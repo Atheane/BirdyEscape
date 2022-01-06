@@ -7,5 +7,7 @@ public class MainCamera : MonoBehaviour
     void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
+        Debug.Log(">>>>>>>>>>>>>>> MainCamera");
+        Debug.Log("_______________ Start()");
     }
 }
