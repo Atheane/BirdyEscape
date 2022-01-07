@@ -1,0 +1,11 @@
+2022-01-07 16:16:53.950 +01:00 [INF] Here is information log
+2022-01-07 16:16:53.961 +01:00 [WRN] Here is warning log
+2022-01-07 16:16:53.961 +01:00 [ERR] Here is error log
+2022-01-07 16:17:05.011 +01:00 [INF] Here is information log
+2022-01-07 16:17:05.020 +01:00 [WRN] Here is warning log
+2022-01-07 16:17:05.020 +01:00 [ERR] Here is error log
+2022-01-07 16:17:26.269 +01:00 [INF] Here is information log
+2022-01-07 16:17:26.279 +01:00 [WRN] Here is warning log
+2022-01-07 16:17:26.280 +01:00 [ERR] Here is error log
+2022-01-07 16:24:58.045 +01:00 [INF] Here is information log
+2022-01-07 16:26:10.912 +01:00 [INF] Test - Start(), Here is information log
