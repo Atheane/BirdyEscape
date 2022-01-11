@@ -8,10 +8,9 @@ using System.IO;
 [Serializable]
 public class LogEvent
 {
-    [SerializeField] public string title;
-    [SerializeField] public string details;
-    [SerializeField] public DateTime timestamp;
-    [SerializeField] public LogType level;
+    public string title;
+    public string details;
+    public LogType level;
 }
 
 public static class JsonHelper
@@ -39,7 +38,7 @@ public static class JsonHelper
     [Serializable]
     private class Wrapper<T>
     {
-        [SerializeField] public T[] items;
+        public T[] items;
     }
 }
 
@@ -108,7 +107,7 @@ public class Logging : MonoBehaviour
 
     private void HandleLog(string logString, string stackTrace, LogType type)
     {
-        currentLog = new LogEvent { title = logString, details = stackTrace, timestamp = DateTime.Now, level = type };
+        currentLog = new LogEvent { title = logString, details = stackTrace, level = type };
         // TODO fix timestamp
         // TODO: add different colors depending on logtype
         // TODO: do not log in prod env
