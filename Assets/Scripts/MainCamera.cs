@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using Serilog;
 
 public class MainCamera : MonoBehaviour
 {
     void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
-        //Log.Information("Dividing {A} by {B}", 1.2f, 2.0f);
-        throw new System.Exception("Main Camera Starts");
+        throw new Exception("Main Camera Starts");
     }
 }

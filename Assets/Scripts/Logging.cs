@@ -1,66 +1,80 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Serilog;
-using Serilog.Sinks.File;
-using Serilog.Formatting.Json;
+using System.IO;
 
 
-//TODO replace by serialog format message (time stamp etc)
-// degager serialog
-public class CustomError
+[Serializable]
+public class LogEvent
 {
-    public string message;
-    public string stackTrace;
+    public string title;
+    public string details;
     public DateTime timestamp;
+    public LogType level;
+}
 
+[Serializable]
+public class LogBatch
+{
+    public LogEvent[] logEvents;
 }
 
 public class Logging : MonoBehaviour
 {
-    private CustomError current;
-    public List<CustomError> batchErrors = new List<CustomError>();
-    private Serilog.ILogger logToJsonFile;
+    private LogEvent currentLog;
+    private List<LogEvent> listLogEvents = new List<LogEvent>();
+    [SerializeField] private LogBatch logBatch;
+    //private Serilog.ILogger logToJsonFile;
     //private Serilog.ILogger logToWebService;
 
-    private void Awake()
-    {
-        logToJsonFile = new LoggerConfiguration()
-            .WriteTo
-            .File(
-                new JsonFormatter(renderMessage: true),
-                Application.dataPath + "/AppLog.json"
-            )
-            .CreateLogger();
-        Log.Logger = logToJsonFile;
-    }
+    //private void Awake()
+    //{
+    //    logToJsonFile = new LoggerConfiguration()
+    //        .WriteTo
+    //        .File(
+    //            new JsonFormatter(renderMessage: true),
+    //            Application.dataPath + "/AppLog.json"
+    //        )
+    //        .CreateLogger();
+    //    Log.Logger = logToJsonFile;
+    //}
 
-    void OnEnable()
+    private void OnEnable()
     {
         Application.logMessageReceivedThreaded += HandleLog;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         Application.logMessageReceivedThreaded -= HandleLog;
+        Debug.Log(">>>>>>>>>>>> should WriteLogBatchToJson");
+        WriteLogBatchToJson();
         // TODO: send batch batchErrors to rabbitMQ
         // if fail
         // log to file
     }
 
-    void HandleLog(string logString, string stackTrace, LogType type)
+    private void HandleLog(string logString, string stackTrace, LogType type)
     {
-        current = new CustomError { message = logString, stackTrace = stackTrace, timestamp = DateTime.Now };
+        currentLog = new LogEvent { title = logString, details = stackTrace, timestamp = DateTime.Now, level = type };
         // TODO: add different colors depending on logtype
         // TODO: do not log in prod env
-        Debug.Log(current.message);
+        Debug.Log(currentLog);
 
         if (type == LogType.Error || type == LogType.Exception)
         {
-            batchErrors.Add(current);
+            listLogEvents.Add(currentLog);
         }
+    }
 
+    private async void WriteLogBatchToJson()
+    {
+        logBatch = new LogBatch { logEvents = listLogEvents.ToArray() };
+        string json = JsonUtility.ToJson(logBatch);
+        using (StreamWriter writer = File.CreateText(Application.dataPath + "/ErrorLogs.json"))
+        {
+            await writer.WriteAsync(json);
+        }
     }
 
 }
