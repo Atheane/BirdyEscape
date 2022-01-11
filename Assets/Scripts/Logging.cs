@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using System.IO;
 
@@ -7,23 +8,45 @@ using System.IO;
 [Serializable]
 public class LogEvent
 {
-    public string title;
-    public string details;
-    public DateTime timestamp;
-    public LogType level;
+    [SerializeField] public string title;
+    [SerializeField] public string details;
+    [SerializeField] public DateTime timestamp;
+    [SerializeField] public LogType level;
 }
 
-[Serializable]
-public class LogBatch
+public static class JsonHelper
 {
-    public LogEvent[] logEvents;
+    public static T[] FromJson<T>(string json)
+    {
+        Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
+        return wrapper.items;
+    }
+
+    public static string ToJson<T>(T[] array)
+    {
+        Wrapper<T> wrapper = new Wrapper<T>();
+        wrapper.items = array;
+        return JsonUtility.ToJson(wrapper);
+    }
+
+    public static string ToJson<T>(T[] array, bool prettyPrint)
+    {
+        Wrapper<T> wrapper = new Wrapper<T>();
+        wrapper.items = array;
+        return JsonUtility.ToJson(wrapper, prettyPrint);
+    }
+
+    [Serializable]
+    private class Wrapper<T>
+    {
+        [SerializeField] public T[] items;
+    }
 }
 
 public class Logging : MonoBehaviour
 {
     private LogEvent currentLog;
-    private List<LogEvent> listLogEvents = new List<LogEvent>();
-    [SerializeField] private LogBatch logBatch;
+    private List<LogEvent> listLogEvents;
     //private Serilog.ILogger logToJsonFile;
     //private Serilog.ILogger logToWebService;
 
@@ -38,6 +61,35 @@ public class Logging : MonoBehaviour
     //        .CreateLogger();
     //    Log.Logger = logToJsonFile;
     //}
+    private async void Awake()
+    {
+        Debug.Log(">>>>>>>>>>>> should ReadLogBatchFromJsonAsync");
+        //TODO parse errorLogs json file. Populate LogEvent.
+        string json = await ReadLogBatchFromJsonAsync();
+        //Debug.Log(">>>>>>> json");
+        //Debug.Log(json);
+        if (json != null)
+        {
+            Debug.Log(">>>>>>> json !=null");
+            Debug.Log(">>>>>>> json");
+            Debug.Log(json);
+
+            LogEvent[] logEvents = JsonHelper.FromJson<LogEvent>(json);
+            Debug.Log(">>>>>>> logEvents");
+            Debug.Log(logEvents);
+            string json2 = JsonHelper.ToJson(logEvents);
+            Debug.Log(">>>>>>> json2");
+            Debug.Log(json2);
+
+            listLogEvents = new List<LogEvent>(logEvents);
+            Debug.Log(">>>>>>> listLogEvents");
+            Debug.Log(listLogEvents);
+        } else
+        {
+            Debug.Log("<<<<<<<<<< json is null");
+            listLogEvents = new List<LogEvent>();
+        }
+    }
 
     private void OnEnable()
     {
@@ -48,7 +100,7 @@ public class Logging : MonoBehaviour
     {
         Application.logMessageReceivedThreaded -= HandleLog;
         Debug.Log(">>>>>>>>>>>> should WriteLogBatchToJson");
-        WriteLogBatchToJson();
+        WriteLogBatchToJsonAsync();
         // TODO: send batch batchErrors to rabbitMQ
         // if fail
         // log to file
@@ -57,6 +109,7 @@ public class Logging : MonoBehaviour
     private void HandleLog(string logString, string stackTrace, LogType type)
     {
         currentLog = new LogEvent { title = logString, details = stackTrace, timestamp = DateTime.Now, level = type };
+        // TODO fix timestamp
         // TODO: add different colors depending on logtype
         // TODO: do not log in prod env
         Debug.Log(currentLog);
@@ -67,13 +120,21 @@ public class Logging : MonoBehaviour
         }
     }
 
-    private async void WriteLogBatchToJson()
+    private async void WriteLogBatchToJsonAsync()
     {
-        logBatch = new LogBatch { logEvents = listLogEvents.ToArray() };
-        string json = JsonUtility.ToJson(logBatch);
+        string json = JsonHelper.ToJson(listLogEvents.ToArray());
         using (StreamWriter writer = File.CreateText(Application.dataPath + "/ErrorLogs.json"))
         {
             await writer.WriteAsync(json);
+        }
+    }
+
+
+    private async Task<string> ReadLogBatchFromJsonAsync()
+    {
+        using (var sr = new StreamReader(Application.dataPath + "/ErrorLogs.json"))
+        {
+            return await sr.ReadToEndAsync();
         }
     }
 
