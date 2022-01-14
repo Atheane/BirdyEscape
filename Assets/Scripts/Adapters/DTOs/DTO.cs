@@ -5,9 +5,9 @@
 //    - list DTOs compatible for framework unity
 //    - list mappers from domain (events and entities) to framework unity
 
-public class Dto
+public class CreateCharacterIdMapper
 {
-    public Dto()
+    public CreateCharacterIdMapper()
     {
     }
 }

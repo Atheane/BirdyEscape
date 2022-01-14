@@ -5,9 +5,10 @@
 //    - parse command
 //    - execute command usecase
 
-public class NewClass
+public class CreateCharacterHandler
 {
-    public NewClass()
+    public CreateCharacterHandler()
     {
+
     }
 }

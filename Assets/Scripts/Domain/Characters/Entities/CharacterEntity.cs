@@ -8,6 +8,7 @@ namespace Domain.Characters.Entities
 {
     public interface ICharacterEntity
     {
+        public Guid Id { get; }
         public VOImage Image { get; }
         public EnumCharacter Type { get; }
         public EnumDirection Direction { get; }
@@ -17,26 +18,23 @@ namespace Domain.Characters.Entities
 
     public class CharacterEntity : AggregateRoot
     {
-        public VOImage Image { get; private set; }
         public EnumCharacter Type { get; private set; }
         public EnumDirection Direction { get; private set; }
         public VOPosition Position { get; private set; }
         public float Speed { get; private set; }
 
         private CharacterEntity() { }
-        private CharacterEntity(Guid id, VOImage image, EnumCharacter type, EnumDirection direction, VOPosition position, float speed) : base(id)
+        private CharacterEntity(Guid id, EnumCharacter type, EnumDirection direction, VOPosition position, float speed) : base(id)
         {
-            this.Image = image;
             this.Type = type;
             this.Direction = direction;
-            this.Image = image;
             this.Position = position;
             this.Speed = speed;
         }
 
-        public static CharacterEntity Create(Guid id, VOImage image, EnumCharacter type, EnumDirection direction, VOPosition position, float speed)
+        public static CharacterEntity Create(Guid id, EnumCharacter type, EnumDirection direction, VOPosition position, float speed)
         {
-            var character = new CharacterEntity(id, image, type, direction, position, speed);
+            var character = new CharacterEntity(id, type, direction, position, speed);
             character.AddDomainEvent(new CharacterCreatedDomainEvent(character.Id));
             return character;
         }
