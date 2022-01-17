@@ -5,9 +5,9 @@
 //    - parse command
 //    - execute command usecase
 
-public class CreateCharacterHandler
+public class OnCreateCharacterHandler
 {
-    public CreateCharacterHandler()
+    public OnCreateCharacterHandler()
     {
 
     }

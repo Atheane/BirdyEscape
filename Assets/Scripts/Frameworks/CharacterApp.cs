@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UniMediator;
+using Domain.Characters.Types;
 
-public class Character : MonoBehaviour
+
+public class CharacterApp : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
         // créer un character
+        // passer un type à termes
+        // pour l'instant, appeler aussi le usecase move always ici
+        Debug.Log("_________________________Character, Start()");
+        var message = new CreateCharacterMessage("CREATE_CHARACTER");
+        Mediator.Send<string>(message);
+        //EventManager.current.CreateCharacter(EnumCharacter.COW);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
