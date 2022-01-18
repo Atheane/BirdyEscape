@@ -8,7 +8,7 @@ namespace Libs.Domain.DomainEvents
 
         DateTime CreatedAtUtc { get; }
 
-        string Label { get; }
+        enum Label { get }
 
     }
 }

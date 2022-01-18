@@ -1,15 +1,24 @@
 ﻿using System;
 using Libs.Domain.DomainEvents;
+using Domain.Characters.Types;
+
+public enum EnumCharacterEvents
+{
+    CHARACTER_CREATED
+}
 
 namespace Domain.Characters.DomainEvents
 {
-    public sealed class CharacterCreatedDomainEvent : DomainEvent
+    public class CharacterCreatedDomainEvent : DomainEvent
     {
-        public Guid CharacterId { get; }
+        public new EnumCharacterEvents Label = EnumCharacterEvents.CHARACTER_CREATED;
+        public new Guid Id = Guid.NewGuid();
+        public new DateTime CreatedAtUtc = DateTime.UtcNow;
+        public EnumCharacter Props;
 
-        public CharacterCreatedDomainEvent(Guid characterId)
+        public CharacterCreatedDomainEvent(EnumCharacter type)
         {
-            this.CharacterId = characterId;
+            Props = type;
         }
     }
 }

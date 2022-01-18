@@ -3,7 +3,7 @@ using UniMediator;
 using Domain.Characters.Types;
 
 
-public class CharacterApp : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
 
     void Start()
@@ -12,9 +12,9 @@ public class CharacterApp : MonoBehaviour
         // passer un type à termes
         // pour l'instant, appeler aussi le usecase move always ici
         Debug.Log("_________________________Character, Start()");
-        var message = new CreateCharacterMessage("CREATE_CHARACTER");
-        Mediator.Send<string>(message);
-        //EventManager.current.CreateCharacter(EnumCharacter.COW);
+        var command = new CreateCharacterCommand(EnumCharacter.COW);
+
+        Mediator.Send<EnumCharacter>(command);
     }
 
 
