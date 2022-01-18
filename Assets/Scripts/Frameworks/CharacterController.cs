@@ -1,11 +1,11 @@
 using UnityEngine;
 using UniMediator;
 using Domain.Characters.Types;
+using Adapters.Commands;
 
 
 public class CharacterController : MonoBehaviour
 {
-
     void Start()
     {
         // créer un character
@@ -15,7 +15,7 @@ public class CharacterController : MonoBehaviour
         var command = new CreateCharacterCommand(EnumCharacter.COW);
 
         Mediator.Send<EnumCharacter>(command);
+        // should be using container.MessageBroker.Send
     }
-
 
 }

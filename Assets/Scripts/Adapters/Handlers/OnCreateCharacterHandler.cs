@@ -1,7 +1,7 @@
 ﻿using System;
 
 //here we :
-//    - map events to domain events
+//    - map commads to domain events
 //    - parse command
 //    - execute command usecase
 
