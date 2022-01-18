@@ -1,7 +1,5 @@
 ﻿using Domain.Characters.Entities;
 using Usecases.Characters;
-using Adapters.Commands;
-
 
 // Adapters.Handlers are responsible for executing a usecase
 

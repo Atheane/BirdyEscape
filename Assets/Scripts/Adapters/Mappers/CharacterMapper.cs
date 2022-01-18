@@ -1,6 +1,6 @@
 ﻿using Libs.Adapters;
 using Frameworks.Messages;
-using Adapters.Commands;
+using Usecases.Characters;
 
 public class CharacterMapper: IMapper<ICreateCharacterCommand, CreateCharacterMessage>
 {

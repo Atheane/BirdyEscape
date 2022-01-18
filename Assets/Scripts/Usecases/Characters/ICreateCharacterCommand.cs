@@ -1,7 +1,7 @@
 ﻿using Domain.Characters.Types;
 
 
-namespace Adapters.Commands
+namespace Usecases.Characters
 {
     public interface ICreateCharacterCommand
     {

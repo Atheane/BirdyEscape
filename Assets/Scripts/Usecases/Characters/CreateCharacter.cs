@@ -1,7 +1,6 @@
 ﻿using Libs.Usecases;
 using Domain.Characters.Entities;
 using Domain.Characters.ValueObjects;
-using Adapters.Commands;
 
 namespace Usecases.Characters
 {
