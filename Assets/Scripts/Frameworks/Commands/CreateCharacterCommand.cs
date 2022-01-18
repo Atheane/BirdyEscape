@@ -1,7 +1,7 @@
 ﻿using UniMediator;
 using Domain.Characters.Types;
 
-namespace Adapters.Commands
+namespace Frameworks.Commands
 {
     public class CreateCharacterCommand : ISingleMessage<EnumCharacter>
     {

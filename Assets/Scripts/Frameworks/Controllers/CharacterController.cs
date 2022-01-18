@@ -1,7 +1,7 @@
 using UnityEngine;
 using UniMediator;
 using Domain.Characters.Types;
-using Adapters.Commands;
+using Frameworks.Commands;
 
 
 public class CharacterController : MonoBehaviour
@@ -15,7 +15,7 @@ public class CharacterController : MonoBehaviour
         var command = new CreateCharacterCommand(EnumCharacter.COW);
 
         Mediator.Send<EnumCharacter>(command);
-        // should be using container.MessageBroker.Send
+        // should be using container.messageBroker.Send(command)
     }
 
 }
