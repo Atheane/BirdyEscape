@@ -1,24 +1,28 @@
 ﻿using UnityEngine;
 using UniMediator;
-using Domain.Characters.Types;
-using Domain.Characters.DomainEvents;
-using Frameworks.Commands;
-
+using Frameworks.Messages;
+using Frameworks.Dtos;
+using Adapters.Handlers;
+using Usecases.Characters;
 
 public class CreateCharacterHandler : MonoBehaviour,
-ISingleMessageHandler<CreateCharacterCommand, EnumCharacter>
+ISingleMessageHandler<CreateCharacterMessage, ICharacterDto>
 {
-    public EnumCharacter Handle(CreateCharacterCommand command)
+    public ICharacterDto Handle(CreateCharacterMessage message)
     {
-        Debug.Log(">>> IN COMMAND");
-        Debug.Log(command);
-        // map command to domain event
-        var domainEvent = new CharacterCreatedDomainEvent(command.Message);
-        Debug.Log(domainEvent);
+        Debug.Log(">>> IN MESSAGE");
+        Debug.Log(message);
         // invoke adapter handler
-        // return saved Entity Character
-        // Map Character to DTO (with image source)
-        return command.Message;
+        var usecase = new CreateCharacter();
+        var handler = new OnCreateCharacterHandler(usecase);
+        // map message to command
+        var command = new CharacterMapper().ToDomain(message);
+        // retrieve character entity with dapater handler
+        var character = handler.Handle(command);
+        // Map Character entty to DTO (with image source)
+        var characterDto = CharacterDto.Create(character.Id, character.Type, character.Direction, (character.Position.Value.X, character.Position.Value.Y), character.Speed);
+
+        return characterDto;
     }
 }
 

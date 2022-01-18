@@ -1,14 +1,23 @@
-﻿using System;
+﻿using Domain.Characters.Entities;
+using Usecases.Characters;
+using Adapters.Commands;
 
-//here we :
-//    - map commads to domain events
-//    - parse command
-//    - execute command usecase
 
-public class OnCreateCharacterHandler
+// Adapters.Handlers are responsible for executing a usecase
+
+namespace Adapters.Handlers
 {
-    public OnCreateCharacterHandler()
+    public class OnCreateCharacterHandler
     {
+        public CreateCharacter Usecase;
+        public OnCreateCharacterHandler(CreateCharacter usecase)
+        {
+            Usecase = usecase;
+        }
+        public ICharacterEntity Handle(ICreateCharacterCommand command)
+        {
+            return this.Usecase.Execute(command);
+        }
 
     }
 }
