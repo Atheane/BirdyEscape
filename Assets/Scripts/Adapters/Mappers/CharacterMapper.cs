@@ -6,6 +6,7 @@ public class CharacterMapper: IMapper<ICreateCharacterCommand, CreateCharacterMe
 {
     public ICreateCharacterCommand ToDomain(CreateCharacterMessage message)
     {
-        return (ICreateCharacterCommand)message;
+        var command = (ICreateCharacterCommand)message;
+        return command;
     }
 }

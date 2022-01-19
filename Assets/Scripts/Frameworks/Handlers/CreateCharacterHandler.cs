@@ -10,17 +10,17 @@ ISingleMessageHandler<CreateCharacterMessage, ICharacterDto>
 {
     public ICharacterDto Handle(CreateCharacterMessage message)
     {
-        Debug.Log(">>> IN MESSAGE");
+        Debug.Log(">>> CreateCharacterHandler");
         Debug.Log(message);
         // invoke adapter handler
         var usecase = new CreateCharacter();
         var handler = new OnCreateCharacterHandler(usecase);
-        // map message to command
-        var command = new CharacterMapper().ToDomain(message);
-        // retrieve character entity with dapater handler
-        var character = handler.Handle(command);
+        var character = handler.Handle(message);
+
         // Map Character entty to DTO (with image source)
         var characterDto = CharacterDto.Create(character.Id, character.Type, character.Direction, (character.Position.Value.X, character.Position.Value.Y), character.Speed);
+        Debug.Log(">>> should return DTO");
+        Debug.Log(characterDto);
 
         return characterDto;
     }

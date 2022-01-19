@@ -1,10 +1,11 @@
 ﻿using UniMediator;
 using Frameworks.Dtos;
+using Usecases.Characters;
 using Domain.Characters.Types;
 
 namespace Frameworks.Messages
 {
-    public class CreateCharacterMessage : ISingleMessage<ICharacterDto>
+    public class CreateCharacterMessage : ISingleMessage<ICharacterDto>, ICreateCharacterCommand
     {
         public EnumCharacter Type { get; }
         public EnumDirection Direction { get; }
@@ -17,6 +18,6 @@ namespace Frameworks.Messages
             this.Direction = direction;
             this.Position = position;
             this.Speed = speed;
-        }
+    }
     }
 }

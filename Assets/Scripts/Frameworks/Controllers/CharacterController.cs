@@ -14,9 +14,7 @@ public class CharacterController : MonoBehaviour
         // pour l'instant, appeler aussi le usecase move always ici
         Debug.Log("_________________________Character, Start()");
 
-        var command = new CreateCharacterMessage(EnumCharacter.COW, EnumDirection.LEFT, (0.0, 0.0), 20.0f);
-
-        Mediator.Send<ICharacterDto>(command);
+        Mediator.Send<ICharacterDto>(new CreateCharacterMessage(EnumCharacter.COW, EnumDirection.LEFT, (0.0, 0.0), 20.0f));
         // should be using container.messageBroker.Send(command)
     }
 
