@@ -5,10 +5,10 @@ namespace Domain.Characters.ValueObjects
 {
     public class VOPosition : ValueObject<(double X, double Y)>
     {
-        public const double XMin = 0.0;
-        public const double XMax = 300.0;
-        public const double YMin = 0.0;
-        public const double YMax = 800.0;
+        public const double XMin = -20.4;
+        public const double XMax = 0.0;
+        public const double YMin = -2.6;
+        public const double YMax = 30.7;
 
         private VOPosition((double X, double Y) value) : base(value) { }
 
