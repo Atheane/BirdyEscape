@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Libs.Domain.Repositories
 {
-    public interface IRepository<T> where T : IAggregateRoot, IEntity
+    public interface IRepository<T> where T : IEntity, IAggregateRoot
     {
         IReadOnlyList<T> GetAll();
 

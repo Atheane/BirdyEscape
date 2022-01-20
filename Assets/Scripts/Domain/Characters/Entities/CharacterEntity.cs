@@ -6,9 +6,9 @@ using Domain.Characters.Types;
 
 namespace Domain.Characters.Entities
 {
-    public interface ICharacterEntity
+    public interface ICharacterEntity: IAggregateRoot
     {
-        public Guid Id { get; }
+        public new Guid Id { get; }
         public EnumCharacter Type { get; }
         public EnumDirection Direction { get; }
         public VOPosition Position { get; }

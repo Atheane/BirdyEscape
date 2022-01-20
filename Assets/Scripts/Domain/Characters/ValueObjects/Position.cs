@@ -20,13 +20,13 @@ namespace Domain.Characters.ValueObjects
         protected override void Validate((float X, float Y) value)
         {
             if (value.X > XMax)
-                throw new PositionException("Position X too large");
+                throw new PositionException.TooLarge("X should be smaller than " + XMax.ToString());
             if (value.X < XMin)
-                throw new PositionException("Position X too small");
+                throw new PositionException.TooSmall("X should be higher than " + XMin.ToString());
             if (value.Y > YMax)
-                throw new PositionException("Position Y too large");
+                throw new PositionException.TooLarge("Y should be smaller than " + YMax.ToString());
             if (value.Y < YMin)
-                throw new PositionException("Position Y too small");
+                throw new PositionException.TooSmall("Y should be higher than " + YMin.ToString());
         }
 
     }

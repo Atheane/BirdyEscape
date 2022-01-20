@@ -2,8 +2,19 @@
 
 namespace Domain.Characters.Exceptions
 {
-    public class PositionException : Exception
+    public static class PositionException
     {
-        public PositionException(string message) : base("PositionException" + '-' + message) { }
+        public class TooLarge : InvalidOperationException
+        {
+            public TooLarge(string message = "") : base("Position-TooLarge" + message) { }
+        }
+        public class TooSmall : InvalidOperationException
+        {
+            public TooSmall(string message = "") : base("Position-TooSmall" + message) { }
+        }
+        public class UpdateShouldChangeValue : InvalidOperationException
+        {
+            public UpdateShouldChangeValue(string message = "") : base("Position-UpdateShouldChangeValue" + message) { }
+        }
     }
 }

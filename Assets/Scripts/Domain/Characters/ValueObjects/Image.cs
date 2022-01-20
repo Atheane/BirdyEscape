@@ -16,7 +16,7 @@ namespace Domain.Characters.ValueObjects
         protected override void Validate(string value)
         {
             if (value == null)
-                throw new ImageSourceException("Image should have source value");
+                throw new ImageException.ShouldNotBeNull();
         }
     }
 }
