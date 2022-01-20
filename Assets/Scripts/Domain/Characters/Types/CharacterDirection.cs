@@ -1,6 +1,6 @@
 ﻿namespace Domain.Characters.Types
 {
-    public enum EnumDirection
+    public enum EnumCharacterDirection
     {
         LEFT,
         UP,

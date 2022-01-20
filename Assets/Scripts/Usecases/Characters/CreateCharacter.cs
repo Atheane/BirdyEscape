@@ -1,9 +1,17 @@
 ﻿using Libs.Usecases;
 using Domain.Characters.Entities;
 using Domain.Characters.ValueObjects;
+using Domain.Characters.Types;
 
 namespace Usecases.Characters
 {
+    public interface ICreateCharacterCommand
+    {
+        public EnumCharacterType Type { get; }
+        public EnumCharacterDirection Direction { get; }
+        public (float, float) Position { get; }
+        public float Speed { get; }
+    }
     public class CreateCharacter : IUsecase<ICreateCharacterCommand, ICharacterEntity>
     {
         //public ICharactersRepository charactersRepository;

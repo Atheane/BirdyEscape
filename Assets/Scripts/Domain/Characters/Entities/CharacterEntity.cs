@@ -9,30 +9,32 @@ namespace Domain.Characters.Entities
     public interface ICharacterEntity: IAggregateRoot
     {
         public new Guid Id { get; }
-        public EnumCharacter Type { get; }
-        public EnumDirection Direction { get; }
+        public EnumCharacterType Type { get; }
+        public EnumCharacterDirection Direction { get; }
         public VOPosition Position { get; }
         public float Speed { get; }
+        public EnumCharacterState State { get; }
     }
 
     public class CharacterEntity : AggregateRoot, ICharacterEntity
     {
         public new Guid Id { get; private set; }
-        public EnumCharacter Type { get; private set; }
-        public EnumDirection Direction { get; private set; }
+        public EnumCharacterType Type { get; private set; }
+        public EnumCharacterDirection Direction { get; private set; }
         public VOPosition Position { get; private set; }
         public float Speed { get;  private set; }
+        public EnumCharacterState State { get; private set; }
 
-        private CharacterEntity(EnumCharacter type, EnumDirection direction, VOPosition position, float speed) : base()
+        private CharacterEntity(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, float speed) : base()
         {
             this.Type = type;
             this.Direction = direction;
             this.Position = position;
             this.Speed = speed;
-
+            this.State = EnumCharacterState.IDLE;
         }
 
-        public static CharacterEntity Create(EnumCharacter type, EnumDirection direction, VOPosition position, float speed)
+        public static CharacterEntity Create(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, float speed)
         {
             var character = new CharacterEntity(type, direction, position, speed);
             var characterCreated = new CharacterCreatedDomainEvent<ICharacterEntity>(character);
@@ -46,16 +48,16 @@ namespace Domain.Characters.Entities
             (float X, float Y) position = this.Position.Value;
             switch (this.Direction)
             {
-                case EnumDirection.LEFT:
+                case EnumCharacterDirection.LEFT:
                     position.X -= 1;
                     break;
-                case EnumDirection.UP:
+                case EnumCharacterDirection.UP:
                     position.Y -= 1;
                     break;
-                case EnumDirection.RIGHT:
+                case EnumCharacterDirection.RIGHT:
                     position.X += 1;
                     break;
-                case EnumDirection.DOWN:
+                case EnumCharacterDirection.DOWN:
                     position.X += 1;
                     break;
             }
@@ -64,6 +66,7 @@ namespace Domain.Characters.Entities
         }
         public void MoveAlways()
         {
+            this.State = EnumCharacterState.MOVING;
             System.Timers.Timer timer = new System.Timers.Timer();
             timer.Interval = this.Speed;
             timer.Elapsed += Timer_Elapsed;
