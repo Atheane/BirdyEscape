@@ -43,7 +43,7 @@ namespace Domain.Characters.Entities
 
         public void MoveOnce()
         {
-            (double X, double Y) position = this.Position.Value;
+            (float X, float Y) position = this.Position.Value;
             switch (this.Direction)
             {
                 case EnumDirection.LEFT:

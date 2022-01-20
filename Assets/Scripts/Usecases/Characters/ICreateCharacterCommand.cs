@@ -7,7 +7,7 @@ namespace Usecases.Characters
     {
         public EnumCharacter Type { get; }
         public EnumDirection Direction { get; }
-        public (double, double) Position { get; }
+        public (float, float) Position { get; }
         public float Speed { get; }
     }
 }

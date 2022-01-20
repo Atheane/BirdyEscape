@@ -1,5 +1,6 @@
 ﻿using System;
 using Domain.Characters.Types;
+using UnityEngine;
 
 namespace Frameworks.Dtos
 {
@@ -8,7 +9,7 @@ namespace Frameworks.Dtos
         public Guid Id { get; }
         public EnumCharacter Type { get; }
         public EnumDirection Direction { get; }
-        public (double, double) Position { get; }
+        public Vector3 Position { get; }
         public float Speed { get; }
         public string Image { get; }
     }
@@ -18,11 +19,11 @@ namespace Frameworks.Dtos
         public Guid Id { get; private set; }
         public EnumCharacter Type { get; private set; }
         public EnumDirection Direction { get; private set; }
-        public (double, double) Position { get; private set; }
+        public Vector3 Position { get; private set; }
         public float Speed { get; private set; }
         public string Image { get; private set; }
 
-        private CharacterDto(Guid id, EnumCharacter type, EnumDirection direction, (double, double) position, float speed, string image)
+        private CharacterDto(Guid id, EnumCharacter type, EnumDirection direction, Vector3 position, float speed, string image)
         {
             this.Id = id;
             this.Type = type;
@@ -32,13 +33,13 @@ namespace Frameworks.Dtos
             this.Image = image;
         }
 
-        public static CharacterDto Create(Guid id, EnumCharacter type, EnumDirection direction, (double, double) position, float speed)
+        public static CharacterDto Create(Guid id, EnumCharacter type, EnumDirection direction, Vector3 position, float speed)
         {
             string image;
             switch (type)
             {
                 case EnumCharacter.COW:
-                    image = "src/cow";
+                    image = "Cow";
                     break;
                 default:
                     image = "";

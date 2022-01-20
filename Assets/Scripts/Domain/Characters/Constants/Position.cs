@@ -2,8 +2,8 @@
 {
     public static class Position
     {
-        public const double INIT_X = 0.0;
-        public const double INIT_Y = 0.7;
+        public const float INIT_X = 0.0f;
+        public const float INIT_Y = 0.7f;
     }
     public static class Speed
     {

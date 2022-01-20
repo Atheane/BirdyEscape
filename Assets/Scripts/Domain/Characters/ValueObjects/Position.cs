@@ -3,21 +3,21 @@ using Domain.Characters.Exceptions;
 
 namespace Domain.Characters.ValueObjects
 {
-    public class VOPosition : ValueObject<(double X, double Y)>
+    public class VOPosition : ValueObject<(float X, float Y)>
     {
-        public const double XMin = -20.4;
-        public const double XMax = 0.0;
-        public const double YMin = -2.6;
-        public const double YMax = 30.7;
+        public const float XMin = -20.4f;
+        public const float XMax = 0.0f;
+        public const float YMin = -2.6f;
+        public const float YMax = 30.7f;
 
-        private VOPosition((double X, double Y) value) : base(value) { }
+        private VOPosition((float X, float Y) value) : base(value) { }
 
-        public static VOPosition Create((double X, double Y) value)
+        public static VOPosition Create((float X, float Y) value)
         {
             return new VOPosition(value);
         }
 
-        protected override void Validate((double X, double Y) value)
+        protected override void Validate((float X, float Y) value)
         {
             if (value.X > XMax)
                 throw new PositionException("Position X too large");
