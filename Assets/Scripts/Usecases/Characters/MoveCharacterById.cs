@@ -1,7 +1,6 @@
 ﻿using System;
 using Libs.Usecases;
 using Domain.Characters.Repositories;
-using Domain.Characters.Entities;
 using Domain.Characters.Types;
 
 
