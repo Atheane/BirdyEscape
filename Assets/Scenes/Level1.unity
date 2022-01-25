@@ -1803,8 +1803,8 @@ GameObject:
   - component: {fileID: 1388887227}
   - component: {fileID: 1388887226}
   - component: {fileID: 1388887229}
-  - component: {fileID: 1388887228}
   - component: {fileID: 1388887230}
+  - component: {fileID: 1388887228}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Grid

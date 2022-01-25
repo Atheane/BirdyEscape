@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UniMediator;
-using Domain.Characters.Entities;
+using Zenject;
 using Domain.Characters.Types;
 using Usecases.Characters;
-using Adapters.InMemoryRepository;
 using Frameworks.Messages;
 
 public class MoveCharacterByIdHandler : MonoBehaviour,
 ISingleMessageHandler<MoveCharacterByIdMessage, EnumCharacterState>
 {
+    private MoveCharacterById _usecase;
+
+    [Inject]
+    public void Construct(MoveCharacterById usecase)
+    {
+        Debug.Log("new MoveCharacterByIdHandler()");
+        _usecase = usecase;
+        Debug.Log("_usecase injected");
+    }
+
     public EnumCharacterState Handle(MoveCharacterByIdMessage message)
     {
-        // invoke adapter handler
-        // should be the singleton repo, if different, won't find characterId
-        var repository = new InMemoryCharacterRepository(new Dictionary<Guid, CharacterEntity>());
-        var characterState = new MoveCharacterById(repository).Execute(message);
+        var characterState = _usecase.Execute(message);
 
         // Map Character entty to DTO (with image source)
         this.MoveCharacter();
