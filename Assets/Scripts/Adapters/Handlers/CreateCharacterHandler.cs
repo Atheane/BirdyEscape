@@ -1,27 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UniMediator;
-using Domain.Characters.Entities;
+using Zenject;
 using Usecases.Characters;
-using Adapters.InMemoryRepository;
 using Frameworks.Messages;
 using Frameworks.Dtos;
 
 public class CreateCharacterHandler : MonoBehaviour,
 ISingleMessageHandler<CreateCharacterMessage, ICharacterDto>
 {
+    private CreateCharacter _usecase;
+
+    [Inject]
+    public void Construct(CreateCharacter usecase)
+    {
+        Debug.Log("new CreateCharacterHandler()");
+        _usecase = usecase;
+        Debug.Log("_usecase CreateCharacter injected");
+    }
+
     public ICharacterDto Handle(CreateCharacterMessage message)
     {
-        // invoke adapter handler
-        var repository = new InMemoryCharacterRepository(new Dictionary<Guid, CharacterEntity>());
-        var character = new CreateCharacter(repository).Execute(message);
-
-        // Map Character entty to DTO (with image source)
+        var character = _usecase.Execute(message);
         var characterDto = CharacterDto.Create(character.Id, character.Type, character.Direction, new Vector3(character.Position.Value.X, character.Position.Value.Y), character.Speed);
         this.DrawCharacter(characterDto);
         return characterDto;
     }
+
     public void DrawCharacter(ICharacterDto characterDto)
     {
         Transform grid = this.transform;

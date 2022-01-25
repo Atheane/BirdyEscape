@@ -13,17 +13,14 @@ ISingleMessageHandler<MoveCharacterByIdMessage, EnumCharacterState>
     [Inject]
     public void Construct(MoveCharacterById usecase)
     {
-        Debug.Log("new MoveCharacterByIdHandler()");
         _usecase = usecase;
-        Debug.Log("_usecase injected");
     }
 
     public EnumCharacterState Handle(MoveCharacterByIdMessage message)
     {
         var characterState = _usecase.Execute(message);
 
-        // Map Character entty to DTO (with image source)
-        this.MoveCharacter();
+        MoveCharacter();
         return characterState;
     }
     public void MoveCharacter()

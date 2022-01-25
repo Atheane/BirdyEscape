@@ -16,11 +16,11 @@ public class GridController : MonoBehaviour
     {
         _mediator = mediator;
     }
+
     void Start()
     {
         Debug.Log("________GridController, Start()");
         ICharacterDto cow = _mediator.Send<ICharacterDto>(new CreateCharacterMessage(EnumCharacterType.COW, EnumCharacterDirection.LEFT, (Position.INIT_X, Position.INIT_Y), Speed.INIT_SPEED));
-        // should be using container.messageBroker.Send(command)
         Debug.Log("Created cow");
         Debug.Log(cow);
         EnumCharacterState cowState = _mediator.Send<EnumCharacterState>(new MoveCharacterByIdMessage(cow.Id));
