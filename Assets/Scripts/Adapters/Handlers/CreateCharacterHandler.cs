@@ -28,6 +28,7 @@ ISingleMessageHandler<CreateCharacterMessage, ICharacterDto>
     {
         Transform grid = this.transform;
         GameObject cow = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, Quaternion.identity) as GameObject;
+        cow.tag = characterDto.Image;
         cow.transform.parent = grid;
     }
 }

@@ -20,14 +20,13 @@ ISingleMessageHandler<MoveCharacterByIdMessage, EnumCharacterState>
     {
         var characterState = _usecase.Execute(message);
 
-        MoveCharacter();
+        MoveCharacter(new Vector3(-10f, 0.7f, 0f));
         return characterState;
     }
 
-    public void MoveCharacter()
+    public void MoveCharacter(Vector3 position)
     {
-        Transform grid = this.transform;
-        GameObject cow = this.transform.gameObject;
-        cow.transform.parent = grid;
+        GameObject cow = GameObject.FindGameObjectWithTag("Cow");
+        cow.transform.position = position;
     }
 }
