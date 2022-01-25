@@ -13,16 +13,14 @@ ISingleMessageHandler<CreateCharacterMessage, ICharacterDto>
     [Inject]
     public void Construct(CreateCharacter usecase)
     {
-        Debug.Log("new CreateCharacterHandler()");
         _usecase = usecase;
-        Debug.Log("_usecase CreateCharacter injected");
     }
 
     public ICharacterDto Handle(CreateCharacterMessage message)
     {
         var character = _usecase.Execute(message);
         var characterDto = CharacterDto.Create(character.Id, character.Type, character.Direction, new Vector3(character.Position.Value.X, character.Position.Value.Y), character.Speed);
-        this.DrawCharacter(characterDto);
+        DrawCharacter(characterDto);
         return characterDto;
     }
 

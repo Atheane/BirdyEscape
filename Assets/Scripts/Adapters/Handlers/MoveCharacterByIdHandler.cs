@@ -23,6 +23,7 @@ ISingleMessageHandler<MoveCharacterByIdMessage, EnumCharacterState>
         MoveCharacter();
         return characterState;
     }
+
     public void MoveCharacter()
     {
         Transform grid = this.transform;
