@@ -2,11 +2,11 @@
 using UniMediator;
 using Zenject;
 using Usecases.Characters;
+using Usecases.Characters.Commands;
 using Domain.Characters.ValueObjects;
-using Frameworks.Messages;
 
 public class MoveAlwaysCharacterByIdHandler : MonoBehaviour,
-ISingleMessageHandler<MoveAlwaysCharacterByIdMessage, VOPosition>
+ISingleMessageHandler<MoveAlwaysCharacterByIdCommand, VOPosition>
 {
     private MoveAlwaysCharacterById _usecase;
 
@@ -16,7 +16,7 @@ ISingleMessageHandler<MoveAlwaysCharacterByIdMessage, VOPosition>
         _usecase = usecase;
     }
 
-    public VOPosition Handle(MoveAlwaysCharacterByIdMessage message)
+    public VOPosition Handle(MoveAlwaysCharacterByIdCommand message)
     {
         var position = _usecase.Execute(message);
         MoveCharacter(new Vector3(position.Value.X, position.Value.Y, 0));
