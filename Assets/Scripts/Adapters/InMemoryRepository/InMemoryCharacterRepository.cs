@@ -10,14 +10,14 @@ namespace Adapters.InMemoryRepository
 {
     public class InMemoryCharacterRepository : ICharactersRepository
     {
-        private Dictionary<Guid, CharacterEntity> Store;
+        private Dictionary<Guid, ICharacterEntity> Store;
 
-        public InMemoryCharacterRepository(Dictionary<Guid, CharacterEntity> store)
+        public InMemoryCharacterRepository(Dictionary<Guid, ICharacterEntity> store)
         {
             this.Store = store;
         }
 
-        public void Add(CharacterEntity character)
+        public void Add(ICharacterEntity character)
         {
             if (!this.Store.ContainsKey(character.Id))
             {
@@ -29,7 +29,19 @@ namespace Adapters.InMemoryRepository
             }
         }
 
-        public void Remove(CharacterEntity character)
+        public void Update(ICharacterEntity newCharacter)
+        {
+            ICharacterEntity oldCharacter = Find(newCharacter.Id);
+            if (oldCharacter.Equals(newCharacter))
+            {
+                throw new CharacterException.PropertiesAreUnchanged(newCharacter.Id.ToString());
+            } else
+            {
+                this.Store[oldCharacter.Id] = newCharacter;
+            }
+        }
+
+        public void Remove(ICharacterEntity character)
         {
             if (this.Store.ContainsKey(character.Id))
             {
@@ -40,9 +52,9 @@ namespace Adapters.InMemoryRepository
                 throw new CharacterException.NotFound(character.Id.ToString());
             }
         }
-        public CharacterEntity Find(Guid characterId)
+        public ICharacterEntity Find(Guid characterId)
         {
-            CharacterEntity character;
+            ICharacterEntity character;
             bool hasValue = this.Store.TryGetValue(characterId, out character);
             if (hasValue)
             {
@@ -53,22 +65,22 @@ namespace Adapters.InMemoryRepository
                 throw new CharacterException.NotFound(characterId.ToString());
             }
         }
-        public IReadOnlyList<CharacterEntity> GetAll()
+        public IReadOnlyList<ICharacterEntity> GetAll()
         {
-            Dictionary<Guid, CharacterEntity>.ValueCollection charactersValueCollection = this.Store.Values;
-            List<CharacterEntity> charactersList = new List<CharacterEntity>();
+            Dictionary<Guid, ICharacterEntity>.ValueCollection charactersValueCollection = this.Store.Values;
+            List<ICharacterEntity> charactersList = new List<ICharacterEntity>();
 
-            foreach (CharacterEntity character in charactersValueCollection)
+            foreach (ICharacterEntity character in charactersValueCollection)
             {
                 charactersList.Add(character);
             }
 
             return charactersList.AsReadOnly();
         }
-        public IReadOnlyList<CharacterEntity> Where(Expression<Func<CharacterEntity, bool>> predicate)
+        public IReadOnlyList<ICharacterEntity> Where(Expression<Func<ICharacterEntity, bool>> predicate)
         {
             // example of predicate: characterEntity => characterEntity.Position.Value.X < 10.0f
-            List<CharacterEntity> filteredCharacters = new List<CharacterEntity>(this.GetAll().Where(predicate.Compile()));
+            List<ICharacterEntity> filteredCharacters = new List<ICharacterEntity>(this.GetAll().Where(predicate.Compile()));
             return filteredCharacters;
         }
     }

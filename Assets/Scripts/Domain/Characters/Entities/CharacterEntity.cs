@@ -14,6 +14,8 @@ namespace Domain.Characters.Entities
         public VOPosition Position { get; }
         public int Speed { get; }
         public EnumCharacterState State { get; }
+        public void MoveOnce();
+        public void UpdateState(EnumCharacterState state);
     }
 
     public class CharacterEntity : AggregateRoot, ICharacterEntity
@@ -27,11 +29,11 @@ namespace Domain.Characters.Entities
 
         private CharacterEntity(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, int speed) : base()
         {
-            this.Type = type;
-            this.Direction = direction;
-            this.Position = position;
-            this.Speed = speed;
-            this.State = EnumCharacterState.IDLE;
+            Type = type;
+            Direction = direction;
+            Position = position;
+            Speed = speed;
+            State = EnumCharacterState.IDLE;
         }
 
         public static CharacterEntity Create(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, int speed)
@@ -45,8 +47,8 @@ namespace Domain.Characters.Entities
 
         public void MoveOnce()
         {
-            (float X, float Y) position = this.Position.Value;
-            switch (this.Direction)
+            (float X, float Y) position = Position.Value;
+            switch (Direction)
             {
                 case EnumCharacterDirection.LEFT:
                     position.X -= 1;
@@ -62,23 +64,16 @@ namespace Domain.Characters.Entities
                     break;
             }
 
-            this.Position = VOPosition.Create(position);
-        }
-        public void MoveAlways()
-        {
-            this.State = EnumCharacterState.MOVING;
-            System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = this.Speed;
-            timer.Elapsed += Timer_Elapsed;
-            timer.Start();
-
-        }
-        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            MoveOnce();
-            var characterMoved = new CharacterMovedDomainEvent<VOPosition>(this.Position);
-            this.AddDomainEvent(characterMoved);
+            Position = VOPosition.Create(position);
+            var characterMoved = new CharacterMovedDomainEvent<VOPosition>(Position);
+            AddDomainEvent(characterMoved);
         }
 
+        public void UpdateState(EnumCharacterState state)
+        {
+            State = state;
+            var characterStateUpdated = new CharacterStateUpdatedDomainEvent<EnumCharacterState>(State);
+            AddDomainEvent(characterStateUpdated);
+        }
     }
 }

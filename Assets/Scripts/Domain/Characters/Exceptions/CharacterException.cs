@@ -12,6 +12,11 @@ namespace Domain.Characters.Exceptions
             public AlreadyExists(string message = "") : base("Character-AlreadyExists" + message) { }
 
         }
+        public class PropertiesAreUnchanged : Exception
+        {
+            public PropertiesAreUnchanged(string message = "") : base("Character-PropertiesAreUnchanged" + message) { }
+
+        }
     }
 }
 
