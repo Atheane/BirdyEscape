@@ -8,15 +8,15 @@ using Domain.Characters.Entities;
 
 namespace Usecases.Characters
 {
-    public class MoveAlwaysCharacterById : IUsecase<IMoveAlwaysCharacterByIdCommand, VOPosition>
+    public class MoveAlwaysCharacter : IUsecase<IMoveAlwaysCharacterCommand, VOPosition>
     {
         public ICharactersRepository _charactersRepository;
         public ICharacterEntity _characterEntity;
-        public MoveAlwaysCharacterById(ICharactersRepository charactersRepository)
+        public MoveAlwaysCharacter(ICharactersRepository charactersRepository)
         {
             _charactersRepository = charactersRepository;
         }
-        public VOPosition Execute(IMoveAlwaysCharacterByIdCommand command)
+        public VOPosition Execute(IMoveAlwaysCharacterCommand command)
         {
             _characterEntity = _charactersRepository.Find(command.CharacterId);
             _characterEntity.UpdateState(EnumCharacterState.MOVING);

@@ -4,15 +4,15 @@ using Domain.Characters.ValueObjects;
 
 namespace Usecases.Characters.Commands
 {
-    public interface IMoveAlwaysCharacterByIdCommand
+    public interface IMoveAlwaysCharacterCommand
     {
         Guid CharacterId { get; }
     }
-    public class MoveAlwaysCharacterByIdCommand : ISingleMessage<VOPosition>, IMoveAlwaysCharacterByIdCommand
+    public class MoveAlwaysCharacterCommand : ISingleMessage<VOPosition>, IMoveAlwaysCharacterCommand
     {
         public Guid CharacterId { get; }
 
-        public MoveAlwaysCharacterByIdCommand(Guid characterId)
+        public MoveAlwaysCharacterCommand(Guid characterId)
         {
             CharacterId = characterId;
         }

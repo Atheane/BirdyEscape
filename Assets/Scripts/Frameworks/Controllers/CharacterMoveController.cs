@@ -2,14 +2,17 @@ using UnityEngine;
 using Zenject;
 using System;
 using Usecases.Characters;
+using Usecases.Characters.Queries;
 using Usecases.Characters.Commands;
+using Domain.Characters.Repositories;
+using Domain.Characters.Entities;
+using Domain.Characters.ValueObjects;
 
 public class CharacterMoveController : MonoBehaviour
 {
     private Guid _id;
     private DiContainer _container;
-
-    //private MoveAlwaysCharacterById _usecase;
+    private ICharacterEntity _characterEntity;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -17,23 +20,25 @@ public class CharacterMoveController : MonoBehaviour
         _container = container;
     }
 
-    //[Inject]
-    //public void Construct(MoveAlwaysCharacterById usecase)
-    //{
-    //    _usecase = usecase;
-    //}
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        var character = _container.Resolve<MoveAlwaysCharacterById>().Execute(new MoveAlwaysCharacterByIdCommand(_id));
+        _characterEntity = _container.Resolve<ICharactersRepository>().Find(_id);
+        _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(_id));
+    }
 
-        Debug.Log("CharacterController Update");
-        Vector3 _cowPosition = transform.position;
-        Debug.Log(_cowPosition);
-        //VOPosition position = _usecase.Execute(_id);
-        //Debug.Log("position");
-        //Debug.Log(position);
+    private void Update()
+    {
+        Debug.Log("_______________-");
+        VOPosition newPositionVO = _container.Resolve<GetCharacterPosition>().Execute(new GetCharacterPositionQuery(_id));
+
+        Vector3 newPosition = new Vector3(newPositionVO.Value.X, newPositionVO.Value.Y, 0f);
+        Debug.Log(newPosition);
+        transform.position = newPosition;
+    }
+
+    public void SetId(Guid id)
+    {
+        _id = id;
     }
 
 }

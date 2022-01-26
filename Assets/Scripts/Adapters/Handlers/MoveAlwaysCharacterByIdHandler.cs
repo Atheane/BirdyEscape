@@ -6,17 +6,17 @@ using Usecases.Characters.Commands;
 using Domain.Characters.ValueObjects;
 
 public class MoveAlwaysCharacterByIdHandler : MonoBehaviour,
-ISingleMessageHandler<MoveAlwaysCharacterByIdCommand, VOPosition>
+ISingleMessageHandler<MoveAlwaysCharacterCommand, VOPosition>
 {
-    private MoveAlwaysCharacterById _usecase;
+    private MoveAlwaysCharacter _usecase;
 
     [Inject]
-    public void Construct(MoveAlwaysCharacterById usecase)
+    public void Construct(MoveAlwaysCharacter usecase)
     {
         _usecase = usecase;
     }
 
-    public VOPosition Handle(MoveAlwaysCharacterByIdCommand message)
+    public VOPosition Handle(MoveAlwaysCharacterCommand message)
     {
         var position = _usecase.Execute(message);
         MoveCharacter(new Vector3(position.Value.X, position.Value.Y, 0));

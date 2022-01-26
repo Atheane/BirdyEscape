@@ -15,7 +15,8 @@ public class GameInstaller : MonoInstaller
         Container.Bind<IMediator>().To<MediatorImpl>().FromComponentInHierarchy().AsSingle();
         Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>()));
         Container.Bind<CreateCharacter>().AsSingle();
-        Container.Bind<MoveAlwaysCharacterById>().AsSingle();
+        Container.Bind<MoveAlwaysCharacter>().AsSingle();
+        Container.Bind<GetCharacterPosition>().AsSingle();
         //to-do how to attach handlers
     }
 }

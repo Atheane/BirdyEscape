@@ -10,7 +10,7 @@ using Frameworks.Dtos;
 public class GridController : MonoBehaviour
 {
     private DiContainer _container;
-    private GameObject _cowGo;
+    private GameObject _currentGo;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -18,24 +18,25 @@ public class GridController : MonoBehaviour
         _container = container;
     }
 
-    void Awake()
+    void Start()
     {
         Debug.Log("________GridController, Start()");
-        var character = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.COW, EnumCharacterDirection.LEFT, (Position.INIT_X, Position.INIT_Y), Speed.INIT_SPEED));
+        var characterEntity = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.COW, EnumCharacterDirection.LEFT, (Position.INIT_X, Position.INIT_Y), Speed.INIT_SPEED));
         Debug.Log("Created cow");
-        Debug.Log(character);
-        var _character = CharacterDto.Create(character.Id, character.Type, character.Direction, new Vector3(character.Position.Value.X, character.Position.Value.Y), character.Speed);
-        DrawCharacter(_character);
+        Debug.Log(characterEntity);
+        var characterDto = CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, characterEntity.Position.Value.Y), characterEntity.Speed);
+        CreateCharacter(characterDto);
     }
 
-    public void DrawCharacter(ICharacterDto characterDto)
+    public void CreateCharacter(ICharacterDto characterDto)
     {
         Transform grid = transform;
-        _cowGo = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, Quaternion.identity) as GameObject;
+        _currentGo = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, Quaternion.identity) as GameObject;
         // instantiate and attach the component in once function
-        _container.InstantiateComponent<CharacterMoveController>(_cowGo);
-        _cowGo.tag = characterDto.Image;
-        _cowGo.transform.parent = grid;
+        CharacterMoveController controller = _container.InstantiateComponent<CharacterMoveController>(_currentGo);
+        controller.SetId(characterDto.Id);
+        _currentGo.tag = characterDto.Image;
+        _currentGo.transform.parent = grid;
     }
 
 }
