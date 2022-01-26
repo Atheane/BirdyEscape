@@ -10,9 +10,9 @@ namespace Frameworks.Messages
         public EnumCharacterType Type { get; }
         public EnumCharacterDirection Direction { get; }
         public (float, float) Position { get; }
-        public float Speed { get; }
+        public int Speed { get; }
 
-        public CreateCharacterMessage(EnumCharacterType type, EnumCharacterDirection direction, (float, float) position, float speed)
+        public CreateCharacterMessage(EnumCharacterType type, EnumCharacterDirection direction, (float, float) position, int speed)
         {
             this.Type = type;
             this.Direction = direction;

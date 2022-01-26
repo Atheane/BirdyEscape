@@ -11,7 +11,7 @@ namespace Usecases.Characters
         public EnumCharacterType Type { get; }
         public EnumCharacterDirection Direction { get; }
         public (float, float) Position { get; }
-        public float Speed { get; }
+        public int Speed { get; }
     }
     public class CreateCharacter : IUsecase<ICreateCharacterCommand, ICharacterEntity>
     {

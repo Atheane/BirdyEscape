@@ -7,7 +7,7 @@
     }
     public static class Speed
     {
-        public const float INIT_SPEED = 20.0f;
+        public const int INIT_SPEED = 2000;
     }
 }
 

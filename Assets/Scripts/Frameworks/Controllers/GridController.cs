@@ -3,6 +3,7 @@ using UniMediator;
 using Zenject;
 using Domain.Characters.Types;
 using Domain.Characters.Constants;
+using Domain.Characters.ValueObjects;
 using Frameworks.Messages;
 using Frameworks.Dtos;
 
@@ -23,9 +24,7 @@ public class GridController : MonoBehaviour
         ICharacterDto cow = _mediator.Send<ICharacterDto>(new CreateCharacterMessage(EnumCharacterType.COW, EnumCharacterDirection.LEFT, (Position.INIT_X, Position.INIT_Y), Speed.INIT_SPEED));
         Debug.Log("Created cow");
         Debug.Log(cow);
-        EnumCharacterState cowState = _mediator.Send<EnumCharacterState>(new MoveCharacterByIdMessage(cow.Id));
-        Debug.Log("cow new state");
-        Debug.Log(cowState);
+        _mediator.Send<VOPosition>(new MoveAlwaysCharacterByIdMessage(cow.Id));
     }
 
 }
