@@ -58,7 +58,7 @@ namespace Adapters.InMemoryRepository
             bool hasValue = this.Store.TryGetValue(characterId, out character);
             if (hasValue)
             {
-                return CharacterEntity.Create(character.Type, character.Direction, character.Position, character.Speed);
+                return character;
             }
             else
             {

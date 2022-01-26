@@ -29,7 +29,6 @@ namespace Usecases.Characters
             timer.Interval = speed;
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
-
         }
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {

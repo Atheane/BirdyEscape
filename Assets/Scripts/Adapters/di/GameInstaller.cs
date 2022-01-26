@@ -16,7 +16,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>()));
         Container.Bind<CreateCharacter>().AsSingle();
         Container.Bind<MoveAlwaysCharacter>().AsSingle();
-        Container.Bind<GetCharacterPosition>().AsSingle();
+        Container.Bind<GetCharacterPositionUsecase>().AsSingle();
         //to-do how to attach handlers
     }
 }
