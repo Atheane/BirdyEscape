@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grid
   - Cow
+  - Boundary
   layers:
   - Default
   - TransparentFX

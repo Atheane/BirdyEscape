@@ -17,6 +17,13 @@ public class CharacterMoveController : MonoBehaviour
         _container = container;
     }
 
+    public void SetId(Guid id)
+    {
+        Debug.Log("SetId");
+        Debug.Log(id);
+        _id = id;
+    }
+
     private void Start()
     {
         _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(_id));
@@ -24,22 +31,18 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("_______________CharacterMoveController, Update()");
-        Debug.Log("_id");
-        Debug.Log(_id);
-
         VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_id));
 
         Vector3 newPosition = new Vector3(newPositionVO.Value.X, newPositionVO.Value.Y, 0f);
-        Debug.Log(newPosition);
         transform.position = newPosition;
     }
 
-    public void SetId(Guid id)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("SetId");
-        Debug.Log(id);
-        _id = id;
+        if (collision.tag == "Boundary")
+        {
+            _container.Resolve<TurnCharacter90Degrees>().Execute(new TurnCharacter90DegreesCommand(_id));
+        }
     }
 
 }

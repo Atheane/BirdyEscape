@@ -20,7 +20,6 @@ public class GridController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("________GridController, Start()");
         var characterEntity = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.COW, EnumCharacterDirection.LEFT, (Position.INIT_X, Position.INIT_Y), Speed.INIT_SPEED));
         Debug.Log("Created cow");
         var characterDto = CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, characterEntity.Position.Value.Y), characterEntity.Speed);
@@ -34,8 +33,6 @@ public class GridController : MonoBehaviour
         // instantiate and attach the component in once function
         CharacterMoveController controller = _container.InstantiateComponent<CharacterMoveController>(_currentGo);
         controller.SetId(characterDto.Id);
-        Debug.Log("COW ID");
-        Debug.Log(characterDto.Id);
         _currentGo.tag = characterDto.Image;
         _currentGo.transform.parent = grid;
     }

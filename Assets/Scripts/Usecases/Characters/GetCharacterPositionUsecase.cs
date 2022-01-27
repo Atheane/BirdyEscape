@@ -15,14 +15,7 @@ public class GetCharacterPositionUsecase : IUsecase<IGetCharacterPositionQuery, 
     }
     public VOPosition Execute(IGetCharacterPositionQuery query)
     {
-        Debug.Log("GetCharacterPositionUsecase.Execute()");
-        Debug.Log("query._characterId");
-        Debug.Log(query._characterId);
         ICharacterEntity characterEntity = _charactersRepository.Find(query._characterId);
-        //Debug.Log("characterEntity.Id");
-        //Debug.Log(characterEntity.Id);
-        //Debug.Log("characterEntity.Position");
-        //Debug.Log(characterEntity.Position);
         return characterEntity.Position;
     }
 }
