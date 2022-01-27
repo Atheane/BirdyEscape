@@ -8,20 +8,20 @@ using UnityEngine;
 
 namespace Usecases.Characters
 {
-    public class TurnCharacter90Degrees : IUsecase<ITurnCharacter90DegreesCommand, EnumCharacterDirection>
+    public class ChangeCharacterDirection : IUsecase<IChangeCharacterDirectionCommand, EnumCharacterDirection>
     {
         public ICharactersRepository _charactersRepository;
         public ICharacterEntity _characterEntity;
-        public TurnCharacter90Degrees(ICharactersRepository charactersRepository)
+        public ChangeCharacterDirection(ICharactersRepository charactersRepository)
         {
             _charactersRepository = charactersRepository;
         }
-        public EnumCharacterDirection Execute(ITurnCharacter90DegreesCommand command)
+        public EnumCharacterDirection Execute(IChangeCharacterDirectionCommand command)
         {
             _characterEntity = _charactersRepository.Find(command._characterId);
             Debug.Log("before, entity direction");
             Debug.Log(_characterEntity.Direction);
-            _characterEntity.Turn90Degrees();
+            _characterEntity.UpdateDirection(command._direction);
             Debug.Log("AFTER, entity direction");
             Debug.Log(_characterEntity.Direction);
             return _characterEntity.Direction;

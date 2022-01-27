@@ -5,6 +5,7 @@ using Usecases.Characters;
 using Usecases.Characters.Queries;
 using Usecases.Characters.Commands;
 using Domain.Characters.ValueObjects;
+using Domain.Characters.Types;
 
 public class CharacterMoveController : MonoBehaviour
 {
@@ -39,11 +40,24 @@ public class CharacterMoveController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Boundary")
+        Debug.Log("Collision");
+        EnumCharacterDirection direction = EnumCharacterDirection.LEFT;
+        switch (collision.tag)
         {
-            Debug.Log("Collision");
-            _container.Resolve<TurnCharacter90Degrees>().Execute(new TurnCharacter90DegreesCommand(_id));
+            case "LeftBoundary":
+                Debug.Log("COLLISION LEFT");
+                direction = EnumCharacterDirection.UP;
+                break;
+            case "UpBoundary":
+                Debug.Log("COLLISION UP");
+                direction = EnumCharacterDirection.RIGHT;
+                break;
+            case "RightBoundary":
+                Debug.Log("COLLISION RIGHT");
+                direction = EnumCharacterDirection.DOWN;
+                break;
         }
+        _container.Resolve<ChangeCharacterDirection>().Execute(new ChangeCharacterDirectionCommand(_id, direction));
     }
 
 }

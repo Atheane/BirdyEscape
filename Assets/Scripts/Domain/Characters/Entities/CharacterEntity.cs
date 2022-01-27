@@ -16,7 +16,7 @@ namespace Domain.Characters.Entities
         public EnumCharacterState State { get; }
         public void MoveOnce();
         public void UpdateState(EnumCharacterState state);
-        public void Turn90Degrees();
+        public void UpdateDirection(EnumCharacterDirection direction);
     }
 
     public class CharacterEntity : AggregateRoot, ICharacterEntity
@@ -61,7 +61,7 @@ namespace Domain.Characters.Entities
                     position.X += 1;
                     break;
                 case EnumCharacterDirection.DOWN:
-                    position.X -= 1;
+                    position.Y -= 1;
                     break;
             }
 
@@ -70,23 +70,11 @@ namespace Domain.Characters.Entities
             AddDomainEvent(characterMoved);
         }
 
-        public void Turn90Degrees()
+        public void UpdateDirection(EnumCharacterDirection direction)
         {
-            switch (Direction)
-            {
-                case EnumCharacterDirection.LEFT:
-                    Direction = EnumCharacterDirection.UP;
-                    break;
-                case EnumCharacterDirection.UP:
-                    Direction = EnumCharacterDirection.RIGHT;
-                    break;
-                case EnumCharacterDirection.RIGHT:
-                    Direction = EnumCharacterDirection.DOWN;
-                    break;
-                case EnumCharacterDirection.DOWN:
-                    Direction = EnumCharacterDirection.LEFT;
-                    break;
-            }
+            Direction = direction;
+            var characterDirectionUpdated = new CharacterMovedDomainEvent<VOPosition>(Position);
+            AddDomainEvent(characterDirectionUpdated);
         }
 
         public void UpdateState(EnumCharacterState state)

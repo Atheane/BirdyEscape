@@ -6,7 +6,10 @@ TagManager:
   tags:
   - Grid
   - Cow
-  - Boundary
+  - LeftBoundary
+  - UpBoundary
+  - RightBoundary
+  - BottomBoundary
   layers:
   - Default
   - TransparentFX
