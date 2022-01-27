@@ -41,6 +41,7 @@ public class CharacterMoveController : MonoBehaviour
     {
         if (collision.tag == "Boundary")
         {
+            Debug.Log("Collision");
             _container.Resolve<TurnCharacter90Degrees>().Execute(new TurnCharacter90DegreesCommand(_id));
         }
     }
