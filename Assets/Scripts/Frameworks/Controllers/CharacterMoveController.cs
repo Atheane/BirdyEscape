@@ -40,20 +40,16 @@ public class CharacterMoveController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision");
         EnumCharacterDirection direction = EnumCharacterDirection.LEFT;
         switch (collision.tag)
         {
             case "LeftBoundary":
-                Debug.Log("COLLISION LEFT");
                 direction = EnumCharacterDirection.UP;
                 break;
             case "UpBoundary":
-                Debug.Log("COLLISION UP");
                 direction = EnumCharacterDirection.RIGHT;
                 break;
             case "RightBoundary":
-                Debug.Log("COLLISION RIGHT");
                 direction = EnumCharacterDirection.DOWN;
                 break;
         }
