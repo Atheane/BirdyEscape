@@ -1,5 +1,5 @@
-﻿using UniMediator;
-using Frameworks.Dtos;
+﻿using System.Threading.Tasks;
+using UniMediator;
 using Domain.Characters.Types;
 
 namespace Usecases.Characters.Commands
@@ -11,7 +11,7 @@ namespace Usecases.Characters.Commands
         public (float, float) Position { get; }
         public int Speed { get; }
     }
-    public class CreateCharacterCommand : ISingleMessage<ICharacterDto>, ICreateCharacterCommand
+    public class CreateCharacterCommand : ISingleMessage<Task>, ICreateCharacterCommand
     {
         public EnumCharacterType Type { get; }
         public EnumCharacterDirection Direction { get; }
