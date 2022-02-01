@@ -14,7 +14,7 @@ public class GameInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.Bind<IMediator>().FromInstance(new MediatorImpl());
+        Container.Bind<IMediator>().FromInstance(FindObjectOfType<MediatorImpl>());
         Container.Bind(typeof(IDomainEventDispatcher)).To(typeof(UnimediatorDomainEventDispatcher)).AsSingle();
         Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>()));
         Container.Bind<CreateCharacter>().AsSingle();

@@ -22,7 +22,8 @@ namespace Adapters.Unimediatr
             try
             {
 
-                return _mediator.Send(domainEventNotification);
+                _mediator.Send(domainEventNotification);
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {
