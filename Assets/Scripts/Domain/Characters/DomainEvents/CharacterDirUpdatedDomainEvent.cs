@@ -3,18 +3,16 @@ using Libs.Domain.DomainEvents;
 
 namespace Domain.Characters.DomainEvents
 {
-    public class CharacterDirectionUpdatedDomainEvent<T> : DomainEvent
+    public class CharacterDirUpdatedDomainEvent<T> : DomainEvent
     {
         public new EnumCharacterEvents Label = EnumCharacterEvents.CHARACTER_DIRECTION_UPDATED;
         public new Guid Id = Guid.NewGuid();
         public new DateTime CreatedAtUtc = DateTime.UtcNow;
         public T Props;
 
-        public CharacterDirectionUpdatedDomainEvent(T props)
+        public CharacterDirUpdatedDomainEvent(T props)
         {
             this.Props = props;
         }
     }
 }
-
-

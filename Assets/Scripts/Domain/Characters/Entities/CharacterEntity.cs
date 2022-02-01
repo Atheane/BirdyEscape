@@ -73,7 +73,7 @@ namespace Domain.Characters.Entities
         public void UpdateDirection(EnumCharacterDirection direction)
         {
             Direction = direction;
-            var characterDirectionUpdated = new CharacterDirectionUpdatedDomainEvent<EnumCharacterDirection>(Direction);
+            var characterDirectionUpdated = new CharacterDirUpdatedDomainEvent<EnumCharacterDirection>(Direction);
             AddDomainEvent(characterDirectionUpdated);
         }
 

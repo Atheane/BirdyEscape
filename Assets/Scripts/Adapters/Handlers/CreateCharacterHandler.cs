@@ -1,10 +1,10 @@
-using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using UniMediator;
-using Usecases.Characters.Commands;
+using Libs.Domain.DomainEvents;
+using Adapters.Unimediatr;
 
-public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<CreateCharacterCommand>
+public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification>
 {
     private DiContainer _container;
     private GameObject _currentGo;
@@ -13,13 +13,12 @@ public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<Cr
     public void Construct(DiContainer container)
     {
         _container = container;
-        Debug.Log("new CreateCharacterHandler");
     }
 
-    public void Handle(CreateCharacterCommand command)
+    public void Handle(DomainEventNotification notification)
     {
         Debug.Log("Handle");
-        Debug.Log(command);
+        Debug.Log(notification);
     }
 
     //public void CreateCharacter(ICharacterDto characterDto)

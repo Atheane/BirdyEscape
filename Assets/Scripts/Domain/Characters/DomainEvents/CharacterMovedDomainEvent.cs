@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Libs.Domain.DomainEvents;
 
 
