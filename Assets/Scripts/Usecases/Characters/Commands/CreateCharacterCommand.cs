@@ -11,7 +11,7 @@ namespace Usecases.Characters.Commands
         public (float, float) Position { get; }
         public int Speed { get; }
     }
-    public class CreateCharacterCommand : ISingleMessage<Task>, ICreateCharacterCommand
+    public class CreateCharacterCommand : IMulticastMessage, ICreateCharacterCommand
     {
         public EnumCharacterType Type { get; }
         public EnumCharacterDirection Direction { get; }

@@ -1,7 +1,6 @@
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using UniMediator;
-using UnityEngine;
 using Libs.Domain.Entities;
 using Libs.Domain.DomainEvents;
 
@@ -16,30 +15,19 @@ namespace Adapters.Unimediatr
             _mediator = mediator;
         }
 
-        public Task Dispatch(IAggregateRoot aggregateRoot)
+        public void Dispatch(IAggregateRoot aggregateRoot)
         {
             var domainEventNotification = CreateDomainEventNotification(aggregateRoot);
-            try
-            {
-
-                _mediator.Send(domainEventNotification);
-                return Task.CompletedTask;
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e);
-                return Task.FromException(e);
-            }
-
+            _mediator.Publish(domainEventNotification);
         }
 
-        public ISingleMessage<Task> CreateDomainEventNotification(IAggregateRoot aggregateRoot)
+        public IMulticastMessage CreateDomainEventNotification(IAggregateRoot aggregateRoot)
         {
             IDomainEvent domainEvent = aggregateRoot.DomainEvents[0];
             var domainEventType = domainEvent.GetType();
             var genericDispatcherType = typeof(DomainEventNotification<>).MakeGenericType(domainEventType);
             var notification = Activator.CreateInstance(genericDispatcherType, domainEvent);
-            return (ISingleMessage<Task>)notification;
+            return (IMulticastMessage)notification;
         }
 
     }

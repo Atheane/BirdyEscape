@@ -1,9 +1,10 @@
 using UniMediator;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using Libs.Domain.DomainEvents;
 
 namespace Adapters.Unimediatr
 {
-    public sealed class DomainEventNotification<IDomainEvent> : ISingleMessage<Task>
+    public sealed class DomainEventNotification<IDomainEvent> : IMulticastMessage
     {
         public IDomainEvent _domainEvent { get; }
         public DomainEventNotification(IDomainEvent domainEvent)

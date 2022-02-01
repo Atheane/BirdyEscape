@@ -4,7 +4,7 @@ using Zenject;
 using UniMediator;
 using Usecases.Characters.Commands;
 
-public class CreateCharacterHandler : MonoBehaviour, ISingleMessageHandler<CreateCharacterCommand, Task>
+public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<CreateCharacterCommand>
 {
     private DiContainer _container;
     private GameObject _currentGo;
@@ -16,12 +16,10 @@ public class CreateCharacterHandler : MonoBehaviour, ISingleMessageHandler<Creat
         Debug.Log("new CreateCharacterHandler");
     }
 
-    public Task Handle(CreateCharacterCommand command)
+    public void Handle(CreateCharacterCommand command)
     {
-        Debug.Log("Handle()");
-        Debug.Log("command");
+        Debug.Log("Handle");
         Debug.Log(command);
-        return Task.CompletedTask;
     }
 
     //public void CreateCharacter(ICharacterDto characterDto)
