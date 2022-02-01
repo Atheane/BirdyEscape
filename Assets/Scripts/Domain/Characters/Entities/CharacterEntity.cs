@@ -40,7 +40,7 @@ namespace Domain.Characters.Entities
         public static CharacterEntity Create(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, int speed)
         {
             var character = new CharacterEntity(type, direction, position, speed);
-            var characterCreated = new CharacterCreatedDomainEvent<ICharacterEntity>(character);
+            var characterCreated = new CharacterCreatedDomainEvent("test");
             character.AddDomainEvent(characterCreated);
             character.Id = characterCreated.Id;
             return character;

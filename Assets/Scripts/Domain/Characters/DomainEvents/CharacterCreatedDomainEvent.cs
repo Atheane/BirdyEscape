@@ -4,14 +4,14 @@ using Libs.Domain.DomainEvents;
 
 namespace Domain.Characters.DomainEvents
 {
-    public class CharacterCreatedDomainEvent<T> : DomainEvent
+    public class CharacterCreatedDomainEvent : DomainEvent
     {
         public new EnumCharacterEvents Label = EnumCharacterEvents.CHARACTER_CREATED;
         public new Guid Id = Guid.NewGuid();
         public new DateTime CreatedAtUtc = DateTime.UtcNow;
-        public T Props;
+        public string Props;
 
-        public CharacterCreatedDomainEvent(T props)
+        public CharacterCreatedDomainEvent(string props)
         {
             this.Props = props;
         }
