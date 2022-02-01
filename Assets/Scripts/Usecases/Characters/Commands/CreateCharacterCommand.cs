@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using UniMediator;
+﻿using UniMediator;
 using Domain.Characters.Types;
 
 namespace Usecases.Characters.Commands

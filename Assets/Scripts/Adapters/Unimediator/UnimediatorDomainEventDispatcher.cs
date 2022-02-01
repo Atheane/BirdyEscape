@@ -24,9 +24,9 @@ namespace Adapters.Unimediatr
         public IMulticastMessage CreateDomainEventNotification(IAggregateRoot aggregateRoot)
         {
             IDomainEvent domainEvent = aggregateRoot.DomainEvents[0];
-            var domainEventType = domainEvent.GetType();
-            var genericDispatcherType = typeof(DomainEventNotification<>).MakeGenericType(domainEventType);
-            var notification = Activator.CreateInstance(genericDispatcherType, domainEvent);
+            //var domainEventType = domainEvent.GetType();
+            //var genericDispatcherType = typeof(DomainEventNotification<>).MakeGenericType(domainEventType);
+            var notification = Activator.CreateInstance(typeof(DomainEventNotification), domainEvent);
             return (IMulticastMessage)notification;
         }
 
