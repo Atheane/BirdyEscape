@@ -5,15 +5,18 @@ using Domain.Characters.Entities;
 
 namespace Domain.Characters.DomainEvents
 {
-    public class CharacterMovedDomainEvent : DomainEvent
+    public class CharacterMovedDomainEvent : IDomainEvent
     {
-        public new EnumCharacterEvents _label = EnumCharacterEvents.CHARACTER_MOVED;
-        public new Guid _id = Guid.NewGuid();
-        public new DateTime _createdAtUtc = DateTime.UtcNow;
-        public ICharacterEntity _props;
+        public string _label { get; }
+        public Guid _id { get; }
+        public DateTime _createdAtUtc { get; }
+        public ICharacterEntity _props { get; }
 
         public CharacterMovedDomainEvent(ICharacterEntity props)
         {
+            _label = "CHARACTER_MOVED";
+            _id = Guid.NewGuid();
+            _createdAtUtc = DateTime.UtcNow;
             _props = props;
         }
     }

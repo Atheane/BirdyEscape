@@ -4,15 +4,18 @@ using Domain.Characters.Entities;
 
 namespace Domain.Characters.DomainEvents
 {
-    public class CharacterDirUpdatedDomainEvent: DomainEvent
+    public class CharacterDirUpdatedDomainEvent: IDomainEvent
     {
-        public new EnumCharacterEvents _label = EnumCharacterEvents.CHARACTER_DIRECTION_UPDATED;
-        public new Guid _id = Guid.NewGuid();
-        public new DateTime _createdAtUtc = DateTime.UtcNow;
-        public ICharacterEntity _props;
+        public string _label { get; }
+        public Guid _id { get; }
+        public DateTime _createdAtUtc { get; }
+        public ICharacterEntity _props { get; }
 
-        public CharacterDirUpdatedDomainEvent(ICharacterEntity props)
+    public CharacterDirUpdatedDomainEvent(ICharacterEntity props)
         {
+            _label = "CHARACTER_DIRECTION_UPDATED";
+            _id = Guid.NewGuid();
+            _createdAtUtc = DateTime.UtcNow;
             _props = props;
         }
     }
