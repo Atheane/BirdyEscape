@@ -21,6 +21,7 @@ namespace Usecases.Characters
             _charactersRepository = charactersRepository;
             _domainEventDispatcher = domainEventDispatcher;
         }
+
         public EnumCharacterDirection Execute(ITurn90DegreesRightCommand command)
         {
             ICharacterEntity characterEntity = _charactersRepository.Find(command._characterId);
