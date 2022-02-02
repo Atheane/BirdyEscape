@@ -2,14 +2,13 @@ using UnityEngine;
 using Zenject;
 using UniMediator;
 using Domain.Characters.DomainEvents;
-using Usecases.Characters.Commands;
+using Domain.Characters.Entities;
 using Adapters.Unimediatr;
 using Frameworks.Dtos;
 
 public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<CharacterCreatedDomainEvent>>
 {
     private DiContainer _container;
-    private GameObject _currentGo;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -19,17 +18,15 @@ public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<Do
 
     public void Handle(DomainEventNotification<CharacterCreatedDomainEvent> notification)
     {
-        Debug.Log("Handle");
-        Debug.Log(notification);
-        Debug.Log(notification._domainEvent._props.Direction);
-        //CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, characterEntity.Position.Value.Y), characterEntity.Speed);
-        //ICharacterDto characterDto = CharacterDto.Create(domainEvent.Id, domainEvent.)
+        ICharacterEntity characterEntity = notification._domainEvent._props;
+        var characterDto = CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, characterEntity.Position.Value.Y), characterEntity.Speed);
+        CreateCharacter(characterDto);
     }
 
     public void CreateCharacter(ICharacterDto characterDto)
     {
         Transform grid = transform.parent;
-        _currentGo = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, Quaternion.identity) as GameObject;
+        GameObject _currentGo = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, Quaternion.identity) as GameObject;
         // instantiate and attach the component in once function
         CharacterMoveController controller = _container.InstantiateComponent<CharacterMoveController>(_currentGo);
         controller.SetId(characterDto.Id);
