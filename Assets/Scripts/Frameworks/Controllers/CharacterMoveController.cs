@@ -20,8 +20,6 @@ public class CharacterMoveController : MonoBehaviour
 
     public void SetId(Guid id)
     {
-        Debug.Log("SetId");
-        Debug.Log(id);
         _id = id;
     }
 
