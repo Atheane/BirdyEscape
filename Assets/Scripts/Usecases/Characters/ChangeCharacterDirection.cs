@@ -19,11 +19,7 @@ namespace Usecases.Characters
         public EnumCharacterDirection Execute(IChangeCharacterDirectionCommand command)
         {
             _characterEntity = _charactersRepository.Find(command._characterId);
-            Debug.Log("before, entity direction");
-            Debug.Log(_characterEntity.Direction);
             _characterEntity.UpdateDirection(command._direction);
-            Debug.Log("AFTER, entity direction");
-            Debug.Log(_characterEntity.Direction);
             return _characterEntity.Direction;
         }
     }

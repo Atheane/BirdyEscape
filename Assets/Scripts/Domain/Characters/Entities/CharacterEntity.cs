@@ -15,6 +15,7 @@ namespace Domain.Characters.Entities
         public int Speed { get; }
         public EnumCharacterState State { get; }
         public void MoveOnce();
+        public void Rebounce(float coeff);
         public void UpdateState(EnumCharacterState state);
         public void UpdateDirection(EnumCharacterDirection direction);
     }
@@ -52,23 +53,49 @@ namespace Domain.Characters.Entities
             switch (Direction)
             {
                 case EnumCharacterDirection.LEFT:
-                    position.X -= 1;
+                    position.X -= 0.2f;
                     break;
                 case EnumCharacterDirection.UP:
-                    position.Y += 1;
+                    position.Y += 0.2f;
                     break;
                 case EnumCharacterDirection.RIGHT:
-                    position.X += 1;
+                    position.X += 0.2f;
                     break;
                 case EnumCharacterDirection.DOWN:
-                    position.Y -= 1;
+                    position.Y -= 0.2f;
+                    break;
+            }
+
+            Position = VOPosition.Create(position);
+            // this method is called in a update loop,
+            // avoid to dispatch an event each time, hard bugs if you do
+            // alternative: do not use update loop and move only by signals
+            // my guess is that it is far less performant than update loop
+        }
+
+        public void Rebounce(float coeff)
+        {
+            (float X, float Y) position = Position.Value;
+            switch (Direction)
+            {
+                case EnumCharacterDirection.LEFT:
+                    position.X += coeff;
+                    break;
+                case EnumCharacterDirection.UP:
+                    position.Y -= coeff;
+                    break;
+                case EnumCharacterDirection.RIGHT:
+                    position.X -= coeff;
+                    break;
+                case EnumCharacterDirection.DOWN:
+                    position.Y += coeff;
                     break;
             }
 
             Position = VOPosition.Create(position);
             // this way, no dependency from usecase' commands to Domain Entities
-            var characterMoved = new CharacterMovedDomainEvent(this);
-            AddDomainEvent(characterMoved);
+            var characterBounced = new CharacterBouncedDomainEvent(this);
+            AddDomainEvent(characterBounced);
         }
 
         public void UpdateDirection(EnumCharacterDirection direction)

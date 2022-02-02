@@ -22,6 +22,7 @@ namespace Adapters.Unimediatr
             {
                 Debug.Log("______" + eventLabel + "_____published");
                 _mediator.Publish(domainEventNotification);
+                aggregateRoot.ClearDomainEvents();
             } catch(Exception e)
             {
                 Debug.LogException(e);

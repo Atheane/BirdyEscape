@@ -6,15 +6,15 @@ namespace Usecases.Characters.Commands
 {
     public interface IMoveAlwaysCharacterCommand
     {
-        Guid CharacterId { get; }
+        Guid _characterId { get; }
     }
     public class MoveAlwaysCharacterCommand : ISingleMessage<VOPosition>, IMoveAlwaysCharacterCommand
     {
-        public Guid CharacterId { get; }
+        public Guid _characterId { get; }
 
         public MoveAlwaysCharacterCommand(Guid characterId)
         {
-            CharacterId = characterId;
+            _characterId = characterId;
         }
     }
 }

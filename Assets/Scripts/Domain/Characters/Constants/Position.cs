@@ -11,7 +11,7 @@
     }
     public static class Speed
     {
-        public const int INIT_SPEED = 80;
+        public const int INIT_SPEED = 10;
     }
 }
 
