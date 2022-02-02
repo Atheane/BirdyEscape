@@ -28,7 +28,6 @@ namespace Usecases.Characters
 
             _charactersRepository.Add(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);
-            characterEntity.ClearDomainEvents();
             return characterEntity;
         }
     }
