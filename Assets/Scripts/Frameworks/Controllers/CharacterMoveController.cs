@@ -38,27 +38,6 @@ public class CharacterMoveController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("COLLISION");
-
-        //ARCHI1
-        //EnumCharacterDirection oldDirection = _container.Resolve<GetCharacterDirectionUsecase>().Execute(new GetCharacterDirectionQuery(_id));
-        //EnumCharacterDirection newDirection = EnumCharacterDirection.LEFT;
-
-        //switch (oldDirection)
-        //{
-        //    case EnumCharacterDirection.LEFT:
-        //        newDirection = EnumCharacterDirection.UP;
-        //        break;
-        //    case EnumCharacterDirection.UP:
-        //        newDirection = EnumCharacterDirection.RIGHT;
-        //        break;
-        //    case EnumCharacterDirection.RIGHT:
-        //        newDirection = EnumCharacterDirection.DOWN;
-        //        break;
-        //}
-        //_container.Resolve<ChangeCharacterDirection>().Execute(new ChangeCharacterDirectionCommand(_id, newDirection));
-
-        //ARCHI2: more intelligence in domain
         _container.Resolve<Turn90DegreesRight>().Execute(new Turn90DegreesRightCommand(_id));
 
     }
