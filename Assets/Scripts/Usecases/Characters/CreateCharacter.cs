@@ -24,11 +24,12 @@ namespace Usecases.Characters
         public ICharacterEntity Execute(ICreateCharacterCommand command)
         {
             var position = VOPosition.Create(command.Position);
-            var character = CharacterEntity.Create(command.Type, command.Direction, position, command.Speed);
+            var characterEntity = CharacterEntity.Create(command.Type, command.Direction, position, command.Speed);
 
-            _charactersRepository.Add(character);
-            _domainEventDispatcher.Dispatch(character);
-            return character;
+            _charactersRepository.Add(characterEntity);
+            _domainEventDispatcher.Dispatch(characterEntity);
+            characterEntity.ClearDomainEvents();
+            return characterEntity;
         }
     }
 }

@@ -32,13 +32,8 @@ namespace Adapters.InMemoryRepository
         public void Update(ICharacterEntity newCharacter)
         {
             ICharacterEntity oldCharacter = Find(newCharacter.Id);
-            if (oldCharacter.Equals(newCharacter))
-            {
-                throw new CharacterException.PropertiesAreUnchanged(newCharacter.Id.ToString());
-            } else
-            {
-                this.Store[oldCharacter.Id] = newCharacter;
-            }
+            //todo: test equality on each prop and return and error if objet is unchanged
+            this.Store[oldCharacter.Id] = newCharacter;
         }
 
         public void Remove(ICharacterEntity character)

@@ -15,6 +15,7 @@ namespace Domain.Characters.Entities
         public int Speed { get; }
         public EnumCharacterState State { get; }
         public void MoveOnce();
+        public void Rebounce(float coeff);
         public void UpdateState(EnumCharacterState state);
         public void UpdateDirection(EnumCharacterDirection direction);
     }
@@ -68,7 +69,31 @@ namespace Domain.Characters.Entities
             Position = VOPosition.Create(position);
             // this way, no dependency from usecase' commands to Domain Entities
             var characterMoved = new CharacterMovedDomainEvent(this);
-            AddDomainEvent(characterMoved);
+            //AddDomainEvent(characterMoved);
+        }
+
+        public void Rebounce(float coeff)
+        {
+            (float X, float Y) position = Position.Value;
+            switch (Direction)
+            {
+                case EnumCharacterDirection.LEFT:
+                    position.X += coeff;
+                    break;
+                case EnumCharacterDirection.UP:
+                    position.Y -= coeff;
+                    break;
+                case EnumCharacterDirection.RIGHT:
+                    position.X -= coeff;
+                    break;
+                case EnumCharacterDirection.DOWN:
+                    position.Y += coeff;
+                    break;
+            }
+
+            Position = VOPosition.Create(position);
+            // this way, no dependency from usecase' commands to Domain Entities
+            var characterMoved = new CharacterMovedDomainEvent(this);
         }
 
         public void UpdateDirection(EnumCharacterDirection direction)
