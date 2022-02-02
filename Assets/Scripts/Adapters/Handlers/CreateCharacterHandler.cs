@@ -21,7 +21,7 @@ public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<Do
     {
         Debug.Log("Handle");
         Debug.Log(notification);
-        Debug.Log(notification._domainEvent.Props);
+        Debug.Log(notification._domainEvent._props.Direction);
         //CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, characterEntity.Position.Value.Y), characterEntity.Speed);
         //ICharacterDto characterDto = CharacterDto.Create(domainEvent.Id, domainEvent.)
     }

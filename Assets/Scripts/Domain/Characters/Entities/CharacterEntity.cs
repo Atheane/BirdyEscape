@@ -40,9 +40,9 @@ namespace Domain.Characters.Entities
         public static CharacterEntity Create(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, int speed)
         {
             var character = new CharacterEntity(type, direction, position, speed);
-            var characterCreated = new CharacterCreatedDomainEvent("test");
+            var characterCreated = new CharacterCreatedDomainEvent(character);
             character.AddDomainEvent(characterCreated);
-            character.Id = characterCreated.Id;
+            character.Id = characterCreated._id;
             return character;
         }
 
@@ -66,21 +66,22 @@ namespace Domain.Characters.Entities
             }
 
             Position = VOPosition.Create(position);
-            var characterMoved = new CharacterMovedDomainEvent<VOPosition>(Position);
+            // this way, no dependency from usecase' commands to Domain Entities
+            var characterMoved = new CharacterMovedDomainEvent(this);
             AddDomainEvent(characterMoved);
         }
 
         public void UpdateDirection(EnumCharacterDirection direction)
         {
             Direction = direction;
-            var characterDirectionUpdated = new CharacterDirUpdatedDomainEvent<EnumCharacterDirection>(Direction);
+            var characterDirectionUpdated = new CharacterDirUpdatedDomainEvent(this);
             AddDomainEvent(characterDirectionUpdated);
         }
 
         public void UpdateState(EnumCharacterState state)
         {
             State = state;
-            var characterStateUpdated = new CharacterStateUpdatedDomainEvent<EnumCharacterState>(State);
+            var characterStateUpdated = new CharacterStateUpdatedDomainEvent(this);
             AddDomainEvent(characterStateUpdated);
         }
     }

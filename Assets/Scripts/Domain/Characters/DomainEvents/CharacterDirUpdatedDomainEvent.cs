@@ -1,18 +1,19 @@
 using System;
 using Libs.Domain.DomainEvents;
+using Domain.Characters.Entities;
 
 namespace Domain.Characters.DomainEvents
 {
-    public class CharacterDirUpdatedDomainEvent<T> : DomainEvent
+    public class CharacterDirUpdatedDomainEvent: DomainEvent
     {
-        public new EnumCharacterEvents Label = EnumCharacterEvents.CHARACTER_DIRECTION_UPDATED;
-        public new Guid Id = Guid.NewGuid();
-        public new DateTime CreatedAtUtc = DateTime.UtcNow;
-        public T Props;
+        public new EnumCharacterEvents _label = EnumCharacterEvents.CHARACTER_DIRECTION_UPDATED;
+        public new Guid _id = Guid.NewGuid();
+        public new DateTime _createdAtUtc = DateTime.UtcNow;
+        public ICharacterEntity _props;
 
-        public CharacterDirUpdatedDomainEvent(T props)
+        public CharacterDirUpdatedDomainEvent(ICharacterEntity props)
         {
-            this.Props = props;
+            _props = props;
         }
     }
 }

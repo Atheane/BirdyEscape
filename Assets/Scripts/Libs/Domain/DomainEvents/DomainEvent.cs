@@ -4,8 +4,8 @@ namespace Libs.Domain.DomainEvents
 {
     public abstract class DomainEvent : IDomainEvent
     {
-        public Guid Id { get; set; }
-        public DateTime CreatedAtUtc { get; set; }
-        public enum Label { get, set }
+        public Guid _id { get; }
+        public DateTime _createdAtUtc { get; }
+        public enum _label { get }
     }
 }
