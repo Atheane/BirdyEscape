@@ -20,8 +20,8 @@ namespace Adapters.Unimediatr
             var (domainEventNotification, eventLabel) = CreateDomainEventNotification(aggregateRoot);
             try
             {
+                Debug.Log("______" + eventLabel + "_____published");
                 _mediator.Publish(domainEventNotification);
-                Debug.Log("______" + eventLabel + "_____");
             } catch(Exception e)
             {
                 Debug.LogException(e);
