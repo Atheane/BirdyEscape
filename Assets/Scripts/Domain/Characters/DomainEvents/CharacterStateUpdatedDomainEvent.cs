@@ -1,19 +1,23 @@
 ﻿using System;
 using Libs.Domain.DomainEvents;
+using Domain.Characters.Entities;
 
 
 namespace Domain.Characters.DomainEvents
 {
-    public class CharacterStateUpdatedDomainEvent<T> : DomainEvent
+    public class CharacterStateUpdatedDomainEvent : IDomainEvent
     {
-        public new EnumCharacterEvents Label = EnumCharacterEvents.CHARACTER_STATE_UPDATED;
-        public new Guid Id = Guid.NewGuid();
-        public new DateTime CreatedAtUtc = DateTime.UtcNow;
-        public T Props;
+        public string _label { get; }
+        public Guid _id { get; }
+        public DateTime _createdAtUtc { get; }
+        public ICharacterEntity _props { get; }
 
-        public CharacterStateUpdatedDomainEvent(T props)
+        public CharacterStateUpdatedDomainEvent(ICharacterEntity props)
         {
-            this.Props = props;
+            _label = "CHARACTER_STATE_UPDATED";
+            _id = Guid.NewGuid();
+            _createdAtUtc = DateTime.UtcNow;
+            _props = props;
         }
     }
 }
