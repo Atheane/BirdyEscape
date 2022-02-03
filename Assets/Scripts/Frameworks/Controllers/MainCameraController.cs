@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MainCameraController : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
-        Screen.orientation = ScreenOrientation.Portrait;
+        Screen.orientation = ScreenOrientation.Landscape;
     }
 }
