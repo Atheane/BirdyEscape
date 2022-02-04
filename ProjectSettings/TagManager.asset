@@ -7,6 +7,12 @@ TagManager:
   - Grid
   - MainCharacter
   - Cute_Bird_16
+  - Obstacle
+  - Cow
+  - UpBoundary
+  - LeftBoundary
+  - RightBoundary
+  - BottomBoundary
   layers:
   - Default
   - TransparentFX

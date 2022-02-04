@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wooden_fence_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -185,6 +189,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 135478699}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &135478701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 135478699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &135478702
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135478701}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1001 &189205823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,6 +217,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -247,6 +273,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 189205823}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &189205825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 189205823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &189205826
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189205825}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1 &243510817
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wooden_fence_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -385,6 +433,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 259674827}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &259674829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 259674827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &259674830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259674829}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1001 &330175682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -395,6 +461,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -447,6 +517,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 330175682}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &330175684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 330175682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &330175685
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330175684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1 &362544283
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wooden_fence_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -554,6 +646,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 404050430}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &404050432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 404050430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &404050433
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404050432}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475604, y: 1.595165, z: -0.008346768}
 --- !u!1001 &424192327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -564,6 +674,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -616,6 +730,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 424192327}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &424192329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 424192327}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &424192330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424192329}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.084756516, y: 1.595165, z: -0.0083470065}
 --- !u!1001 &430969457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -626,6 +758,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -678,6 +814,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 430969457}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &430969459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 430969457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &430969460
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430969459}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475795, y: 1.595165, z: -0.00834796}
 --- !u!1001 &462115855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -688,6 +842,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -740,68 +898,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 462115855}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &468766930
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1741072177}
-    m_Modifications:
-    - target: {fileID: 773984229532619121, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_Name
-      value: module_fence
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
---- !u!4 &468766931 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 773984229532650833, guid: 4e71b7e75e7544c12a82e1ea09af8ee4, type: 3}
-  m_PrefabInstance: {fileID: 468766930}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &481691120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -812,6 +908,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -1047,6 +1147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wooden_fence_02 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -1098,6 +1202,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 551583638}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &551583640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 551583638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &551583641
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551583640}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475795, y: 1.595165, z: -0.00834796}
 --- !u!1 &583741963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,6 +1231,7 @@ GameObject:
   - component: {fileID: 583741964}
   - component: {fileID: 583741966}
   - component: {fileID: 583741965}
+  - component: {fileID: 583741967}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -57522,6 +57645,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!65 &583741967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583741963}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 498.19998, y: 247.32005, z: 2.5600007}
+  m_Center: {x: -130.56001, y: -12.799991, z: 1.2800003}
 --- !u!1001 &598904362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57532,6 +57668,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -57584,6 +57724,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 598904362}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &598904364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 598904362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &598904365
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598904364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475604, y: 1.595165, z: -0.00834796}
 --- !u!1001 &601710080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57594,6 +57752,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -57646,6 +57808,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 601710080}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &601710082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 601710080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &601710083
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601710082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1001 &655735710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57656,6 +57836,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -57708,6 +57892,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 655735710}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &655735712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 655735710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &655735713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655735712}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85942304, y: 2.771477, z: 0.442782}
+  m_Center: {x: -0.0000004917383, y: 1.3785995, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -57812,6 +58014,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: part_02a
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -57863,6 +58069,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 710526324}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &710526326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 710526324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &710526327
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710526326}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8594232, y: 2.771477, z: 0.44278213}
+  m_Center: {x: -0.0000014454127, y: 1.3785995, z: 0}
 --- !u!1001 &772539901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57873,6 +58097,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -57925,6 +58153,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 772539901}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &772539903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 772539901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &772539904
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772539903}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.084756516, y: 1.595165, z: -0.008346053}
 --- !u!1001 &902521464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57935,6 +58181,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -57987,6 +58237,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 902521464}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &902521466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 902521464}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &902521467
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902521466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1001 &948920185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57997,6 +58265,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -58156,6 +58428,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: part_02a
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -58207,6 +58483,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 1009306628}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1009306630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 1009306628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1009306631
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009306630}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85942304, y: 2.771477, z: 0.442782}
+  m_Center: {x: -0.0000004917383, y: 1.3785995, z: 0}
 --- !u!1001 &1021141250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58217,6 +58511,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -58269,6 +58567,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 1021141250}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1021141252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 1021141250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1021141253
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021141252}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1 &1216574629
 GameObject:
   m_ObjectHideFlags: 0
@@ -58374,6 +58690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wooden_fence_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -58425,6 +58745,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 1315739473}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1315739475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 1315739473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1315739476
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315739475}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1001 &1333980956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58435,6 +58773,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -58487,6 +58829,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 1333980956}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1333980958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 1333980956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1333980959
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333980958}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1001 &1362051035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58497,6 +58857,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -58549,68 +58913,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 1362051035}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1414264727
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1741072177}
-    m_Modifications:
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6852600187345144759, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-      propertyPath: m_Name
-      value: fence
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
---- !u!4 &1414264728 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 858447252365681706, guid: 0c60b95b74a874e3592b26753fc9d7c2, type: 3}
-  m_PrefabInstance: {fileID: 1414264727}
+--- !u!1 &1362051037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 1362051035}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1362051038
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362051037}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85942304, y: 2.771477, z: 0.442782}
+  m_Center: {x: 0.000003322959, y: 1.3785995, z: 0}
 --- !u!1001 &1420442483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58621,6 +58941,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -58673,6 +58997,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 1420442483}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1420442485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 1420442483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1420442486
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420442485}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475604, y: 1.595165, z: -0.00834653}
 --- !u!1001 &1443675868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58683,6 +59025,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -58746,6 +59092,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wooden_fence_02 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -58797,6 +59147,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 1446729811}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1446729813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 1446729811}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1446729814
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446729813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475795, y: 1.595165, z: -0.008346053}
+--- !u!65 &1446729815
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446729813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475795, y: 1.595165, z: -0.008346053}
 --- !u!1001 &1504291563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58807,6 +59188,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -58859,6 +59244,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 1504291563}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1504291565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 1504291563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1504291566
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504291565}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85942304, y: 2.771477, z: 0.442782}
+  m_Center: {x: -0.0000004917383, y: 1.3785995, z: 0}
 --- !u!1001 &1537905877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58869,6 +59272,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -58921,6 +59328,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 1537905877}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1537905879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 1537905877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1537905880
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537905879}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475604, y: 1.595165, z: -0.0083470065}
 --- !u!1 &1741072176
 GameObject:
   m_ObjectHideFlags: 0
@@ -58950,8 +59375,6 @@ Transform:
   m_LocalPosition: {x: 2.48, y: 0, z: -31.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1414264728}
-  - {fileID: 468766931}
   - {fileID: 902521465}
   - {fileID: 601710081}
   - {fileID: 189205824}
@@ -59129,6 +59552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wooden_fence_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -59180,6 +59607,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 1825133465}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1825133467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 1825133465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1825133468
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825133467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.570504, y: 3.1374779, z: 0.4425}
+  m_Center: {x: 0.08475602, y: 1.595165, z: -0.008347005}
 --- !u!1001 &1847245077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59190,6 +59635,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -59242,6 +59691,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 1847245077}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1847245079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 1847245077}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1847245080
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847245079}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85942304, y: 2.771477, z: 0.442782}
+  m_Center: {x: -0.0000004917383, y: 1.3785995, z: 0}
 --- !u!1001 &1858036142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59252,6 +59719,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -59304,6 +59775,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 1858036142}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1858036144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 1858036142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1858036145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858036144}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85942304, y: 2.771477, z: 0.442782}
+  m_Center: {x: -0.0000004917383, y: 1.3785995, z: 0}
 --- !u!1001 &1868303314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59314,6 +59803,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_RootOrder
@@ -59366,6 +59859,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
   m_PrefabInstance: {fileID: 1868303314}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1868303316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+  m_PrefabInstance: {fileID: 1868303314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1868303317
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868303316}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5705056, y: 3.1374779, z: 0.4425001}
+  m_Center: {x: 0.08475604, y: 1.595165, z: -0.0083470065}
 --- !u!1 &1902468782
 GameObject:
   m_ObjectHideFlags: 0
@@ -59433,6 +59944,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: part_02a (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
       value: 34
@@ -59484,6 +59999,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 1905292136}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1905292138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 1905292136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1905292139
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905292138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8594232, y: 2.771477, z: 0.44278213}
+  m_Center: {x: 0.0000002235173, y: 1.3785995, z: 0}
 --- !u!1001 &1952789569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59494,6 +60027,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
@@ -59546,6 +60083,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
   m_PrefabInstance: {fileID: 1952789569}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1952789571 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+  m_PrefabInstance: {fileID: 1952789569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1952789572
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952789571}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85942304, y: 2.771477, z: 0.442782}
+  m_Center: {x: -0.0000004917383, y: 1.3785995, z: 0}
 --- !u!1 &2136013652
 GameObject:
   m_ObjectHideFlags: 0

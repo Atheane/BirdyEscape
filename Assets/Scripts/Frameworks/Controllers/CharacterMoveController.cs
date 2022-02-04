@@ -36,10 +36,13 @@ public class CharacterMoveController : MonoBehaviour
         transform.position = newPosition;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        _container.Resolve<Turn90DegreesRight>().Execute(new Turn90DegreesRightCommand(_id));
-
+        Debug.Log("COLLISION");
+        if (collision.tag == "Obstacle")
+        {
+            _container.Resolve<Turn90DegreesRight>().Execute(new Turn90DegreesRightCommand(_id));
+        }
     }
 
 }
