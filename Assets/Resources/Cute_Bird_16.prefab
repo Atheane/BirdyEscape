@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 6251641437774776594}
   - component: {fileID: 6306085247128893190}
   - component: {fileID: 6152901608706053884}
-  - component: {fileID: 6256116131031462223}
+  - component: {fileID: 6750412321375256270}
   m_Layer: 0
   m_Name: Cute_Bird_16
   m_TagString: Cute_Bird_16
@@ -704,9 +704,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &6256116131031462223
+  m_Constraints: 80
+  m_CollisionDetection: 3
+--- !u!65 &6750412321375256270
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -717,8 +717,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0.13, z: 0}
+  m_Size: {x: 0.37777087, y: 0.37024292, z: 0.36642137}
+  m_Center: {x: 0.008699859, y: 0.1461623, z: -0.004562915}
 --- !u!1 &6257499856575272124
 GameObject:
   m_ObjectHideFlags: 0

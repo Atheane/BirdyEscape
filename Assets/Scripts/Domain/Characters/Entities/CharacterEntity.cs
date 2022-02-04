@@ -56,13 +56,13 @@ namespace Domain.Characters.Entities
                     position.X -= 0.2f;
                     break;
                 case EnumCharacterDirection.UP:
-                    position.Y += 0.2f;
+                    position.Z += 0.2f;
                     break;
                 case EnumCharacterDirection.RIGHT:
                     position.X += 0.2f;
                     break;
                 case EnumCharacterDirection.DOWN:
-                    position.Y -= 0.2f;
+                    position.Z -= 0.2f;
                     break;
             }
 
@@ -71,6 +71,7 @@ namespace Domain.Characters.Entities
             // avoid to dispatch an event each time, hard bugs if you do
             // alternative: do not use update loop and move only by signals
             // my guess is that it is far less performant than update loop
+            // todo: benchmark performance
         }
 
         public void Rebounce(float coeff)
@@ -82,13 +83,13 @@ namespace Domain.Characters.Entities
                     position.X += coeff;
                     break;
                 case EnumCharacterDirection.UP:
-                    position.Y -= coeff;
+                    position.Z -= coeff;
                     break;
                 case EnumCharacterDirection.RIGHT:
                     position.X -= coeff;
                     break;
                 case EnumCharacterDirection.DOWN:
-                    position.Y += coeff;
+                    position.Z += coeff;
                     break;
             }
 

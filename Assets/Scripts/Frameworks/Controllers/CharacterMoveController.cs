@@ -38,7 +38,6 @@ public class CharacterMoveController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("COLLISION");
         if (collision.tag == "Obstacle")
         {
             _container.Resolve<Turn90DegreesRight>().Execute(new Turn90DegreesRightCommand(_id));
