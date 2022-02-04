@@ -38,8 +38,8 @@ namespace Frameworks.Dtos
             string image;
             switch (type)
             {
-                case EnumCharacterType.COW:
-                    image = "Cow";
+                case EnumCharacterType.BLACK_BIRD:
+                    image = "Cute_Bird_16";
                     break;
                 default:
                     image = "";

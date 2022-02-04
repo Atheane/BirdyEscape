@@ -49,7 +49,7 @@ namespace Domain.Characters.Entities
 
         public void MoveOnce()
         {
-            (float X, float Y) position = Position.Value;
+            (float X, float Y, float Z) position = Position.Value;
             switch (Direction)
             {
                 case EnumCharacterDirection.LEFT:
@@ -75,7 +75,7 @@ namespace Domain.Characters.Entities
 
         public void Rebounce(float coeff)
         {
-            (float X, float Y) position = Position.Value;
+            (float X, float Y, float Z) position = Position.Value;
             switch (Direction)
             {
                 case EnumCharacterDirection.LEFT:

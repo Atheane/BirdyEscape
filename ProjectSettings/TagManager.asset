@@ -5,11 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Grid
-  - Cow
-  - LeftBoundary
-  - UpBoundary
-  - RightBoundary
-  - BottomBoundary
+  - MainCharacter
+  - Cute_Bird_16
   layers:
   - Default
   - TransparentFX

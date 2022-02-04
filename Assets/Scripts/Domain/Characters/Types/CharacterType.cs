@@ -2,7 +2,7 @@
 {
     public enum EnumCharacterType
     {
-        COW,
+        BLACK_BIRD,
     }
 }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 using UniMediator;
+using Domain.Characters.Constants;
 using Domain.Characters.DomainEvents;
 using Domain.Characters.Entities;
 using Adapters.Unimediatr;
@@ -20,14 +21,14 @@ public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<Do
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ICharacterEntity characterEntity = notification._domainEvent._props;
-        var characterDto = CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, characterEntity.Position.Value.Y), characterEntity.Speed);
+        var characterDto = CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, Position.INIT_Y, characterEntity.Position.Value.Z), characterEntity.Speed);
         CreateCharacter(characterDto);
     }
 
     public void CreateCharacter(ICharacterDto characterDto)
     {
         Transform grid = transform.parent;
-        GameObject _currentGo = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, Quaternion.identity) as GameObject;
+        GameObject _currentGo = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, new Quaternion(0, -90, 0, 0)) as GameObject;
         // instantiate and attach the component in once function
         CharacterMoveController controller = _container.InstantiateComponent<CharacterMoveController>(_currentGo);
         controller.SetId(characterDto.Id);

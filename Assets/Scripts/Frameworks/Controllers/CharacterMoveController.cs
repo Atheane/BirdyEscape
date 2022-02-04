@@ -5,7 +5,7 @@ using Usecases.Characters;
 using Usecases.Characters.Queries;
 using Usecases.Characters.Commands;
 using Domain.Characters.ValueObjects;
-using Domain.Characters.Types;
+using Domain.Characters.Constants;
 
 public class CharacterMoveController : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class CharacterMoveController : MonoBehaviour
     {
         VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_id));
 
-        Vector3 newPosition = new Vector3(newPositionVO.Value.X, newPositionVO.Value.Y, 0f);
+        Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
         transform.position = newPosition;
     }
 
