@@ -12,6 +12,7 @@ public class GridController : MonoBehaviour
     public float INIT_X;
     public float INIT_Y;
     public float INIT_Z;
+    public EnumCharacterDirection INIT_DIRECTION;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -25,8 +26,8 @@ public class GridController : MonoBehaviour
         if (INIT_X != 0.0f && INIT_Y != 0.0f && INIT_Z != 0.0f)
         {
             INIT_POSITION = (INIT_X, INIT_Y, INIT_Z);
-        } 
-        _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, EnumCharacterDirection.LEFT, INIT_POSITION, Speed.INIT_SPEED));
+        }
+        _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, INIT_DIRECTION, INIT_POSITION, Speed.INIT_SPEED));
     }
 
 }

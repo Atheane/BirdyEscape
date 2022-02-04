@@ -39,7 +39,7 @@ namespace Usecases.Characters
                     newDirection = EnumCharacterDirection.DOWN;
                     break;
             }
-            characterEntity.Rebounce(1.2f);
+            characterEntity.Rebounce(0.5f);
             characterEntity.UpdateDirection(newDirection);
             _charactersRepository.Update(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);

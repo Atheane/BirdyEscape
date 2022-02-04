@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: module_fence
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_RootOrder
       value: 0
