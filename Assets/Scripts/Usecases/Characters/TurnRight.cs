@@ -4,16 +4,17 @@ using Usecases.Characters.Commands;
 using Domain.Characters.Repositories;
 using Domain.Characters.Types;
 using Domain.Characters.Entities;
+using Domain.Characters.ValueObjects;
 
 
 namespace Usecases.Characters
 {
-    public class Turn90DegreesRight : IUsecase<ITurn90DegreesRightCommand, EnumCharacterDirection>
+    public class TurnRight : IUsecase<ITurnRightCommand, EnumCharacterDirection>
     {
         public ICharactersRepository _charactersRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
 
-        public Turn90DegreesRight(
+        public TurnRight(
             ICharactersRepository charactersRepository,
             IDomainEventDispatcher domainEventDispatcher
         )
@@ -22,7 +23,7 @@ namespace Usecases.Characters
             _domainEventDispatcher = domainEventDispatcher;
         }
 
-        public EnumCharacterDirection Execute(ITurn90DegreesRightCommand command)
+        public EnumCharacterDirection Execute(ITurnRightCommand command)
         {
             ICharacterEntity characterEntity = _charactersRepository.Find(command._characterId);
             EnumCharacterDirection newDirection = EnumCharacterDirection.LEFT;
@@ -39,8 +40,9 @@ namespace Usecases.Characters
                     newDirection = EnumCharacterDirection.DOWN;
                     break;
             }
-            characterEntity.Rebounce(0.5f);
-            characterEntity.UpdateDirection(newDirection);
+            VOPosition turnedPosition = VOPosition.Create((characterEntity.Position.Value.X, characterEntity.Position.Value.Y + 90, characterEntity.Position.Value.Z));
+            characterEntity.UpdateDirection(newDirection, turnedPosition);
+
             _charactersRepository.Update(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);
 

@@ -20,8 +20,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<CreateCharacter>().AsSingle();
         Container.Bind<MoveAlwaysCharacter>().AsSingle();
         Container.Bind<GetCharacterPositionUsecase>().AsSingle();
-        Container.Bind<ChangeCharacterDirection>().AsSingle();
-        Container.Bind<Turn90DegreesRight>().AsSingle();
+        Container.Bind<TurnRight>().AsSingle();
         //to-do how to attach handlers
     }
 }

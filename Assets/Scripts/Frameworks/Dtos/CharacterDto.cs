@@ -10,6 +10,7 @@ namespace Frameworks.Dtos
         public EnumCharacterType Type { get; }
         public EnumCharacterDirection Direction { get; }
         public Vector3 Position { get; }
+        public Vector3 Orientation { get; }
         public int Speed { get; }
         public string Image { get; }
     }
@@ -20,6 +21,7 @@ namespace Frameworks.Dtos
         public EnumCharacterType Type { get; private set; }
         public EnumCharacterDirection Direction { get; private set; }
         public Vector3 Position { get; private set; }
+        public Vector3 Orientation { get; private set; }
         public int Speed { get; private set; }
         public string Image { get; private set; }
 
@@ -46,8 +48,27 @@ namespace Frameworks.Dtos
                     break;
             }
             var characterDto = new CharacterDto(id, type, direction, position, speed, image);
-
+            characterDto.Orientate();
             return characterDto;
+        }
+
+        public void Orientate()
+        {
+            switch (Direction)
+            {
+                case EnumCharacterDirection.LEFT:
+                    Orientation = new Vector3(0, -90f, 0);
+                    break;
+                case EnumCharacterDirection.RIGHT:
+                    Orientation = new Vector3(0, 90f, 0);
+                    break;
+                case EnumCharacterDirection.DOWN:
+                    Orientation = new Vector3(0, 180f, 0);
+                    break;
+                case EnumCharacterDirection.UP:
+                    Orientation = new Vector3(0, 0, 0);
+                    break;
+            }
         }
     }
 }
