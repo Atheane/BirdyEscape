@@ -646,7 +646,6 @@ GameObject:
   - component: {fileID: 6251641437774776594}
   - component: {fileID: 6306085247128893190}
   - component: {fileID: 6152901608706053884}
-  - component: {fileID: 6750412321375256270}
   m_Layer: 0
   m_Name: Cute_Bird_16
   m_TagString: Cute_Bird_16
@@ -661,7 +660,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6257381675285408252}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 11.2, y: 2.05, z: -29.8}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
@@ -670,7 +669,7 @@ Transform:
   - {fileID: 6259266339137659484}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &6306085247128893190
 Animator:
   serializedVersion: 3
@@ -704,21 +703,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 3
---- !u!65 &6750412321375256270
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6257381675285408252}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.37777087, y: 0.37024292, z: 0.36642137}
-  m_Center: {x: 0.008699859, y: 0.1461623, z: -0.004562915}
 --- !u!1 &6257499856575272124
 GameObject:
   m_ObjectHideFlags: 0

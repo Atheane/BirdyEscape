@@ -11,6 +11,7 @@ public class CharacterMoveController : MonoBehaviour
 {
     private Guid _id;
     private DiContainer _container;
+    public LayerMask _layer;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -25,23 +26,37 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Start()
     {
+        _layer = LayerMask.GetMask("Obstacle");
         _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(_id));
     }
 
     private void Update()
     {
-        VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_id));
+        if (ValidMove())
+        {
+            VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_id));
+            Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
+            transform.position = newPosition;
+        } else
+        {
+            _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_id));
+        }
 
-        Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
-        transform.position = newPosition;
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private bool ValidMove()
     {
-        if (collision.tag == "Obstacle")
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1.5f, _layer))
         {
-            _container.Resolve<Turn90DegreesRight>().Execute(new Turn90DegreesRightCommand(_id));
+            if (hit.collider.CompareTag("Obstacle"))
+            {
+                return false;
+            }
         }
+        return true;
+
     }
 
 }

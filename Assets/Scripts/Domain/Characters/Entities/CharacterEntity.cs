@@ -12,10 +12,11 @@ namespace Domain.Characters.Entities
         public EnumCharacterType Type { get; }
         public EnumCharacterDirection Direction { get; }
         public VOPosition Position { get; }
+        public VOPosition Orientation { get; }
         public int Speed { get; }
         public EnumCharacterState State { get; }
         public void MoveOnce();
-        public void Rebounce(float coeff);
+        public void Orientate();
         public void UpdateState(EnumCharacterState state);
         public void UpdateDirection(EnumCharacterDirection direction);
     }
@@ -26,6 +27,7 @@ namespace Domain.Characters.Entities
         public EnumCharacterType Type { get; private set; }
         public EnumCharacterDirection Direction { get; private set; }
         public VOPosition Position { get; private set; }
+        public VOPosition Orientation { get; private set; }
         public int Speed { get;  private set; }
         public EnumCharacterState State { get; private set; }
 
@@ -41,10 +43,30 @@ namespace Domain.Characters.Entities
         public static CharacterEntity Create(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, int speed)
         {
             var character = new CharacterEntity(type, direction, position, speed);
+            character.Orientate();
             var characterCreated = new CharacterCreatedDomainEvent(character);
             character.AddDomainEvent(characterCreated);
             character.Id = characterCreated._id;
             return character;
+        }
+
+        public void Orientate()
+        {
+            switch(Direction)
+            {
+                case EnumCharacterDirection.LEFT:
+                    Orientation = VOPosition.Create((0, -90f, 0));
+                    break;
+                case EnumCharacterDirection.RIGHT:
+                    Orientation = VOPosition.Create((0, 90f, 0));
+                    break;
+                case EnumCharacterDirection.DOWN:
+                    Orientation = VOPosition.Create((0, 180f, 0));
+                    break;
+                case EnumCharacterDirection.UP:
+                    Orientation = VOPosition.Create((0, 0, 0));
+                    break;
+            }
         }
 
         public void MoveOnce()
@@ -74,34 +96,10 @@ namespace Domain.Characters.Entities
             // todo: benchmark performance
         }
 
-        public void Rebounce(float coeff)
-        {
-            (float X, float Y, float Z) position = Position.Value;
-            switch (Direction)
-            {
-                case EnumCharacterDirection.LEFT:
-                    position.X += coeff;
-                    break;
-                case EnumCharacterDirection.UP:
-                    position.Z -= coeff;
-                    break;
-                case EnumCharacterDirection.RIGHT:
-                    position.X -= coeff;
-                    break;
-                case EnumCharacterDirection.DOWN:
-                    position.Z += coeff;
-                    break;
-            }
-
-            Position = VOPosition.Create(position);
-            // this way, no dependency from usecase' commands to Domain Entities
-            var characterBounced = new CharacterBouncedDomainEvent(this);
-            AddDomainEvent(characterBounced);
-        }
-
         public void UpdateDirection(EnumCharacterDirection direction)
         {
             Direction = direction;
+            this.Orientate();
             var characterDirectionUpdated = new CharacterDirUpdatedDomainEvent(this);
             AddDomainEvent(characterDirectionUpdated);
         }

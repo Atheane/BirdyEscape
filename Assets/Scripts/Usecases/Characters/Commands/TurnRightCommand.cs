@@ -3,15 +3,15 @@ using UniMediator;
 
 namespace Usecases.Characters.Commands
 {
-    public interface ITurn90DegreesRightCommand
+    public interface ITurnRightCommand
     {
         Guid _characterId { get; }
     }
-    public class Turn90DegreesRightCommand : IMulticastMessage, ITurn90DegreesRightCommand
+    public class TurnRightCommand : IMulticastMessage, ITurnRightCommand
     {
         public Guid _characterId { get; }
 
-        public Turn90DegreesRightCommand(Guid characterId)
+        public TurnRightCommand(Guid characterId)
         {
             _characterId = characterId;
         }
