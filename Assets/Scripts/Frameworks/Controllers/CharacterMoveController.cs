@@ -11,7 +11,7 @@ public class CharacterMoveController : MonoBehaviour
 {
     private Guid _id;
     private DiContainer _container;
-    public LayerMask layer;
+    public LayerMask _layer;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -26,6 +26,7 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Start()
     {
+        _layer = LayerMask.GetMask("Obstacle");
         _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(_id));
     }
 
@@ -47,11 +48,10 @@ public class CharacterMoveController : MonoBehaviour
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1f))
+        if (Physics.Raycast(ray, out hit, 1.5f, _layer))
         {
             if (hit.collider.CompareTag("Obstacle"))
             {
-                Debug.Log("THERE IS A WALL");
                 return false;
             }
         }

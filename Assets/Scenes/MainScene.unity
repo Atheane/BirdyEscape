@@ -135,6 +135,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -217,6 +221,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -379,6 +387,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -461,6 +473,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -592,6 +608,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -674,6 +694,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -760,6 +784,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -844,6 +872,10 @@ PrefabInstance:
       value: part_02a
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -926,6 +958,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
@@ -1182,6 +1218,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -57706,6 +57746,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -57790,6 +57834,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -57872,6 +57920,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
@@ -58051,6 +58103,10 @@ PrefabInstance:
       value: part_02a
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -58133,6 +58189,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -58219,6 +58279,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -58301,6 +58365,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
@@ -58483,6 +58551,10 @@ PrefabInstance:
       value: part_02a
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -58565,6 +58637,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -58745,6 +58821,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -58827,6 +58907,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -58913,6 +58997,10 @@ PrefabInstance:
       value: part_02a
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -58995,6 +59083,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -59081,6 +59173,10 @@ PrefabInstance:
       value: part_02a
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -59163,6 +59259,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -59262,6 +59362,10 @@ PrefabInstance:
       value: part_02a
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -59344,6 +59448,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -59625,6 +59733,10 @@ PrefabInstance:
       value: wooden_fence_02
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -59707,6 +59819,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
@@ -59793,6 +59909,10 @@ PrefabInstance:
       value: part_02a
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -59875,6 +59995,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_Name
       value: wooden_fence_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
       propertyPath: m_TagString
@@ -60017,6 +60141,10 @@ PrefabInstance:
       value: part_02a
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
@@ -60099,6 +60227,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_Name
       value: part_02a
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6e9604fd28e68904da22b615c57a8163, type: 3}
       propertyPath: m_TagString
@@ -60185,6 +60317,7 @@ GameObject:
   - component: {fileID: 2136013655}
   - component: {fileID: 2136013654}
   - component: {fileID: 2136013653}
+  - component: {fileID: 2136013657}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -60248,3 +60381,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136013657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136013652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7a7125166dd480f8e49027a7dfbb0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

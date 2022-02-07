@@ -16,10 +16,9 @@ namespace Domain.Characters.Entities
         public int Speed { get; }
         public EnumCharacterState State { get; }
         public void MoveOnce();
-        public void Rebounce(float coeff);
         public void Orientate();
         public void UpdateState(EnumCharacterState state);
-        public void UpdateDirection(EnumCharacterDirection direction, VOPosition turnedPosition);
+        public void UpdateDirection(EnumCharacterDirection direction);
     }
 
     public class CharacterEntity : AggregateRoot, ICharacterEntity
@@ -97,36 +96,10 @@ namespace Domain.Characters.Entities
             // todo: benchmark performance
         }
 
-        public void Rebounce(float coeff)
-        {
-            (float X, float Y, float Z) position = Position.Value;
-            switch (Direction)
-            {
-                case EnumCharacterDirection.LEFT:
-                    position.X += coeff;
-                    break;
-                case EnumCharacterDirection.UP:
-                    position.Z -= coeff;
-                    break;
-                case EnumCharacterDirection.RIGHT:
-                    position.X -= coeff;
-                    break;
-                case EnumCharacterDirection.DOWN:
-                    position.Z += coeff;
-                    break;
-            }
-
-            Position = VOPosition.Create(position);
-            // this way, no dependency from usecase' commands to Domain Entities
-            var characterBounced = new CharacterBouncedDomainEvent(this);
-            AddDomainEvent(characterBounced);
-        }
-
-        public void UpdateDirection(EnumCharacterDirection direction, VOPosition turnedPosition)
+        public void UpdateDirection(EnumCharacterDirection direction)
         {
             Direction = direction;
             this.Orientate();
-            Position = turnedPosition;
             var characterDirectionUpdated = new CharacterDirUpdatedDomainEvent(this);
             AddDomainEvent(characterDirectionUpdated);
         }

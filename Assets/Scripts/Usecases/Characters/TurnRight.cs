@@ -4,7 +4,6 @@ using Usecases.Characters.Commands;
 using Domain.Characters.Repositories;
 using Domain.Characters.Types;
 using Domain.Characters.Entities;
-using Domain.Characters.ValueObjects;
 
 
 namespace Usecases.Characters
@@ -40,8 +39,7 @@ namespace Usecases.Characters
                     newDirection = EnumCharacterDirection.DOWN;
                     break;
             }
-            VOPosition turnedPosition = VOPosition.Create((characterEntity.Position.Value.X, characterEntity.Position.Value.Y + 90, characterEntity.Position.Value.Z));
-            characterEntity.UpdateDirection(newDirection, turnedPosition);
+            characterEntity.UpdateDirection(newDirection);
 
             _charactersRepository.Update(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);
