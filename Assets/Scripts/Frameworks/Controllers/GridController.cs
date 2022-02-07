@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using Domain.Characters.Types;
@@ -9,10 +10,14 @@ using Usecases.Characters.Commands;
 public class GridController : MonoBehaviour
 {
     private DiContainer _container;
-    public float INIT_X;
-    public float INIT_Y;
-    public float INIT_Z;
-    public EnumCharacterDirection INIT_DIRECTION;
+
+    public Vector3 MainCharacterInitPosition;
+    public EnumCharacterDirection MainCharacterInitDirection;
+    public Vector3 GridSize;
+    public GameObject LightTile;
+    public GameObject DarkTile;
+    public float Gutter;
+
 
     [Inject]
     public void Construct(DiContainer container)
@@ -22,12 +27,31 @@ public class GridController : MonoBehaviour
 
     void Start()
     {
-        (float, float, float) INIT_POSITION = (Position.INIT_X, Position.INIT_Y, Position.INIT_Z);
-        if (INIT_X != 0.0f && INIT_Y != 0.0f && INIT_Z != 0.0f)
+        DrawGrid();
+        _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, MainCharacterInitDirection, (MainCharacterInitPosition[0], MainCharacterInitPosition[1], MainCharacterInitPosition[2]), Speed.INIT_SPEED));
+    }
+
+    void DrawGrid()
+    {
+        for (int z = 0; z < GridSize.z; z++)
         {
-            INIT_POSITION = (INIT_X, INIT_Y, INIT_Z);
+            for (int y = 0; y < GridSize.y; y++)
+            {
+                for (int x = 0; x < GridSize.x; x++)
+                {
+                    if (x % 2 == 0 && z % 2 == 0 || x % 2 == 1 && z % 2 == 1)
+                    {
+                        GameObject _currentGo = Instantiate(DarkTile, new Vector3(x * (1 + Gutter), y * (1 + Gutter), z * (1 + Gutter)), Quaternion.identity);
+                        _currentGo.transform.parent = transform;
+                    }
+                    else
+                    {
+                        GameObject _currentGo = Instantiate(LightTile, new Vector3(x * (1 + Gutter), y * (1 + Gutter), z * (1 + Gutter)), Quaternion.identity);
+                        _currentGo.transform.parent = transform;
+                    }
+                }
+            }
         }
-        _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, INIT_DIRECTION, INIT_POSITION, Speed.INIT_SPEED));
     }
 
 }
