@@ -46,9 +46,9 @@ public class CharacterMoveController : MonoBehaviour
 
     private bool ValidMove()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.8f, 0), transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1.5f, _layer))
+        if (Physics.Raycast(ray, out hit, 0.8f, _layer))
         {
             if (hit.collider.CompareTag("Obstacle"))
             {
