@@ -8,12 +8,12 @@ using Domain.Characters.Entities;
 
 namespace Usecases.Characters
 {
-    public class TurnRight : IUsecase<ITurnRightCommand, EnumDirection>
+    public class UpdateDirection : IUsecase<IUpdateDirectionCommand, EnumDirection>
     {
         public ICharactersRepository _charactersRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
 
-        public TurnRight(
+        public UpdateDirection(
             ICharactersRepository charactersRepository,
             IDomainEventDispatcher domainEventDispatcher
         )
@@ -22,24 +22,11 @@ namespace Usecases.Characters
             _domainEventDispatcher = domainEventDispatcher;
         }
 
-        public EnumDirection Execute(ITurnRightCommand command)
+        public EnumDirection Execute(IUpdateDirectionCommand command)
         {
             ICharacterEntity characterEntity = _charactersRepository.Find(command._characterId);
-            EnumDirection newDirection = EnumDirection.LEFT;
 
-            switch (characterEntity.Direction)
-            {
-                case EnumDirection.LEFT:
-                    newDirection = EnumDirection.UP;
-                    break;
-                case EnumDirection.UP:
-                    newDirection = EnumDirection.RIGHT;
-                    break;
-                case EnumDirection.RIGHT:
-                    newDirection = EnumDirection.DOWN;
-                    break;
-            }
-            characterEntity.UpdateDirection(newDirection);
+            characterEntity.UpdateDirection(command._direction);
 
             _charactersRepository.Update(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);

@@ -3,6 +3,8 @@ using Libs.Domain.Entities;
 using Domain.Characters.DomainEvents;
 using Domain.Characters.ValueObjects;
 using Domain.Characters.Types;
+using Domain.Commons.Types;
+
 
 namespace Domain.Characters.Entities
 {
@@ -10,7 +12,7 @@ namespace Domain.Characters.Entities
     {
         public new Guid Id { get; }
         public EnumCharacterType Type { get; }
-        public EnumCharacterDirection Direction { get; }
+        public EnumDirection Direction { get; }
         public VOPosition Position { get; }
         public VOPosition Orientation { get; }
         public int Speed { get; }
@@ -18,20 +20,20 @@ namespace Domain.Characters.Entities
         public void MoveOnce();
         public void Orientate();
         public void UpdateState(EnumCharacterState state);
-        public void UpdateDirection(EnumCharacterDirection direction);
+        public void UpdateDirection(EnumDirection direction);
     }
 
     public class CharacterEntity : AggregateRoot, ICharacterEntity
     {
         public new Guid Id { get; private set; }
         public EnumCharacterType Type { get; private set; }
-        public EnumCharacterDirection Direction { get; private set; }
+        public EnumDirection Direction { get; private set; }
         public VOPosition Position { get; private set; }
         public VOPosition Orientation { get; private set; }
         public int Speed { get;  private set; }
         public EnumCharacterState State { get; private set; }
 
-        private CharacterEntity(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, int speed) : base()
+        private CharacterEntity(EnumCharacterType type, EnumDirection direction, VOPosition position, int speed) : base()
         {
             Type = type;
             Direction = direction;
@@ -40,7 +42,7 @@ namespace Domain.Characters.Entities
             State = EnumCharacterState.IDLE;
         }
 
-        public static CharacterEntity Create(EnumCharacterType type, EnumCharacterDirection direction, VOPosition position, int speed)
+        public static CharacterEntity Create(EnumCharacterType type, EnumDirection direction, VOPosition position, int speed)
         {
             var character = new CharacterEntity(type, direction, position, speed);
             character.Orientate();
@@ -54,16 +56,16 @@ namespace Domain.Characters.Entities
         {
             switch(Direction)
             {
-                case EnumCharacterDirection.LEFT:
+                case EnumDirection.LEFT:
                     Orientation = VOPosition.Create((0, -90f, 0));
                     break;
-                case EnumCharacterDirection.RIGHT:
+                case EnumDirection.RIGHT:
                     Orientation = VOPosition.Create((0, 90f, 0));
                     break;
-                case EnumCharacterDirection.DOWN:
+                case EnumDirection.DOWN:
                     Orientation = VOPosition.Create((0, 180f, 0));
                     break;
-                case EnumCharacterDirection.UP:
+                case EnumDirection.UP:
                     Orientation = VOPosition.Create((0, 0, 0));
                     break;
             }
@@ -74,16 +76,16 @@ namespace Domain.Characters.Entities
             (float X, float Y, float Z) position = Position.Value;
             switch (Direction)
             {
-                case EnumCharacterDirection.LEFT:
+                case EnumDirection.LEFT:
                     position.X -= 0.2f;
                     break;
-                case EnumCharacterDirection.UP:
+                case EnumDirection.UP:
                     position.Z += 0.2f;
                     break;
-                case EnumCharacterDirection.RIGHT:
+                case EnumDirection.RIGHT:
                     position.X += 0.2f;
                     break;
-                case EnumCharacterDirection.DOWN:
+                case EnumDirection.DOWN:
                     position.Z -= 0.2f;
                     break;
             }
@@ -96,7 +98,7 @@ namespace Domain.Characters.Entities
             // todo: benchmark performance
         }
 
-        public void UpdateDirection(EnumCharacterDirection direction)
+        public void UpdateDirection(EnumDirection direction)
         {
             Direction = direction;
             this.Orientate();

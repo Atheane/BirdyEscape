@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using Domain.Commons.Types;
 using Domain.Characters.Types;
 using Domain.Characters.Constants;
 using Usecases.Characters;
@@ -12,7 +13,7 @@ public class GridController : MonoBehaviour
     private DiContainer _container;
 
     public Vector3 MainCharacterInitPosition;
-    public EnumCharacterDirection MainCharacterInitDirection;
+    public EnumDirection MainCharacterInitDirection;
     //public Vector3 GridSize;
     //public GameObject LightTile;
     //public GameObject DarkTile;
