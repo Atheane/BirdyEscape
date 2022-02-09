@@ -6,12 +6,15 @@ using Usecases.Characters.Queries;
 using Usecases.Characters.Commands;
 using Domain.Characters.ValueObjects;
 using Domain.Characters.Constants;
+using Domain.Commons.Types;
+
 
 public class CharacterMoveController : MonoBehaviour
 {
-    private Guid _id;
+    public Guid _id;
     private DiContainer _container;
     public LayerMask _layer;
+    public EnumDirection _direction;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -39,7 +42,7 @@ public class CharacterMoveController : MonoBehaviour
             transform.position = newPosition;
         } else
         {
-            _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_id));
+            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_id));
         }
 
     }
@@ -48,7 +51,7 @@ public class CharacterMoveController : MonoBehaviour
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1f, _layer))
+        if (Physics.Raycast(ray, out hit, 1.2f, _layer))
         {
             if (hit.collider.CompareTag("Obstacle"))
             {
@@ -56,7 +59,10 @@ public class CharacterMoveController : MonoBehaviour
             }
         }
         return true;
-
     }
 
+    private void UpdateDirection()
+    {
+
+    }
 }

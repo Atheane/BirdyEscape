@@ -8,11 +8,7 @@ TagManager:
   - MainCharacter
   - Cute_Bird_16
   - Obstacle
-  - Cow
-  - UpBoundary
-  - LeftBoundary
-  - RightBoundary
-  - BottomBoundary
+  - Arrow
   layers:
   - Default
   - TransparentFX
