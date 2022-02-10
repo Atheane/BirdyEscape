@@ -31,7 +31,7 @@ public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<Do
         GameObject _currentGo = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, Quaternion.Euler(characterDto.Orientation)) as GameObject;
         // instantiate and attach the component in once function
         CharacterMoveController controller = _container.InstantiateComponent<CharacterMoveController>(_currentGo);
-        controller.SetId(characterDto.Id);
+        //controller.SetId(characterDto.Id);
         _currentGo.tag = characterDto.Image;
         _currentGo.transform.parent = grid;
     }
