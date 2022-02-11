@@ -647,6 +647,7 @@ GameObject:
   - component: {fileID: 6306085247128893190}
   - component: {fileID: 6152901608706053884}
   - component: {fileID: 3353613613888201365}
+  - component: {fileID: -4095443486449062395}
   m_Layer: 0
   m_Name: Cute_Bird_16
   m_TagString: Cute_Bird_16
@@ -717,8 +718,25 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.3, y: 0.3566013, z: 0.3}
+  m_Center: {x: -0, y: 0.14779231, z: 0}
+--- !u!114 &-4095443486449062395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6257381675285408252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d83622986df2480490a1aea24fc8eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layer:
+    serializedVersion: 2
+    m_Bits: 0
+  _direction: 0
+  _speed: 30
 --- !u!1 &6257499856575272124
 GameObject:
   m_ObjectHideFlags: 0

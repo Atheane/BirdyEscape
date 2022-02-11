@@ -6,6 +6,8 @@ using Usecases.Characters.Queries;
 using Usecases.Characters.Commands;
 using Domain.Characters.ValueObjects;
 using Domain.Characters.Constants;
+using Domain.Characters.Types;
+using Domain.Characters.Entities;
 using Domain.Commons.Types;
 
 
@@ -15,6 +17,7 @@ public class CharacterMoveController : MonoBehaviour
     private DiContainer _container;
     public LayerMask _layer;
     public EnumDirection _direction;
+    public int _speed;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -22,15 +25,11 @@ public class CharacterMoveController : MonoBehaviour
         _container = container;
     }
 
-    public void SetId(Guid id)
+    private void Awake()
     {
-        _id = id;
-    }
-
-    private void Start()
-    {
+        ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, _direction, (transform.position[0], transform.position[1], transform.position[2]), _speed));
+        _id = characterEntity.Id;
         _layer = LayerMask.GetMask("Obstacle");
-        _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(_id));
     }
 
     private void Update()
@@ -69,7 +68,7 @@ public class CharacterMoveController : MonoBehaviour
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), -transform.up);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1.2f))
+        if (Physics.Raycast(ray, out hit, 0.5f))
         {
             if (hit.collider.CompareTag("Arrow"))
             {
