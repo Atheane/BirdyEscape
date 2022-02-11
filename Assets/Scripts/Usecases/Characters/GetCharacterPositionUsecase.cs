@@ -3,7 +3,6 @@ using Usecases.Characters.Queries;
 using Domain.Characters.ValueObjects;
 using Domain.Characters.Repositories;
 using Domain.Characters.Entities;
-using UnityEngine;
 
 
 public class GetCharacterPositionUsecase : IUsecase<IGetCharacterPositionQuery, VOPosition>

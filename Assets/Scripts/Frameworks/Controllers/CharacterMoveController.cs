@@ -29,12 +29,7 @@ public class CharacterMoveController : MonoBehaviour
     {
         ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, _direction, (transform.position[0], transform.position[1], transform.position[2]), _speed));
         _id = characterEntity.Id;
-    }
-
-    private void Start()
-    {
         _layer = LayerMask.GetMask("Obstacle");
-        _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(_id));
     }
 
     private void Update()
