@@ -5,11 +5,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Usecases.Characters;
 using Usecases.Characters.Commands;
+using Domain.Characters.Entities;
+using Domain.Characters.Types;
 
-public class PlayButtonController : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
+public class PlayButtonController : MonoBehaviour, IPointerDownHandler
 {
     private DiContainer _container;
-    private IReadOnlyList<Guid> _characterIds;
+    private IReadOnlyList<ICharacterEntity> _characters;
+
     [Inject]
     public void Construct(DiContainer container)
     {
@@ -18,23 +21,18 @@ public class PlayButtonController : MonoBehaviour, IPointerUpHandler, IPointerDo
 
     void Start()
     {
-        _characterIds = _container.Resolve<GetAllCharactersIds>().Execute(IntPtr.Zero);
+        _characters = _container.Resolve<GetAllCharacters>().Execute(IntPtr.Zero);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("POINTER DOWN");
-        foreach (Guid id in _characterIds)
+        foreach (ICharacterEntity character in _characters)
         {
-            Debug.Log(id);
-            _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(id));
+            if (character.State == EnumCharacterState.IDLE)
+            {
+                _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(character.Id));
+            }
         }
     }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        Debug.Log("POINTER UP");
-    }
-
 
 }

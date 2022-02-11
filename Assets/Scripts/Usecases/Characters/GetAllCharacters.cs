@@ -2,21 +2,17 @@ using System;
 using System.Collections.Generic;
 using Libs.Usecases;
 using Domain.Characters.Repositories;
+using Domain.Characters.Entities;
 
-public class GetAllCharactersIds : IUsecase<IntPtr, IReadOnlyList<Guid>>
+public class GetAllCharacters : IUsecase<IntPtr, IReadOnlyList<ICharacterEntity>>
 {
     public ICharactersRepository _charactersRepository;
-    public GetAllCharactersIds(ICharactersRepository charactersRepository)
+    public GetAllCharacters(ICharactersRepository charactersRepository)
     {
         _charactersRepository = charactersRepository;
     }
-    public IReadOnlyList<Guid> Execute(IntPtr pointer)
+    public IReadOnlyList<ICharacterEntity> Execute(IntPtr pointer)
     {
-        List<Guid> guidList = new List<Guid>();
-        foreach (var character in _charactersRepository.GetAll())
-        {
-            guidList.Add(character.Id);
-        }
-        return guidList.AsReadOnly();
+        return _charactersRepository.GetAll();
     }
 }
