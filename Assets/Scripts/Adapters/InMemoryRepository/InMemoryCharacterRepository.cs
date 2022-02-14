@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Domain.Characters.Repositories;
-using Domain.Characters.Entities;
-using Domain.Characters.Exceptions;
+using Domain.Repositories;
+using Domain.Entities;
+using Domain.Exceptions;
 
 namespace Adapters.InMemoryRepository
 {

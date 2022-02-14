@@ -1,39 +1,38 @@
 ﻿using System;
-using Domain.Characters.Types;
-using Domain.Commons.Types;
+using Domain.Types;
 using UnityEngine;
 
 namespace Frameworks.Dtos
 {
     public interface ICharacterDto
     {
-        public Guid Id { get; }
-        public EnumCharacterType Type { get; }
-        public EnumDirection Direction { get; }
-        public Vector3 Position { get; }
-        public Vector3 Orientation { get; }
-        public int Speed { get; }
-        public string Image { get; }
+        public Guid _id { get; }
+        public EnumCharacterType _type { get; }
+        public EnumDirection _direction { get; }
+        public Vector3 _position { get; }
+        public Vector3 _orientation { get; }
+        public int _speed { get; }
+        public string _image { get; }
     }
 
     public class CharacterDto: ICharacterDto
     {
-        public Guid Id { get; private set; }
-        public EnumCharacterType Type { get; private set; }
-        public EnumDirection Direction { get; private set; }
-        public Vector3 Position { get; private set; }
-        public Vector3 Orientation { get; private set; }
-        public int Speed { get; private set; }
-        public string Image { get; private set; }
+        public Guid _id { get; private set; }
+        public EnumCharacterType _type { get; private set; }
+        public EnumDirection _direction { get; private set; }
+        public Vector3 _position { get; private set; }
+        public Vector3 _orientation { get; private set; }
+        public int _speed { get; private set; }
+        public string _image { get; private set; }
 
         private CharacterDto(Guid id, EnumCharacterType type, EnumDirection direction, Vector3 position, int speed, string image)
         {
-            this.Id = id;
-            this.Type = type;
-            this.Direction = direction;
-            this.Position = position;
-            this.Speed = speed;
-            this.Image = image;
+            _id = id;
+            _type = type;
+            _direction = direction;
+            _position = position;
+            _speed = speed;
+            _image = image;
         }
 
         public static CharacterDto Create(Guid id, EnumCharacterType type, EnumDirection direction, Vector3 position, int speed)
@@ -55,19 +54,19 @@ namespace Frameworks.Dtos
 
         public void Orientate()
         {
-            switch (Direction)
+            switch (_direction)
             {
                 case EnumDirection.LEFT:
-                    Orientation = new Vector3(0, -90f, 0);
+                    _orientation = new Vector3(0, -90f, 0);
                     break;
                 case EnumDirection.RIGHT:
-                    Orientation = new Vector3(0, 90f, 0);
+                    _orientation = new Vector3(0, 90f, 0);
                     break;
                 case EnumDirection.DOWN:
-                    Orientation = new Vector3(0, 180f, 0);
+                    _orientation = new Vector3(0, 180f, 0);
                     break;
                 case EnumDirection.UP:
-                    Orientation = new Vector3(0, 0, 0);
+                    _orientation = new Vector3(0, 0, 0);
                     break;
             }
         }

@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using UniMediator;
 using Libs.Domain.DomainEvents;
-using Domain.Characters.Entities;
-using Domain.Characters.Repositories;
-using Usecases.Characters;
+using Domain.Entities;
+using Domain.Repositories;
+using Usecases;
 using Adapters.InMemoryRepository;
 using Adapters.Unimediatr;
 
@@ -23,6 +23,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<TurnRight>().AsSingle();
         Container.Bind<UpdateDirection>().AsSingle();
         Container.Bind<GetAllCharacters>().AsSingle();
-        //to-do how to attach handlers
+        Container.Bind<CreateArrow>().AsSingle();
     }
 }

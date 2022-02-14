@@ -1,14 +1,13 @@
 using UnityEngine;
 using Zenject;
 using System;
-using Usecases.Characters;
-using Usecases.Characters.Queries;
-using Usecases.Characters.Commands;
-using Domain.Characters.ValueObjects;
-using Domain.Characters.Constants;
-using Domain.Characters.Types;
-using Domain.Characters.Entities;
-using Domain.Commons.Types;
+using Usecases;
+using Usecases.Queries;
+using Usecases.Commands;
+using Domain.ValueObjects;
+using Domain.Constants;
+using Domain.Types;
+using Domain.Entities;
 
 
 public class CharacterMoveController : MonoBehaviour
@@ -40,8 +39,8 @@ public class CharacterMoveController : MonoBehaviour
         }
         if (ValidMove())
         {
-            VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_id));
-            Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
+            VOPosition3D newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_id));
+            Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position3D.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
         } else
         {

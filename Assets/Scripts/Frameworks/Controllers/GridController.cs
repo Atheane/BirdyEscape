@@ -1,5 +1,12 @@
 using UnityEngine;
 
+using Zenject;
+using Domain.Types;
+using Domain.Constants;
+using Usecases;
+using Usecases.Commands;
+
+
 public class GridController : MonoBehaviour
 {
     //public Vector3 GridSize;
