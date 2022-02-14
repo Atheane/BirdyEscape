@@ -1,7 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using Zenject;
-
+using Usecases;
+using Usecases.Commands;
 
 public class SwipeDetector : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class SwipeDetector : MonoBehaviour
         _container = container;
     }
 
-    //public static event Action<SwipeData> OnSwipe = delegate { };
+    public static event Action<SwipeData> OnSwipe = delegate { };
 
     private void Update()
     {
@@ -94,7 +95,7 @@ public class SwipeDetector : MonoBehaviour
             EndPosition = fingerUpPosition
         };
         //OnSwipe(swipeData);
-        _container.
+        //_container.Resolve<CreateArrow>().Execute(new CreateArrowCommand(direction, ));
     }
 }
 

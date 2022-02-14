@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using Domain.Commons.Types;
-using Domain.Characters.Types;
-using Domain.Characters.Constants;
-using Usecases.Characters;
-using Usecases.Characters.Commands;
+using Domain.Types;
+using Domain.Constants;
+using Usecases;
+using Usecases.Commands;
 
 
 public class GridController : MonoBehaviour
