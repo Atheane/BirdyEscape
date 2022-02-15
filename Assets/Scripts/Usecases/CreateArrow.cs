@@ -19,8 +19,8 @@ namespace Usecases
         }
         public IArrowEntity Execute(ICreateArrowCommand command)
         {
-            var position = VOPositionGrid.Create(command.Position);
-            var arrowEntity = ArrowEntity.Create(command.Direction, position);
+            var position = VOPositionGrid.Create(command._position);
+            var arrowEntity = ArrowEntity.Create(command._direction, position);
 
             _domainEventDispatcher.Dispatch(arrowEntity);
             return arrowEntity;

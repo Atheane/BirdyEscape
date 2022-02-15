@@ -27,7 +27,7 @@ namespace Usecases
             ICharacterEntity characterEntity = _charactersRepository.Find(command._characterId);
             EnumDirection newDirection = EnumDirection.LEFT;
 
-            switch (characterEntity.Direction)
+            switch (characterEntity._direction)
             {
                 case EnumDirection.LEFT:
                     newDirection = EnumDirection.UP;
@@ -44,7 +44,7 @@ namespace Usecases
             _charactersRepository.Update(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);
 
-            return characterEntity.Direction;
+            return characterEntity._direction;
         }
     }
 }

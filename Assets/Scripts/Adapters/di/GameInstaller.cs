@@ -24,5 +24,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<UpdateDirection>().AsSingle();
         Container.Bind<GetAllCharacters>().AsSingle();
         Container.Bind<CreateArrow>().AsSingle();
+        Container.Bind<CreateTile>().AsSingle();
     }
 }

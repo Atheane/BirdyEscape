@@ -1,3 +1,4 @@
+using System;
 using Libs.Domain.ValueObjects;
 using Domain.Constants;
 using Domain.Exceptions;
@@ -14,6 +15,13 @@ namespace Domain.ValueObjects
             return new VOPositionGrid(value);
         }
 
+        public static (int X, int Y) ConvertToCoordinates((float X, float Y, float Z) position)
+        {
+            var coordX = (int)Math.Round(position.X, 0);
+            var coordY = (int)Math.Round(position.Z, 0);
+            return (coordX, coordY);
+        }
+
         protected override void Validate((int X, int Y) value)
         {
             if (value.X > PositionGrid.X_MAX)
@@ -21,9 +29,9 @@ namespace Domain.ValueObjects
             if (value.X < PositionGrid.X_MIN)
                 throw new PositionException.TooSmall("X should be higher than " + PositionGrid.X_MIN.ToString());
             if (value.Y > PositionGrid.Y_MAX)
-                throw new PositionException.TooLarge("Z should be smaller than " + PositionGrid.Y_MAX.ToString());
+                throw new PositionException.TooLarge("Y should be smaller than " + PositionGrid.Y_MAX.ToString());
             if (value.Y < PositionGrid.Y_MIN)
-                throw new PositionException.TooSmall("Z should be higher than " + PositionGrid.Y_MIN.ToString());
+                throw new PositionException.TooSmall("Y should be higher than " + PositionGrid.Y_MIN.ToString());
         }
     }
 }

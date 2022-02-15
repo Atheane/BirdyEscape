@@ -29,9 +29,9 @@ public class ArrowController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _puzzleLayer))
         {
-            Debug.DrawLine(ray.origin, hit.point);
-            Debug.Log("Cube clicked");
-            Debug.Log(hit.point);
+            //Debug.DrawLine(ray.origin, hit.point);
+            //Debug.Log("Cube clicked");
+            //Debug.Log(hit.point);
 
         }
     }

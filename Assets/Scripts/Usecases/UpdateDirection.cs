@@ -31,7 +31,7 @@ namespace Usecases
             _charactersRepository.Update(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);
 
-            return characterEntity.Direction;
+            return characterEntity._direction;
         }
     }
 }

@@ -16,6 +16,6 @@ public class GetCharacterPositionUsecase : IUsecase<IGetCharacterPositionQuery, 
     public VOPosition3D Execute(IGetCharacterPositionQuery query)
     {
         ICharacterEntity characterEntity = _charactersRepository.Find(query._characterId);
-        return characterEntity.Position;
+        return characterEntity._position;
     }
 }

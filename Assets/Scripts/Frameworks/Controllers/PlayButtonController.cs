@@ -28,9 +28,9 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
     {
         foreach (ICharacterEntity character in _characters)
         {
-            if (character.State == EnumCharacterState.IDLE)
+            if (character._state == EnumCharacterState.IDLE)
             {
-                _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(character.Id));
+                _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(character._id));
             }
         }
     }

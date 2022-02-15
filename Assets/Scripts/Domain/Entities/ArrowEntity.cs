@@ -9,21 +9,21 @@ namespace Domain.Entities
 {
     public interface IArrowEntity : IAggregateRoot
     {
-        public new Guid Id { get; }
-        public EnumDirection Direction { get; }
-        public VOPositionGrid Position { get; }
+        public Guid _id { get; }
+        public EnumDirection _direction { get; }
+        public VOPositionGrid _position { get; }
     }
 
     public class ArrowEntity : AggregateRoot, IArrowEntity
     {
-        public new Guid Id { get; private set; }
-        public EnumDirection Direction { get; private set; }
-        public VOPositionGrid Position { get; private set; }
+        public Guid _id { get; private set; }
+        public EnumDirection _direction { get; private set; }
+        public VOPositionGrid _position { get; private set; }
 
         private ArrowEntity(EnumDirection direction, VOPositionGrid position) : base()
         {
-            Direction = direction;
-            Position = position;
+            _direction = direction;
+            _position = position;
         }
 
         public static ArrowEntity Create(EnumDirection direction, VOPositionGrid position)
@@ -31,7 +31,7 @@ namespace Domain.Entities
             var arrow = new ArrowEntity(direction, position);
             var arrowCreated = new ArrowCreatedDomainEvent(arrow);
             arrow.AddDomainEvent(arrowCreated);
-            arrow.Id = arrowCreated._id;
+            arrow._id = arrowCreated._id;
             return arrow;
         }
 

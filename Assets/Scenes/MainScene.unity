@@ -34619,6 +34619,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1318487648125430585, guid: a29713c9fd5504371b43118a81f9fb64, type: 3}
   m_PrefabInstance: {fileID: 1531897006}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1532806946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4414427373582201362, guid: 47b8da65d02b046b4953e8ffb8de43c5, type: 3}
+  m_PrefabInstance: {fileID: 1724422493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1532806947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532806946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68c6fb3793a96485f999547ae8ead4ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coordinates: {x: 0, y: 0}
+  _path: 
+--- !u!114 &1532806948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532806946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbbcf78efae4c46a799a49c6d144be15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1536718128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: e9d46351124cb994fb773abf44a8f396, type: 3}
@@ -38743,7 +38774,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4414427373582201362, guid: 47b8da65d02b046b4953e8ffb8de43c5, type: 3}
       propertyPath: m_Name
-      value: DarkTile (1)
+      value: DarkTile
       objectReference: {fileID: 0}
     - target: {fileID: 4414427373582201365, guid: 47b8da65d02b046b4953e8ffb8de43c5, type: 3}
       propertyPath: m_RootOrder
@@ -38789,8 +38820,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2132481417, guid: 47b8da65d02b046b4953e8ffb8de43c5, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47b8da65d02b046b4953e8ffb8de43c5, type: 3}
 --- !u!4 &1724422494 stripped
 Transform:
@@ -39430,7 +39460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1318487648125430590, guid: a29713c9fd5504371b43118a81f9fb64, type: 3}
       propertyPath: m_Name
-      value: Snow (1)
+      value: Snow
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3390937606408244389, guid: a29713c9fd5504371b43118a81f9fb64, type: 3}

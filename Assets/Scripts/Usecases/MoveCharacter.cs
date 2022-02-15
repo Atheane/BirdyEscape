@@ -30,8 +30,8 @@ namespace Usecases
             _characterEntity.UpdateState(EnumCharacterState.MOVING);
             _charactersRepository.Update(_characterEntity);
             _domainEventDispatcher.Dispatch(_characterEntity);
-            MoveAlways(_characterEntity.Speed);
-            return _characterEntity.Position;
+            MoveAlways(_characterEntity._speed);
+            return _characterEntity._position;
         }
 
         public void MoveAlways(int speed)
