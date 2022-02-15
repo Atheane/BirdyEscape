@@ -9,8 +9,8 @@ namespace Usecases.Commands
     }
     public class CreateTileCommand : IMulticastMessage, ICreateTileCommand
     {
-        public (float, float, float) _position { get; }
-        public string _image { get; }
+        public (float, float, float) _position { get; private set; }
+        public string _image { get; private set; }
 
         public CreateTileCommand((float, float, float) position, string image)
         {

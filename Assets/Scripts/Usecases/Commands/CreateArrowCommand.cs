@@ -10,8 +10,8 @@ namespace Usecases.Commands
     }
     public class CreateArrowCommand : IMulticastMessage, ICreateArrowCommand
     {
-        public EnumDirection _direction { get; }
-        public (int, int) _position { get; }
+        public EnumDirection _direction { get; private set; }
+        public (int, int) _position { get; private set; }
 
         public CreateArrowCommand(EnumDirection direction, (int, int) position)
         {

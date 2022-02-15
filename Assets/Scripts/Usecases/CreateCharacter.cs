@@ -23,8 +23,8 @@ namespace Usecases
         }
         public ICharacterEntity Execute(ICreateCharacterCommand command)
         {
-            var position = VOPosition3D.Create(command.Position);
-            var characterEntity = CharacterEntity.Create(command.Type, command.Direction, position, command.Speed);
+            var position = VOPosition3D.Create(command._position);
+            var characterEntity = CharacterEntity.Create(command._type, command._direction, position, command._speed);
 
             _charactersRepository.Add(characterEntity);
 

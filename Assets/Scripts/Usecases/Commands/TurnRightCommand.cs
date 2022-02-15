@@ -9,7 +9,7 @@ namespace Usecases.Commands
     }
     public class TurnRightCommand : IMulticastMessage, ITurnRightCommand
     {
-        public Guid _characterId { get; }
+        public Guid _characterId { get; private set; }
 
         public TurnRightCommand(Guid characterId)
         {
