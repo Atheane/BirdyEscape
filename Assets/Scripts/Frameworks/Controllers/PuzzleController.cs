@@ -78,10 +78,11 @@ public class PuzzleController : MonoBehaviour
                     ((int)_arrowCoordinates.x, (int)_arrowCoordinates.y)
                 )
             );
-            _arrowDto = ArrowDto.Create(
-                arrowEntity._direction,
-                new Vector2(arrowEntity._position.Value.X, arrowEntity._position.Value.Y)
-            );
+            var coords = new Vector2(arrowEntity._position.Value.X, arrowEntity._position.Value.Y)
+            //_arrowDto = ArrowDto.Create(
+            //    arrowEntity._direction,
+                
+            //);
 
             //fingerUpPosition = fingerDownPosition;
         }
