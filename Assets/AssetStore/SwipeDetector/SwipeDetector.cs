@@ -8,19 +8,12 @@ public class SwipeDetector : MonoBehaviour
 {
     private Vector2 fingerDownPosition;
     private Vector2 fingerUpPosition;
-    private DiContainer _container;
 
     [SerializeField]
     private bool detectSwipeOnlyAfterRelease = false;
 
     [SerializeField]
     private float minDistanceForSwipe = 20f;
-
-    [Inject]
-    public void Construct(DiContainer container)
-    {
-        _container = container;
-    }
 
     public static event Action<SwipeData> OnSwipe = delegate { };
 
@@ -94,8 +87,7 @@ public class SwipeDetector : MonoBehaviour
             StartPosition = fingerDownPosition,
             EndPosition = fingerUpPosition
         };
-        //OnSwipe(swipeData);
-        //_container.Resolve<CreateArrow>().Execute(new CreateArrowCommand(direction, ));
+        OnSwipe(swipeData);
     }
 }
 

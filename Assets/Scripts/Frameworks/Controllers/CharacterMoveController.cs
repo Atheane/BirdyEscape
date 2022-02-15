@@ -40,14 +40,12 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Update()
     {
-        if (ShouldUpdateDirection().Item1)
-        {
-            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
-        }
+        //if (ShouldUpdateDirection().Item1)
+        //{
+        //    _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
+        //}
         if (ValidMove())
         {
-            Debug.Log("Valid Move _______________");
-            Debug.Log(_dto._id);
             VOPosition3D newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
             Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position3D.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
@@ -72,21 +70,21 @@ public class CharacterMoveController : MonoBehaviour
         return true;
     }
 
-    private (bool, EnumDirection) ShouldUpdateDirection()
-    {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), -transform.up);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 0.5f))
-        {
-            if (hit.collider.CompareTag("Arrow"))
-            {
-                EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-                if (direction != _direction)
-                {
-                    return (true, direction);
-                }
-            }
-        }
-        return (false, _direction);
-    }
+    //private (bool, EnumDirection) ShouldUpdateDirection()
+    //{
+    //    Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), -transform.up);
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(ray, out hit, 0.5f))
+    //    {
+    //        if (hit.collider.CompareTag("Arrow"))
+    //        {
+    //            EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
+    //            if (direction != _direction)
+    //            {
+    //                return (true, direction);
+    //            }
+    //        }
+    //    }
+    //    return (false, _direction);
+    //}
 }

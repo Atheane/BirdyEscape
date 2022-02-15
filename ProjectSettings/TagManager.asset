@@ -4,12 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Grid
   - MainCharacter
   - Cute_Bird_16
   - Obstacle
   - Arrow
-  - Puzzle
+  - Tile
   layers:
   - Default
   - TransparentFX
