@@ -37,7 +37,7 @@ public class PuzzleController : MonoBehaviour
             Debug.DrawLine(ray.origin, hit.point);
             if (hit.transform.tag == "Tile")
             {
-                Vector2 _arrowCoordinates = hit.transform.gameObject.GetComponent<TileController>()._dto._coordinates;
+                _arrowCoordinates = hit.transform.gameObject.GetComponent<TileController>()._dto._coordinates;
                 foreach (Touch touch in Input.touches)
                 {
                     if (touch.phase == TouchPhase.Began)
@@ -70,21 +70,18 @@ public class PuzzleController : MonoBehaviour
                 //SendSwipe(direction);
                 
             }
-            Debug.Log("____ SWIPE !");
-            Debug.Log(direction);
             IArrowEntity arrowEntity = _container.Resolve<CreateArrow>().Execute(
                 new CreateArrowCommand(
                     direction,
                     ((int)_arrowCoordinates.x, (int)_arrowCoordinates.y)
                 )
             );
-            var coords = new Vector2(arrowEntity._position.Value.X, arrowEntity._position.Value.Y)
-            //_arrowDto = ArrowDto.Create(
-            //    arrowEntity._direction,
-                
-            //);
-
-            //fingerUpPosition = fingerDownPosition;
+            var coords = new Vector2(arrowEntity._position.Value.X, arrowEntity._position.Value.Y);
+            _arrowDto = ArrowDto.Create(
+                arrowEntity._id,
+                arrowEntity._direction,
+                coords
+            );
         }
     }
 
