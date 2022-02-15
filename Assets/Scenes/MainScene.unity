@@ -7709,6 +7709,7 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 128
+  minDistanceForSwipe: 20
 --- !u!1001 &287219016
 PrefabInstance:
   m_ObjectHideFlags: 0
