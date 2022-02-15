@@ -27,6 +27,7 @@ namespace Usecases
             var characterEntity = CharacterEntity.Create(command.Type, command.Direction, position, command.Speed);
 
             _charactersRepository.Add(characterEntity);
+
             _domainEventDispatcher.Dispatch(characterEntity);
             return characterEntity;
         }

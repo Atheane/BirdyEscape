@@ -1,6 +1,5 @@
 using UnityEngine;
 using Zenject;
-using System;
 using Usecases;
 using Usecases.Queries;
 using Usecases.Commands;
@@ -8,15 +7,18 @@ using Domain.ValueObjects;
 using Domain.Constants;
 using Domain.Types;
 using Domain.Entities;
+using Frameworks.Dtos;
 
 
 public class CharacterMoveController : MonoBehaviour
 {
-    public Guid _id;
+    public CharacterDto _dto;
+
+    [SerializeField] private EnumDirection _direction;
+    [SerializeField] private int _speed;
+
+    private LayerMask _layer;
     private DiContainer _container;
-    public LayerMask _layer;
-    public EnumDirection _direction;
-    public int _speed;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -27,7 +29,12 @@ public class CharacterMoveController : MonoBehaviour
     private void Awake()
     {
         ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, _direction, (transform.position[0], transform.position[1], transform.position[2]), _speed));
-        _id = characterEntity.Id;
+        _dto = CharacterDto.Create(
+            characterEntity._id,
+            characterEntity._type,
+            characterEntity._direction,
+            new Vector3(characterEntity._position.Value.X, Position3D.INIT_Y, characterEntity._position.Value.Z),
+            characterEntity._speed);
         _layer = LayerMask.GetMask("Obstacle");
     }
 
@@ -35,16 +42,18 @@ public class CharacterMoveController : MonoBehaviour
     {
         if (ShouldUpdateDirection().Item1)
         {
-            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_id, ShouldUpdateDirection().Item2));
+            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
         }
         if (ValidMove())
         {
-            VOPosition3D newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_id));
+            Debug.Log("Valid Move _______________");
+            Debug.Log(_dto._id);
+            VOPosition3D newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
             Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position3D.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
         } else
         {
-            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_id));
+            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
         }
 
     }

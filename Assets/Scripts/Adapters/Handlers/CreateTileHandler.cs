@@ -8,10 +8,7 @@ using Frameworks.Dtos;
 
 public class CreateTileHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<TileCreatedDomainEvent>>
 {
-    public Guid _id;
-    public Vector2 _coordinates;
-    public string _path;
-    private TileDto _dto;
+    public TileDto _dto;
 
     public void Handle(DomainEventNotification<TileCreatedDomainEvent> notification)
     {
@@ -21,14 +18,6 @@ public class CreateTileHandler : MonoBehaviour, IMulticastMessageHandler<DomainE
             tileEntity._id,
             new Vector2(tileEntity._position.Value.X, tileEntity._position.Value.X),
             tileEntity._image.Value);
-        SetData();
-    }
-
-    public void SetData()
-    {
-        _id = _dto._id;
-        _coordinates = _dto._coordinates;
-        _path = _dto._path;
     }
 }
 
