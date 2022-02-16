@@ -6,7 +6,7 @@ using Usecases.Commands;
 using Domain.Entities;
 using Frameworks.Dtos;
 
-public class PuzzleController : MonoBehaviour
+public class SwipeController : MonoBehaviour
 {
     [SerializeField] private LayerMask _layer;
     private Vector3 _fingerBeginPosition;
@@ -34,7 +34,7 @@ public class PuzzleController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            Debug.DrawLine(ray.origin, hit.point);
+            //Debug.DrawLine(ray.origin, hit.point);
             if (hit.transform.tag == "Tile")
             {
                 _arrowCoordinates = hit.transform.gameObject.GetComponent<TileController>()._dto._coordinates;

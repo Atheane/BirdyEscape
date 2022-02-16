@@ -7,8 +7,9 @@ TagManager:
   - MainCharacter
   - Cute_Bird_16
   - Obstacle
-  - Arrow
   - Tile
+  - Puzzle
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - Ground
   - Puzzle
-  - 
+  - Arrow
   - 
   - 
   - 

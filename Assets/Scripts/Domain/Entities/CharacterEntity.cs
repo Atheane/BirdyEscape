@@ -55,16 +55,16 @@ namespace Domain.Entities
         {
             switch(_direction)
             {
-                case EnumDirection.LEFT:
+                case EnumDirection.UP:
                     _orientation = VOPosition3D.Create((0, -90f, 0));
                     break;
-                case EnumDirection.RIGHT:
+                case EnumDirection.DOWN:
                     _orientation = VOPosition3D.Create((0, 90f, 0));
                     break;
-                case EnumDirection.DOWN:
+                case EnumDirection.LEFT:
                     _orientation = VOPosition3D.Create((0, 180f, 0));
                     break;
-                case EnumDirection.UP:
+                case EnumDirection.RIGHT:
                     _orientation = VOPosition3D.Create((0, 0, 0));
                     break;
             }
@@ -76,16 +76,16 @@ namespace Domain.Entities
             switch (_direction)
             {
                 case EnumDirection.LEFT:
-                    position.X -= 0.2f;
+                    position.Z -= 0.25f;
                     break;
                 case EnumDirection.UP:
-                    position.Z += 0.2f;
+                    position.X -= 0.25f;
                     break;
                 case EnumDirection.RIGHT:
-                    position.X += 0.2f;
+                    position.Z += 0.25f;
                     break;
                 case EnumDirection.DOWN:
-                    position.Z -= 0.2f;
+                    position.X += 0.25f;
                     break;
             }
 
@@ -100,7 +100,7 @@ namespace Domain.Entities
         public void UpdateDirection(EnumDirection direction)
         {
             _direction = direction;
-            this.Orientate();
+            Orientate();
             var characterDirectionUpdated = new CharacterDirUpdatedDomainEvent(this);
             AddDomainEvent(characterDirectionUpdated);
         }

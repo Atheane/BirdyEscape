@@ -56,16 +56,16 @@ namespace Frameworks.Dtos
         {
             switch (_direction)
             {
-                case EnumDirection.LEFT:
+                case EnumDirection.UP:
                     _orientation = new Vector3(0, -90f, 0);
                     break;
-                case EnumDirection.RIGHT:
+                case EnumDirection.DOWN:
                     _orientation = new Vector3(0, 90f, 0);
                     break;
-                case EnumDirection.DOWN:
+                case EnumDirection.LEFT:
                     _orientation = new Vector3(0, 180f, 0);
                     break;
-                case EnumDirection.UP:
+                case EnumDirection.RIGHT:
                     _orientation = new Vector3(0, 0, 0);
                     break;
             }

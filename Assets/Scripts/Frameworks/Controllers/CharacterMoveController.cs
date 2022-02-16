@@ -17,7 +17,9 @@ public class CharacterMoveController : MonoBehaviour
     [SerializeField] private EnumDirection _direction;
     [SerializeField] private int _speed;
 
-    private LayerMask _layer;
+    private LayerMask _layerObstacle;
+    private LayerMask _layerArrow;
+
     private DiContainer _container;
 
     [Inject]
@@ -28,6 +30,8 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Awake()
     {
+        _layerObstacle = LayerMask.GetMask("Obstacle");
+        _layerArrow = LayerMask.GetMask("Arrow");
         ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, _direction, (transform.position[0], transform.position[1], transform.position[2]), _speed));
         _dto = CharacterDto.Create(
             characterEntity._id,
@@ -35,15 +39,15 @@ public class CharacterMoveController : MonoBehaviour
             characterEntity._direction,
             new Vector3(characterEntity._position.Value.X, Position3D.INIT_Y, characterEntity._position.Value.Z),
             characterEntity._speed);
-        _layer = LayerMask.GetMask("Obstacle");
+
     }
 
     private void Update()
     {
-        //if (ShouldUpdateDirection().Item1)
-        //{
-        //    _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
-        //}
+        if (ShouldUpdateDirection().Item1)
+        {
+            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
+        }
         if (ValidMove())
         {
             VOPosition3D newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
@@ -60,7 +64,8 @@ public class CharacterMoveController : MonoBehaviour
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1.1f, _layer))
+        Debug.DrawRay(ray.origin, ray.direction);
+        if (Physics.Raycast(ray, out hit, 1f, _layerObstacle))
         {
             if (hit.collider.CompareTag("Obstacle"))
             {
@@ -70,21 +75,19 @@ public class CharacterMoveController : MonoBehaviour
         return true;
     }
 
-    //private (bool, EnumDirection) ShouldUpdateDirection()
-    //{
-    //    Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), -transform.up);
-    //    RaycastHit hit;
-    //    if (Physics.Raycast(ray, out hit, 0.5f))
-    //    {
-    //        if (hit.collider.CompareTag("Arrow"))
-    //        {
-    //            EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-    //            if (direction != _direction)
-    //            {
-    //                return (true, direction);
-    //            }
-    //        }
-    //    }
-    //    return (false, _direction);
-    //}
+    private (bool, EnumDirection) ShouldUpdateDirection()
+    {
+        Ray ray = new Ray(transform.position + new Vector3(0, 1f, 0), new Vector3(0, -1, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 2f, _layerArrow))
+        {
+            EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
+            if (direction != _direction)
+            {
+                return (true, direction);
+            }
+
+        }
+        return (false, _direction);
+    }
 }
