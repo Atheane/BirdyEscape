@@ -1,8 +1,8 @@
 using UnityEngine;
 using UniMediator;
-using Domain.Characters.Constants;
-using Domain.Characters.DomainEvents;
-using Domain.Characters.Entities;
+using Domain.DomainEvents;
+using Domain.Entities;
+using Domain.Constants;
 using Adapters.Unimediatr;
 using Frameworks.Dtos;
 
@@ -13,13 +13,18 @@ public class UpdateCharacterDirectionHandler : MonoBehaviour, IMulticastMessageH
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ICharacterEntity characterEntity = notification._domainEvent._props;
-        var characterDto = CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, Position.INIT_Y, characterEntity.Position.Value.Z), characterEntity.Speed);
+        var characterDto = CharacterDto.Create(
+            characterEntity._id,
+            characterEntity._type,
+            characterEntity._direction,
+            new Vector3(characterEntity._position.Value.X, Position.INIT_Y, characterEntity._position.Value.Z),
+            characterEntity._speed);
         RotateCharacter(characterDto);
     }
 
     public void RotateCharacter(ICharacterDto characterDto)
     {
-        GameObject bird = GameObject.FindGameObjectWithTag(characterDto.Image);
-        bird.transform.rotation = Quaternion.Euler(characterDto.Orientation);
+        GameObject bird = GameObject.FindGameObjectWithTag(characterDto._image);
+        bird.transform.rotation = Quaternion.Euler(characterDto._orientation);
     }
 }

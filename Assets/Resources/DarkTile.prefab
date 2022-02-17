@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4414427373582201366}
   - component: {fileID: 4414427373582201367}
   - component: {fileID: 4414427373582201364}
-  - component: {fileID: 2132481417}
   m_Layer: 7
   m_Name: DarkTile
   m_TagString: Puzzle
@@ -96,19 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2132481417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4414427373582201362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71f8ecd4f840c40748a2f50ab19e8471, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _direction: 0
-  _layer:
-    serializedVersion: 2
-    m_Bits: 0

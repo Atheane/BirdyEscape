@@ -1,38 +1,26 @@
+using System;
 using UnityEngine;
 using Zenject;
 using UniMediator;
-using Domain.Characters.Constants;
-using Domain.Characters.DomainEvents;
-using Domain.Characters.Entities;
+using Domain.Constants;
+using Domain.DomainEvents;
+using Domain.Entities;
 using Adapters.Unimediatr;
 using Frameworks.Dtos;
 
 public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<CharacterCreatedDomainEvent>>
 {
-    private DiContainer _container;
-
-    [Inject]
-    public void Construct(DiContainer container)
-    {
-        _container = container;
-    }
+    public CharacterDto _dto;
 
     public void Handle(DomainEventNotification<CharacterCreatedDomainEvent> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ICharacterEntity characterEntity = notification._domainEvent._props;
-        var characterDto = CharacterDto.Create(characterEntity.Id, characterEntity.Type, characterEntity.Direction, new Vector3(characterEntity.Position.Value.X, Position.INIT_Y, characterEntity.Position.Value.Z), characterEntity.Speed);
-        CreateCharacter(characterDto);
-    }
-
-    public void CreateCharacter(ICharacterDto characterDto)
-    {
-        Transform grid = transform.parent;
-        GameObject _currentGo = Instantiate(Resources.Load(characterDto.Image), characterDto.Position, Quaternion.Euler(characterDto.Orientation)) as GameObject;
-        // instantiate and attach the component in once function
-        CharacterMoveController controller = _container.InstantiateComponent<CharacterMoveController>(_currentGo);
-        //controller.SetId(characterDto.Id);
-        _currentGo.tag = characterDto.Image;
-        _currentGo.transform.parent = grid;
+        _dto = CharacterDto.Create(
+            characterEntity._id,
+            characterEntity._type,
+            characterEntity._direction,
+            new Vector3(characterEntity._position.Value.X, Position.INIT_Y, characterEntity._position.Value.Z),
+            characterEntity._speed);
     }
 }

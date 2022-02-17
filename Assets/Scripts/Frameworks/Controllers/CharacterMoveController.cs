@@ -1,23 +1,26 @@
 using UnityEngine;
 using Zenject;
-using System;
-using Usecases.Characters;
-using Usecases.Characters.Queries;
-using Usecases.Characters.Commands;
-using Domain.Characters.ValueObjects;
-using Domain.Characters.Constants;
-using Domain.Characters.Types;
-using Domain.Characters.Entities;
-using Domain.Commons.Types;
+using Usecases;
+using Usecases.Queries;
+using Usecases.Commands;
+using Domain.ValueObjects;
+using Domain.Constants;
+using Domain.Types;
+using Domain.Entities;
+using Frameworks.Dtos;
 
 
 public class CharacterMoveController : MonoBehaviour
 {
-    public Guid _id;
+    public CharacterDto _dto;
+
+    [SerializeField] private EnumDirection _direction;
+    [SerializeField] private int _speed;
+
+    private LayerMask _layerObstacle;
+    private LayerMask _layerArrow;
+
     private DiContainer _container;
-    public LayerMask _layer;
-    public EnumDirection _direction;
-    public int _speed;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -27,56 +30,65 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Awake()
     {
-        ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, _direction, (transform.position[0], transform.position[1], transform.position[2]), _speed));
-        _id = characterEntity.Id;
-        _layer = LayerMask.GetMask("Obstacle");
+        _layerObstacle = LayerMask.GetMask("Obstacle");
+        _layerArrow = LayerMask.GetMask("Arrow");
+        ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(
+            new CreateCharacterCommand(
+                EnumCharacterType.BLACK_BIRD,
+                _direction,
+                (transform.position[0], transform.position[1],
+                transform.position[2]),
+            _speed));
+        _dto = CharacterDto.Create(
+            characterEntity._id,
+            characterEntity._type,
+            characterEntity._direction,
+            new Vector3(characterEntity._position.Value.X, Position.INIT_Y, characterEntity._position.Value.Z),
+            characterEntity._speed);
+
     }
 
     private void Update()
     {
         if (ShouldUpdateDirection().Item1)
         {
-            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_id, ShouldUpdateDirection().Item2));
+            _direction = _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
         }
         if (ValidMove())
         {
-            VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_id));
+            VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
             Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
         } else
         {
-            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_id));
+            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
         }
 
     }
 
     private bool ValidMove()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), 0.75f*transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1.1f, _layer))
+        //Debug.DrawRay(ray.origin, ray.direction);
+        if (Physics.Raycast(ray, out hit, 1f, _layerObstacle))
         {
-            if (hit.collider.CompareTag("Obstacle"))
-            {
-                return false;
-            }
+            return false;
         }
         return true;
     }
 
     private (bool, EnumDirection) ShouldUpdateDirection()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), -transform.up);
+        Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 0.5f))
+        //Debug.DrawRay(ray.origin, ray.direction);
+        if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
         {
-            if (hit.collider.CompareTag("Arrow"))
+            EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
+            if (direction != _direction)
             {
-                EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-                if (direction != _direction)
-                {
-                    return (true, direction);
-                }
+                return (true, direction);
             }
         }
         return (false, _direction);

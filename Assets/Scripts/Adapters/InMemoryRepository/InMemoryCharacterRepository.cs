@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Domain.Characters.Repositories;
-using Domain.Characters.Entities;
-using Domain.Characters.Exceptions;
+using Domain.Repositories;
+using Domain.Entities;
+using Domain.Exceptions;
 
 namespace Adapters.InMemoryRepository
 {
@@ -19,32 +19,32 @@ namespace Adapters.InMemoryRepository
 
         public void Add(ICharacterEntity character)
         {
-            if (!this.Store.ContainsKey(character.Id))
+            if (!this.Store.ContainsKey(character._id))
             {
-                this.Store.Add(character.Id, character);
+                this.Store.Add(character._id, character);
             }
             else
             {
-                throw new CharacterException.AlreadyExists(character.Id.ToString());
+                throw new CharacterException.AlreadyExists(character._id.ToString());
             }
         }
 
         public void Update(ICharacterEntity newCharacter)
         {
-            ICharacterEntity oldCharacter = Find(newCharacter.Id);
+            ICharacterEntity oldCharacter = Find(newCharacter._id);
             //todo: test equality on each prop and return and error if objet is unchanged
             this.Store[oldCharacter.Id] = newCharacter;
         }
 
         public void Remove(ICharacterEntity character)
         {
-            if (this.Store.ContainsKey(character.Id))
+            if (this.Store.ContainsKey(character._id))
             {
-                this.Store.Remove(character.Id);
+                this.Store.Remove(character._id);
             }
             else
             {
-                throw new CharacterException.NotFound(character.Id.ToString());
+                throw new CharacterException.NotFound(character._id.ToString());
             }
         }
         public ICharacterEntity Find(Guid characterId)

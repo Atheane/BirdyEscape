@@ -2,12 +2,16 @@ using Zenject;
 using System;
 using System.Collections.Generic;
 using UniMediator;
+using UnityEngine;
 using Libs.Domain.DomainEvents;
-using Domain.Characters.Entities;
-using Domain.Characters.Repositories;
-using Usecases.Characters;
+using Libs.Adapters;
+using Domain.Entities;
+using Domain.Repositories;
+using Domain.ValueObjects;
+using Usecases;
 using Adapters.InMemoryRepository;
 using Adapters.Unimediatr;
+using Adapters.Mappers;
 
 
 public class GameInstaller : MonoInstaller
@@ -17,12 +21,14 @@ public class GameInstaller : MonoInstaller
         Container.Bind<IMediator>().FromInstance(FindObjectOfType<MediatorImpl>());
         Container.Bind<IDomainEventDispatcher>().To<UnimediatorDomainEventDispatcher>().AsSingle();
         Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>()));
+        Container.Bind<IMapper<VOCoordinates, Vector3>>().To<PositionToCoordinatesMapper>().AsSingle();
         Container.Bind<CreateCharacter>().AsSingle();
         Container.Bind<MoveAlwaysCharacter>().AsSingle();
         Container.Bind<GetCharacterPositionUsecase>().AsSingle();
         Container.Bind<TurnRight>().AsSingle();
         Container.Bind<UpdateDirection>().AsSingle();
         Container.Bind<GetAllCharacters>().AsSingle();
-        //to-do how to attach handlers
+        Container.Bind<CreateArrow>().AsSingle();
+        Container.Bind<CreateTile>().AsSingle();
     }
 }

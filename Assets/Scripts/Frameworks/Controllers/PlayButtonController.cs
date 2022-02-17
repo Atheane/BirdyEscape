@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Usecases.Characters;
-using Usecases.Characters.Commands;
-using Domain.Characters.Entities;
-using Domain.Characters.Types;
+using Usecases;
+using Usecases.Commands;
+using Domain.Entities;
+using Domain.Types;
 
 public class PlayButtonController : MonoBehaviour, IPointerDownHandler
 {
@@ -28,9 +28,9 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
     {
         foreach (ICharacterEntity character in _characters)
         {
-            if (character.State == EnumCharacterState.IDLE)
+            if (character._state == EnumCharacterState.IDLE)
             {
-                _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(character.Id));
+                _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(character._id));
             }
         }
     }
