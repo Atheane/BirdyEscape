@@ -91,10 +91,7 @@ public class CharacterMoveController : MonoBehaviour
             if (hit.collider.CompareTag("Arrow"))
             {
                 EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-                if (direction != _direction)
-                {
-                    return (true, direction);
-                }
+                return (true, direction);
             }
 
 

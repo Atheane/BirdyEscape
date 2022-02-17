@@ -75,17 +75,17 @@ namespace Domain.Entities
             (float X, float Y, float Z) position = _position.Value;
             switch (_direction)
             {
-                case EnumDirection.LEFT:
-                    position.Z -= 0.25f;
-                    break;
                 case EnumDirection.UP:
                     position.X -= 0.25f;
                     break;
-                case EnumDirection.RIGHT:
-                    position.Z += 0.25f;
-                    break;
                 case EnumDirection.DOWN:
                     position.X += 0.25f;
+                    break;
+                case EnumDirection.LEFT:
+                    position.Z -= 0.25f;
+                    break;
+                case EnumDirection.RIGHT:
+                    position.Z += 0.25f;
                     break;
             }
 
