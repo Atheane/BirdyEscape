@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Domain.Types;
 using Domain.ValueObjects;
+using Domain.Constants;
 
 namespace Frameworks.Dtos
 {
@@ -46,8 +47,11 @@ namespace Frameworks.Dtos
                     orientation = new Vector3(0, -90f, 0);
                     break;
             }
-            (float X, float Y, float Z) = VOPosition.ConvertToPosition(((int)coordinates.Value.X, (int)coordinates.Value.Y));
-            Vector3 position = new Vector3(X, Y + 0.5f, Z);
+            var posX = coordinates.Value.X + 0.5f;
+            var posY = Position.INIT_Y + 0.5f;
+            var posZ = coordinates.Value.Y + 0.5f;
+            Vector3 position = new Vector3(posX, posY, posZ);
+
             return new ArrowDto(id, direction, orientation, position, path.Value);
         }
     }
