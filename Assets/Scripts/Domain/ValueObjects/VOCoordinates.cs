@@ -15,13 +15,6 @@ namespace Domain.ValueObjects
             return new VOCoordinates(value);
         }
 
-        public static (int X, int Y) ConvertToCoordinates((float X, float Y, float Z) position)
-        {
-            var coordX = (int)Math.Floor(position.X);
-            var coordY = (int)Math.Floor(position.Z);
-            return (coordX, coordY);
-        }
-
         protected override void Validate((int X, int Y) value)
         {
             if (value.X > Coordinates.X_MAX)

@@ -19,18 +19,12 @@ public class TileController : MonoBehaviour
 
     void Awake()
     {
-        string path = "Resources/" + gameObject.name;
-        float X = transform.position[0];
-        float Y = transform.position[1];
-        float Z = transform.position[2];
-        ITileEntity tileEntity = _container.Resolve<CreateTile>().Execute(new CreateTileCommand((X, Y, Z), path));
+        string path = gameObject.name;
+        ITileEntity tileEntity = _container.Resolve<CreateTile>().Execute(new CreateTileCommand(transform.position, path));
         _dto = TileDto.Create(
             tileEntity._id,
-            new Vector2(
-                tileEntity._coordinates.Value.X,
-                tileEntity._coordinates.Value.Y
-            ),
-            tileEntity._path.Value
+            tileEntity._coordinates,
+            tileEntity._path
         );
     }
 }

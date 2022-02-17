@@ -1,24 +1,25 @@
 using UniMediator;
 using Domain.Types;
+using UnityEngine;
 
 namespace Usecases.Commands
 {
     public interface ICreateArrowCommand
     {
         public EnumDirection _direction { get; }
-        public (int, int) _coordinates { get; }
+        public Vector3 _position { get; }
         public string _path { get;  }
     }
     public class CreateArrowCommand : IMulticastMessage, ICreateArrowCommand
     {
         public EnumDirection _direction { get; private set; }
-        public (int, int) _coordinates { get; private set; }
+        public Vector3 _position { get; private set; }
         public string _path { get; private set; }
 
-        public CreateArrowCommand(EnumDirection direction, (int, int) coords, string path)
+        public CreateArrowCommand(EnumDirection direction, Vector3 position, string path)
         {
             _direction = direction;
-            _coordinates = coords;
+            _position = position;
             _path = path;
         }
     }

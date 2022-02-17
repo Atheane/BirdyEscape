@@ -1,32 +1,37 @@
 using System;
 using UnityEngine;
+using Domain.ValueObjects;
 
 namespace Frameworks.Dtos
 {
     public interface ITileDto
     {
         public Guid _id { get; }
-        public Vector2 _coordinates { get; }
+        public Vector3 _position { get; }
         public string _path { get; }
     }
 
     public class TileDto : ITileDto
     {
         public Guid _id { get; private set; }
-        public Vector2 _coordinates { get; private set; }
+        public Vector3 _position { get; private set; }
         public string _path { get; private set; }
 
-        private TileDto(Guid id, Vector2 coordinates, string path)
+        private TileDto(Guid id, Vector3 position, string path)
         {
             _id = id;
-            _coordinates = coordinates;
+            _position = position;
             _path = path;
         }
 
-        public static TileDto Create(Guid id, Vector2 coordinates, string path)
+        public static TileDto Create(Guid id, VOCoordinates coordinates, VOPath path)
         {
-            var tileDto = new TileDto(id, coordinates, path);
-            return tileDto;
+            var position = new Vector3(
+                coordinates.Value.X,
+                0f,
+                coordinates.Value.Y
+            );
+            return new TileDto(id, position, path.Value);
         }
 
     }
