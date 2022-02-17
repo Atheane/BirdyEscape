@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 131724225}
   m_Layer: 8
   m_Name: arrow
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.2936378, y: 2.6439345, z: 3.290895}
-  m_Center: {x: -1.0112203, y: -0.1200718, z: -0.06418532}
+  m_Size: {x: 7.0730853, y: 2.3149183, z: 4.3662224}
+  m_Center: {x: -1.0669776, y: 0.19364542, z: -0.120068975}
 --- !u!114 &131724225
 MonoBehaviour:
   m_ObjectHideFlags: 0

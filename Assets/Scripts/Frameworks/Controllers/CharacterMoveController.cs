@@ -32,7 +32,13 @@ public class CharacterMoveController : MonoBehaviour
     {
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
-        ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(new CreateCharacterCommand(EnumCharacterType.BLACK_BIRD, _direction, (transform.position[0], transform.position[1], transform.position[2]), _speed));
+        ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(
+            new CreateCharacterCommand(
+                EnumCharacterType.BLACK_BIRD,
+                _direction,
+                (transform.position[0], transform.position[1],
+                transform.position[2]),
+            _speed));
         _dto = CharacterDto.Create(
             characterEntity._id,
             characterEntity._type,
@@ -62,9 +68,9 @@ public class CharacterMoveController : MonoBehaviour
 
     private bool ValidMove()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), 0.75f*transform.forward);
         RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction);
+        //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerObstacle))
         {
             if (hit.collider.CompareTag("Obstacle"))
@@ -77,15 +83,20 @@ public class CharacterMoveController : MonoBehaviour
 
     private (bool, EnumDirection) ShouldUpdateDirection()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 1f, 0), new Vector3(0, -1, 0));
+        Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 2f, _layerArrow))
+        //Debug.DrawRay(ray.origin, ray.direction);
+        if (Physics.Raycast(ray, out hit, 1f))
         {
-            EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-            if (direction != _direction)
+            if (hit.collider.CompareTag("Arrow"))
             {
-                return (true, direction);
+                EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
+                if (direction != _direction)
+                {
+                    return (true, direction);
+                }
             }
+
 
         }
         return (false, _direction);
