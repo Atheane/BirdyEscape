@@ -35,9 +35,10 @@ public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<Domai
     public void DrawArrow()
     {
         Transform grid = transform.parent;
-        GameObject _currentGo = Instantiate(Resources.Load(_dto._path), _dto._position, Quaternion.Euler(_dto._orientation)) as GameObject;
+        GameObject go = Instantiate(Resources.Load(_dto._path), _dto._position, Quaternion.Euler(_dto._orientation)) as GameObject;
         // instantiate and attach the component in once function
-        _container.InstantiateComponent<ArrowController>(_currentGo);
-        _currentGo.transform.parent = grid;
+        var controller = _container.InstantiateComponent<ArrowController>(go);
+        controller._direction = _dto._direction;
+        go.transform.parent = grid;
     }
 }

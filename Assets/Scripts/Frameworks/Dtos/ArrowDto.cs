@@ -8,6 +8,7 @@ namespace Frameworks.Dtos
     public interface IArrowDto
     {
         public Guid _id { get; }
+        public EnumDirection _direction { get; }
         public Vector3 _orientation { get; }
         public Vector3 _position { get; }
         public string _path { get; }
@@ -16,13 +17,15 @@ namespace Frameworks.Dtos
     public class ArrowDto : IArrowDto
     {
         public Guid _id { get; private set; }
+        public EnumDirection _direction { get; }
         public Vector3 _orientation { get; private set; }
         public Vector3 _position { get; private set; }
         public string _path { get; }
 
-        private ArrowDto(Guid id, Vector3 orientation, Vector3 position, string path)
+        private ArrowDto(Guid id, EnumDirection direction, Vector3 orientation, Vector3 position, string path)
         {
             _id = id;
+            _direction = direction;
             _orientation = orientation;
             _position = position;
             _path = path;
@@ -45,7 +48,7 @@ namespace Frameworks.Dtos
             }
             (float X, float Y, float Z) = VOPosition.ConvertToPosition(((int)coordinates.Value.X, (int)coordinates.Value.Y));
             Vector3 position = new Vector3(X, Y + 0.5f, Z);
-            return new ArrowDto(id, orientation, position, path.Value);
+            return new ArrowDto(id, direction, orientation, position, path.Value);
         }
     }
 }

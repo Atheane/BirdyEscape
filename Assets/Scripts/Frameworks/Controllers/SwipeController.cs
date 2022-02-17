@@ -76,12 +76,7 @@ public class SwipeController : MonoBehaviour
                     Entities.Arrow.ToString()
                 )
             );
-            _arrowDto = ArrowDto.Create(
-                arrowEntity._id,
-                arrowEntity._direction,
-                arrowEntity._coordinates,
-                arrowEntity._path
-            );
+            Debug.Log(arrowEntity);
         }
     }
 
