@@ -1,6 +1,6 @@
 ﻿namespace Domain.Constants
 {
-    public static class Position3D
+    public static class Position
     {
         public const float INIT_X = 8.01f;
         public const float INIT_Y = 0.5f;

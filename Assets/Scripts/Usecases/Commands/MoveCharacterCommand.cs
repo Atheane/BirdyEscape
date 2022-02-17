@@ -8,7 +8,7 @@ namespace Usecases.Commands
     {
         Guid _characterId { get; }
     }
-    public class MoveAlwaysCharacterCommand : ISingleMessage<VOPosition3D>, IMoveAlwaysCharacterCommand
+    public class MoveAlwaysCharacterCommand : ISingleMessage<VOPosition>, IMoveAlwaysCharacterCommand
     {
         public Guid _characterId { get; private set; }
 

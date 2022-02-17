@@ -19,9 +19,9 @@ namespace Usecases
         }
         public ITileEntity Execute(ICreateTileCommand command)
         {
-            var coordinates = VOPositionGrid.ConvertToCoordinates(command._position);
-            var position = VOPositionGrid.Create(coordinates);
-            var image = VOImage.Create(command._image);
+            var coordinates = VOCoordinates.ConvertToCoordinates(command._position);
+            var position = VOCoordinates.Create(coordinates);
+            var image = VOPath.Create(command._path);
             var tileEntity = TileEntity.Create(position, image);
 
             _domainEventDispatcher.Dispatch(tileEntity);

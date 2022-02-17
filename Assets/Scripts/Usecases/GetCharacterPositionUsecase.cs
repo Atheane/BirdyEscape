@@ -6,14 +6,14 @@ using Domain.Entities;
 using UnityEngine;
 
 
-public class GetCharacterPositionUsecase : IUsecase<IGetCharacterPositionQuery, VOPosition3D>
+public class GetCharacterPositionUsecase : IUsecase<IGetCharacterPositionQuery, VOPosition>
 {
     public ICharactersRepository _charactersRepository;
     public GetCharacterPositionUsecase(ICharactersRepository charactersRepository)
     {
         _charactersRepository = charactersRepository;
     }
-    public VOPosition3D Execute(IGetCharacterPositionQuery query)
+    public VOPosition Execute(IGetCharacterPositionQuery query)
     {
         ICharacterEntity characterEntity = _charactersRepository.Find(query._characterId);
         return characterEntity._position;

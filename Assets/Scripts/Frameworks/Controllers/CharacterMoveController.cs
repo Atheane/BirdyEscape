@@ -43,7 +43,7 @@ public class CharacterMoveController : MonoBehaviour
             characterEntity._id,
             characterEntity._type,
             characterEntity._direction,
-            new Vector3(characterEntity._position.Value.X, Position3D.INIT_Y, characterEntity._position.Value.Z),
+            new Vector3(characterEntity._position.Value.X, Position.INIT_Y, characterEntity._position.Value.Z),
             characterEntity._speed);
 
     }
@@ -56,8 +56,8 @@ public class CharacterMoveController : MonoBehaviour
         }
         if (ValidMove())
         {
-            VOPosition3D newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
-            Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position3D.INIT_Y, newPositionVO.Value.Z);
+            VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
+            Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
         } else
         {

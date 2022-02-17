@@ -32399,7 +32399,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cute_Bird_16
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3353613613888201365, guid: 4aaa334ebc58f4a51bee2a0049f533de, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4aaa334ebc58f4a51bee2a0049f533de, type: 3}
 --- !u!4 &1334161050 stripped
 Transform:

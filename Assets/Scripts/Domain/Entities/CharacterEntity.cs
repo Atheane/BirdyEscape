@@ -12,8 +12,8 @@ namespace Domain.Entities
         public Guid _id { get; }
         public EnumCharacterType _type { get; }
         public EnumDirection _direction { get; }
-        public VOPosition3D _position { get; }
-        public VOPosition3D _orientation { get; }
+        public VOPosition _position { get; }
+        public VOPosition _orientation { get; }
         public int _speed { get; }
         public EnumCharacterState _state { get; }
         public void MoveOnce();
@@ -27,12 +27,12 @@ namespace Domain.Entities
         public Guid _id { get; private set; }
         public EnumCharacterType _type { get; private set; }
         public EnumDirection _direction { get; private set; }
-        public VOPosition3D _position { get; private set; }
-        public VOPosition3D _orientation { get; private set; }
+        public VOPosition _position { get; private set; }
+        public VOPosition _orientation { get; private set; }
         public int _speed { get;  private set; }
         public EnumCharacterState _state { get; private set; }
 
-        private CharacterEntity(EnumCharacterType type, EnumDirection direction, VOPosition3D position, int speed) : base()
+        private CharacterEntity(EnumCharacterType type, EnumDirection direction, VOPosition position, int speed) : base()
         {
             _type = type;
             _direction = direction;
@@ -41,7 +41,7 @@ namespace Domain.Entities
             _state = EnumCharacterState.IDLE;
         }
 
-        public static CharacterEntity Create(EnumCharacterType type, EnumDirection direction, VOPosition3D position, int speed)
+        public static CharacterEntity Create(EnumCharacterType type, EnumDirection direction, VOPosition position, int speed)
         {
             var character = new CharacterEntity(type, direction, position, speed);
             character.Orientate();
@@ -56,16 +56,16 @@ namespace Domain.Entities
             switch(_direction)
             {
                 case EnumDirection.UP:
-                    _orientation = VOPosition3D.Create((0, -90f, 0));
+                    _orientation = VOPosition.Create((0, -90f, 0));
                     break;
                 case EnumDirection.DOWN:
-                    _orientation = VOPosition3D.Create((0, 90f, 0));
+                    _orientation = VOPosition.Create((0, 90f, 0));
                     break;
                 case EnumDirection.LEFT:
-                    _orientation = VOPosition3D.Create((0, 180f, 0));
+                    _orientation = VOPosition.Create((0, 180f, 0));
                     break;
                 case EnumDirection.RIGHT:
-                    _orientation = VOPosition3D.Create((0, 0, 0));
+                    _orientation = VOPosition.Create((0, 0, 0));
                     break;
             }
         }
@@ -89,7 +89,7 @@ namespace Domain.Entities
                     break;
             }
 
-            _position = VOPosition3D.Create(position);
+            _position = VOPosition.Create(position);
             // this method is called in a update loop,
             // avoid to dispatch an event each time, hard bugs if you do
             // alternative: do not use update loop and move only by signals

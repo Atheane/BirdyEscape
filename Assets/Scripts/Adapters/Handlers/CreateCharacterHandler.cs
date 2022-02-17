@@ -20,7 +20,7 @@ public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<Do
             characterEntity._id,
             characterEntity._type,
             characterEntity._direction,
-            new Vector3(characterEntity._position.Value.X, Position3D.INIT_Y, characterEntity._position.Value.Z),
+            new Vector3(characterEntity._position.Value.X, Position.INIT_Y, characterEntity._position.Value.Z),
             characterEntity._speed);
     }
 }

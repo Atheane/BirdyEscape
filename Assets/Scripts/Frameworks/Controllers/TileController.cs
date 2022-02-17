@@ -27,10 +27,10 @@ public class TileController : MonoBehaviour
         _dto = TileDto.Create(
             tileEntity._id,
             new Vector2(
-                tileEntity._position.Value.X,
-                tileEntity._position.Value.Y
+                tileEntity._coordinates.Value.X,
+                tileEntity._coordinates.Value.Y
             ),
-            tileEntity._image.Value
+            tileEntity._path.Value
         );
     }
 }

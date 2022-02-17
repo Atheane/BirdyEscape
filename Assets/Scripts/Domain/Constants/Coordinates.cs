@@ -1,6 +1,6 @@
 ﻿namespace Domain.Constants
 {
-    public static class PositionGrid
+    public static class Coordinates
     {
         public const int INIT_X = 0;
         public const int INIT_Y = 0;

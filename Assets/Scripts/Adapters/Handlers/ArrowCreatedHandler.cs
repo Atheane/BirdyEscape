@@ -1,18 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Zenject;
+using UniMediator;
+using Domain.DomainEvents;
+using Domain.Entities;
+using Adapters.Unimediatr;
+using Frameworks.Dtos;
 
-public class ArrowCreatedHandler : MonoBehaviour
+public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<ArrowCreatedDomainEvent>>
 {
-    // Start is called before the first frame update
-    void Start()
+    public ArrowDto _dto;
+    private DiContainer _container;
+
+
+    [Inject]
+    public void Construct(DiContainer container)
     {
-        
+        _container = container;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Handle(DomainEventNotification<ArrowCreatedDomainEvent> notification)
     {
-        
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        IArrowEntity arrowEntity = notification._domainEvent._props;
+        _dto = ArrowDto.Create(
+            arrowEntity._id,
+            arrowEntity._direction,
+            arrowEntity._coordinates,
+            arrowEntity._path
+        );
+    }
+
+    public void DrawArrow()
+    {
+        Transform grid = transform.parent;
+        GameObject _currentGo = Instantiate(Resources.Load(_dto._path), _dto._position, Quaternion.Euler(_dto._orientation)) as GameObject;
+        // instantiate and attach the component in once function
+        _container.InstantiateComponent<ArrowController>(_currentGo);
+        _currentGo.transform.parent = grid;
     }
 }

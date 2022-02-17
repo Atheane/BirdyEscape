@@ -67,20 +67,20 @@ public class SwipeController : MonoBehaviour
             else
             {
                 direction = _fingerEndPosition.x > _fingerBeginPosition.x ? EnumDirection.RIGHT : EnumDirection.LEFT;
-                //SendSwipe(direction);
                 
             }
             IArrowEntity arrowEntity = _container.Resolve<CreateArrow>().Execute(
                 new CreateArrowCommand(
                     direction,
-                    ((int)_arrowCoordinates.x, (int)_arrowCoordinates.y)
+                    ((int)_arrowCoordinates.x, (int)_arrowCoordinates.y),
+                    "Resources/arrow"
                 )
             );
-            var coords = new Vector2(arrowEntity._position.Value.X, arrowEntity._position.Value.Y);
             _arrowDto = ArrowDto.Create(
                 arrowEntity._id,
                 arrowEntity._direction,
-                coords
+                arrowEntity._coordinates,
+                arrowEntity._path
             );
         }
     }

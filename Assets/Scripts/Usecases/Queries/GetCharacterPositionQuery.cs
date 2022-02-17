@@ -8,7 +8,7 @@ namespace Usecases.Queries
     {
         Guid _characterId { get; }
     }
-    public class GetCharacterPositionQuery : ISingleMessage<VOPosition3D>, IGetCharacterPositionQuery
+    public class GetCharacterPositionQuery : ISingleMessage<VOPosition>, IGetCharacterPositionQuery
     {
         public Guid _characterId { get; }
 

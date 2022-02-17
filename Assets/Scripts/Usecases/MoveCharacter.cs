@@ -9,7 +9,7 @@ using Domain.Entities;
 
 namespace Usecases
 {
-    public class MoveAlwaysCharacter : IUsecase<IMoveAlwaysCharacterCommand, VOPosition3D>
+    public class MoveAlwaysCharacter : IUsecase<IMoveAlwaysCharacterCommand, VOPosition>
     {
         public ICharactersRepository _charactersRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
@@ -24,7 +24,7 @@ namespace Usecases
             _domainEventDispatcher = domainEventDispatcher;
         }
 
-        public VOPosition3D Execute(IMoveAlwaysCharacterCommand command)
+        public VOPosition Execute(IMoveAlwaysCharacterCommand command)
         {
             _characterEntity = _charactersRepository.Find(command._characterId);
             _characterEntity.UpdateState(EnumCharacterState.MOVING);

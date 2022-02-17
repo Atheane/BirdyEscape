@@ -16,8 +16,8 @@ public class CreateTileHandler : MonoBehaviour, IMulticastMessageHandler<DomainE
         ITileEntity tileEntity = notification._domainEvent._props;
         _dto = TileDto.Create(
             tileEntity._id,
-            new Vector2(tileEntity._position.Value.X, tileEntity._position.Value.X),
-            tileEntity._image.Value);
+            new Vector2(tileEntity._coordinates.Value.X, tileEntity._coordinates.Value.X),
+            tileEntity._path.Value);
     }
 }
 

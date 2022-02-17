@@ -8,26 +8,26 @@ namespace Domain.Entities
     public interface ITileEntity : IAggregateRoot
     {
         public Guid _id { get; }
-        public VOPositionGrid _position { get; }
-        public VOImage _image { get; }
+        public VOCoordinates _coordinates { get; }
+        public VOPath _path { get; }
     }
 
     public class TileEntity : AggregateRoot, ITileEntity
     {
         public Guid _id { get; private set; }
-        public VOPositionGrid _position { get; private set; }
-        public VOImage _image { get; private set; }
+        public VOCoordinates _coordinates { get; private set; }
+        public VOPath _path { get; private set; }
 
 
-        private TileEntity(VOPositionGrid position, VOImage image) : base()
+        private TileEntity(VOCoordinates coords, VOPath path) : base()
         {
-            _position = position;
-            _image = image;
+            _coordinates = coords;
+            _path = path;
         }
 
-        public static TileEntity Create(VOPositionGrid position, VOImage image)
+        public static TileEntity Create(VOCoordinates coords, VOPath path)
         {
-            var tile = new TileEntity(position, image);
+            var tile = new TileEntity(coords, path);
             var tileCreated = new TileCreatedDomainEvent(tile);
             tile.AddDomainEvent(tileCreated);
             tile._id = tileCreated._id;
