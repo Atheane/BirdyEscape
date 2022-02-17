@@ -73,10 +73,7 @@ public class CharacterMoveController : MonoBehaviour
         //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerObstacle))
         {
-            if (hit.collider.CompareTag("Obstacle"))
-            {
-                return false;
-            }
+            return false;
         }
         return true;
     }
@@ -86,15 +83,10 @@ public class CharacterMoveController : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
         //Debug.DrawRay(ray.origin, ray.direction);
-        if (Physics.Raycast(ray, out hit, 1f))
-        {
-            if (hit.collider.CompareTag("Arrow"))
-            {
-                EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-                return (true, direction);
-            }
-
-
+        if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
+        {    
+            EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
+            return (true, direction);
         }
         return (false, _direction);
     }
