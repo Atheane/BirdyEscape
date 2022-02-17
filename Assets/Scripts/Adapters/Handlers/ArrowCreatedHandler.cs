@@ -29,6 +29,7 @@ public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<Domai
             arrowEntity._coordinates,
             arrowEntity._path
         );
+        DrawArrow();
     }
 
     public void DrawArrow()

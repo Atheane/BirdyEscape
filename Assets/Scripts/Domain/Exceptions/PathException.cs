@@ -12,10 +12,6 @@ namespace Domain.Exceptions
         {
             public ShouldNotBeEmpty(string message = "") : base("Path-ShouldNotBeEmpty" + message) { }
         }
-        public class ShouldContainResources : Exception
-        {
-            public ShouldContainResources(string message = "") : base("Path-ShouldContainResources" + message) { }
-        }
     }
 }
 

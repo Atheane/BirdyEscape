@@ -25,7 +25,7 @@ public class SwipeController : MonoBehaviour
     }
     public void Awake()
     {
-        _layer = LayerMask.GetMask("Puzzle");
+        _layer = LayerMask.GetMask(Entities.Puzzle.ToString());
     }
 
     public void Update()
@@ -35,7 +35,7 @@ public class SwipeController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, _layer))
         {
             //Debug.DrawLine(ray.origin, hit.point);
-            if (hit.transform.tag == "Tile")
+            if (hit.transform.tag == Entities.Tile.ToString())
             {
                 _arrowCoordinates = hit.transform.gameObject.GetComponent<TileController>()._dto._coordinates;
                 foreach (Touch touch in Input.touches)
@@ -73,7 +73,7 @@ public class SwipeController : MonoBehaviour
                 new CreateArrowCommand(
                     direction,
                     ((int)_arrowCoordinates.x, (int)_arrowCoordinates.y),
-                    "Resources/arrow"
+                    Entities.Arrow.ToString()
                 )
             );
             _arrowDto = ArrowDto.Create(

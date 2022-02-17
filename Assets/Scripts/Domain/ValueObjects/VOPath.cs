@@ -18,11 +18,7 @@ namespace Domain.ValueObjects
             if (value == null)
                 throw new PathException.ShouldNotBeNull();
             if (value == "")
-                throw new PathException.ShouldNotBeNull();
-            if (!value.Contains("Resources/"))
-            {
-                throw new PathException.ShouldContainResources();
-            }
+                throw new PathException.ShouldNotBeEmpty();
         }
     }
 }

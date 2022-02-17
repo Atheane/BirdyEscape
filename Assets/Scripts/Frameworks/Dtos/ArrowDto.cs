@@ -30,21 +30,21 @@ namespace Frameworks.Dtos
 
         public static ArrowDto Create(Guid id, EnumDirection direction, VOCoordinates coordinates, VOPath path)
         {
-            Vector3 orientation = new Vector3(0, 0, 0);
+            Vector3 orientation = new Vector3(0, 90, 0);
             switch (direction)
             {
                 case EnumDirection.UP:
-                    orientation = new Vector3(0, -90f, 0);
+                    orientation = new Vector3(0, 0f, 0);
                     break;
                 case EnumDirection.DOWN:
-                    orientation = new Vector3(0, 90f, 0);
+                    orientation = new Vector3(0, 180f, 0);
                     break;
                 case EnumDirection.LEFT:
-                    orientation = new Vector3(0, 180f, 0);
+                    orientation = new Vector3(0, -90f, 0);
                     break;
             }
             (float X, float Y, float Z) = VOPosition.ConvertToPosition(((int)coordinates.Value.X, (int)coordinates.Value.Y));
-            Vector3 position = new Vector3(X, Y, Z);
+            Vector3 position = new Vector3(X, Y + 0.5f, Z);
             return new ArrowDto(id, orientation, position, path.Value);
         }
     }
