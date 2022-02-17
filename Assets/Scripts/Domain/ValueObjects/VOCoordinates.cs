@@ -17,8 +17,8 @@ namespace Domain.ValueObjects
 
         public static (int X, int Y) ConvertToCoordinates((float X, float Y, float Z) position)
         {
-            var coordX = (int)Math.Round(position.X, 0);
-            var coordY = (int)Math.Round(position.Z, 0);
+            var coordX = (int)Math.Floor(position.X);
+            var coordY = (int)Math.Floor(position.Z);
             return (coordX, coordY);
         }
 

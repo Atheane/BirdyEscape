@@ -37,11 +37,11 @@ public class SwipeController : MonoBehaviour
             //Debug.DrawLine(ray.origin, hit.point);
             if (hit.transform.tag == Entities.Tile.ToString())
             {
-                _arrowCoordinates = hit.transform.gameObject.GetComponent<TileController>()._dto._coordinates;
                 foreach (Touch touch in Input.touches)
                 {
                     if (touch.phase == TouchPhase.Began)
                     {
+                        _arrowCoordinates = hit.transform.gameObject.GetComponent<TileController>()._dto._coordinates;
                         _fingerBeginPosition = touch.position;
                         _fingerEndPosition = touch.position;
                     }
@@ -76,7 +76,8 @@ public class SwipeController : MonoBehaviour
                     Entities.Arrow.ToString()
                 )
             );
-            Debug.Log(arrowEntity);
+            Debug.Log("__________SWIPE");
+            Debug.Log(arrowEntity._coordinates.Value);
         }
     }
 

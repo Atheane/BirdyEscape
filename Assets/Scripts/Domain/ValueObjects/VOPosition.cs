@@ -15,9 +15,9 @@ namespace Domain.ValueObjects
 
         public static (float X, float Y, float Z) ConvertToPosition((int X, int Y) coordinates)
         {
-            var posX = coordinates.X - 0.5f;
+            var posX = coordinates.X + 0.5f;
             var posY = Position.INIT_Y;
-            var posZ = coordinates.Y - 0.5f;
+            var posZ = coordinates.Y + 0.5f;
             return (posX, posY, posZ);
         }
 
