@@ -52,7 +52,7 @@ public class CharacterMoveController : MonoBehaviour
     {
         if (ShouldUpdateDirection().Item1)
         {
-            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
+            _direction = _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
         }
         if (ValidMove())
         {
@@ -84,9 +84,12 @@ public class CharacterMoveController : MonoBehaviour
         RaycastHit hit;
         //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
-        {    
+        {
             EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-            return (true, direction);
+            if (direction != _direction)
+            {
+                return (true, direction);
+            }
         }
         return (false, _direction);
     }
