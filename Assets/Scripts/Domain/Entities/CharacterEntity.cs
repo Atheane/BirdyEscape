@@ -65,7 +65,16 @@ namespace Domain.Entities
                     position.Z += 0.1f;
                     break;
             }
-            _position = VOPosition.Create(position);
+            try
+            {
+                _position = VOPosition.Create(position);
+                return;
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+                return;
+            }
             // this method is called in a update loop,
             // avoid to dispatch an event each time, hard bugs if you do
             // alternative: do not use update loop and move only by signals
