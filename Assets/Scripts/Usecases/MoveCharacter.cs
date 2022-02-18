@@ -1,10 +1,13 @@
-﻿using Libs.Usecases;
+﻿using System;
+using Libs.Usecases;
 using Libs.Domain.DomainEvents;
 using Usecases.Commands;
 using Domain.Repositories;
 using Domain.ValueObjects;
 using Domain.Types;
 using Domain.Entities;
+using UnityEngine;
+using Domain.Exceptions;
 
 
 namespace Usecases
@@ -44,8 +47,41 @@ namespace Usecases
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _characterEntity.MoveOnce();
-            _charactersRepository.Update(_characterEntity);
+            try
+            {
+                _characterEntity.MoveOnce();
+            } catch(Exception er)
+            {
+                Debug.Log(er);
+                EnumDirection newDirection = EnumDirection.LEFT;
+                if (
+                    er.GetType() == typeof(PositionException.XTooLarge) &&
+                    _characterEntity._direction == EnumDirection.DOWN)
+                {
+                    newDirection = EnumDirection.LEFT;
+                }
+                if (
+                    er.GetType() == typeof(PositionException.ZTooSmall) &&
+                    _characterEntity._direction == EnumDirection.LEFT)
+                {
+                    newDirection = EnumDirection.UP;
+                }
+                if (
+                    er.GetType() == typeof(PositionException.XTooSmall) &&
+                    _characterEntity._direction == EnumDirection.UP)
+                {
+                    newDirection = EnumDirection.RIGHT;
+                }
+                if (
+                    er.GetType() == typeof(PositionException.ZTooLarge) &&
+                    _characterEntity._direction == EnumDirection.RIGHT)
+                {
+                    newDirection = EnumDirection.DOWN;
+                }
+                _characterEntity.UpdateDirection(newDirection);
+                _charactersRepository.Update(_characterEntity);
+                _domainEventDispatcher.Dispatch(_characterEntity);
+            }
         }
     }
 }

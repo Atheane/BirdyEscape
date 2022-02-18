@@ -4,13 +4,25 @@ namespace Domain.Exceptions
 {
     public static class PositionException
     {
-        public class TooLarge : InvalidOperationException
+        public class OutOfBoundaries : InvalidOperationException
         {
-            public TooLarge(string message = "") : base("Position-TooLarge" + message) { }
+            public OutOfBoundaries(string message = "") : base("Position-OutOfBoundaries" + message) { }
         }
-        public class TooSmall : InvalidOperationException
+        public class XTooLarge : InvalidOperationException
         {
-            public TooSmall(string message = "") : base("Position-TooSmall" + message) { }
+            public XTooLarge(string message = "") : base("Position-XTooLarge" + message) { }
+        }
+        public class ZTooLarge : InvalidOperationException
+        {
+            public ZTooLarge(string message = "") : base("Position-ZTooLarge" + message) { }
+        }
+        public class XTooSmall : InvalidOperationException
+        {
+            public XTooSmall(string message = "") : base("Position-XTooSmall" + message) { }
+        }
+        public class ZTooSmall : InvalidOperationException
+        {
+            public ZTooSmall(string message = "") : base("Position-ZTooSmall" + message) { }
         }
         public class UpdateShouldChangeValue : InvalidOperationException
         {
