@@ -72,6 +72,7 @@ namespace Domain.Entities
             }
             catch (Exception e)
             {
+                // if VOPosition is not validated, we do not want character to move foward
                 Debug.Log(e);
                 return;
             }
