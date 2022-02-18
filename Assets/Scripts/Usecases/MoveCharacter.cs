@@ -1,4 +1,5 @@
-﻿using Libs.Usecases;
+﻿using System;
+using Libs.Usecases;
 using Libs.Domain.DomainEvents;
 using Usecases.Commands;
 using Domain.Repositories;
@@ -44,8 +45,7 @@ namespace Usecases
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _characterEntity.MoveOnce();
-            _charactersRepository.Update(_characterEntity);
+             _characterEntity.MoveOnce();
         }
     }
 }

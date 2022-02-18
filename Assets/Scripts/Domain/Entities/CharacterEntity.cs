@@ -3,7 +3,7 @@ using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.ValueObjects;
 using Domain.Types;
-
+using UnityEngine;
 
 namespace Domain.Entities
 {
@@ -53,20 +53,28 @@ namespace Domain.Entities
             switch (_direction)
             {
                 case EnumDirection.UP:
-                    position.X -= 0.25f;
+                    position.X -= 0.1f;
                     break;
                 case EnumDirection.DOWN:
-                    position.X += 0.25f;
+                    position.X += 0.1f;
                     break;
                 case EnumDirection.LEFT:
-                    position.Z -= 0.25f;
+                    position.Z -= 0.1f;
                     break;
                 case EnumDirection.RIGHT:
-                    position.Z += 0.25f;
+                    position.Z += 0.1f;
                     break;
             }
-
-            _position = VOPosition.Create(position);
+            try
+            {
+                _position = VOPosition.Create(position);
+                return;
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+                return;
+            }
             // this method is called in a update loop,
             // avoid to dispatch an event each time, hard bugs if you do
             // alternative: do not use update loop and move only by signals

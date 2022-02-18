@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Zenject;
 using UniMediator;
 using Domain.Constants;
 using Domain.DomainEvents;
@@ -20,7 +18,7 @@ public class CreateCharacterHandler : MonoBehaviour, IMulticastMessageHandler<Do
             characterEntity._id,
             characterEntity._type,
             characterEntity._direction,
-            new Vector3(characterEntity._position.Value.X, Position.INIT_Y, characterEntity._position.Value.Z),
+            characterEntity._position,
             characterEntity._speed);
     }
 }

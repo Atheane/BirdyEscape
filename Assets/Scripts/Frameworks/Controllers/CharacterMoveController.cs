@@ -43,42 +43,45 @@ public class CharacterMoveController : MonoBehaviour
             characterEntity._id,
             characterEntity._type,
             characterEntity._direction,
-            new Vector3(characterEntity._position.Value.X, Position.INIT_Y, characterEntity._position.Value.Z),
+            characterEntity._position,
             characterEntity._speed);
-
     }
 
     private void Update()
     {
-        if (ShouldUpdateDirection().Item1)
+        if (ShouldUpdateDirection())
         {
-            _direction = _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
+            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
+            return;
         }
-        if (ValidMove())
+        else if (ShouldTurnRight())
+        {
+            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
+            return;
+        }
+        else
         {
             VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
             Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
-        } else
-        {
-            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
+            return;
         }
 
     }
 
-    private bool ValidMove()
+    private bool ShouldTurnRight()
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), 0.75f*transform.forward);
         RaycastHit hit;
         //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerObstacle))
         {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    private (bool, EnumDirection) ShouldUpdateDirection()
+    private bool ShouldUpdateDirection()
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
@@ -88,9 +91,10 @@ public class CharacterMoveController : MonoBehaviour
             EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
             if (direction != _direction)
             {
-                return (true, direction);
+                _direction = direction;
+                return true;
             }
         }
-        return (false, _direction);
+        return false;
     }
 }

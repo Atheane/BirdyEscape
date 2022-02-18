@@ -18,17 +18,9 @@ namespace Adapters.Unimediatr
         public void Dispatch(IAggregateRoot aggregateRoot)
         {
             var (domainEventNotification, eventLabel) = CreateDomainEventNotification(aggregateRoot);
-            try
-            {
-                Debug.Log("______" + eventLabel + "_____published");
-                _mediator.Publish(domainEventNotification);
-                aggregateRoot.ClearDomainEvents();
-            } catch(Exception e)
-            {
-                Debug.LogException(e);
-                throw e;
-            }
-
+            Debug.Log("______" + eventLabel + "_____published");
+            _mediator.Publish(domainEventNotification);
+            aggregateRoot.ClearDomainEvents();
         }
 
         public (IMulticastMessage, string) CreateDomainEventNotification(IAggregateRoot aggregateRoot)
