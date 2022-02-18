@@ -17,7 +17,7 @@ public class UpdateCharacterDirectionHandler : MonoBehaviour, IMulticastMessageH
             characterEntity._id,
             characterEntity._type,
             characterEntity._direction,
-            new Vector3(characterEntity._position.Value.X, Position.INIT_Y, characterEntity._position.Value.Z),
+            characterEntity._position,
             characterEntity._speed);
         RotateCharacter(characterDto);
     }

@@ -1,6 +1,8 @@
 ﻿using System;
 using Domain.Types;
 using UnityEngine;
+using Domain.ValueObjects;
+using Domain.Constants;
 
 namespace Frameworks.Dtos
 {
@@ -35,7 +37,7 @@ namespace Frameworks.Dtos
             _image = image;
         }
 
-        public static CharacterDto Create(Guid id, EnumCharacterType type, EnumDirection direction, Vector3 position, int speed)
+        public static CharacterDto Create(Guid id, EnumCharacterType type, EnumDirection direction, VOPosition position, int speed)
         {
             string image;
             switch (type)
@@ -47,7 +49,8 @@ namespace Frameworks.Dtos
                     image = "";
                     break;
             }
-            var characterDto = new CharacterDto(id, type, direction, position, speed, image);
+            var pos = new Vector3(position.Value.X, Position.INIT_Y, position.Value.Z);
+            var characterDto = new CharacterDto(id, type, direction, pos, speed, image);
             characterDto.Orientate();
             return characterDto;
         }
