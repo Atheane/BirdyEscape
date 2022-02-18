@@ -31,22 +31,19 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            //Debug.DrawLine(ray.origin, hit.point);
-            if (hit.transform.tag == Entities.Tile.ToString())
+            Debug.DrawRay(ray.origin, hit.point);
+            foreach (Touch touch in Input.touches)
             {
-                foreach (Touch touch in Input.touches)
+                if (touch.phase == TouchPhase.Began)
                 {
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        _arrowPosition = hit.transform.gameObject.GetComponent<TileController>()._dto._position;
-                        _fingerBeginPosition = touch.position;
-                        _fingerEndPosition = touch.position;
-                    }
-                    if (touch.phase == TouchPhase.Ended)
-                    {
-                        _fingerEndPosition = touch.position;
-                        DetectSwipe();
-                    }
+                    _arrowPosition = hit.transform.parent.gameObject.GetComponent<TileController>()._dto._position;
+                    _fingerBeginPosition = touch.position;
+                    _fingerEndPosition = touch.position;
+                }
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    _fingerEndPosition = touch.position;
+                    DetectSwipe();
                 }
             }
         }
@@ -70,7 +67,7 @@ public class SwipeController : MonoBehaviour
                 new CreateArrowCommand(
                     direction,
                     _arrowPosition,
-                    Entities.Arrow.ToString()
+                    "Arrow/"+Entities.Arrow.ToString()
                 )
             );
         }

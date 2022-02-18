@@ -71,10 +71,10 @@ public class CharacterMoveController : MonoBehaviour
 
     private bool ShouldTurnRight()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), 0.75f*transform.forward);
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
         RaycastHit hit;
-        //Debug.DrawRay(ray.origin, ray.direction);
-        if (Physics.Raycast(ray, out hit, 1f, _layerObstacle))
+        Debug.DrawRay(ray.origin, ray.direction);
+        if (Physics.Raycast(ray, out hit, 0.5f, _layerObstacle))
         {
             return true;
         }

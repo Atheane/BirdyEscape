@@ -68,7 +68,6 @@ namespace Domain.Entities
             try
             {
                 _position = VOPosition.Create(position);
-                return;
             }
             catch (Exception e)
             {
