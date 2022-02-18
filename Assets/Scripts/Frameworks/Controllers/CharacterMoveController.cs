@@ -50,9 +50,9 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Update()
     {
-        if (ShouldUpdateDirection().Item1)
+        if (ShouldUpdateDirection())
         {
-            _direction = _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, ShouldUpdateDirection().Item2));
+            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
         }
         if (ValidMove())
         {
@@ -78,7 +78,7 @@ public class CharacterMoveController : MonoBehaviour
         return true;
     }
 
-    private (bool, EnumDirection) ShouldUpdateDirection()
+    private bool ShouldUpdateDirection()
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
@@ -88,9 +88,10 @@ public class CharacterMoveController : MonoBehaviour
             EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
             if (direction != _direction)
             {
-                return (true, direction);
+                _direction = direction;
+                return true;
             }
         }
-        return (false, _direction);
+        return false;
     }
 }
