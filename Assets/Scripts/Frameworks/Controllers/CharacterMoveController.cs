@@ -36,15 +36,16 @@ public class CharacterMoveController : MonoBehaviour
             new CreateCharacterCommand(
                 EnumCharacterType.BLACK_BIRD,
                 _direction,
-                (transform.position[0], transform.position[1],
-                transform.position[2]),
-            _speed));
+                transform.position,
+                _speed)
+            );
         _dto = CharacterDto.Create(
             characterEntity._id,
             characterEntity._type,
             characterEntity._direction,
             characterEntity._position,
-            characterEntity._speed);
+            characterEntity._speed
+        );
     }
 
     private void Update()
@@ -64,7 +65,6 @@ public class CharacterMoveController : MonoBehaviour
             VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
             Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
-            return;
         }
 
     }

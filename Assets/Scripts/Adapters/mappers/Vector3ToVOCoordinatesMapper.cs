@@ -5,7 +5,7 @@ using System;
 
 namespace Adapters.Mappers
 {
-    public class PositionToCoordinatesMapper : IMapper<VOCoordinates, Vector3>
+    public class Vector3ToVOCoordinatesMapper : IMapper<VOCoordinates, Vector3>
     {
         public VOCoordinates ToDomain(Vector3 position)
         {
