@@ -6,12 +6,13 @@ using Adapters.Unimediatr;
 using Frameworks.Dtos;
 using System;
 
-public class UpdateCharacterDirectionHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<CharacterDirUpdatedDomainEvent>>
+public class UpdateCharacterDirectionHandler : MonoBehaviour, ISingleMessageHandler<DomainEventNotification<CharacterDirUpdatedDomainEvent>, string>
 {
 
-    public void Handle(DomainEventNotification<CharacterDirUpdatedDomainEvent> notification)
+    public string Handle(DomainEventNotification<CharacterDirUpdatedDomainEvent> notification)
     {
-        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        string log = "______" + notification._domainEvent._label + "_____handled";
+        Debug.Log(log);
         ICharacterEntity characterEntity = notification._domainEvent._props;
         var characterDto = CharacterDto.Create(
             characterEntity._id,
@@ -20,14 +21,14 @@ public class UpdateCharacterDirectionHandler : MonoBehaviour, IMulticastMessageH
             characterEntity._position,
             characterEntity._speed);
         RotateCharacter(characterDto);
+        return log;
     }
 
     public void RotateCharacter(ICharacterDto characterDto)
     {
         try
         {
-            GameObject bird = GameObject.FindGameObjectWithTag(characterDto._image);
-            bird.transform.rotation = Quaternion.Euler(characterDto._orientation);
+            gameObject.transform.rotation = Quaternion.Euler(characterDto._orientation);
         } catch(Exception e)
         {
             Debug.LogException(e);

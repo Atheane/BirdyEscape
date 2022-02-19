@@ -8,7 +8,7 @@ namespace Usecases.Commands
         public Vector3 _position { get; }
         public string _path { get; }
     }
-    public class CreateTileCommand : IMulticastMessage, ICreateTileCommand
+    public class CreateTileCommand : ISingleMessage<string>, ICreateTileCommand
     {
         public Vector3 _position { get; private set; }
         public string _path { get; private set; }

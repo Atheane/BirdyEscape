@@ -9,7 +9,7 @@ namespace Usecases.Commands
         Guid _characterId { get; }
         EnumDirection _direction { get; }
     }
-    public class UpdateDirectionCommand : IMulticastMessage, IUpdateDirectionCommand
+    public class UpdateDirectionCommand : ISingleMessage<string>, IUpdateDirectionCommand
     {
         public Guid _characterId { get; }
         public EnumDirection _direction { get; }

@@ -11,7 +11,7 @@ namespace Usecases.Commands
         public Vector3 _position { get; }
         public int _speed { get; }
     }
-    public class CreateCharacterCommand : IMulticastMessage, ICreateCharacterCommand
+    public class CreateCharacterCommand : ISingleMessage<string>, ICreateCharacterCommand
     {
         public EnumCharacterType _type { get; private set; }
         public EnumDirection _direction { get; private set; }

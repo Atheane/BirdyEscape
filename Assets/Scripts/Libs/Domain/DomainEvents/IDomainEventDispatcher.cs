@@ -4,6 +4,6 @@ namespace Libs.Domain.DomainEvents
 {
     public interface IDomainEventDispatcher
     {
-        void Dispatch(IAggregateRoot aggregateRoot);
+        string Dispatch(IAggregateRoot aggregateRoot);
     }
 }

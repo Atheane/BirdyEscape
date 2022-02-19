@@ -6,7 +6,7 @@ using Domain.Entities;
 using Adapters.Unimediatr;
 using Frameworks.Dtos;
 
-public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<ArrowCreatedDomainEvent>>
+public class ArrowCreatedHandler : MonoBehaviour, ISingleMessageHandler<DomainEventNotification<ArrowCreatedDomainEvent>, string>
 {
     public ArrowDto _dto;
     private DiContainer _container;
@@ -18,9 +18,10 @@ public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<Domai
         _container = container;
     }
 
-    public void Handle(DomainEventNotification<ArrowCreatedDomainEvent> notification)
+    public string Handle(DomainEventNotification<ArrowCreatedDomainEvent> notification)
     {
-        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        string log = "______" + notification._domainEvent._label + "_____handled";
+        Debug.Log(log);
         IArrowEntity arrowEntity = notification._domainEvent._props;
         _dto = ArrowDto.Create(
             arrowEntity._id,
@@ -29,6 +30,7 @@ public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<Domai
             arrowEntity._path
         );
         DrawArrow();
+        return log;
     }
 
     public void DrawArrow()

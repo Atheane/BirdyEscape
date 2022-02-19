@@ -10,7 +10,7 @@ namespace Usecases.Commands
         public Vector3 _position { get; }
         public string _path { get;  }
     }
-    public class CreateArrowCommand : IMulticastMessage, ICreateArrowCommand
+    public class CreateArrowCommand : ISingleMessage<string>, ICreateArrowCommand
     {
         public EnumDirection _direction { get; private set; }
         public Vector3 _position { get; private set; }

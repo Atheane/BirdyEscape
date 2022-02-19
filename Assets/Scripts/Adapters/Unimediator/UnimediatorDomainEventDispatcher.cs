@@ -16,19 +16,20 @@ namespace Adapters.Unimediatr
             _mediator = mediator;
         }
 
-        public void Dispatch(IAggregateRoot aggregateRoot)
+        public string Dispatch(IAggregateRoot aggregateRoot)
         {
             var domainEventNotifications = CreateDomainEventNotifications(aggregateRoot);
-            foreach (IMulticastMessage message in domainEventNotifications)
+            foreach (ISingleMessage<string> message in domainEventNotifications)
             {
-                _mediator.Publish(message);
+                _mediator.Send(message);
             }
+            return "dispatched";
             aggregateRoot.ClearDomainEvents();
         }
 
-        public IReadOnlyList<IMulticastMessage> CreateDomainEventNotifications(IAggregateRoot aggregateRoot)
+        public IReadOnlyList<ISingleMessage<string>> CreateDomainEventNotifications(IAggregateRoot aggregateRoot)
         {
-            List<IMulticastMessage> notificationList = new List<IMulticastMessage>();
+            List<ISingleMessage<string>> notificationList = new List<ISingleMessage<string>>();
             Type domainEventType;
             Type genericDispatcherType;
             object notification;
@@ -39,7 +40,7 @@ namespace Adapters.Unimediatr
                 domainEventType = domainEvent.GetType();
                 genericDispatcherType = typeof(DomainEventNotification<>).MakeGenericType(domainEventType);
                 notification = Activator.CreateInstance(genericDispatcherType, domainEvent);
-                notificationList.Add((IMulticastMessage)notification);
+                notificationList.Add((ISingleMessage<string>)notification);
             }
             return notificationList;
         }
