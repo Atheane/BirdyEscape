@@ -32,6 +32,5 @@ public class GameInstaller : MonoInstaller
         Container.Bind<GetAllCharacters>().AsSingle();
         Container.Bind<CreateArrow>().AsSingle();
         Container.Bind<CreateTile>().AsSingle();
-        Container.Bind<IMulticastMessageHandler<DomainEventNotification<CharacterDirUpdatedDomainEvent>>>().To<UpdateCharacterDirectionHandler>().AsSingle();
     }
 }

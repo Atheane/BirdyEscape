@@ -30,7 +30,7 @@ public class UpdateCharacterDirectionHandler : MonoBehaviour, IMulticastMessageH
             bird.transform.rotation = Quaternion.Euler(characterDto._orientation);
         } catch(Exception e)
         {
-            Debug.Log(e);
+            Debug.LogException(e);
         }
 
     }
