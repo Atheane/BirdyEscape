@@ -45,7 +45,9 @@ namespace Usecases
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-             _characterEntity.MoveOnce();
+            _characterEntity.MoveOnce();
+            _charactersRepository.Update(_characterEntity);
+            _domainEventDispatcher.Dispatch(_characterEntity);
         }
     }
 }

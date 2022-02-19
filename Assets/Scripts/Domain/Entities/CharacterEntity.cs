@@ -49,31 +49,44 @@ namespace Domain.Entities
 
         public void MoveOnce()
         {
-            (float X, float Y, float Z) position = _position.Value;
-            switch (_direction)
-            {
-                case EnumDirection.UP:
-                    position.X -= 0.1f;
-                    break;
-                case EnumDirection.DOWN:
-                    position.X += 0.1f;
-                    break;
-                case EnumDirection.LEFT:
-                    position.Z -= 0.1f;
-                    break;
-                case EnumDirection.RIGHT:
-                    position.Z += 0.1f;
-                    break;
-            }
             try
             {
+                (float X, float Y, float Z) position = _position.Value;
+                switch (_direction)
+                {
+                    case EnumDirection.UP:
+                        position.X -= 0.2f;
+                        break;
+                    case EnumDirection.DOWN:
+                        position.X += 0.2f;
+                        break;
+                    case EnumDirection.LEFT:
+                        position.Z -= 0.2f;
+                        break;
+                    case EnumDirection.RIGHT:
+                        position.Z += 0.2f;
+                        break;
+                }
                 _position = VOPosition.Create(position);
             }
             catch (Exception e)
             {
-                // if VOPosition is not validated, we do not want character to move foward
                 Debug.Log(e);
-                return;
+                // if VOPosition is not validated, we want character to turn right
+                EnumDirection newDirection = EnumDirection.LEFT;
+                switch (_direction)
+                {
+                    case EnumDirection.LEFT:
+                        newDirection = EnumDirection.UP;
+                        break;
+                    case EnumDirection.UP:
+                        newDirection = EnumDirection.RIGHT;
+                        break;
+                    case EnumDirection.RIGHT:
+                        newDirection = EnumDirection.DOWN;
+                        break;
+                }
+                UpdateDirection(newDirection);
             }
             // this method is called in a update loop,
             // avoid to dispatch an event each time, hard bugs if you do

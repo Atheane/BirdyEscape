@@ -50,26 +50,35 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Update()
     {
-        if (ShouldUpdateDirection())
+        if (CollisionWithArrow())
         {
             _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
             return;
         }
-        else if (ShouldTurnRight())
+        else if (CollisionWithObstacle())
         {
+            Debug.Log("CharacterMoveController Update CollisionWithObstacle");
             _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
             return;
         }
         else
         {
+            Debug.Log("CharacterMoveController Update Else");
+            // to-do
+            // MoveOnce = usecase with
+            // try
+            // moveFoward
+            // catch
+            // turnRight
             VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
             Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
+            return;
         }
 
     }
 
-    private bool ShouldTurnRight()
+    private bool CollisionWithObstacle()
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
         RaycastHit hit;
@@ -81,7 +90,7 @@ public class CharacterMoveController : MonoBehaviour
         return false;
     }
 
-    private bool ShouldUpdateDirection()
+    private bool CollisionWithArrow()
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;

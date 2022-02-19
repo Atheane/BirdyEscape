@@ -12,6 +12,7 @@ using Usecases;
 using Adapters.InMemoryRepository;
 using Adapters.Unimediatr;
 using Adapters.Mappers;
+using Domain.DomainEvents;
 
 
 public class GameInstaller : MonoInstaller
@@ -20,7 +21,7 @@ public class GameInstaller : MonoInstaller
     {
         Container.Bind<IMediator>().FromInstance(FindObjectOfType<MediatorImpl>()).AsSingle();
         Container.Bind<IDomainEventDispatcher>().To<UnimediatorDomainEventDispatcher>().AsSingle();
-        Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>()));
+        Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>())).AsSingle();
         Container.Bind<IMapper<VOCoordinates, Vector3>>().To<Vector3ToVOCoordinatesMapper>().AsSingle();
         Container.Bind<IMapper<VOPosition, Vector3>>().To<Vector3ToVOPositionMapper>().AsSingle();
         Container.Bind<CreateCharacter>().AsSingle();
@@ -31,5 +32,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<GetAllCharacters>().AsSingle();
         Container.Bind<CreateArrow>().AsSingle();
         Container.Bind<CreateTile>().AsSingle();
+        Container.Bind<IMulticastMessageHandler<DomainEventNotification<CharacterDirUpdatedDomainEvent>>>().To<UpdateCharacterDirectionHandler>().AsSingle();
     }
 }

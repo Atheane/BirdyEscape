@@ -4,6 +4,7 @@ using Domain.DomainEvents;
 using Domain.Entities;
 using Adapters.Unimediatr;
 using Frameworks.Dtos;
+using System;
 
 public class UpdateCharacterDirectionHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<CharacterDirUpdatedDomainEvent>>
 {
@@ -23,7 +24,14 @@ public class UpdateCharacterDirectionHandler : MonoBehaviour, IMulticastMessageH
 
     public void RotateCharacter(ICharacterDto characterDto)
     {
-        GameObject bird = GameObject.FindGameObjectWithTag(characterDto._image);
-        bird.transform.rotation = Quaternion.Euler(characterDto._orientation);
+        try
+        {
+            GameObject bird = GameObject.FindGameObjectWithTag(characterDto._image);
+            bird.transform.rotation = Quaternion.Euler(characterDto._orientation);
+        } catch(Exception e)
+        {
+            Debug.Log(e);
+        }
+
     }
 }
