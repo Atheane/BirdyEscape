@@ -1,22 +1,20 @@
-﻿using System;
 using Libs.Usecases;
 using Libs.Domain.DomainEvents;
 using Usecases.Commands;
 using Domain.Repositories;
-using Domain.ValueObjects;
 using Domain.Types;
 using Domain.Entities;
 
 
 namespace Usecases
 {
-    public class MoveAlwaysCharacter : IUsecase<IMoveAlwaysCharacterCommand, VOPosition>
+    public class UpdateCharacterState : IUsecase<IUpdateCharacterStateCommand, EnumCharacterState>
     {
         public ICharactersRepository _charactersRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
         public ICharacterEntity _characterEntity;
 
-        public MoveAlwaysCharacter(
+        public UpdateCharacterState(
             ICharactersRepository charactersRepository,
             IDomainEventDispatcher domainEventDispatcher
         )
@@ -25,31 +23,16 @@ namespace Usecases
             _domainEventDispatcher = domainEventDispatcher;
         }
 
-        public VOPosition Execute(IMoveAlwaysCharacterCommand command)
+        public EnumCharacterState Execute(IUpdateCharacterStateCommand command)
         {
             _characterEntity = _charactersRepository.Find(command._characterId);
             _characterEntity.UpdateState(EnumCharacterState.MOVING);
-            _characterEntity.MoveOnce();
             _charactersRepository.Update(_characterEntity);
             _domainEventDispatcher.Dispatch(_characterEntity);
-            //MoveAlways(_characterEntity._speed);
-            return _characterEntity._position;
+            return _characterEntity._state;
         }
 
-        //public void MoveAlways(int speed)
-        //{
-        //    System.Timers.Timer timer = new System.Timers.Timer();
-        //    timer.Interval = speed;
-        //    timer.Elapsed += Timer_Elapsed;
-        //    timer.Start();
-        //}
-
-        //private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        //{
-        //    _characterEntity.MoveOnce();
-        //    _charactersRepository.Update(_characterEntity);
-        //    _domainEventDispatcher.Dispatch(_characterEntity);
-        //}
     }
 }
+
 

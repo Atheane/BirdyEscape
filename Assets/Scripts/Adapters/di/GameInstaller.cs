@@ -12,7 +12,6 @@ using Usecases;
 using Adapters.InMemoryRepository;
 using Adapters.Unimediatr;
 using Adapters.Mappers;
-using Domain.DomainEvents;
 
 
 public class GameInstaller : MonoInstaller
@@ -30,6 +29,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<TurnRight>().AsSingle();
         Container.Bind<UpdateDirection>().AsSingle();
         Container.Bind<GetAllCharacters>().AsSingle();
+        Container.Bind<UpdateCharacterState>().AsSingle();
         Container.Bind<CreateArrow>().AsSingle();
         Container.Bind<CreateTile>().AsSingle();
     }

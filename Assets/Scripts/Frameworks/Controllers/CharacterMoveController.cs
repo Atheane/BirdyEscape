@@ -57,19 +57,11 @@ public class CharacterMoveController : MonoBehaviour
         }
         else if (CollisionWithObstacle())
         {
-            Debug.Log("CharacterMoveController Update CollisionWithObstacle");
             _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
             return;
         }
         else
         {
-            Debug.Log("CharacterMoveController Update Else");
-            // to-do
-            // MoveOnce = usecase with
-            // try
-            // moveFoward
-            // catch
-            // turnRight
             VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
             Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
             transform.position = newPosition;
