@@ -62,10 +62,14 @@ public class CharacterMoveController : MonoBehaviour
         }
         else
         {
-            VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
-            Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
-            transform.position = newPosition;
-            return;
+            var state = _container.Resolve<GetCharacterState>().Execute(new GetCharacterStateQuery(_dto._id));
+            if (state == EnumCharacterState.MOVING)
+            {
+                VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
+                Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
+                transform.position = newPosition;
+                return;
+            }
         }
 
     }

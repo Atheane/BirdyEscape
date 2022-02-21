@@ -2,17 +2,18 @@ using System;
 
 namespace Usecases.Queries
 {
-    public interface IGetCharacterPositionQuery
+    public interface IGetCharacterStateQuery
     {
         Guid _characterId { get; }
     }
-    public class GetCharacterPositionQuery : IGetCharacterPositionQuery
+    public class GetCharacterStateQuery : IGetCharacterStateQuery
     {
         public Guid _characterId { get; }
 
-        public GetCharacterPositionQuery(Guid characterId)
+        public GetCharacterStateQuery(Guid characterId)
         {
             _characterId = characterId;
         }
     }
 }
+

@@ -10,13 +10,13 @@ using Domain.Entities;
 
 namespace Usecases
 {
-    public class MoveAlwaysCharacter : IUsecase<IMoveAlwaysCharacterCommand, VOPosition>
+    public class MoveOnceCharacter : IUsecase<IMoveAlwaysCharacterCommand, VOPosition>
     {
         public ICharactersRepository _charactersRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
         public ICharacterEntity _characterEntity;
 
-        public MoveAlwaysCharacter(
+        public MoveOnceCharacter(
             ICharactersRepository charactersRepository,
             IDomainEventDispatcher domainEventDispatcher
         )

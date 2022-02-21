@@ -1,6 +1,5 @@
 ﻿using System;
 using UniMediator;
-using Domain.ValueObjects;
 
 namespace Usecases.Commands
 {
@@ -8,11 +7,11 @@ namespace Usecases.Commands
     {
         Guid _characterId { get; }
     }
-    public class MoveAlwaysCharacterCommand : ISingleMessage<VOPosition>, IMoveAlwaysCharacterCommand
+    public class MoveOnceCharacterCommand : IMulticastMessage, IMoveAlwaysCharacterCommand
     {
         public Guid _characterId { get; private set; }
 
-        public MoveAlwaysCharacterCommand(Guid characterId)
+        public MoveOnceCharacterCommand(Guid characterId)
         {
             _characterId = characterId;
         }
