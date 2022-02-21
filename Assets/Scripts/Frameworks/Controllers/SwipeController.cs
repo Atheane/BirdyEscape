@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Domain.Types;
 using Zenject;
@@ -32,20 +33,35 @@ public class SwipeController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, _layer))
         {
             Debug.DrawRay(ray.origin, hit.point);
-            foreach (Touch touch in Input.touches)
+            Debug.Log(hit.transform.tag);
+            if (hit.transform.CompareTag(Entities.Tile.ToString()))
             {
-                if (touch.phase == TouchPhase.Began)
+                foreach (Touch touch in Input.touches)
                 {
-                    _arrowPosition = hit.transform.parent.gameObject.GetComponent<TileController>()._dto._position;
-                    _fingerBeginPosition = touch.position;
-                    _fingerEndPosition = touch.position;
-                }
-                if (touch.phase == TouchPhase.Ended)
-                {
-                    _fingerEndPosition = touch.position;
-                    DetectSwipe();
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        Vector3 tilePosition;
+                        try
+                        {
+                            tilePosition = hit.transform.GetComponent<TileController>()._dto._position;
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogException(e);
+                            tilePosition = hit.transform.parent.GetComponent<TileController>()._dto._position;
+                        }
+                        _arrowPosition = tilePosition;
+                        _fingerBeginPosition = touch.position;
+                        _fingerEndPosition = touch.position;
+                    }
+                    if (touch.phase == TouchPhase.Ended)
+                    {
+                        _fingerEndPosition = touch.position;
+                        DetectSwipe();
+                    }
                 }
             }
+            
         }
     }
 

@@ -55,21 +55,22 @@ namespace Domain.Entities
                 switch (_direction)
                 {
                     case EnumDirection.UP:
-                        position.X -= 0.2f;
+                        position.X -= 0.5f;
                         break;
                     case EnumDirection.DOWN:
-                        position.X += 0.2f;
+                        position.X += 0.5f;
                         break;
                     case EnumDirection.LEFT:
-                        position.Z -= 0.2f;
+                        position.Z -= 0.5f;
                         break;
                     case EnumDirection.RIGHT:
-                        position.Z += 0.2f;
+                        position.Z += 0.5f;
                         break;
                 }
                 _position = VOPosition.Create(position);
-                var characterPositionUpdated = new CharacterPositionUpdatedDomainEvent(this);
-                AddDomainEvent(characterPositionUpdated);
+                // ot necessary, and low perf
+                //var characterPositionUpdated = new CharacterPositionUpdatedDomainEvent(this);
+                //AddDomainEvent(characterPositionUpdated);
             }
             catch (Exception e)
             {
