@@ -9,7 +9,6 @@ using Domain.Types;
 using Domain.Entities;
 using Frameworks.Dtos;
 
-
 public class CharacterMoveController : MonoBehaviour
 {
     public CharacterDto _dto;
@@ -21,6 +20,8 @@ public class CharacterMoveController : MonoBehaviour
     private LayerMask _layerArrow;
 
     private DiContainer _container;
+
+    float timer = 0;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -50,15 +51,25 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Update()
     {
+        timer += Time.deltaTime * 1000;
+
+        if (timer > _dto._speed)
+        {
+            Moveloop();
+            timer = 0;
+        }
+
+    }
+
+    private void Moveloop() {
+
         if (CollisionWithArrow())
         {
             _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
-            return;
         }
         else if (CollisionWithObstacle())
         {
             _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
-            return;
         }
         else
         {
@@ -68,17 +79,15 @@ public class CharacterMoveController : MonoBehaviour
                 VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
                 Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
                 transform.position = newPosition;
-                return;
             }
         }
-
     }
 
     private bool CollisionWithObstacle()
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
         RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction);
+        //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 0.5f, _layerObstacle))
         {
             return true;

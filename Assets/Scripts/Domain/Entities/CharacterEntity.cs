@@ -68,6 +68,8 @@ namespace Domain.Entities
                         break;
                 }
                 _position = VOPosition.Create(position);
+                var characterPositionUpdated = new CharacterPositionUpdatedDomainEvent(this);
+                AddDomainEvent(characterPositionUpdated);
             }
             catch (Exception e)
             {
