@@ -47,7 +47,6 @@ public class SwipeController : MonoBehaviour
                         }
                         catch (Exception e)
                         {
-                            Debug.LogException(e);
                             tilePosition = hit.transform.parent.GetComponent<TileController>()._dto._position;
                         }
                         _arrowPosition = tilePosition;
@@ -79,11 +78,14 @@ public class SwipeController : MonoBehaviour
                 direction = _fingerEndPosition.x > _fingerBeginPosition.x ? EnumDirection.RIGHT : EnumDirection.LEFT;
                 
             }
+            var path = "Arrow/" + Entities.Arrow.ToString();
+            Debug.Log(_arrowPosition);
+            Debug.Log(path);
             _container.Resolve<CreateArrow>().Execute(
                 new CreateArrowCommand(
                     direction,
                     _arrowPosition,
-                    "Arrow/"+Entities.Arrow.ToString()
+                    path
                 )
             );
         }

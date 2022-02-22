@@ -6,7 +6,7 @@
         public const float X_MIN = -12.5f;
         public const float X_MAX = -2.5f;
         public const float Z_MIN = -7f;
-        public const float Z_MAX = 6f;
+        public const float Z_MAX = 7f;
     }
 }
 
