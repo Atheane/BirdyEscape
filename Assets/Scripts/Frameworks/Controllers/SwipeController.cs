@@ -79,8 +79,7 @@ public class SwipeController : MonoBehaviour
                 
             }
             var path = "Arrow/" + Entities.Arrow.ToString();
-            Debug.Log(_arrowPosition);
-            Debug.Log(path);
+
             _container.Resolve<CreateArrow>().Execute(
                 new CreateArrowCommand(
                     direction,
