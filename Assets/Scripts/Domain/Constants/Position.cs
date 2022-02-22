@@ -2,11 +2,11 @@
 {
     public static class Position
     {
-        public const float INIT_Y = 0.5f;
-        public const float X_MIN = -3.5f;
-        public const float X_MAX = 6.5f;
-        public const float Z_MIN = -1.5f;
-        public const float Z_MAX = 11.5f;
+        public const float INIT_Y = -9.5f;
+        public const float X_MIN = -12.5f;
+        public const float X_MAX = -2.5f;
+        public const float Z_MIN = -7f;
+        public const float Z_MAX = 6f;
     }
 }
 

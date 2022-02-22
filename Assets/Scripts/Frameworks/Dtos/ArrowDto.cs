@@ -48,8 +48,8 @@ namespace Frameworks.Dtos
                     break;
             }
             var posX = coordinates.Value.X + 0.5f;
-            var posY = Position.INIT_Y + 0.5f;
-            var posZ = coordinates.Value.Y + 0.5f;
+            var posY = Position.INIT_Y;
+            var posZ = coordinates.Value.Y;
             Vector3 position = new Vector3(posX, posY, posZ);
 
             return new ArrowDto(id, direction, orientation, position, path.Value);

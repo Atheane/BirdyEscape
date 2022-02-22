@@ -2,12 +2,11 @@
 {
     public static class Coordinates
     {
-        public const int INIT_X = 0;
-        public const int INIT_Y = 0;
-        public const float X_MIN = -4;
-        public const float X_MAX = 6;
-        public const float Y_MIN = -2;
-        public const float Y_MAX = 12;
+        public const float INIT_X = -9.5f;
+        public const float X_MIN = -13;
+        public const float X_MAX = -3;
+        public const float Y_MIN = -7;
+        public const float Y_MAX = 7;
     }
 }
 
