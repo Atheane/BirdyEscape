@@ -9,7 +9,6 @@ using Domain.Types;
 using Domain.Entities;
 using Frameworks.Dtos;
 
-
 public class CharacterMoveController : MonoBehaviour
 {
     public CharacterDto _dto;
@@ -21,6 +20,8 @@ public class CharacterMoveController : MonoBehaviour
     private LayerMask _layerArrow;
 
     private DiContainer _container;
+
+    float timer = 0;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -36,52 +37,65 @@ public class CharacterMoveController : MonoBehaviour
             new CreateCharacterCommand(
                 EnumCharacterType.BLACK_BIRD,
                 _direction,
-                (transform.position[0], transform.position[1],
-                transform.position[2]),
-            _speed));
+                transform.position,
+                _speed)
+            );
         _dto = CharacterDto.Create(
             characterEntity._id,
             characterEntity._type,
             characterEntity._direction,
             characterEntity._position,
-            characterEntity._speed);
+            characterEntity._speed
+        );
     }
 
     private void Update()
     {
-        if (ShouldUpdateDirection())
+        timer += Time.deltaTime * 1000;
+
+        if (timer > _dto._speed)
         {
-            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
-            return;
-        }
-        else if (ShouldTurnRight())
-        {
-            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
-            return;
-        }
-        else
-        {
-            VOPosition newPositionVO = _container.Resolve<GetCharacterPositionUsecase>().Execute(new GetCharacterPositionQuery(_dto._id));
-            Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
-            transform.position = newPosition;
-            return;
+            Moveloop();
+            timer = 0;
         }
 
     }
 
-    private bool ShouldTurnRight()
+    private void Moveloop() {
+
+        if (CollisionWithArrow())
+        {
+            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
+        }
+        else if (CollisionWithObstacle())
+        {
+            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
+        }
+        else
+        {
+            var state = _container.Resolve<GetCharacterState>().Execute(new GetCharacterStateQuery(_dto._id));
+            if (state == EnumCharacterState.MOVING)
+            {
+                VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
+                Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
+                transform.position = newPosition;
+            }
+        }
+    }
+
+    private bool CollisionWithObstacle()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), 0.75f*transform.forward);
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
         RaycastHit hit;
         //Debug.DrawRay(ray.origin, ray.direction);
-        if (Physics.Raycast(ray, out hit, 1f, _layerObstacle))
+        if (Physics.Raycast(ray, out hit, 0.5f, _layerObstacle))
         {
             return true;
         }
         return false;
     }
 
-    private bool ShouldUpdateDirection()
+    private bool CollisionWithArrow()
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;

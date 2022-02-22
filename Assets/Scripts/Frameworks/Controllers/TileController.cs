@@ -4,6 +4,7 @@ using Usecases;
 using Usecases.Commands;
 using Domain.Entities;
 using Frameworks.Dtos;
+using System.Collections.Generic;
 
 
 public class TileController : MonoBehaviour
@@ -17,6 +18,16 @@ public class TileController : MonoBehaviour
         _container = container;
     }
 
+    public static List<GameObject> GetAllChilds(GameObject Go)
+    {
+        List<GameObject> list = new List<GameObject>();
+        for (int i = 0; i < Go.transform.childCount; i++)
+        {
+            list.Add(Go.transform.GetChild(i).gameObject);
+        }
+        return list;
+    }
+
     void Awake()
     {
         string path = gameObject.name;
@@ -26,5 +37,11 @@ public class TileController : MonoBehaviour
             tileEntity._coordinates,
             tileEntity._path
         );
+        List<GameObject> children = GetAllChilds(gameObject);
+        foreach(GameObject child in children)
+        {
+            child.tag = gameObject.tag;
+        }
     }
+
 }

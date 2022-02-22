@@ -30,7 +30,7 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
         {
             if (character._state == EnumCharacterState.IDLE)
             {
-                _container.Resolve<MoveAlwaysCharacter>().Execute(new MoveAlwaysCharacterCommand(character._id));
+                _container.Resolve<UpdateCharacterState>().Execute(new UpdateCharacterStateCommand(character._id, EnumCharacterState.MOVING));
             }
         }
     }

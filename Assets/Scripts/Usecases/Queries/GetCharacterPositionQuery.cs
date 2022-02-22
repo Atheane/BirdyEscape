@@ -1,6 +1,4 @@
 using System;
-using UniMediator;
-using Domain.ValueObjects;
 
 namespace Usecases.Queries
 {
@@ -8,7 +6,7 @@ namespace Usecases.Queries
     {
         Guid _characterId { get; }
     }
-    public class GetCharacterPositionQuery : ISingleMessage<VOPosition>, IGetCharacterPositionQuery
+    public class GetCharacterPositionQuery : IGetCharacterPositionQuery
     {
         public Guid _characterId { get; }
 

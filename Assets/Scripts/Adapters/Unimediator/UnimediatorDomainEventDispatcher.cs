@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UniMediator;
 using UnityEngine;
 using Libs.Domain.Entities;
@@ -17,19 +18,30 @@ namespace Adapters.Unimediatr
 
         public void Dispatch(IAggregateRoot aggregateRoot)
         {
-            var (domainEventNotification, eventLabel) = CreateDomainEventNotification(aggregateRoot);
-            Debug.Log("______" + eventLabel + "_____published");
-            _mediator.Publish(domainEventNotification);
+            var domainEventNotifications = CreateDomainEventNotifications(aggregateRoot);
+            foreach (IMulticastMessage message in domainEventNotifications)
+            {
+                _mediator.Publish(message);
+            }
             aggregateRoot.ClearDomainEvents();
         }
 
-        public (IMulticastMessage, string) CreateDomainEventNotification(IAggregateRoot aggregateRoot)
+        public IReadOnlyList<IMulticastMessage> CreateDomainEventNotifications(IAggregateRoot aggregateRoot)
         {
-            var domainEvent = aggregateRoot.DomainEvents[0];
-            var domainEventType = domainEvent.GetType();
-            var genericDispatcherType = typeof(DomainEventNotification<>).MakeGenericType(domainEventType);
-            var notification = Activator.CreateInstance(genericDispatcherType, domainEvent);
-            return ((IMulticastMessage, string))(notification, domainEvent._label);
+            List<IMulticastMessage> notificationList = new List<IMulticastMessage>();
+            Type domainEventType;
+            Type genericDispatcherType;
+            object notification;
+
+            foreach (IDomainEvent domainEvent in aggregateRoot.DomainEvents)
+            {
+                Debug.Log("______" + domainEvent._label + "_____published");
+                domainEventType = domainEvent.GetType();
+                genericDispatcherType = typeof(DomainEventNotification<>).MakeGenericType(domainEventType);
+                notification = Activator.CreateInstance(genericDispatcherType, domainEvent);
+                notificationList.Add((IMulticastMessage)notification);
+            }
+            return notificationList;
         }
 
     }

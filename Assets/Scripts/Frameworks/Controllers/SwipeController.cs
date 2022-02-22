@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Domain.Types;
 using Zenject;
@@ -31,14 +32,24 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            //Debug.DrawLine(ray.origin, hit.point);
-            if (hit.transform.tag == Entities.Tile.ToString())
+            Debug.DrawRay(ray.origin, hit.point);
+            Debug.Log(hit.transform.tag);
+            if (hit.transform.CompareTag(Entities.Tile.ToString()))
             {
                 foreach (Touch touch in Input.touches)
                 {
                     if (touch.phase == TouchPhase.Began)
                     {
-                        _arrowPosition = hit.transform.gameObject.GetComponent<TileController>()._dto._position;
+                        Vector3 tilePosition;
+                        try
+                        {
+                            tilePosition = hit.transform.GetComponent<TileController>()._dto._position;
+                        }
+                        catch (Exception e)
+                        {
+                            tilePosition = hit.transform.parent.GetComponent<TileController>()._dto._position;
+                        }
+                        _arrowPosition = tilePosition;
                         _fingerBeginPosition = touch.position;
                         _fingerEndPosition = touch.position;
                     }
@@ -49,6 +60,7 @@ public class SwipeController : MonoBehaviour
                     }
                 }
             }
+            
         }
     }
 
@@ -66,11 +78,13 @@ public class SwipeController : MonoBehaviour
                 direction = _fingerEndPosition.x > _fingerBeginPosition.x ? EnumDirection.RIGHT : EnumDirection.LEFT;
                 
             }
+            var path = "Arrow/" + Entities.Arrow.ToString();
+
             _container.Resolve<CreateArrow>().Execute(
                 new CreateArrowCommand(
                     direction,
                     _arrowPosition,
-                    Entities.Arrow.ToString()
+                    path
                 )
             );
         }
