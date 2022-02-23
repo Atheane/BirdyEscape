@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 using Usecases;
@@ -102,10 +103,10 @@ public class CharacterMoveController : MonoBehaviour
         //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
         {
-            EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-            if (direction != _direction)
+            ArrowController controller = hit.collider.GetComponent<ArrowController>();
+            if (controller._direction != _direction)
             {
-                _direction = direction;
+                _direction = controller._direction;
                 return true;
             }
         }

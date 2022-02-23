@@ -32,6 +32,5 @@ public class UpdateCharacterDirectionHandler : MonoBehaviour, IMulticastMessageH
         {
             Debug.LogException(e);
         }
-
     }
 }

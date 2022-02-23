@@ -10,18 +10,18 @@ namespace Adapters.InMemoryRepository
 {
     public class InMemoryCharacterRepository : ICharactersRepository
     {
-        private Dictionary<Guid, ICharacterEntity> Store;
+        private Dictionary<Guid, ICharacterEntity> _store;
 
         public InMemoryCharacterRepository(Dictionary<Guid, ICharacterEntity> store)
         {
-            this.Store = store;
+            _store = store;
         }
 
         public void Add(ICharacterEntity character)
         {
-            if (!this.Store.ContainsKey(character._id))
+            if (!_store.ContainsKey(character._id))
             {
-                this.Store.Add(character._id, character);
+                _store.Add(character._id, character);
             }
             else
             {
@@ -33,24 +33,25 @@ namespace Adapters.InMemoryRepository
         {
             ICharacterEntity oldCharacter = Find(newCharacter._id);
             //todo: test equality on each prop and return and error if objet is unchanged
-            this.Store[oldCharacter.Id] = newCharacter;
+            _store[oldCharacter.Id] = newCharacter;
         }
 
         public void Remove(ICharacterEntity character)
         {
-            if (this.Store.ContainsKey(character._id))
+            if (_store.ContainsKey(character._id))
             {
-                this.Store.Remove(character._id);
+                _store.Remove(character._id);
             }
             else
             {
                 throw new CharacterException.NotFound(character._id.ToString());
             }
         }
+
         public ICharacterEntity Find(Guid characterId)
         {
             ICharacterEntity character;
-            bool hasValue = this.Store.TryGetValue(characterId, out character);
+            bool hasValue = _store.TryGetValue(characterId, out character);
             if (hasValue)
             {
                 return character;
@@ -60,9 +61,10 @@ namespace Adapters.InMemoryRepository
                 throw new CharacterException.NotFound(characterId.ToString());
             }
         }
+
         public IReadOnlyList<ICharacterEntity> GetAll()
         {
-            Dictionary<Guid, ICharacterEntity>.ValueCollection charactersValueCollection = this.Store.Values;
+            Dictionary<Guid, ICharacterEntity>.ValueCollection charactersValueCollection = _store.Values;
             List<ICharacterEntity> charactersList = new List<ICharacterEntity>();
 
             foreach (ICharacterEntity character in charactersValueCollection)
@@ -72,10 +74,11 @@ namespace Adapters.InMemoryRepository
 
             return charactersList.AsReadOnly();
         }
+
         public IReadOnlyList<ICharacterEntity> Where(Expression<Func<ICharacterEntity, bool>> predicate)
         {
             // example of predicate: characterEntity => characterEntity.Position.Value.X < 10.0f
-            List<ICharacterEntity> filteredCharacters = new List<ICharacterEntity>(this.GetAll().Where(predicate.Compile()));
+            List<ICharacterEntity> filteredCharacters = new List<ICharacterEntity>(GetAll().Where(predicate.Compile()));
             return filteredCharacters;
         }
     }

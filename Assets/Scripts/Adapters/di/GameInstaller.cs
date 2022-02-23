@@ -21,6 +21,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<IMediator>().FromInstance(FindObjectOfType<MediatorImpl>()).AsSingle();
         Container.Bind<IDomainEventDispatcher>().To<UnimediatorDomainEventDispatcher>().AsSingle();
         Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>())).AsSingle();
+        Container.Bind<IArrowsRepository>().FromInstance(new InMemoryArrowRepository(new Dictionary<Guid, IArrowEntity>())).AsSingle();
         Container.Bind<IMapper<VOCoordinates, Vector3>>().To<Vector3ToVOCoordinatesMapper>().AsSingle();
         Container.Bind<IMapper<VOPosition, Vector3>>().To<Vector3ToVOPositionMapper>().AsSingle();
         // character commands
@@ -35,6 +36,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<GetCharacterPositionUsecase>().AsSingle();
         // arrow commands
         Container.Bind<CreateArrow>().AsSingle();
+        Container.Bind<DeleteArrow>().AsSingle();
         // tile commands
         Container.Bind<CreateTile>().AsSingle();
     }

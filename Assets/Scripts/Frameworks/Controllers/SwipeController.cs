@@ -8,11 +8,11 @@ using Usecases.Commands;
 public class SwipeController : MonoBehaviour
 {
     [SerializeField] private LayerMask _layer;
-    private Vector3 _fingerBeginPosition;
-    private Vector3 _fingerEndPosition;
+    private Vector2 _fingerBeginPosition;
+    private Vector2 _fingerEndPosition;
 
     private Vector3 _arrowPosition;
-    private float _minDistanceForSwipe = 20f;
+    private float _minDistanceForSwipe = 40f;
 
     private DiContainer _container;
 
@@ -32,24 +32,21 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            Debug.DrawRay(ray.origin, hit.point);
-            Debug.Log(hit.transform.tag);
             if (hit.transform.CompareTag(Entities.Tile.ToString()))
             {
                 foreach (Touch touch in Input.touches)
                 {
                     if (touch.phase == TouchPhase.Began)
                     {
-                        Vector3 tilePosition;
                         try
                         {
-                            tilePosition = hit.transform.GetComponent<TileController>()._dto._position;
+                            _arrowPosition = hit.transform.parent.GetComponent<TileController>()._dto._position;
                         }
                         catch (Exception e)
                         {
-                            tilePosition = hit.transform.parent.GetComponent<TileController>()._dto._position;
+                            Debug.Log(e);
+                            _arrowPosition = hit.transform.GetComponent<TileController>()._dto._position;
                         }
-                        _arrowPosition = tilePosition;
                         _fingerBeginPosition = touch.position;
                         _fingerEndPosition = touch.position;
                     }
@@ -60,8 +57,7 @@ public class SwipeController : MonoBehaviour
                     }
                 }
             }
-            
-        }
+        }  
     }
 
     public void DetectSwipe()
@@ -107,7 +103,7 @@ public class SwipeController : MonoBehaviour
 
     private float HorizontalMovementDistance()
     {
-        return Mathf.Abs(_fingerEndPosition.x - _fingerBeginPosition.x);
+       return Mathf.Abs(_fingerEndPosition.x - _fingerBeginPosition.x);
     }
 
 }
