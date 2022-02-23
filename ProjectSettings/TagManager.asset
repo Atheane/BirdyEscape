@@ -8,6 +8,7 @@ TagManager:
   - Cute_Bird_16
   - Tile
   - Puzzle
+  - Arrow
   layers:
   - Default
   - TransparentFX

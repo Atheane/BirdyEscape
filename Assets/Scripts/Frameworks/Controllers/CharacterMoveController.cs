@@ -22,9 +22,6 @@ public class CharacterMoveController : MonoBehaviour
 
     private DiContainer _container;
 
-    private GameObject _arrow;
-    private ArrowController _arrowController;
-
     float timer = 0;
 
     [Inject]
@@ -67,11 +64,9 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Moveloop() {
 
-        if (CollisionWithArrow().Item1 == true)
+        if (CollisionWithArrow())
         {
             _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
-            _container.Resolve<DeleteArrow>().Execute(new DeleteArrowCommand(_arrowController._id));
-            Destroy(_arrow);
         }
         else if (CollisionWithObstacle())
         {
@@ -101,21 +96,20 @@ public class CharacterMoveController : MonoBehaviour
         return false;
     }
 
-    private (bool, ArrowController) CollisionWithArrow()
+    private bool CollisionWithArrow()
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
         //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
         {
-            _arrow = hit.collider.gameObject;
-            _arrowController = hit.collider.GetComponent<ArrowController>();
-            if (_arrowController._direction != _direction)
+            ArrowController controller = hit.collider.GetComponent<ArrowController>();
+            if (controller._direction != _direction)
             {
-                _direction = _arrowController._direction;
-                return (true, _arrowController);
+                _direction = controller._direction;
+                return true;
             }
         }
-        return (false, null);
+        return false;
     }
 }

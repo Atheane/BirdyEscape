@@ -38,5 +38,6 @@ public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<Domai
         controller._direction = dto._direction;
         controller._id = dto._id;
         go.transform.parent = grid;
+        go.tag = Entities.Arrow.ToString();
     }
 }
