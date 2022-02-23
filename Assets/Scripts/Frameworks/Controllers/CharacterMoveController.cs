@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 using Usecases;
@@ -20,6 +21,9 @@ public class CharacterMoveController : MonoBehaviour
     private LayerMask _layerArrow;
 
     private DiContainer _container;
+
+    private GameObject _arrow;
+    private ArrowController _arrowController;
 
     float timer = 0;
 
@@ -63,9 +67,11 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Moveloop() {
 
-        if (CollisionWithArrow())
+        if (CollisionWithArrow().Item1 == true)
         {
             _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
+            _container.Resolve<DeleteArrow>().Execute(new DeleteArrowCommand(_arrowController._id));
+            Destroy(_arrow);
         }
         else if (CollisionWithObstacle())
         {
@@ -95,20 +101,21 @@ public class CharacterMoveController : MonoBehaviour
         return false;
     }
 
-    private bool CollisionWithArrow()
+    private (bool, ArrowController) CollisionWithArrow()
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
         //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
         {
-            EnumDirection direction = hit.collider.GetComponent<ArrowController>()._direction;
-            if (direction != _direction)
+            _arrow = hit.collider.gameObject;
+            _arrowController = hit.collider.GetComponent<ArrowController>();
+            if (_arrowController._direction != _direction)
             {
-                _direction = direction;
-                return true;
+                _direction = _arrowController._direction;
+                return (true, _arrowController);
             }
         }
-        return false;
+        return (false, null);
     }
 }
