@@ -98,18 +98,12 @@ public class SwipeController : MonoBehaviour
 
     private float VerticalMovementDistance()
     {
-        var distance = Mathf.Abs(_fingerEndPosition.y - _fingerBeginPosition.y);
-        Debug.Log("VerticalMovementDistance");
-        Debug.Log(distance);
-        return distance;
+        return Mathf.Abs(_fingerEndPosition.y - _fingerBeginPosition.y);
     }
 
     private float HorizontalMovementDistance()
     {
-        var distance = Mathf.Abs(_fingerEndPosition.x - _fingerBeginPosition.x);
-        Debug.Log("HorizontalMovementDistance");
-        Debug.Log(distance);
-        return distance;
+       return Mathf.Abs(_fingerEndPosition.x - _fingerBeginPosition.x);
     }
 
 }
