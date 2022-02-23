@@ -32,8 +32,6 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            Debug.DrawRay(ray.origin, hit.point);
-            Debug.Log(hit.transform.tag);
             if (hit.transform.CompareTag(Entities.Tile.ToString()))
             {
                 foreach (Touch touch in Input.touches)
@@ -43,11 +41,12 @@ public class SwipeController : MonoBehaviour
                         Vector3 tilePosition;
                         try
                         {
-                            tilePosition = hit.transform.GetComponent<TileController>()._dto._position;
+                            tilePosition = hit.transform.parent.GetComponent<TileController>()._dto._position;
                         }
                         catch (Exception e)
                         {
-                            tilePosition = hit.transform.parent.GetComponent<TileController>()._dto._position;
+                            Debug.Log(e);
+                            tilePosition = hit.transform.GetComponent<TileController>()._dto._position;
                         }
                         _arrowPosition = tilePosition;
                         _fingerBeginPosition = touch.position;

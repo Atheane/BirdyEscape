@@ -13,6 +13,7 @@ namespace Domain.Entities
         public EnumDirection _direction { get; }
         public VOCoordinates _coordinates { get; }
         public VOPath _path { get; }
+        public void Delete();
     }
 
     public class ArrowEntity : AggregateRoot, IArrowEntity
@@ -36,6 +37,12 @@ namespace Domain.Entities
             arrow.AddDomainEvent(arrowCreated);
             arrow._id = arrowCreated._id;
             return arrow;
+        }
+
+        public void Delete()
+        {
+            var arrowDeleted = new ArrowDeletedDomainEvent(this);
+            this.AddDomainEvent(arrowDeleted);
         }
 
     }
