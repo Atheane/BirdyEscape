@@ -2,6 +2,7 @@ using System;
 using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.ValueObjects;
+using Domain.Types;
 
 namespace Domain.Entities
 {
@@ -12,6 +13,8 @@ namespace Domain.Entities
         public VOPath _path { get; }
         public IArrowEntity _arrow { get; }
         public void AddArrow(IArrowEntity arrow);
+        public void UpdateArrowDirection(EnumDirection direction);
+        public void RemoveArrow();
     }
 
     public class TileEntity : AggregateRoot, ITileEntity
@@ -44,6 +47,18 @@ namespace Domain.Entities
             AddDomainEvent(arrowAddedToTile);
         }
 
+        public void UpdateArrowDirection(EnumDirection direction)
+        {
+            _arrow.UpdateDirection(direction);
+        }
+
+        public void RemoveArrow()
+        {
+            _arrow.Delete();
+            _arrow = null;
+            var arrowRemoved = new ArrowRemoved(this);
+            AddDomainEvent(arrowRemoved);
+        }
     }
 }
 

@@ -7,27 +7,27 @@ using Domain.Entities;
 
 namespace Usecases
 {
-    public class UpdateArrowDirection : IUsecase<IUpdateArrowDirectionCommand, IArrowEntity>
+    public class UpdateArrowDirection : IUsecase<IUpdateArrowDirectionCommand, ITileEntity>
     {
-        public IArrowsRepository _arrowsRepository;
+        public ITilesRepository _tilesRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
 
         public UpdateArrowDirection(
-            IArrowsRepository arrowsRepository,
+            ITilesRepository tilesRepository,
             IDomainEventDispatcher domainEventDispatcher
         )
         {
-            _arrowsRepository = arrowsRepository;
+            _tilesRepository = tilesRepository;
             _domainEventDispatcher = domainEventDispatcher;
         }
 
-        public IArrowEntity Execute(IUpdateArrowDirectionCommand command)
+        public ITileEntity Execute(IUpdateArrowDirectionCommand command)
         {
-            IArrowEntity _arrowEntity = _arrowsRepository.Find(command._arrowId);
-            _arrowEntity.UpdateDirection(command._direction);
-            _arrowsRepository.Update(_arrowEntity);
-            _domainEventDispatcher.Dispatch(_arrowEntity);
-            return _arrowEntity;
+            ITileEntity tile = _tilesRepository.Find(command._tileId);
+            tile.UpdateArrowDirection(command._direction);
+            _tilesRepository.Update(tile);
+            _domainEventDispatcher.Dispatch(tile);
+            return tile;
         }
     }
 }

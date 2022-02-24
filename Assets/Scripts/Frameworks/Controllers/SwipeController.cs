@@ -89,17 +89,11 @@ public class SwipeController : MonoBehaviour
                 )
             );
         } else {
-            IArrowEntity arrowEntity = _container.Resolve<UpdateArrowDirection>().Execute(
+            _container.Resolve<UpdateArrowDirection>().Execute(
                 new UpdateArrowDirectionCommand(
-                    tileController._dto._arrow._id,
+                    tileController._dto._id,
                     direction
                 )
-            );
-            IArrowDto arrowDto = ArrowDto.Create(
-                arrowEntity._id,
-                arrowEntity._direction,
-                arrowEntity._coordinates,
-                arrowEntity._path
             );
             Transform arrowTransform = tileController.GetArrow();
             arrowTransform.rotation = Quaternion.Euler(arrowDto._orientation);

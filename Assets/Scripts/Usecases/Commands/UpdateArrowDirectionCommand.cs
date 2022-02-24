@@ -6,18 +6,18 @@ namespace Usecases.Commands
 {
     public interface IUpdateArrowDirectionCommand
     {
-        Guid _arrowId { get; }
+        Guid _tileId { get; }
         EnumDirection _direction { get; }
     }
     public class UpdateArrowDirectionCommand : IMulticastMessage, IUpdateArrowDirectionCommand
     {
-        public Guid _arrowId { get; }
+        public Guid _tileId { get; }
         public EnumDirection _direction { get; }
 
 
-        public UpdateArrowDirectionCommand(Guid arrowId, EnumDirection direction)
+        public UpdateArrowDirectionCommand(Guid tileId, EnumDirection direction)
         {
-            _arrowId = arrowId;
+            _tileId = tileId;
             _direction = direction;
         }
     }

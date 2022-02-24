@@ -7,27 +7,27 @@ using Domain.Repositories;
 
 namespace Usecases
 {
-    public class DeleteArrow : IUsecase<IDeleteArrowCommand, IArrowEntity>
+    public class DeleteArrow : IUsecase<IDeleteArrowCommand, ITileEntity>
     {
         public IDomainEventDispatcher _domainEventDispatcher;
-        public IArrowsRepository _arrowRepository;
+        public ITilesRepository _tileRepository;
 
         public DeleteArrow(
             IDomainEventDispatcher domainEventDispatcher,
-            IArrowsRepository arrowRepository
+            ITilesRepository tileRepository
         )
         {
             _domainEventDispatcher = domainEventDispatcher;
-            _arrowRepository = arrowRepository;
+            _tileRepository = tileRepository;
 
         }
-        public IArrowEntity Execute(IDeleteArrowCommand command)
+        public ITileEntity Execute(IDeleteArrowCommand command)
         {
-            IArrowEntity arrowEntity = _arrowRepository.Find(command._arrowId);
-            arrowEntity.Delete();
-            _arrowRepository.Remove(arrowEntity);
-            _domainEventDispatcher.Dispatch(arrowEntity);
-            return arrowEntity;
+            ITileEntity tile = _tileRepository.Find(command._tileId);
+            tile.RemoveArrow();
+            _tileRepository.Update(tile);
+            _domainEventDispatcher.Dispatch(tile);
+            return tile;
         }
     }
 }
