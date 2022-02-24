@@ -10,6 +10,8 @@ namespace Domain.Entities
         public Guid _id { get; }
         public VOCoordinates _coordinates { get; }
         public VOPath _path { get; }
+        public IArrowEntity _arrow { get; }
+        public void AddArrow(IArrowEntity arrow);
     }
 
     public class TileEntity : AggregateRoot, ITileEntity
@@ -17,6 +19,7 @@ namespace Domain.Entities
         public Guid _id { get; private set; }
         public VOCoordinates _coordinates { get; private set; }
         public VOPath _path { get; private set; }
+        public IArrowEntity _arrow { get; set; }
 
 
         private TileEntity(VOCoordinates coords, VOPath path) : base()
@@ -32,6 +35,13 @@ namespace Domain.Entities
             tile.AddDomainEvent(tileCreated);
             tile._id = tileCreated._id;
             return tile;
+        }
+
+        public void AddArrow(IArrowEntity arrowEntity)
+        {
+            _arrow = arrowEntity;
+            var arrowAddedToTile = new ArrowAddedToTileDomainEvent(this);
+            AddDomainEvent(arrowAddedToTile);
         }
 
     }

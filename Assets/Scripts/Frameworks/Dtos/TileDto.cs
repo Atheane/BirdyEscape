@@ -17,6 +17,7 @@ namespace Frameworks.Dtos
         public Guid _id { get; private set; }
         public Vector3 _position { get; private set; }
         public string _path { get; private set; }
+        public IArrowDto _arrow { get; private set; }
 
         private TileDto(Guid id, Vector3 position, string path)
         {
@@ -33,6 +34,11 @@ namespace Frameworks.Dtos
                 coordinates.Value.Y
             );
             return new TileDto(id, position, path.Value);
+        }
+
+        public void AddArrow(IArrowDto arrowDto)
+        {
+            _arrow = arrowDto;
         }
 
     }

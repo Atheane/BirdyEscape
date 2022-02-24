@@ -59,31 +59,51 @@ public class SwipeController : MonoBehaviour
                     _fingerEndPosition = touch.position;
                     if (DetectTouch() && target.CompareTag(Entities.Arrow.ToString()))
                     {
-                        Debug.Log(">>>>>>>>>>TOUCH ARROW");
                         DeleteArrow(target);
+                        return;
                     }
                     if (!DetectTouch() && target.CompareTag(Entities.Tile.ToString()))
                     {
-                        Debug.Log(">>>>>>>>>>SWIPE ARROW");
-                        CreateArrow();
+                        DrawArrow(target);
+                        return;
                     }
                 }
             }
         }  
     }
 
-    private void CreateArrow()
+    private void DrawArrow(Transform tile)
     {
         EnumDirection direction = GetSwipeDirection();
-        var path = "Arrow/" + Entities.Arrow.ToString();
-
-        _container.Resolve<CreateArrow>().Execute(
-            new CreateArrowCommand(
-                direction,
-                _arrowPosition,
-                path
-            )
-        );
+        TileController tileController = tile.GetComponent<TileController>();
+        if (tileController._dto._arrow == null)
+        {
+            // add arrow to tile
+            var path = "Arrow/" + Entities.Arrow.ToString();
+            _container.Resolve<CreateArrow>().Execute(
+                new CreateArrowCommand(
+                    tileController._dto._id,
+                    direction,
+                    _arrowPosition,
+                    path
+                )
+            );
+        } else {
+            IArrowEntity arrowEntity = _container.Resolve<UpdateArrowDirection>().Execute(
+                new UpdateArrowDirectionCommand(
+                    tileController._dto._arrow._id,
+                    direction
+                )
+            );
+            IArrowDto arrowDto = ArrowDto.Create(
+                arrowEntity._id,
+                arrowEntity._direction,
+                arrowEntity._coordinates,
+                arrowEntity._path
+            );
+            Transform arrowTransform = tileController.GetArrow();
+            arrowTransform.rotation = Quaternion.Euler(arrowDto._orientation);
+        }
     }
 
     private void DeleteArrow(Transform target)
