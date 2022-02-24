@@ -3,6 +3,7 @@ using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.ValueObjects;
 using Domain.Types;
+using Domain.Exceptions;
 
 
 namespace Domain.Entities
