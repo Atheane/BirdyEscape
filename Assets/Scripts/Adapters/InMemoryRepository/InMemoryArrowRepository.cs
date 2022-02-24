@@ -29,6 +29,13 @@ namespace Adapters.InMemoryRepository
             }
         }
 
+        public void Update(IArrowEntity newArrow)
+        {
+            IArrowEntity oldArrow = Find(newArrow._id);
+            //todo: test equality on each prop and return and error if objet is unchanged
+            _store[oldArrow._id] = newArrow;
+        }
+
         public void Remove(IArrowEntity arrow)
         {
             if (_store.ContainsKey(arrow._id))

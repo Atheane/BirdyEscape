@@ -32,7 +32,31 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            if (hit.transform.CompareTag(Entities.Tile.ToString()))
+            if (hit.transform.CompareTag(Entities.Arrow.ToString()))
+            {
+                foreach (Touch touch in Input.touches)
+                {
+                    ArrowController controller = hit.transform.GetComponent<ArrowController>();
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        _arrowPosition = controller._dto._position;
+                        _fingerBeginPosition = touch.position;
+                        _fingerEndPosition = touch.position;
+                    }
+                    if (touch.phase == TouchPhase.Ended)
+                    {
+                        _fingerEndPosition = touch.position;
+                        DetectSwipe();
+                        _container.Resolve<UpdateArrowDirection>().Execute(
+                            new UpdateArrowDirectionCommand(
+                                controller._dto._id,
+                                controller._dto._direction
+                            )
+                        );
+                    }
+                }
+            }
+            else if (hit.transform.CompareTag(Entities.Tile.ToString()))
             {
                 foreach (Touch touch in Input.touches)
                 {
@@ -53,18 +77,27 @@ public class SwipeController : MonoBehaviour
                     if (touch.phase == TouchPhase.Ended)
                     {
                         _fingerEndPosition = touch.position;
-                        DetectSwipe();
+                        EnumDirection direction = DetectSwipe();
+                        var path = "Arrow/" + Entities.Arrow.ToString();
+
+                        _container.Resolve<CreateArrow>().Execute(
+                            new CreateArrowCommand(
+                                direction,
+                                _arrowPosition,
+                                path
+                            )
+                        );
                     }
                 }
             }
         }  
     }
 
-    public void DetectSwipe()
+    public EnumDirection DetectSwipe()
     {
+        EnumDirection direction = EnumDirection.EMPTY;
         if (SwipeDistanceCheckMet())
         {
-            EnumDirection direction;
             if (IsVerticalSwipe())
             {
                 direction = _fingerEndPosition.y > _fingerBeginPosition.y ? EnumDirection.UP: EnumDirection.DOWN;
@@ -72,18 +105,9 @@ public class SwipeController : MonoBehaviour
             else
             {
                 direction = _fingerEndPosition.x > _fingerBeginPosition.x ? EnumDirection.RIGHT : EnumDirection.LEFT;
-                
             }
-            var path = "Arrow/" + Entities.Arrow.ToString();
-
-            _container.Resolve<CreateArrow>().Execute(
-                new CreateArrowCommand(
-                    direction,
-                    _arrowPosition,
-                    path
-                )
-            );
         }
+        return direction;
     }
 
     private bool IsVerticalSwipe()

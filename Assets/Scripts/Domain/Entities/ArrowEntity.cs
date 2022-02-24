@@ -13,6 +13,7 @@ namespace Domain.Entities
         public EnumDirection _direction { get; }
         public VOCoordinates _coordinates { get; }
         public VOPath _path { get; }
+        public void UpdateDirection(EnumDirection direction);
         public void Delete();
     }
 
@@ -39,10 +40,17 @@ namespace Domain.Entities
             return arrow;
         }
 
+        public void UpdateDirection(EnumDirection direction)
+        {
+            var arrowDirectionUpdated = new ArrowDirectionUpdatedDomainEvent(this);
+            _direction = direction;
+            AddDomainEvent(arrowDirectionUpdated);
+        }
+
         public void Delete()
         {
             var arrowDeleted = new ArrowDeletedDomainEvent(this);
-            this.AddDomainEvent(arrowDeleted);
+            AddDomainEvent(arrowDeleted);
         }
 
     }

@@ -29,13 +29,14 @@ public class GameInstaller : MonoInstaller
         Container.Bind<MoveOnceCharacter>().AsSingle();
         Container.Bind<UpdateCharacterState>().AsSingle();
         Container.Bind<TurnRight>().AsSingle();
-        Container.Bind<UpdateDirection>().AsSingle();
+        Container.Bind<UpdateCharacterDirection>().AsSingle();
         // character queries
         Container.Bind<GetAllCharacters>().AsSingle();
         Container.Bind<GetCharacterState>().AsSingle();
         Container.Bind<GetCharacterPositionUsecase>().AsSingle();
         // arrow commands
         Container.Bind<CreateArrow>().AsSingle();
+        Container.Bind<UpdateArrowDirection>().AsSingle();
         Container.Bind<DeleteArrow>().AsSingle();
         // tile commands
         Container.Bind<CreateTile>().AsSingle();

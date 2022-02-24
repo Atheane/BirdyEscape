@@ -1,15 +1,13 @@
-using System;
 using UnityEngine;
-using Domain.Types;
 using Zenject;
 using Usecases;
 using Usecases.Commands;
+using Frameworks.Dtos;
 
 
 public class ArrowController : MonoBehaviour
 {
-    public EnumDirection _direction;
-    public Guid _id;
+    public IArrowDto _dto;
 
     [SerializeField] private LayerMask _layer;
 
@@ -41,8 +39,8 @@ public class ArrowController : MonoBehaviour
                     {
                         ArrowController controller = hit.transform.GetComponent<ArrowController>();
                         GameObject go = hit.transform.gameObject;
-                        if (controller._id == _id)
-                            _container.Resolve<DeleteArrow>().Execute(new DeleteArrowCommand(_id));
+                        if (controller._dto._id == _dto._id)
+                            _container.Resolve<DeleteArrow>().Execute(new DeleteArrowCommand(_dto._id));
                             Destroy(go);
                     }
                 }

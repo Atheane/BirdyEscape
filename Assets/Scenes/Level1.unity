@@ -14810,13 +14810,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645408383}
-  m_LocalRotation: {x: 0.33177352, y: -0.62444085, z: 0.33177352, w: 0.62444085}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.40228236, y: -0.58152294, z: 0.40228236, w: 0.58152294}
+  m_LocalPosition: {x: -5.2, y: -0.5, z: -0.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 55.965, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 69.34894, y: -90, z: 0}
 --- !u!4 &650290922 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4489404336695620, guid: 841d0b92731f75947984ee4f4f45703e, type: 3}
@@ -34209,7 +34209,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 645408386}
-  m_PlaneDistance: 10
+  m_PlaneDistance: 6
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
