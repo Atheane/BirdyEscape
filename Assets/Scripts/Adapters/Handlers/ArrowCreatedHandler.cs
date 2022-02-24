@@ -31,12 +31,12 @@ public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<Domai
 
     public void DrawArrow(IArrowDto dto)
     {
-        Transform grid = transform.parent;
+        Transform puzzle = transform;
         GameObject go = Instantiate(Resources.Load(dto._path), dto._position, Quaternion.Euler(dto._orientation)) as GameObject;
         // instantiate and attach the component in once function
         var controller = _container.InstantiateComponent<ArrowController>(go);
         controller._dto = dto;
-        go.transform.parent = grid;
         go.tag = Entities.Arrow.ToString();
+        go.transform.parent = puzzle;
     }
 }
