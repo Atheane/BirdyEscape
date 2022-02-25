@@ -9,13 +9,13 @@ using Domain.Repositories;
 
 namespace Usecases
 {
-    public class CreateArrow : IUsecase<ICreateArrowCommand, ITileEntity>
+    public class AddTileArrow : IUsecase<IAddTileArrowCommand, ITileEntity>
     {
         public IDomainEventDispatcher _domainEventDispatcher;
         public IMapper<VOCoordinates, Vector3> _mapper;
         public ITilesRepository _tileRepository;
 
-        public CreateArrow(
+        public AddTileArrow(
             IDomainEventDispatcher domainEventDispatcher,
             ITilesRepository tileRepository,
             IMapper<VOCoordinates, Vector3> mapper
@@ -25,23 +25,16 @@ namespace Usecases
             _tileRepository = tileRepository;
             _mapper = mapper;
         }
-        public ITileEntity Execute(ICreateArrowCommand command)
+        public ITileEntity Execute(IAddTileArrowCommand command)
         {
             var tileEntity = _tileRepository.Find(command._tileId);
-
-            var coordinates = _mapper.ToDomain(command._position);
             var path = VOPath.Create(command._path);
 
-            var arrowEntity = ArrowEntity.Create(
-                command._direction,
-                coordinates,
-                path);
 
-            tileEntity.AddArrow(arrowEntity);
+            tileEntity.AddArrow(command._direction, tileEntity._coordinates, path);
             _tileRepository.Update(tileEntity);
             _domainEventDispatcher.Dispatch(tileEntity);
 
-            _domainEventDispatcher.Dispatch(arrowEntity);
             return tileEntity;
         }
     }

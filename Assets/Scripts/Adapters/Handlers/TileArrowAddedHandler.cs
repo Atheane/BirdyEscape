@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using UniMediator;
@@ -6,9 +8,10 @@ using Domain.Entities;
 using Adapters.Unimediatr;
 using Frameworks.Dtos;
 
-public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<ArrowCreatedDomainEvent>>
+public class TileArrowAddedHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<TileArrowAdded>>
 {
     private DiContainer _container;
+
 
     [Inject]
     public void Construct(DiContainer container)
@@ -16,27 +19,27 @@ public class ArrowCreatedHandler : MonoBehaviour, IMulticastMessageHandler<Domai
         _container = container;
     }
 
-    public void Handle(DomainEventNotification<ArrowCreatedDomainEvent> notification)
+    public void Handle(DomainEventNotification<TileArrowAdded> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
-        IArrowEntity arrowEntity = notification._domainEvent._props;
+        ITileEntity tile = notification._domainEvent._props;
         IArrowDto dto = ArrowDto.Create(
-            arrowEntity._id,
-            arrowEntity._direction,
-            arrowEntity._coordinates,
-            arrowEntity._path
+            tile._arrow._id,
+            tile._arrow._direction,
+            tile._arrow._coordinates,
+            tile._arrow._path
         );
-        DrawArrow(dto);
+        AddArrowToTile(tile._id, dto);
     }
 
-    public void DrawArrow(IArrowDto dto)
+    public void AddArrowToTile(Guid tileId, IArrowDto dto)
     {
-        Transform puzzle = transform;
+        GameObject tile = transform.GetComponent<PuzzleController>().FindTileById(tileId);
         GameObject go = Instantiate(Resources.Load(dto._path), dto._position, Quaternion.Euler(dto._orientation)) as GameObject;
         // instantiate and attach the component in once function
         var controller = _container.InstantiateComponent<ArrowController>(go);
         controller._dto = dto;
         go.tag = Entities.Arrow.ToString();
-        go.transform.parent = puzzle;
+        go.transform.parent = tile.transform;
     }
 }

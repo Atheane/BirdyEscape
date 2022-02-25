@@ -3,15 +3,15 @@ using UniMediator;
 
 namespace Usecases.Commands
 {
-    public interface IDeleteArrowCommand
+    public interface IRemoveTileArrowCommand
     {
         public Guid _tileId { get; }
     }
-    public class DeleteArrowCommand : IMulticastMessage, IDeleteArrowCommand
+    public class RemoveTileArrowCommand : IMulticastMessage, IRemoveTileArrowCommand
     {
         public Guid _tileId { get; private set; }
 
-        public DeleteArrowCommand(Guid tileId)
+        public RemoveTileArrowCommand(Guid tileId)
         {
             _tileId = tileId;
         }

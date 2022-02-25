@@ -7,12 +7,12 @@ using Domain.Repositories;
 
 namespace Usecases
 {
-    public class DeleteArrow : IUsecase<IDeleteArrowCommand, ITileEntity>
+    public class RemoveTileArrow : IUsecase<IRemoveTileArrowCommand, ITileEntity>
     {
         public IDomainEventDispatcher _domainEventDispatcher;
         public ITilesRepository _tileRepository;
 
-        public DeleteArrow(
+        public RemoveTileArrow(
             IDomainEventDispatcher domainEventDispatcher,
             ITilesRepository tileRepository
         )
@@ -21,12 +21,13 @@ namespace Usecases
             _tileRepository = tileRepository;
 
         }
-        public ITileEntity Execute(IDeleteArrowCommand command)
+        public ITileEntity Execute(IRemoveTileArrowCommand command)
         {
             ITileEntity tile = _tileRepository.Find(command._tileId);
             tile.RemoveArrow();
+            _domainEventDispatcher.Dispatch(tile._arrow);
+
             _tileRepository.Update(tile);
-            _domainEventDispatcher.Dispatch(tile);
             return tile;
         }
     }

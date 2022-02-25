@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using Usecases;
 using Usecases.Commands;
 using Domain.Entities;
 using Frameworks.Dtos;
-using System.Collections.Generic;
 
 
 public class TileController : MonoBehaviour
@@ -37,6 +37,9 @@ public class TileController : MonoBehaviour
             tileEntity._coordinates,
             tileEntity._path
         );
+        //var tag = tileEntity._id.ToString();
+        //TagHelper.AddTag(tag);
+        //gameObject.tag = tag;
         List<GameObject> children = GetAllChilds(gameObject);
         foreach(GameObject child in children)
         {

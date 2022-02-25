@@ -35,9 +35,9 @@ public class GameInstaller : MonoInstaller
         Container.Bind<GetCharacterState>().AsSingle();
         Container.Bind<GetCharacterPositionUsecase>().AsSingle();
         // arrow commands
-        Container.Bind<CreateArrow>().AsSingle();
-        Container.Bind<UpdateArrowDirection>().AsSingle();
-        Container.Bind<DeleteArrow>().AsSingle();
+        Container.Bind<AddTileArrow>().AsSingle();
+        Container.Bind<UpdateTileArrowDirection>().AsSingle();
+        Container.Bind<RemoveTileArrow>().AsSingle();
         // tile commands
         Container.Bind<CreateTile>().AsSingle();
     }

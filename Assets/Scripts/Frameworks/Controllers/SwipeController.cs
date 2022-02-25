@@ -5,15 +5,13 @@ using Zenject;
 using Usecases;
 using Usecases.Commands;
 using Domain.Entities;
-using Frameworks.Dtos;
 
 public class SwipeController : MonoBehaviour
 {
     [SerializeField] private LayerMask _layer;
     private Vector2 _fingerBeginPosition;
     private Vector2 _fingerEndPosition;
-    private Vector3 _arrowPosition;
-
+    private Transform _target;
     private float _minDistanceForSwipe = 40f;
 
     private DiContainer _container;
@@ -34,37 +32,25 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            Transform target = hit.transform;
             foreach (Touch touch in Input.touches)
             {
                 if (touch.phase == TouchPhase.Began)
                 {
+                    _target = hit.transform;
                     _fingerBeginPosition = touch.position;
                     _fingerEndPosition = touch.position;
-                    if (target.CompareTag(Entities.Tile.ToString())) {
-                        try
-                        {
-                            _arrowPosition = target.parent.GetComponent<TileController>()._dto._position;
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.Log(e);
-                            _arrowPosition = target.GetComponent<TileController>()._dto._position;
-                        }
-                    }
-
                 }
                 if (touch.phase == TouchPhase.Ended)
                 {
                     _fingerEndPosition = touch.position;
-                    if (DetectTouch() && target.CompareTag(Entities.Arrow.ToString()))
+                    if (DetectTouch())
                     {
-                        DeleteArrow(target);
+                        DeleteArrow(_target);
                         return;
                     }
-                    if (!DetectTouch() && target.CompareTag(Entities.Tile.ToString()))
+                    if (!DetectTouch())
                     {
-                        DrawArrow(target);
+                        DrawArrow(_target);
                         return;
                     }
                 }
@@ -79,31 +65,35 @@ public class SwipeController : MonoBehaviour
         if (tileController._dto._arrow == null)
         {
             // add arrow to tile
+            Debug.Log("________________");
+            Debug.Log(tileController.tag);
+            Debug.Log(tileController._dto._id);
             var path = "Arrow/" + Entities.Arrow.ToString();
-            _container.Resolve<CreateArrow>().Execute(
-                new CreateArrowCommand(
+            _container.Resolve<AddTileArrow>().Execute(
+                new AddTileArrowCommand(
                     tileController._dto._id,
                     direction,
-                    _arrowPosition,
                     path
                 )
             );
         } else {
-            _container.Resolve<UpdateArrowDirection>().Execute(
-                new UpdateArrowDirectionCommand(
+            ITileEntity tileEntity = _container.Resolve<UpdateTileArrowDirection>().Execute(
+                new UpdateTileArrowDirectionCommand(
                     tileController._dto._id,
                     direction
                 )
             );
-            Transform arrowTransform = tileController.GetArrow();
-            arrowTransform.rotation = Quaternion.Euler(arrowDto._orientation);
+            Debug.Log(tileEntity);
+
+            //Transform arrowTransform = tileController.GetArrow();
+            //arrowTransform.rotation = Quaternion.Euler(arrowDto._orientation);
         }
     }
 
     private void DeleteArrow(Transform target)
     {
-        ArrowController controller = target.GetComponent<ArrowController>();
-        _container.Resolve<DeleteArrow>().Execute(new DeleteArrowCommand(controller._dto._id));
+        TileController controller = target.parent.GetComponent<TileController>();
+        _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._dto._id));
         Destroy(target.gameObject);
     }
 

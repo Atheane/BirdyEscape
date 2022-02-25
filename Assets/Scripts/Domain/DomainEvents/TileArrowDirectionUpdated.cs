@@ -4,19 +4,20 @@ using Domain.Entities;
 
 namespace Domain.DomainEvents
 {
-    public class ArrowAddedToTileDomainEvent : IDomainEvent
+    public class TileArrowDirectionUpdated : IDomainEvent
     {
         public string _label { get; }
         public Guid _id { get; }
         public DateTime _createdAtUtc { get; }
         public ITileEntity _props { get; }
 
-        public ArrowAddedToTileDomainEvent(ITileEntity props)
+        public TileArrowDirectionUpdated(ITileEntity props)
         {
-            _label = "ARROW_ADDED_TO_TILE";
+            _label = "TILE_ARROW_DIRECTION_UPDATED";
             _id = Guid.NewGuid();
             _createdAtUtc = DateTime.UtcNow;
             _props = props;
         }
     }
 }
+
