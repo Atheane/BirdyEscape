@@ -93,8 +93,8 @@ public class SwipeController : MonoBehaviour
     private void DeleteArrow(Transform target)
     {
         TileController controller = target.parent.GetComponent<TileController>();
-        _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._dto._id));
         Destroy(target.gameObject);
+        _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._dto._id));
     }
 
     private bool DetectTouch()

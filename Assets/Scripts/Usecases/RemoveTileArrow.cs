@@ -25,8 +25,7 @@ namespace Usecases
         {
             ITileEntity tile = _tileRepository.Find(command._tileId);
             tile.RemoveArrow();
-            _domainEventDispatcher.Dispatch(tile._arrow);
-
+            _domainEventDispatcher.Dispatch(tile);
             _tileRepository.Update(tile);
             return tile;
         }

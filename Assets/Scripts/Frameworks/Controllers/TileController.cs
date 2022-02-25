@@ -37,9 +37,6 @@ public class TileController : MonoBehaviour
             tileEntity._coordinates,
             tileEntity._path
         );
-        //var tag = tileEntity._id.ToString();
-        //TagHelper.AddTag(tag);
-        //gameObject.tag = tag;
         List<GameObject> children = GetAllChilds(gameObject);
         foreach(GameObject child in children)
         {
