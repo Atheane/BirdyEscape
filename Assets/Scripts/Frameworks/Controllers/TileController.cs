@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using Usecases;
 using Usecases.Commands;
 using Domain.Entities;
 using Frameworks.Dtos;
-using System.Collections.Generic;
 
 
 public class TileController : MonoBehaviour

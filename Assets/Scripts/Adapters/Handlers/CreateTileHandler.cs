@@ -6,11 +6,11 @@ using Domain.Entities;
 using Adapters.Unimediatr;
 using Frameworks.Dtos;
 
-public class CreateTileHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<TileCreatedDomainEvent>>
+public class CreateTileHandler : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<TileCreated>>
 {
     public TileDto _dto;
 
-    public void Handle(DomainEventNotification<TileCreatedDomainEvent> notification)
+    public void Handle(DomainEventNotification<TileCreated> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ITileEntity tileEntity = notification._domainEvent._props;

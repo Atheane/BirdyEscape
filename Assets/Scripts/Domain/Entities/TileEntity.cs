@@ -2,6 +2,7 @@ using System;
 using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.ValueObjects;
+using Domain.Types;
 
 namespace Domain.Entities
 {
@@ -10,6 +11,10 @@ namespace Domain.Entities
         public Guid _id { get; }
         public VOCoordinates _coordinates { get; }
         public VOPath _path { get; }
+        public IArrowEntity _arrow { get; }
+        public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path);
+        public void UpdateArrowDirection(EnumDirection direction);
+        public void RemoveArrow();
     }
 
     public class TileEntity : AggregateRoot, ITileEntity
@@ -17,6 +22,7 @@ namespace Domain.Entities
         public Guid _id { get; private set; }
         public VOCoordinates _coordinates { get; private set; }
         public VOPath _path { get; private set; }
+        public IArrowEntity _arrow { get; private set; }
 
 
         private TileEntity(VOCoordinates coords, VOPath path) : base()
@@ -28,12 +34,35 @@ namespace Domain.Entities
         public static TileEntity Create(VOCoordinates coords, VOPath path)
         {
             var tile = new TileEntity(coords, path);
-            var tileCreated = new TileCreatedDomainEvent(tile);
+            var tileCreated = new TileCreated(tile);
             tile.AddDomainEvent(tileCreated);
             tile._id = tileCreated._id;
             return tile;
         }
 
+        public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path)
+        {
+            var arrowEntity = ArrowEntity.Create(direction, coordinates, path);
+            var arrowCreated = new TileArrowAdded(this);
+            AddDomainEvent(arrowCreated);
+            arrowEntity._id = arrowCreated._id;
+            _arrow = arrowEntity;
+        }
+
+        public void UpdateArrowDirection(EnumDirection direction)
+        {
+            var arrowUpdated = _arrow.UpdateDirection(direction);
+            _arrow = arrowUpdated;
+            var arrowDirectionUpdated = new TileArrowDirectionUpdated(this);
+            AddDomainEvent(arrowDirectionUpdated);
+        }
+
+        public void RemoveArrow()
+        {
+            _arrow = null;
+            var tileArrowRemoved = new TileArrowRemoved(this);
+            AddDomainEvent(tileArrowRemoved);
+        }
     }
 }
 

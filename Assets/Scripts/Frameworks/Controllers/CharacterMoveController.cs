@@ -66,7 +66,7 @@ public class CharacterMoveController : MonoBehaviour
 
         if (CollisionWithArrow())
         {
-            _container.Resolve<UpdateDirection>().Execute(new UpdateDirectionCommand(_dto._id, _direction));
+            _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _direction));
         }
         else if (CollisionWithObstacle())
         {
@@ -103,10 +103,10 @@ public class CharacterMoveController : MonoBehaviour
         //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
         {
-            ArrowController controller = hit.collider.GetComponent<ArrowController>();
-            if (controller._direction != _direction)
+            TileController controller = hit.collider.GetComponentInParent<TileController>();
+            if (controller._dto._arrow._direction != _direction)
             {
-                _direction = controller._direction;
+                _direction = controller._dto._arrow._direction;
                 return true;
             }
         }

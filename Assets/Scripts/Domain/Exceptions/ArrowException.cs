@@ -12,6 +12,10 @@ namespace Domain.Exceptions
         {
             public AlreadyExists(string message = "") : base("Arrow-AlreadyExists" + message) { }
         }
+        public class MissingDirection : Exception
+        {
+            public MissingDirection(string message = "") : base("Arrow-MissingDirection" + message) { }
+        }
     }
 }
 

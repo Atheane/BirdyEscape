@@ -1,6 +1,5 @@
 using System;
 using Libs.Domain.Entities;
-using Domain.DomainEvents;
 using Domain.ValueObjects;
 using Domain.Types;
 
@@ -13,13 +12,13 @@ namespace Domain.Entities
         public EnumDirection _direction { get; }
         public VOCoordinates _coordinates { get; }
         public VOPath _path { get; }
-        public void Delete();
+        public IArrowEntity UpdateDirection(EnumDirection direction);
     }
 
     public class ArrowEntity : AggregateRoot, IArrowEntity
     {
-        public Guid _id { get; private set; }
-        public EnumDirection _direction { get; private set; }
+        public Guid _id { get; set; }
+        public EnumDirection _direction { get; set; }
         public VOCoordinates _coordinates { get; private set; }
         public VOPath _path { get; private set; }
 
@@ -33,16 +32,13 @@ namespace Domain.Entities
         public static ArrowEntity Create(EnumDirection direction, VOCoordinates coords, VOPath path)
         {
             var arrow = new ArrowEntity(direction, coords, path);
-            var arrowCreated = new ArrowCreatedDomainEvent(arrow);
-            arrow.AddDomainEvent(arrowCreated);
-            arrow._id = arrowCreated._id;
             return arrow;
         }
 
-        public void Delete()
+        public IArrowEntity UpdateDirection(EnumDirection direction)
         {
-            var arrowDeleted = new ArrowDeletedDomainEvent(this);
-            this.AddDomainEvent(arrowDeleted);
+            _direction = direction;
+            return this;
         }
 
     }
