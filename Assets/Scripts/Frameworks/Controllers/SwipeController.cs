@@ -5,6 +5,7 @@ using Zenject;
 using Usecases;
 using Usecases.Commands;
 using Domain.Entities;
+using Frameworks.Dtos;
 
 public class SwipeController : MonoBehaviour
 {
@@ -43,14 +44,19 @@ public class SwipeController : MonoBehaviour
                 if (touch.phase == TouchPhase.Ended)
                 {
                     _fingerEndPosition = touch.position;
-                    if (DetectTouch())
+                    if (!DetectTouch() && _target.CompareTag(Entities.Tile.ToString()))
                     {
-                        DeleteArrow(_target);
+                        DrawArrow();
                         return;
                     }
-                    if (!DetectTouch())
+                    if (!DetectTouch() && _target.CompareTag(Entities.Arrow.ToString()))
                     {
-                        DrawArrow(_target);
+                        ChangeArrowDirection();
+                        return;
+                    }
+                    if (DetectTouch() && _target.CompareTag(Entities.Arrow.ToString()))
+                    {
+                        DeleteArrow();
                         return;
                     }
                 }
@@ -58,42 +64,43 @@ public class SwipeController : MonoBehaviour
         }  
     }
 
-    private void DrawArrow(Transform tile)
+    private void DrawArrow()
     {
         EnumDirection direction = GetSwipeDirection();
-        TileController tileController = tile.GetComponent<TileController>();
-        if (tileController._dto._arrow == null)
-        {
-            // add arrow to tile
-            Debug.Log("________________");
-            Debug.Log(tileController.tag);
-            Debug.Log(tileController._dto._id);
-            var path = "Arrow/" + Entities.Arrow.ToString();
-            _container.Resolve<AddTileArrow>().Execute(
-                new AddTileArrowCommand(
-                    tileController._dto._id,
-                    direction,
-                    path
-                )
-            );
-        } else {
-            ITileEntity tileEntity = _container.Resolve<UpdateTileArrowDirection>().Execute(
+        ITileDto tileDto = _target.GetComponent<TileController>()._dto;
+        var path = "Arrow/" + Entities.Arrow.ToString();
+        _container.Resolve<AddTileArrow>().Execute(
+            new AddTileArrowCommand(
+                tileDto._id,
+                direction,
+                path
+            )
+        );
+    }
+
+    private void ChangeArrowDirection()
+    {
+        EnumDirection direction = GetSwipeDirection();
+        ITileDto tileDto = _target.parent.GetComponent<TileController>()._dto;
+        ITileEntity tileEntity = _container.Resolve<UpdateTileArrowDirection>().Execute(
                 new UpdateTileArrowDirectionCommand(
-                    tileController._dto._id,
+                    tileDto._id,
                     direction
                 )
             );
-            Debug.Log(tileEntity);
-
-            //Transform arrowTransform = tileController.GetArrow();
-            //arrowTransform.rotation = Quaternion.Euler(arrowDto._orientation);
-        }
+        IArrowDto arrowDto = ArrowDto.Create(
+            tileEntity._arrow._id,
+            tileEntity._arrow._direction,
+            tileEntity._arrow._coordinates,
+            tileEntity._arrow._path);
+        tileDto.AddArrow(arrowDto);
+        _target.rotation = Quaternion.Euler(arrowDto._orientation);
     }
 
-    private void DeleteArrow(Transform target)
+    private void DeleteArrow()
     {
-        TileController controller = target.parent.GetComponent<TileController>();
-        Destroy(target.gameObject);
+        TileController controller = _target.parent.GetComponent<TileController>();
+        Destroy(_target.gameObject);
         _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._dto._id));
     }
 

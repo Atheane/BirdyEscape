@@ -9,24 +9,24 @@ namespace Usecases
 {
     public class RemoveTileArrow : IUsecase<IRemoveTileArrowCommand, ITileEntity>
     {
-        public IDomainEventDispatcher _domainEventDispatcher;
         public ITilesRepository _tileRepository;
+        public IDomainEventDispatcher _domainEventDispatcher;
 
         public RemoveTileArrow(
-            IDomainEventDispatcher domainEventDispatcher,
-            ITilesRepository tileRepository
+            ITilesRepository tileRepository,
+            IDomainEventDispatcher domainEventDispatcher
         )
         {
-            _domainEventDispatcher = domainEventDispatcher;
             _tileRepository = tileRepository;
-
+            _domainEventDispatcher = domainEventDispatcher;
         }
+
         public ITileEntity Execute(IRemoveTileArrowCommand command)
         {
             ITileEntity tile = _tileRepository.Find(command._tileId);
             tile.RemoveArrow();
-            _domainEventDispatcher.Dispatch(tile);
             _tileRepository.Update(tile);
+            _domainEventDispatcher.Dispatch(tile);
             return tile;
         }
     }

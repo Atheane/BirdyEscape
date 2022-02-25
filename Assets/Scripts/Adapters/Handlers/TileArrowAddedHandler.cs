@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using UniMediator;
@@ -35,6 +34,8 @@ public class TileArrowAddedHandler : MonoBehaviour, IMulticastMessageHandler<Dom
     public void AddArrowToTile(Guid tileId, IArrowDto dto)
     {
         GameObject tile = transform.GetComponent<PuzzleController>().FindTileById(tileId);
+        ITileDto tileDto = tile.GetComponent<TileController>()._dto;
+        tileDto.AddArrow(dto);
         GameObject go = Instantiate(Resources.Load(dto._path), dto._position, Quaternion.Euler(dto._orientation)) as GameObject;
         // instantiate and attach the component in once function
         var controller = _container.InstantiateComponent<ArrowController>(go);
