@@ -38,8 +38,6 @@ public class TileArrowAddedHandler : MonoBehaviour, IMulticastMessageHandler<Dom
         tileDto.AddArrow(dto);
         GameObject go = Instantiate(Resources.Load(dto._path), dto._position, Quaternion.Euler(dto._orientation)) as GameObject;
         // instantiate and attach the component in once function
-        var controller = _container.InstantiateComponent<ArrowController>(go);
-        controller._dto = dto;
         go.tag = Entities.Arrow.ToString();
         go.transform.parent = tile.transform;
     }
