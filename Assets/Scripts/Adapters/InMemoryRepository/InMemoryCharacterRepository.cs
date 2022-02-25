@@ -33,7 +33,7 @@ namespace Adapters.InMemoryRepository
         {
             ICharacterEntity oldCharacter = Find(newCharacter._id);
             //todo: test equality on each prop and return and error if objet is unchanged
-            _store[oldCharacter.Id] = newCharacter;
+            _store[oldCharacter._id] = newCharacter;
         }
 
         public void Remove(ICharacterEntity character)

@@ -4,14 +4,15 @@ using Domain.Types;
 using Zenject;
 using Usecases;
 using Usecases.Commands;
+using Domain.Entities;
+using Frameworks.Dtos;
 
 public class SwipeController : MonoBehaviour
 {
     [SerializeField] private LayerMask _layer;
     private Vector2 _fingerBeginPosition;
     private Vector2 _fingerEndPosition;
-
-    private Vector3 _arrowPosition;
+    private Transform _target;
     private float _minDistanceForSwipe = 40f;
 
     private DiContainer _container;
@@ -32,57 +33,95 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            if (hit.transform.CompareTag(Entities.Tile.ToString()))
+            foreach (Touch touch in Input.touches)
             {
-                foreach (Touch touch in Input.touches)
+                if (touch.phase == TouchPhase.Began)
                 {
-                    if (touch.phase == TouchPhase.Began)
+                    _target = hit.transform;
+                    _fingerBeginPosition = touch.position;
+                    _fingerEndPosition = touch.position;
+                }
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    _fingerEndPosition = touch.position;
+                    if (!DetectTouch() && _target.CompareTag(Entities.Tile.ToString()))
                     {
-                        try
-                        {
-                            _arrowPosition = hit.transform.parent.GetComponent<TileController>()._dto._position;
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.Log(e);
-                            _arrowPosition = hit.transform.GetComponent<TileController>()._dto._position;
-                        }
-                        _fingerBeginPosition = touch.position;
-                        _fingerEndPosition = touch.position;
+                        DrawArrow();
+                        return;
                     }
-                    if (touch.phase == TouchPhase.Ended)
+                    if (!DetectTouch() && _target.CompareTag(Entities.Arrow.ToString()))
                     {
-                        _fingerEndPosition = touch.position;
-                        DetectSwipe();
+                        ChangeArrowDirection();
+                        return;
+                    }
+                    if (DetectTouch() && _target.CompareTag(Entities.Arrow.ToString()))
+                    {
+                        DeleteArrow();
+                        return;
                     }
                 }
             }
         }  
     }
 
-    public void DetectSwipe()
+    private void DrawArrow()
     {
-        if (SwipeDistanceCheckMet())
-        {
-            EnumDirection direction;
-            if (IsVerticalSwipe())
-            {
-                direction = _fingerEndPosition.y > _fingerBeginPosition.y ? EnumDirection.UP: EnumDirection.DOWN;
-            }
-            else
-            {
-                direction = _fingerEndPosition.x > _fingerBeginPosition.x ? EnumDirection.RIGHT : EnumDirection.LEFT;
-                
-            }
-            var path = "Arrow/" + Entities.Arrow.ToString();
+        EnumDirection direction = GetSwipeDirection();
+        ITileDto tileDto = _target.GetComponent<TileController>()._dto;
+        var path = "Arrow/" + Entities.Arrow.ToString();
+        _container.Resolve<AddTileArrow>().Execute(
+            new AddTileArrowCommand(
+                tileDto._id,
+                direction,
+                path
+            )
+        );
+    }
 
-            _container.Resolve<CreateArrow>().Execute(
-                new CreateArrowCommand(
-                    direction,
-                    _arrowPosition,
-                    path
+    private void ChangeArrowDirection()
+    {
+        EnumDirection direction = GetSwipeDirection();
+        ITileDto tileDto = _target.parent.GetComponent<TileController>()._dto;
+        ITileEntity tileEntity = _container.Resolve<UpdateTileArrowDirection>().Execute(
+                new UpdateTileArrowDirectionCommand(
+                    tileDto._id,
+                    direction
                 )
             );
+        IArrowDto arrowDto = ArrowDto.Create(
+            tileEntity._arrow._id,
+            tileEntity._arrow._direction,
+            tileEntity._arrow._coordinates,
+            tileEntity._arrow._path);
+        tileDto.AddArrow(arrowDto);
+        _target.rotation = Quaternion.Euler(arrowDto._orientation);
+    }
+
+    private void DeleteArrow()
+    {
+        TileController controller = _target.parent.GetComponent<TileController>();
+        Destroy(_target.gameObject);
+        _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._dto._id));
+    }
+
+    private bool DetectTouch()
+    {
+        if (!SwipeDistanceCheckMet())
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private EnumDirection GetSwipeDirection()
+    {
+        if (IsVerticalSwipe())
+        {
+            return _fingerEndPosition.y > _fingerBeginPosition.y ? EnumDirection.UP: EnumDirection.DOWN;
+        }
+        else
+        {
+            return _fingerEndPosition.x > _fingerBeginPosition.x ? EnumDirection.RIGHT : EnumDirection.LEFT;
         }
     }
 

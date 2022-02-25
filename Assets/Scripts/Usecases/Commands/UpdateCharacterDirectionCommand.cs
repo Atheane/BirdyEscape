@@ -4,18 +4,18 @@ using Domain.Types;
 
 namespace Usecases.Commands
 {
-    public interface IUpdateDirectionCommand
+    public interface IUpdateCharacterDirectionCommand
     {
         Guid _characterId { get; }
         EnumDirection _direction { get; }
     }
-    public class UpdateDirectionCommand : IMulticastMessage, IUpdateDirectionCommand
+    public class UpdateCharacterDirectionCommand : IMulticastMessage, IUpdateCharacterDirectionCommand
     {
         public Guid _characterId { get; }
         public EnumDirection _direction { get; }
 
 
-        public UpdateDirectionCommand(Guid characterId, EnumDirection direction)
+        public UpdateCharacterDirectionCommand(Guid characterId, EnumDirection direction)
         {
             _characterId = characterId;
             _direction = direction;
