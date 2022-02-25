@@ -103,10 +103,10 @@ public class CharacterMoveController : MonoBehaviour
         //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
         {
-            ArrowController controller = hit.collider.GetComponent<ArrowController>();
-            if (controller._dto._direction != _direction)
+            TileController controller = hit.collider.GetComponentInParent<TileController>();
+            if (controller._dto._arrow._direction != _direction)
             {
-                _direction = controller._dto._direction;
+                _direction = controller._dto._arrow._direction;
                 return true;
             }
         }

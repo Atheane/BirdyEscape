@@ -44,9 +44,4 @@ public class TileController : MonoBehaviour
         }
     }
 
-    public Transform GetArrow()
-    {
-        return transform.Find(Entities.Arrow.ToString());
-    }
-
 }
