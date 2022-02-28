@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PuzzleController : MonoBehaviour
 {
+    public static Vector3 MIN = new Vector3(-12.5f, -9.5f, -7f);
+    public static Vector3 MAX = new Vector3(-5.5f, 0f, 6f);
+
     public List<GameObject> GetAllChilds()
     {
         List<GameObject> list = new List<GameObject>();

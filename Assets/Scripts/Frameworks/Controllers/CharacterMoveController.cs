@@ -5,7 +5,6 @@ using Usecases;
 using Usecases.Queries;
 using Usecases.Commands;
 using Domain.ValueObjects;
-using Domain.Constants;
 using Domain.Types;
 using Domain.Entities;
 using Frameworks.Dtos;
@@ -78,7 +77,7 @@ public class CharacterMoveController : MonoBehaviour
             if (state == EnumCharacterState.MOVING)
             {
                 VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
-                Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
+                Vector3 newPosition = new Vector3(newPositionVO.Value.X, PuzzleController.MIN.y, newPositionVO.Value.Z);
                 transform.position = newPosition;
             }
         }

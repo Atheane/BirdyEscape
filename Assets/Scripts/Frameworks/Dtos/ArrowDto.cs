@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using Domain.Types;
 using Domain.ValueObjects;
-using Domain.Constants;
 
 namespace Frameworks.Dtos
 {
@@ -48,7 +47,7 @@ namespace Frameworks.Dtos
                     break;
             }
             var posX = coordinates.Value.X + 0.5f;
-            var posY = Position.INIT_Y + 0.5f;
+            var posY = PuzzleController.MIN.y + 0.5f;
             var posZ = coordinates.Value.Y;
             Vector3 position = new Vector3(posX, posY, posZ);
 
