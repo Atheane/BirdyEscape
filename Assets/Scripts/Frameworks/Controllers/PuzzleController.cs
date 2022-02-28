@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class PuzzleController : MonoBehaviour
 {
-    public static Vector3 MIN = new Vector3(-12.5f, -9.5f, -7f);
-    public static Vector3 MAX = new Vector3(-5.5f, 0f, 6f);
+    [SerializeField] Vector3 min;
+    [SerializeField] Vector3 max;
+
+    public static Vector3 MIN;
+    public static Vector3 MAX;
+
+    private void Awake()
+    {
+        MIN = min;
+        MAX = max;
+    }
 
     public List<GameObject> GetAllChilds()
     {

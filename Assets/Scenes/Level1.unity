@@ -2220,6 +2220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48970f241c89a489296ea8154583595f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  min: {x: -12.5, y: -9.5, z: -7}
+  max: {x: -5.5, y: 0, z: 6}
 --- !u!1001 &103455177
 PrefabInstance:
   m_ObjectHideFlags: 0
