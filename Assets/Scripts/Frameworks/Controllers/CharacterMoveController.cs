@@ -65,11 +65,25 @@ public class CharacterMoveController : MonoBehaviour
 
         if (CollisionWithArrow())
         {
-            _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _direction));
+            ICharacterEntity characterEntity = _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _direction));
+            var characterDto = CharacterDto.Create(
+                characterEntity._id,
+                characterEntity._type,
+                characterEntity._direction,
+                characterEntity._position,
+                characterEntity._speed);
+            transform.rotation = Quaternion.Euler(characterDto._orientation);
         }
         else if (CollisionWithObstacle())
         {
-            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
+            ICharacterEntity characterEntity = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
+            var characterDto = CharacterDto.Create(
+               characterEntity._id,
+               characterEntity._type,
+               characterEntity._direction,
+               characterEntity._position,
+               characterEntity._speed);
+            transform.rotation = Quaternion.Euler(characterDto._orientation);
         }
         else
         {

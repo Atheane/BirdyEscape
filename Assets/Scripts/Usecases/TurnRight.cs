@@ -8,7 +8,7 @@ using Domain.Entities;
 
 namespace Usecases
 {
-    public class TurnRight : IUsecase<ITurnRightCommand, EnumDirection>
+    public class TurnRight : IUsecase<ITurnRightCommand, ICharacterEntity>
     {
         public ICharactersRepository _charactersRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
@@ -22,7 +22,7 @@ namespace Usecases
             _domainEventDispatcher = domainEventDispatcher;
         }
 
-        public EnumDirection Execute(ITurnRightCommand command)
+        public ICharacterEntity Execute(ITurnRightCommand command)
         {
             ICharacterEntity characterEntity = _charactersRepository.Find(command._characterId);
             EnumDirection newDirection = EnumDirection.LEFT;
@@ -44,7 +44,7 @@ namespace Usecases
             _charactersRepository.Update(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);
 
-            return characterEntity._direction;
+            return characterEntity;
         }
     }
 }
