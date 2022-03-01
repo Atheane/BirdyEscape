@@ -18,7 +18,7 @@ public class TileController : MonoBehaviour
         _container = container;
     }
 
-    public static List<GameObject> GetAllChilds(GameObject Go)
+    public static List<GameObject> GetAllChildren(GameObject Go)
     {
         List<GameObject> list = new List<GameObject>();
         for (int i = 0; i < Go.transform.childCount; i++)
@@ -37,7 +37,7 @@ public class TileController : MonoBehaviour
             tileEntity._coordinates,
             tileEntity._path
         );
-        List<GameObject> children = GetAllChilds(gameObject);
+        List<GameObject> children = GetAllChildren(gameObject);
         foreach(GameObject child in children)
         {
             child.tag = gameObject.tag;

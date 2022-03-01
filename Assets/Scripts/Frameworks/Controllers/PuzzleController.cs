@@ -10,6 +10,8 @@ public class PuzzleController : MonoBehaviour
     public static Vector3 MIN;
     public static Vector3 MAX;
 
+    public List<GameObject> tiles;
+
     private void Awake()
     {
         // must be loaded before TileController Start()
@@ -17,19 +19,31 @@ public class PuzzleController : MonoBehaviour
         MAX = max;
     }
 
-    public List<GameObject> GetAllChilds()
+    private void Start()
     {
-        List<GameObject> list = new List<GameObject>();
-        for (int i = 0; i < transform.childCount; i++)
+        SetTiles(gameObject);
+    }
+
+    private void SetTiles(GameObject obj)
+    {
+        if (null == obj)
+            return;
+
+        foreach (Transform child in obj.transform)
         {
-            list.Add(transform.GetChild(i).gameObject);
+            if (null == child)
+                continue;
+            //child.gameobject contains the current child you can do whatever you want like add it to an array
+            if (child.TryGetComponent(out TileController tileController))
+            {
+                tiles.Add(child.gameObject);
+            }
+            SetTiles(child.gameObject);
         }
-        return list;
     }
 
     public GameObject FindTileById(Guid tileId)
     {
-        List<GameObject> tiles = GetAllChilds();
         GameObject result = tiles[0];
         foreach (GameObject tile in tiles)
         {
