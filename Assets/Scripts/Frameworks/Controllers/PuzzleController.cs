@@ -33,11 +33,12 @@ public class PuzzleController : MonoBehaviour
         {
             if (null == child)
                 continue;
-            //child.gameobject contains the current child you can do whatever you want like add it to an array
+
             if (child.TryGetComponent(out TileController tileController))
             {
                 tiles.Add(child.gameObject);
             }
+            // reccursive search for child
             SetTiles(child.gameObject);
         }
     }
