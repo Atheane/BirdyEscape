@@ -12,6 +12,7 @@ public class PuzzleController : MonoBehaviour
 
     private void Awake()
     {
+        // must be loaded before TileController Start()
         MIN = min;
         MAX = max;
     }

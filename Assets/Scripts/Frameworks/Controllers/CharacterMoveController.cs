@@ -29,8 +29,9 @@ public class CharacterMoveController : MonoBehaviour
         _container = container;
     }
 
-    private void Awake()
+    private void Start()
     {
+        // must be loaded AFTER PuzzleController Awake()
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
         ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(
