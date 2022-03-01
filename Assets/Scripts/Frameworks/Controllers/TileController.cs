@@ -28,7 +28,7 @@ public class TileController : MonoBehaviour
         return list;
     }
 
-    void Awake()
+    void Start()
     {
         string path = gameObject.name;
         ITileEntity tileEntity = _container.Resolve<CreateTile>().Execute(new CreateTileCommand(transform.position, path));

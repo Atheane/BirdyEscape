@@ -5,7 +5,6 @@ using Usecases;
 using Usecases.Queries;
 using Usecases.Commands;
 using Domain.ValueObjects;
-using Domain.Constants;
 using Domain.Types;
 using Domain.Entities;
 using Frameworks.Dtos;
@@ -30,8 +29,9 @@ public class CharacterMoveController : MonoBehaviour
         _container = container;
     }
 
-    private void Awake()
+    private void Start()
     {
+        // must be loaded AFTER PuzzleController Awake()
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
         ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(
@@ -66,11 +66,25 @@ public class CharacterMoveController : MonoBehaviour
 
         if (CollisionWithArrow())
         {
-            _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _direction));
+            ICharacterEntity characterEntity = _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _direction));
+            var characterDto = CharacterDto.Create(
+                characterEntity._id,
+                characterEntity._type,
+                characterEntity._direction,
+                characterEntity._position,
+                characterEntity._speed);
+            transform.rotation = Quaternion.Euler(characterDto._orientation);
         }
         else if (CollisionWithObstacle())
         {
-            _direction = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
+            ICharacterEntity characterEntity = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
+            var characterDto = CharacterDto.Create(
+               characterEntity._id,
+               characterEntity._type,
+               characterEntity._direction,
+               characterEntity._position,
+               characterEntity._speed);
+            transform.rotation = Quaternion.Euler(characterDto._orientation);
         }
         else
         {
@@ -78,7 +92,7 @@ public class CharacterMoveController : MonoBehaviour
             if (state == EnumCharacterState.MOVING)
             {
                 VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
-                Vector3 newPosition = new Vector3(newPositionVO.Value.X, Position.INIT_Y, newPositionVO.Value.Z);
+                Vector3 newPosition = new Vector3(newPositionVO.Value.X, PuzzleController.MIN.y, newPositionVO.Value.Z);
                 transform.position = newPosition;
             }
         }

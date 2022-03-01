@@ -8,7 +8,7 @@ using Domain.Entities;
 
 namespace Usecases
 {
-    public class UpdateCharacterDirection : IUsecase<IUpdateCharacterDirectionCommand, EnumDirection>
+    public class UpdateCharacterDirection : IUsecase<IUpdateCharacterDirectionCommand, ICharacterEntity>
     {
         public ICharactersRepository _charactersRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
@@ -22,7 +22,7 @@ namespace Usecases
             _domainEventDispatcher = domainEventDispatcher;
         }
 
-        public EnumDirection Execute(IUpdateCharacterDirectionCommand command)
+        public ICharacterEntity Execute(IUpdateCharacterDirectionCommand command)
         {
             ICharacterEntity characterEntity = _charactersRepository.Find(command._characterId);
 
@@ -31,7 +31,7 @@ namespace Usecases
             _charactersRepository.Update(characterEntity);
             _domainEventDispatcher.Dispatch(characterEntity);
 
-            return characterEntity._direction;
+            return characterEntity;
         }
     }
 }

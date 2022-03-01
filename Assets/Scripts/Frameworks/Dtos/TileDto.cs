@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Domain.ValueObjects;
-using Domain.Constants;
 
 namespace Frameworks.Dtos
 {
@@ -33,7 +32,7 @@ namespace Frameworks.Dtos
         {
             var position = new Vector3(
                 coordinates.Value.X,
-                Position.INIT_Y,
+                PuzzleController.MIN.y,
                 coordinates.Value.Y
             );
             return new TileDto(id, position, path.Value);

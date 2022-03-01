@@ -2,7 +2,7 @@
 using Domain.Types;
 using UnityEngine;
 using Domain.ValueObjects;
-using Domain.Constants;
+
 
 namespace Frameworks.Dtos
 {
@@ -49,7 +49,7 @@ namespace Frameworks.Dtos
                     image = "";
                     break;
             }
-            var pos = new Vector3(position.Value.X, Position.INIT_Y, position.Value.Z);
+            var pos = new Vector3(position.Value.X, PuzzleController.MIN.y, position.Value.Z);
             var characterDto = new CharacterDto(id, type, direction, pos, speed, image);
             characterDto.Orientate();
             return characterDto;

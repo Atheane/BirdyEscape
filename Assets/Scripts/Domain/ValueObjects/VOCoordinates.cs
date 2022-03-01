@@ -1,6 +1,5 @@
 using System;
 using Libs.Domain.ValueObjects;
-using Domain.Constants;
 using Domain.Exceptions;
 
 
@@ -17,14 +16,17 @@ namespace Domain.ValueObjects
 
         protected override void Validate((int X, int Y) value)
         {
-            if (value.X > Coordinates.X_MAX)
-                throw new CoordinatesException.TooLarge("X should be smaller than " + Coordinates.X_MAX.ToString());
-            if (value.X < Coordinates.X_MIN)
-                throw new CoordinatesException.TooSmall("X should be higher than " + Coordinates.X_MIN.ToString());
-            if (value.Y > Coordinates.Y_MAX)
-                throw new CoordinatesException.TooLarge("Y should be smaller than " + Coordinates.Y_MAX.ToString());
-            if (value.Y < Coordinates.Y_MIN)
-                throw new CoordinatesException.TooSmall("Y should be higher than " + Coordinates.Y_MIN.ToString());
+            var xMAX = PuzzleController.MAX.x - PuzzleController.MIN.x;
+            var yMAX = PuzzleController.MAX.z - PuzzleController.MIN.z;
+
+            if (value.X > xMAX)
+                throw new CoordinatesException.TooLarge("X should be smaller than " + xMAX);
+            if (value.X < 0)
+                throw new CoordinatesException.TooSmall("X should be higher than " + 0);
+            if (value.Y > yMAX)
+                throw new CoordinatesException.TooLarge("Y should be smaller than " + yMAX);
+            if (value.Y < 0)
+                throw new CoordinatesException.TooSmall("Y should be higher than " + 0);
         }
     }
 }

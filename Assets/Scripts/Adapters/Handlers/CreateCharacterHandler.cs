@@ -1,6 +1,5 @@
 using UnityEngine;
 using UniMediator;
-using Domain.Constants;
 using Domain.DomainEvents;
 using Domain.Entities;
 using Adapters.Unimediatr;
