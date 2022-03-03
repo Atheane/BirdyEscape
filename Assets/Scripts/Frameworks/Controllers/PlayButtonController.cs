@@ -46,11 +46,13 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
                 {
                     _container.Resolve<UpdateCharacterState>().Execute(new UpdateCharacterStateCommand(character._id, EnumCharacterState.MOVING));
                     _state = EnumButtonState.ON;
+                    //todo should be saved in Level Aggregate root
                 }
             }
         } else
         {
             Debug.Log("SHOULD RESTART");
+            // Level.Restart() => publish LEVEL_RESTARTED
             _state = EnumButtonState.OFF;
             _icon.sprite = _spriteButtonOn;
         }

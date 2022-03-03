@@ -22,8 +22,12 @@ public class GameInstaller : MonoInstaller
         Container.Bind<IDomainEventDispatcher>().To<UnimediatorDomainEventDispatcher>().AsSingle();
         Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>())).AsSingle();
         Container.Bind<ITilesRepository>().FromInstance(new InMemoryTileRepository(new Dictionary<Guid, ITileEntity>())).AsSingle();
+        Container.Bind<ILevelsRepository>().FromInstance(new InMemoryLevelRepository(new Dictionary<Guid, ILevelEntity>())).AsSingle();
+
         Container.Bind<IMapper<VOCoordinates, Vector3>>().To<Vector3ToVOCoordinatesMapper>().AsSingle();
         Container.Bind<IMapper<VOPosition, Vector3>>().To<Vector3ToVOPositionMapper>().AsSingle();
+        // level commands
+        Container.Bind<CreateLevel>().AsSingle();
         // character commands
         Container.Bind<CreateCharacter>().AsSingle();
         Container.Bind<MoveOnceCharacter>().AsSingle();

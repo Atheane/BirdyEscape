@@ -36,18 +36,6 @@ namespace Adapters.InMemoryRepository
             _store[oldTile._id] = newTile;
         }
 
-        public void Remove(ITileEntity tile)
-        {
-            if (_store.ContainsKey(tile._id))
-            {
-                _store.Remove(tile._id);
-            }
-            else
-            {
-                throw new TileException.NotFound(tile._id.ToString());
-            }
-        }
-
         public ITileEntity Find(Guid tileId)
         {
             ITileEntity tile;

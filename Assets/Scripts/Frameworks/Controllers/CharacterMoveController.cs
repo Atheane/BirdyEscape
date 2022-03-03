@@ -11,15 +11,16 @@ using Frameworks.Dtos;
 
 public class CharacterMoveController : MonoBehaviour
 {
-    public CharacterDto _dto;
-
-    [SerializeField] private EnumDirection _direction;
-    [SerializeField] private int _speed;
+    public EnumCharacterType _type;
+    public EnumDirection _direction;
+    public Vector3 _init_position;
+    public int _speed;
 
     private LayerMask _layerObstacle;
     private LayerMask _layerArrow;
 
     private DiContainer _container;
+    private CharacterDto _dto;
 
     float timer = 0;
 
@@ -34,20 +35,8 @@ public class CharacterMoveController : MonoBehaviour
         // must be loaded AFTER PuzzleController Awake()
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
-        ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(
-            new CreateCharacterCommand(
-                EnumCharacterType.BLACK_BIRD,
-                _direction,
-                transform.position,
-                _speed)
-            );
-        _dto = CharacterDto.Create(
-            characterEntity._id,
-            characterEntity._type,
-            characterEntity._direction,
-            characterEntity._position,
-            characterEntity._speed
-        );
+        _init_position = transform.position;
+        _dto = gameObject.GetComponent<CreateCharacterHandler>()._dto;
     }
 
     private void Update()
