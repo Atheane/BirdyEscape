@@ -36,19 +36,23 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        foreach (ICharacterEntity character in _characters)
+        if (_state == EnumButtonState.OFF)
         {
-            if (character._state == EnumCharacterState.IDLE)
+            _icon.sprite = _spriteButtonOff;
+            _state = EnumButtonState.ON;
+            foreach (ICharacterEntity character in _characters)
             {
-                _container.Resolve<UpdateCharacterState>().Execute(new UpdateCharacterStateCommand(character._id, EnumCharacterState.MOVING));
-                _icon.sprite = _spriteButtonOff;
-                _state = EnumButtonState.ON;
+                if (character._state == EnumCharacterState.IDLE)
+                {
+                    _container.Resolve<UpdateCharacterState>().Execute(new UpdateCharacterStateCommand(character._id, EnumCharacterState.MOVING));
+                    _state = EnumButtonState.ON;
+                }
             }
-        }
-        if (_state == EnumButtonState.ON)
+        } else
         {
-            SceneManager.LoadScene("Level1");
+            Debug.Log("SHOULD RESTART");
             _state = EnumButtonState.OFF;
+            _icon.sprite = _spriteButtonOn;
         }
     }
 

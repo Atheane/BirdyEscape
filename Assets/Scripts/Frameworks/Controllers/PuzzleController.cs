@@ -36,6 +36,7 @@ public class PuzzleController : MonoBehaviour
 
             if (child.TryGetComponent(out TileController tileController))
             {
+
                 tiles.Add(child.gameObject);
             }
             // reccursive search for child
