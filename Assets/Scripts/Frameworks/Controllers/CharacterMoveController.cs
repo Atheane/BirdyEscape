@@ -36,19 +36,22 @@ public class CharacterMoveController : MonoBehaviour
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
         _init_position = transform.position;
-        _dto = gameObject.GetComponent<CreateCharacterHandler>()._dto;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime * 1000;
-
-        if (timer > _dto._speed)
+        if (_dto == null)
+            _dto = gameObject.GetComponent<CreateCharacterHandler>()._dto;
+        else
         {
-            Moveloop();
-            timer = 0;
-        }
+            timer += Time.deltaTime * 1000;
 
+            if (timer > _dto._speed)
+            {
+                Moveloop();
+                timer = 0;
+            }
+        }
     }
 
     private void Moveloop() {

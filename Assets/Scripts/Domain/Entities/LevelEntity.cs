@@ -11,7 +11,7 @@ namespace Domain.Entities
         public int _number { get;  }
         public ICharacterEntity[] _characters { get; }
         public EnumLevelState _state { get; }
-        public void UpdateState();
+        public void UpdateState(EnumLevelState state);
     }
 
     public class LevelEntity : AggregateRoot, ILevelEntity
@@ -38,9 +38,11 @@ namespace Domain.Entities
             return level;
         }
 
-        public void UpdateState()
+        public void UpdateState(EnumLevelState state)
         {
-            //todo
+            _state = state;
+            var levelStateUpdated = new LevelStateUpdatedDomainEvent(this);
+            AddDomainEvent(levelStateUpdated);
         }
 
         public void Restart()

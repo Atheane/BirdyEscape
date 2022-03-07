@@ -6,11 +6,12 @@ using Domain.Entities;
 using Usecases;
 using Usecases.Commands;
 using Domain.Types;
+using Frameworks.Dtos;
 
 public class LevelController : MonoBehaviour
 {
 
-    //public LevelDto _dto;
+    public ILevelDto _dto;
     private DiContainer _container;
     public List<CharacterMoveController> _charactersController;
 
@@ -23,8 +24,8 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         SetCharactersController(gameObject);
-        List<ICharacterEntity> characters = new List<ICharacterEntity>();
 
+        List<ICharacterEntity> characters = new List<ICharacterEntity>();
         foreach (CharacterMoveController controller in _charactersController)
         {
             ICharacterEntity characterEntity = _container.Resolve<CreateCharacter>().Execute(
@@ -43,7 +44,7 @@ public class LevelController : MonoBehaviour
                 characters,
                 EnumLevelState.OFF
             ));
-        // to-do DTO
+        _dto = LevelDto.Create(levelEntity._id, levelEntity._number, levelEntity._characters, levelEntity._state);
     }
 
     private void SetCharactersController(GameObject obj)
