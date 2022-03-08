@@ -12,15 +12,16 @@ using Frameworks.Dtos;
 public class CharacterMoveController : MonoBehaviour
 {
     public EnumCharacterType _type;
-    public EnumDirection _direction;
+    private EnumDirection _direction;
     public Vector3 _init_position;
+    public EnumDirection _init_direction;
     public int _speed;
 
     private LayerMask _layerObstacle;
     private LayerMask _layerArrow;
 
     private DiContainer _container;
-    private CharacterDto _dto;
+    public CharacterDto _dto;
 
     float timer = 0;
 
@@ -36,6 +37,7 @@ public class CharacterMoveController : MonoBehaviour
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
         _init_position = transform.position;
+        _direction = _init_direction;
     }
 
     private void Update()

@@ -9,7 +9,7 @@ using Usecases.Commands;
 using Domain.Entities;
 using Domain.Types;
 
-public enum EnumButtonState { ON, OFF };
+public enum EnumButtonState { ON, OFF, HIDDEN };
 
 public class PlayButtonController : MonoBehaviour, IPointerDownHandler
 {
@@ -35,12 +35,13 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        var levelController = transform.GetComponentInParent<LevelController>();
+
         if (_state == EnumButtonState.OFF)
         {
             _icon.sprite = _spriteButtonOff;
             _state = EnumButtonState.ON;
 
-            var levelController = transform.GetComponentInParent<LevelController>();
             _container.Resolve<UpdateLevelState>().Execute(new UpdateLevelStateCommand(levelController._dto._id, EnumLevelState.ON));
 
             foreach (ICharacterEntity character in _characters)
@@ -52,10 +53,11 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
             }
         } else
         {
-            Debug.Log("SHOULD RESTART");
-            // Level.Restart() => publish LEVEL_RESTARTED
+            (Guid id, Vector3 position, EnumDirection direction)[] charactersRestartProps = levelController.GetCharactersInit();
+            _container.Resolve<RestartLevel>().Execute(new RestartLevelCommand(levelController._dto._id, charactersRestartProps));
             _state = EnumButtonState.OFF;
             _icon.sprite = _spriteButtonOn;
+            //to-do HIDE BUTTON
         }
     }
 

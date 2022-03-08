@@ -29,6 +29,7 @@ public class GameInstaller : MonoInstaller
         // level commands
         Container.Bind<CreateLevel>().AsSingle();
         Container.Bind<UpdateLevelState>().AsSingle();
+        Container.Bind<RestartLevel>().AsSingle();
         // character commands
         Container.Bind<CreateCharacter>().AsSingle();
         Container.Bind<MoveOnceCharacter>().AsSingle();

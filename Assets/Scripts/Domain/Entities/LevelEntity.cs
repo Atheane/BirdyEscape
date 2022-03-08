@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.Types;
+using Domain.ValueObjects;
 
 namespace Domain.Entities
 {
@@ -12,6 +14,7 @@ namespace Domain.Entities
         public ICharacterEntity[] _characters { get; }
         public EnumLevelState _state { get; }
         public void UpdateState(EnumLevelState state);
+        public void Restart((ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps);
     }
 
     public class LevelEntity : AggregateRoot, ILevelEntity
@@ -45,9 +48,19 @@ namespace Domain.Entities
             AddDomainEvent(levelStateUpdated);
         }
 
-        public void Restart()
+        public void Restart((ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps)
         {
-            //todo
+            _state = EnumLevelState.OFF;
+            List<ICharacterEntity> charactersEntity = new List<ICharacterEntity>();
+
+            foreach ((ICharacterEntity character, VOPosition position, EnumDirection direction) in arrayProps)
+            {
+                character.Restart(position, direction);
+                charactersEntity.Add(character);
+            }
+            var levelRestarted = new LevelRestartedDomainEvent(this);
+            AddDomainEvent(levelRestarted);
+            _characters = charactersEntity.ToArray();
         }
 
         public void Over()

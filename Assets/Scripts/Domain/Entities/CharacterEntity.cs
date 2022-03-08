@@ -18,6 +18,7 @@ namespace Domain.Entities
         public void MoveOnce();
         public void UpdateState(EnumCharacterState state);
         public void UpdateDirection(EnumDirection direction);
+        public void Restart(VOPosition position, EnumDirection direction);
     }
 
     public class CharacterEntity : AggregateRoot, ICharacterEntity
@@ -110,6 +111,15 @@ namespace Domain.Entities
             _state = state;
             var characterStateUpdated = new CharacterStateUpdatedDomainEvent(this);
             AddDomainEvent(characterStateUpdated);
+        }
+
+        public void Restart(VOPosition position, EnumDirection direction)
+        {
+            _state = EnumCharacterState.IDLE;
+            _direction = direction;
+            _position = position;
+            var characterRestarted = new CharacterRestartedDomainEvent(this);
+            AddDomainEvent(characterRestarted);
         }
     }
 }
