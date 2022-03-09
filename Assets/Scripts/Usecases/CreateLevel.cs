@@ -22,7 +22,11 @@ namespace Usecases
         }
         public ILevelEntity Execute(ICreateLevelCommand command)
         {
-            var levelEntity = LevelEntity.Create(command._number, command._characters.ToArray(), command._state);
+            var levelEntity = LevelEntity.Create(
+                command._number,
+                command._characters.ToArray(),
+                command._tiles.ToArray(),
+                command._state);
             _levelsRepository.Add(levelEntity);
             _domainEventDispatcher.Dispatch(levelEntity);
             return levelEntity;

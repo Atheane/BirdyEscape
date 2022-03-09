@@ -1,24 +1,36 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
-using Usecases;
-using Usecases.Commands;
+using UniMediator;
+using Domain.DomainEvents;
 using Domain.Entities;
+using Domain.Types;
+using Adapters.Unimediatr;
 using Frameworks.Dtos;
 
 
-public class TileController : MonoBehaviour
+public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<TileArrowRemoved>>
 {
-    private DiContainer _container;
     public TileDto _dto;
 
-    [Inject]
-    public void Construct(DiContainer container)
+    public void Handle(DomainEventNotification<TileArrowRemoved> notification)
     {
-        _container = container;
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        ITileEntity tileEntity = notification._domainEvent._props;
+        _dto = TileDto.Create(
+            tileEntity._id,
+            tileEntity._coordinates,
+            tileEntity._path);
+        List<GameObject> children = GetAllChildren(gameObject);
+        foreach (GameObject child in children)
+        {
+            if (child.CompareTag(Entities.Arrow.ToString()))
+            {
+                Destroy(child);
+            }
+        }
     }
 
-    public static List<GameObject> GetAllChildren(GameObject Go)
+    private static List<GameObject> GetAllChildren(GameObject Go)
     {
         List<GameObject> list = new List<GameObject>();
         for (int i = 0; i < Go.transform.childCount; i++)
@@ -28,15 +40,8 @@ public class TileController : MonoBehaviour
         return list;
     }
 
-    void Start()
+    private void Start()
     {
-        string path = gameObject.name;
-        ITileEntity tileEntity = _container.Resolve<CreateTile>().Execute(new CreateTileCommand(transform.position, path));
-        _dto = TileDto.Create(
-            tileEntity._id,
-            tileEntity._coordinates,
-            tileEntity._path
-        );
         List<GameObject> children = GetAllChildren(gameObject);
         foreach(GameObject child in children)
         {

@@ -12,9 +12,13 @@ namespace Domain.Entities
         public Guid _id { get; }
         public int _number { get;  }
         public ICharacterEntity[] _characters { get; }
+        public ITileEntity[] _tiles { get; }
         public EnumLevelState _state { get; }
         public void UpdateState(EnumLevelState state);
-        public void Restart((ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps);
+        public void Restart(
+            (ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps,
+            ITileEntity[] tiles
+        );
     }
 
     public class LevelEntity : AggregateRoot, ILevelEntity
@@ -22,19 +26,21 @@ namespace Domain.Entities
         public Guid _id { get; private set; }
         public int _number { get; private set; }
         public ICharacterEntity[] _characters { get; private set; }
+        public ITileEntity[] _tiles { get; private set; }
         public EnumLevelState _state { get; private set; }
 
 
-        private LevelEntity(int number, ICharacterEntity[] characters, EnumLevelState state) : base()
+        private LevelEntity(int number, ICharacterEntity[] characters, ITileEntity[] tiles, EnumLevelState state) : base()
         {
             _number = number;
             _characters = characters;
+            _tiles = tiles;
             _state = state;
         }
 
-        public static LevelEntity Create(int number, ICharacterEntity[] characters, EnumLevelState state)
+        public static LevelEntity Create(int number, ICharacterEntity[] characters, ITileEntity[] tiles, EnumLevelState state)
         {
-            var level = new LevelEntity(number, characters, state);
+            var level = new LevelEntity(number, characters, tiles, state);
             var levelCreated = new LevelCreated(level);
             level.AddDomainEvent(levelCreated);
             level._id = levelCreated._id;
@@ -48,19 +54,30 @@ namespace Domain.Entities
             AddDomainEvent(levelStateUpdated);
         }
 
-        public void Restart((ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps)
+        public void Restart(
+            (ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps,
+            ITileEntity[] tiles
+        )
         {
             _state = EnumLevelState.OFF;
-            List<ICharacterEntity> charactersEntity = new List<ICharacterEntity>();
 
+            List<ICharacterEntity> charactersEntities = new List<ICharacterEntity>();
             foreach ((ICharacterEntity character, VOPosition position, EnumDirection direction) in arrayProps)
             {
                 character.Restart(position, direction);
-                charactersEntity.Add(character);
+                charactersEntities.Add(character);
+            }
+
+            List<ITileEntity> tilesEntities = new List<ITileEntity>();
+            foreach (ITileEntity tile in tiles)
+            {
+                tile.RemoveArrow();
+                tilesEntities.Add(tile);
             }
             var levelRestarted = new LevelRestarted(this);
             AddDomainEvent(levelRestarted);
-            _characters = charactersEntity.ToArray();
+            _characters = charactersEntities.ToArray();
+            _tiles = tilesEntities.ToArray();
         }
 
         public void Over()

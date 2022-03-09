@@ -54,7 +54,13 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
         } else
         {
             (Guid id, Vector3 position, EnumDirection direction)[] charactersRestartProps = levelController.GetCharactersInit();
-            _container.Resolve<RestartLevel>().Execute(new RestartLevelCommand(levelController._dto._id, charactersRestartProps));
+            Guid[] tilesIds = levelController.GetTilesIdsWithArrows(); 
+            _container.Resolve<RestartLevel>().Execute(
+                new RestartLevelCommand(
+                    levelController._dto._id,
+                    charactersRestartProps,
+                    tilesIds
+                ));
             _state = EnumButtonState.OFF;
             _icon.sprite = _spriteButtonOn;
             //to-do HIDE BUTTON

@@ -16,6 +16,7 @@ namespace Usecases
     {
         public ILevelsRepository _levelsRepository;
         public ICharactersRepository _charactersRepository;
+        public ITilesRepository _tilesRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
         public ILevelEntity _levelEntity;
         public IMapper<VOPosition, Vector3> _mapper;
@@ -23,12 +24,14 @@ namespace Usecases
         public RestartLevel(
             ILevelsRepository levelsRepository,
             ICharactersRepository charactersRepository,
+            ITilesRepository tilesRepository,
             IDomainEventDispatcher domainEventDispatcher,
             IMapper<VOPosition, Vector3> mapper
         )
         {
             _levelsRepository = levelsRepository;
             _charactersRepository = charactersRepository;
+            _tilesRepository = tilesRepository;
             _domainEventDispatcher = domainEventDispatcher;
             _mapper = mapper;
         }
@@ -42,12 +45,24 @@ namespace Usecases
                 var vOPosition = _mapper.ToDomain(position);
                 charactersProps.Add((_charactersRepository.Find(id), vOPosition, direction));
             }
-            _levelEntity.Restart(charactersProps.ToArray());
+            List<ITileEntity> tilesEntities = new List<ITileEntity>();
+            foreach (Guid id in command._tilesIds)
+            {
+                tilesEntities.Add(_tilesRepository.Find(id));
+            }
+            Debug.Log("-----------------------");
+            Debug.Log(tilesEntities.ToArray().Length);
+            _levelEntity.Restart(charactersProps.ToArray(), tilesEntities.ToArray());
 
             foreach (ICharacterEntity character in _levelEntity._characters)
             {
                 _domainEventDispatcher.Dispatch(character);
                 _charactersRepository.Update(character);
+            }
+            foreach (ITileEntity tile in _levelEntity._tiles)
+            {
+                _domainEventDispatcher.Dispatch(tile);
+                _tilesRepository.Update(tile);
             }
             _levelsRepository.Update(_levelEntity);
             _domainEventDispatcher.Dispatch(_levelEntity);
