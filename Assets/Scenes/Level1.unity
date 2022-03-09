@@ -26001,6 +26001,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -4095443486449062395, guid: 1a660ff9a17c40a408befc65f9284fad, type: 3}
+      propertyPath: _init_direction
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4095443486449062395, guid: 1a660ff9a17c40a408befc65f9284fad, type: 3}
       propertyPath: _init_position.x
       value: -12.5
       objectReference: {fileID: 0}

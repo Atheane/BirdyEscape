@@ -1,27 +1,31 @@
 using System;
 using UnityEngine;
 using Zenject;
+using UniMediator;
 using Usecases;
 using Usecases.Queries;
 using Usecases.Commands;
+using Adapters.Unimediatr;
+using Domain.DomainEvents;
 using Domain.ValueObjects;
 using Domain.Types;
 using Domain.Entities;
 using Frameworks.Dtos;
 
-public class CharacterMoveController : MonoBehaviour
+public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<LevelRestarted>>
 {
     public EnumCharacterType _type;
-    private EnumDirection _direction;
     public Vector3 _init_position;
     public EnumDirection _init_direction;
     public int _speed;
+
+    private EnumDirection _direction;
+    public CharacterDto _dto;
 
     private LayerMask _layerObstacle;
     private LayerMask _layerArrow;
 
     private DiContainer _container;
-    public CharacterDto _dto;
 
     float timer = 0;
 
@@ -29,6 +33,29 @@ public class CharacterMoveController : MonoBehaviour
     public void Construct(DiContainer container)
     {
         _container = container;
+    }
+
+    public void Handle(DomainEventNotification<LevelRestarted> notification)
+    {
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        ILevelEntity levelEntity = notification._domainEvent._props;
+        // characters
+        ICharacterEntity[] charactersEntity = levelEntity._characters;
+        foreach (ICharacterEntity characterEntity in charactersEntity)
+        {
+            if (characterEntity._id == _dto._id)
+            {
+                _dto = CharacterDto.Create(
+                    characterEntity._id,
+                    characterEntity._type,
+                    characterEntity._direction,
+                    characterEntity._position,
+                    characterEntity._speed
+                );
+                transform.position = _dto._position;
+                transform.rotation = Quaternion.Euler(_dto._orientation);
+            }
+        }
     }
 
     private void Start()
@@ -120,4 +147,7 @@ public class CharacterMoveController : MonoBehaviour
         }
         return false;
     }
+
+
+
 }

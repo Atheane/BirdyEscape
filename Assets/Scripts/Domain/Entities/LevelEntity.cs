@@ -44,7 +44,7 @@ namespace Domain.Entities
         public void UpdateState(EnumLevelState state)
         {
             _state = state;
-            var levelStateUpdated = new LevelStateUpdatedDomainEvent(this);
+            var levelStateUpdated = new LevelStateUpdated(this);
             AddDomainEvent(levelStateUpdated);
         }
 
@@ -58,7 +58,7 @@ namespace Domain.Entities
                 character.Restart(position, direction);
                 charactersEntity.Add(character);
             }
-            var levelRestarted = new LevelRestartedDomainEvent(this);
+            var levelRestarted = new LevelRestarted(this);
             AddDomainEvent(levelRestarted);
             _characters = charactersEntity.ToArray();
         }

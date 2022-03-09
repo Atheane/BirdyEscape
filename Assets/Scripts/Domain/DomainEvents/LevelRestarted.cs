@@ -4,14 +4,14 @@ using Domain.Entities;
 
 namespace Domain.DomainEvents
 {
-    public class LevelRestartedDomainEvent : IDomainEvent
+    public class LevelRestarted: IDomainEvent
     {
         public string _label { get; }
         public Guid _id { get; }
         public DateTime _createdAtUtc { get; }
         public ILevelEntity _props { get; }
 
-        public LevelRestartedDomainEvent(ILevelEntity props)
+        public LevelRestarted(ILevelEntity props)
         {
             _label = "LEVEL_RESTARTED";
             _id = Guid.NewGuid();
