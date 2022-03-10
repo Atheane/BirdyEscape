@@ -94,7 +94,6 @@ public class SwipeController :
         EnumDirection direction = GetSwipeDirection();
         ITileDto tileDto = _target.GetComponent<TileController>()._dto;
         var path = "Arrow/" + Entities.Arrow.ToString();
-        Debug.Log(tileDto._id);
         _container.Resolve<AddTileArrow>().Execute(
             new AddTileArrowCommand(
                 tileDto._id,

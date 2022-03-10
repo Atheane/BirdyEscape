@@ -1,3 +1,5 @@
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UniMediator;
@@ -11,16 +13,21 @@ public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEven
 {
     public TileDto _dto { get; private set; }
 
+    public void SetDto(TileDto dto)
+    {
+        _dto = dto;
+    }
+
     public void Handle(DomainEventNotification<TileArrowRemoved> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
-        ITileEntity tileEntity = notification._domainEvent._props;
-        if (tileEntity._id == _dto._id)
+        ITileEntity tile = notification._domainEvent._props;
+        if (tile._id == _dto._id)
         {
             TileDto updatedDto = TileDto.Create(
-                tileEntity._id,
-                tileEntity._coordinates,
-                tileEntity._path);
+                tile._id,
+                tile._coordinates,
+                tile._path);
             SetDto(updatedDto);
             List<GameObject> children = GetAllChildren(gameObject);
             foreach (GameObject child in children)
@@ -33,9 +40,24 @@ public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEven
         }
     }
 
-    public void SetDto(TileDto dto)
+    public void Handle(DomainEventNotification<TileArrowAdded> notification)
     {
-        _dto = dto;
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        ITileEntity tile = notification._domainEvent._props;
+        if (_dto._id == tile._id)
+        {
+            IArrowDto dto = ArrowDto.Create(
+                tile._arrow._id,
+                tile._arrow._direction,
+                tile._arrow._coordinates,
+                tile._arrow._path
+            );
+            _dto.AddArrow(dto);
+            GameObject go = Instantiate(Resources.Load(dto._path), dto._position, Quaternion.Euler(dto._orientation)) as GameObject;
+            // instantiate and attach the component in once function
+            go.tag = Entities.Arrow.ToString();
+            go.transform.parent = transform;
+        }
     }
 
     private static List<GameObject> GetAllChildren(GameObject Go)

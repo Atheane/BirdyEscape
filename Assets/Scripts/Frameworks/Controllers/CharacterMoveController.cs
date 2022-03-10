@@ -19,15 +19,14 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
     public EnumDirection _init_direction;
     public int _speed;
 
-    private EnumDirection _direction;
-    public CharacterDto _dto;
+    public EnumDirection _direction { get; private set; }
+    public CharacterDto _dto { get; private set; }
 
     private LayerMask _layerObstacle;
     private LayerMask _layerArrow;
-
     private DiContainer _container;
 
-    float timer = 0;
+    private float timer = 0;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -45,17 +44,23 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         {
             if (characterEntity._id == _dto._id)
             {
-                _dto = CharacterDto.Create(
+                CharacterDto dto = CharacterDto.Create(
                     characterEntity._id,
                     characterEntity._type,
                     characterEntity._direction,
                     characterEntity._position,
                     characterEntity._speed
                 );
+                SetDto(dto);
                 transform.position = _dto._position;
                 transform.rotation = Quaternion.Euler(_dto._orientation);
             }
         }
+    }
+
+    public void SetDto(CharacterDto dto)
+    {
+        _dto = dto;
     }
 
     private void Start()
@@ -69,17 +74,12 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
 
     private void Update()
     {
-        if (_dto == null)
-            _dto = gameObject.GetComponent<CreateCharacterHandler>()._dto;
-        else
-        {
-            timer += Time.deltaTime * 1000;
+        timer += Time.deltaTime * 1000;
 
-            if (timer > _dto._speed)
-            {
-                Moveloop();
-                timer = 0;
-            }
+        if (timer > _dto._speed)
+        {
+            Moveloop();
+            timer = 0;
         }
     }
 
