@@ -33,6 +33,7 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
+            Debug.DrawRay(ray.origin, hit.point);
             foreach (Touch touch in Input.touches)
             {
                 if (touch.phase == TouchPhase.Began)
@@ -69,6 +70,7 @@ public class SwipeController : MonoBehaviour
         EnumDirection direction = GetSwipeDirection();
         ITileDto tileDto = _target.GetComponent<TileController>()._dto;
         var path = "Arrow/" + Entities.Arrow.ToString();
+        Debug.Log(tileDto._id);
         _container.Resolve<AddTileArrow>().Execute(
             new AddTileArrowCommand(
                 tileDto._id,

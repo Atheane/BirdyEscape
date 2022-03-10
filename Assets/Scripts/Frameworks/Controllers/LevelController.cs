@@ -126,11 +126,11 @@ public class LevelController : MonoBehaviour
             string path = controller.gameObject.name;
             ITileEntity tileEntity = _container.Resolve<CreateTile>().Execute(new CreateTileCommand(controller.transform.position, path));
             tiles.Add(tileEntity);
-            controller._dto = TileDto.Create(
+            controller.SetDto(TileDto.Create(
                 tileEntity._id,
                 tileEntity._coordinates,
                 tileEntity._path
-            );
+            ));
         }
         return tiles;
     }

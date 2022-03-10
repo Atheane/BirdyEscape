@@ -50,8 +50,6 @@ namespace Usecases
             {
                 tilesEntities.Add(_tilesRepository.Find(id));
             }
-            Debug.Log("-----------------------");
-            Debug.Log(tilesEntities.ToArray().Length);
             _levelEntity.Restart(charactersProps.ToArray(), tilesEntities.ToArray());
 
             foreach (ICharacterEntity character in _levelEntity._characters)

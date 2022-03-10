@@ -7,27 +7,35 @@ using Domain.Types;
 using Adapters.Unimediatr;
 using Frameworks.Dtos;
 
-
 public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<TileArrowRemoved>>
 {
-    public TileDto _dto;
+    public TileDto _dto { get; private set; }
 
     public void Handle(DomainEventNotification<TileArrowRemoved> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ITileEntity tileEntity = notification._domainEvent._props;
-        _dto = TileDto.Create(
-            tileEntity._id,
-            tileEntity._coordinates,
-            tileEntity._path);
-        List<GameObject> children = GetAllChildren(gameObject);
-        foreach (GameObject child in children)
+        if (tileEntity._id == _dto._id)
         {
-            if (child.CompareTag(Entities.Arrow.ToString()))
+            TileDto updatedDto = TileDto.Create(
+                tileEntity._id,
+                tileEntity._coordinates,
+                tileEntity._path);
+            SetDto(updatedDto);
+            List<GameObject> children = GetAllChildren(gameObject);
+            foreach (GameObject child in children)
             {
-                Destroy(child);
+                if (child.CompareTag(Entities.Arrow.ToString()))
+                {
+                    Destroy(child);
+                }
             }
         }
+    }
+
+    public void SetDto(TileDto dto)
+    {
+        _dto = dto;
     }
 
     private static List<GameObject> GetAllChildren(GameObject Go)
