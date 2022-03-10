@@ -1,13 +1,19 @@
 using System;
 using UnityEngine;
-using Domain.Types;
+using UniMediator;
 using Zenject;
+using Adapters.Unimediatr;
 using Usecases;
 using Usecases.Commands;
+using Domain.Types;
+using Domain.DomainEvents;
 using Domain.Entities;
 using Frameworks.Dtos;
 
-public class SwipeController : MonoBehaviour
+public class SwipeController :
+    MonoBehaviour,
+    IMulticastMessageHandler<DomainEventNotification<LevelStateUpdated>>,
+    IMulticastMessageHandler<DomainEventNotification<LevelRestarted>>
 {
     [SerializeField] private LayerMask _layer;
     private Vector2 _fingerBeginPosition;
@@ -16,6 +22,7 @@ public class SwipeController : MonoBehaviour
     private float _minDistanceForSwipe = 40f;
 
     private DiContainer _container;
+    private EnumLevelState _levelState;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -25,6 +32,21 @@ public class SwipeController : MonoBehaviour
     public void Awake()
     {
         _layer = LayerMask.GetMask(Entities.Puzzle.ToString());
+        _levelState = EnumLevelState.OFF;
+    }
+
+    public void Handle(DomainEventNotification<LevelStateUpdated> notification)
+    {
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        ILevelEntity levelEntity = notification._domainEvent._props;
+        _levelState = levelEntity._state;
+    }
+
+    public void Handle(DomainEventNotification<LevelRestarted> notification)
+    {
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        ILevelEntity levelEntity = notification._domainEvent._props;
+        _levelState = levelEntity._state;
     }
 
     public void Update()
@@ -33,32 +55,34 @@ public class SwipeController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            Debug.DrawRay(ray.origin, hit.point);
-            foreach (Touch touch in Input.touches)
+            if (_levelState == EnumLevelState.OFF)
             {
-                if (touch.phase == TouchPhase.Began)
+                foreach (Touch touch in Input.touches)
                 {
-                    _target = hit.transform;
-                    _fingerBeginPosition = touch.position;
-                    _fingerEndPosition = touch.position;
-                }
-                if (touch.phase == TouchPhase.Ended)
-                {
-                    _fingerEndPosition = touch.position;
-                    if (!DetectTouch() && _target.CompareTag(Entities.Tile.ToString()))
+                    if (touch.phase == TouchPhase.Began)
                     {
-                        DrawArrow();
-                        return;
+                        _target = hit.transform;
+                        _fingerBeginPosition = touch.position;
+                        _fingerEndPosition = touch.position;
                     }
-                    if (!DetectTouch() && _target.CompareTag(Entities.Arrow.ToString()))
+                    if (touch.phase == TouchPhase.Ended)
                     {
-                        ChangeArrowDirection();
-                        return;
-                    }
-                    if (DetectTouch() && _target.CompareTag(Entities.Arrow.ToString()))
-                    {
-                        DeleteArrow();
-                        return;
+                        _fingerEndPosition = touch.position;
+                        if (!DetectTouch() && _target.CompareTag(Entities.Tile.ToString()))
+                        {
+                            DrawArrow();
+                            return;
+                        }
+                        if (!DetectTouch() && _target.CompareTag(Entities.Arrow.ToString()))
+                        {
+                            ChangeArrowDirection();
+                            return;
+                        }
+                        if (DetectTouch() && _target.CompareTag(Entities.Arrow.ToString()))
+                        {
+                            DeleteArrow();
+                            return;
+                        }
                     }
                 }
             }

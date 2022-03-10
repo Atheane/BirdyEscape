@@ -5,12 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UniMediator;
 using Zenject;
+using Adapters.Unimediatr;
 using Usecases;
 using Usecases.Commands;
 using Domain.Entities;
 using Domain.Types;
 using Domain.DomainEvents;
-using Adapters.Unimediatr;
 
 public enum EnumButtonState { PLAY, RESTART, HIDDEN };
 
