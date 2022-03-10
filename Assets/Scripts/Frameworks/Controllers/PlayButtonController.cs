@@ -1,17 +1,20 @@
 using System;
 using System.Collections.Generic;
-using Zenject;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UniMediator;
+using Zenject;
 using Usecases;
 using Usecases.Commands;
 using Domain.Entities;
 using Domain.Types;
+using Domain.DomainEvents;
+using Adapters.Unimediatr;
 
-public enum EnumButtonState { ON, OFF, HIDDEN };
+public enum EnumButtonState { PLAY, RESTART, HIDDEN };
 
-public class PlayButtonController : MonoBehaviour, IPointerDownHandler
+public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMulticastMessageHandler<DomainEventNotification<TileArrowAdded>>
 {
     public Sprite _spriteButtonOff;
     public EnumButtonState _state;
@@ -19,6 +22,7 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
     private IReadOnlyList<ICharacterEntity> _characters;
     private Image _icon;
     private Sprite _spriteButtonOn;
+    private Image _button;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -26,21 +30,43 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
         _container = container;
     }
 
-    void Start()
+    public void Handle(DomainEventNotification<TileArrowAdded> notification)
     {
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        _button.enabled = true;
+        _icon.enabled = true;
+        _state = EnumButtonState.PLAY;
+        _icon.sprite = _spriteButtonOn;
+    }
+
+    private void Start()
+    {
+        _state = EnumButtonState.HIDDEN;
         _icon = transform.GetChild(0).GetComponent<Image>();
+        _button = GetComponent<Image>();
         _spriteButtonOn = _icon.sprite;
         _characters = _container.Resolve<GetAllCharacters>().Execute(IntPtr.Zero);
+        _button.enabled = false;
+        _icon.enabled = false;
+    }
+
+    private void Update()
+    {
+        if (_state == EnumButtonState.HIDDEN)
+        {
+            _button.enabled = false;
+            _icon.enabled = false;
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         var levelController = transform.GetComponentInParent<LevelController>();
 
-        if (_state == EnumButtonState.OFF)
+        if (_state == EnumButtonState.PLAY)
         {
             _icon.sprite = _spriteButtonOff;
-            _state = EnumButtonState.ON;
+            _state = EnumButtonState.RESTART;
 
             _container.Resolve<UpdateLevelState>().Execute(new UpdateLevelStateCommand(levelController._dto._id, EnumLevelState.ON));
 
@@ -61,9 +87,8 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler
                     charactersRestartProps,
                     tilesIds
                 ));
-            _state = EnumButtonState.OFF;
+            _state = EnumButtonState.HIDDEN;
             _icon.sprite = _spriteButtonOn;
-            //to-do HIDE BUTTON
         }
     }
 

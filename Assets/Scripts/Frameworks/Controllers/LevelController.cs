@@ -46,7 +46,7 @@ public class LevelController : MonoBehaviour
         return ids.ToArray();
     }
 
-    void Start()
+    private void Start()
     {
         SetCharactersController(gameObject);
         SetTilesController(gameObject);
