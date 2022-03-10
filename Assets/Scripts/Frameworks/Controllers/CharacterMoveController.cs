@@ -19,7 +19,6 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
     public EnumDirection _init_direction;
     public int _speed;
 
-    public EnumDirection _direction { get; private set; }
     public CharacterDto _dto { get; private set; }
 
     private LayerMask _layerObstacle;
@@ -69,13 +68,11 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
         _init_position = transform.position;
-        _direction = _init_direction;
     }
 
     private void Update()
     {
         timer += Time.deltaTime * 1000;
-
         if (timer > _dto._speed)
         {
             Moveloop();
@@ -87,25 +84,27 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
 
         if (CollisionWithArrow())
         {
-            ICharacterEntity characterEntity = _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _direction));
-            var characterDto = CharacterDto.Create(
+            ICharacterEntity characterEntity = _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _dto._direction));
+            var dto = CharacterDto.Create(
                 characterEntity._id,
                 characterEntity._type,
                 characterEntity._direction,
                 characterEntity._position,
                 characterEntity._speed);
-            transform.rotation = Quaternion.Euler(characterDto._orientation);
+            SetDto(dto);
+            transform.rotation = Quaternion.Euler(dto._orientation);
         }
         else if (CollisionWithObstacle())
         {
             ICharacterEntity characterEntity = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
-            var characterDto = CharacterDto.Create(
+            var dto = CharacterDto.Create(
                characterEntity._id,
                characterEntity._type,
                characterEntity._direction,
                characterEntity._position,
                characterEntity._speed);
-            transform.rotation = Quaternion.Euler(characterDto._orientation);
+            SetDto(dto);
+            transform.rotation = Quaternion.Euler(dto._orientation);
         }
         else
         {
@@ -139,9 +138,9 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
         {
             TileController controller = hit.collider.GetComponentInParent<TileController>();
-            if (controller._dto._arrow._direction != _direction)
+            if (controller._dto._arrow._direction != _dto._direction)
             {
-                _direction = controller._dto._arrow._direction;
+                _dto.UpdateDirection(controller._dto._arrow._direction);
                 return true;
             }
         }

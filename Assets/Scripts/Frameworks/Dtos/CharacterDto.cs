@@ -73,5 +73,10 @@ namespace Frameworks.Dtos
                     break;
             }
         }
+
+        public void UpdateDirection(EnumDirection direction)
+        {
+            _direction = direction;
+        }
     }
 }
