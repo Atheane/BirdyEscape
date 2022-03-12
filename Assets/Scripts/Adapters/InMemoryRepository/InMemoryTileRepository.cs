@@ -50,6 +50,18 @@ namespace Adapters.InMemoryRepository
             }
         }
 
+        public void Remove(ITileEntity tile)
+        {
+            if (_store.ContainsKey(tile._id))
+            {
+                _store.Remove(tile._id);
+            }
+            else
+            {
+                throw new TileException.NotFound(tile._id.ToString());
+            }
+        }
+
         public IReadOnlyList<ITileEntity> GetAll()
         {
             Dictionary<Guid, ITileEntity>.ValueCollection tilesValueCollection = _store.Values;

@@ -19,6 +19,7 @@ namespace Domain.Entities
             (ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps,
             ITileEntity[] tiles
         );
+        public void Finish();
     }
 
     public class LevelEntity : AggregateRoot, ILevelEntity
@@ -80,11 +81,18 @@ namespace Domain.Entities
             _tiles = tilesEntities.ToArray();
         }
 
-        public void Over()
+        public void Finish()
         {
-            //todo
+            _state = EnumLevelState.WIN;
+            foreach (ICharacterEntity character in _characters)
+            {
+                character.Delete();
+            }
+            foreach (ITileEntity tile in _tiles)
+            {
+                tile.Delete();
+            }
         }
-
     }
 }
 

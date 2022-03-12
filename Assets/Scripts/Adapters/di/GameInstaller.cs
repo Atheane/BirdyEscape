@@ -30,6 +30,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<CreateLevel>().AsSingle();
         Container.Bind<UpdateLevelState>().AsSingle();
         Container.Bind<RestartLevel>().AsSingle();
+        Container.Bind<FinishLevel>().AsSingle();
         // character commands
         Container.Bind<CreateCharacter>().AsSingle();
         Container.Bind<MoveOnceCharacter>().AsSingle();
@@ -46,5 +47,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<RemoveTileArrow>().AsSingle();
         // tile commands
         Container.Bind<CreateTile>().AsSingle();
+        // controllers
+        Container.Bind<LevelController>().AsSingle();
     }
 }

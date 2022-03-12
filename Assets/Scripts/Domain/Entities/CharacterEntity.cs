@@ -19,6 +19,7 @@ namespace Domain.Entities
         public void UpdateState(EnumCharacterState state);
         public void UpdateDirection(EnumDirection direction);
         public void Restart(VOPosition position, EnumDirection direction);
+        public void Delete();
     }
 
     public class CharacterEntity : AggregateRoot, ICharacterEntity
@@ -42,7 +43,7 @@ namespace Domain.Entities
         public static CharacterEntity Create(EnumCharacterType type, EnumDirection direction, VOPosition position, int speed)
         {
             var character = new CharacterEntity(type, direction, position, speed);
-            var characterCreated = new CharacterCreatedDomainEvent(character);
+            var characterCreated = new CharacterCreated(character);
             character.AddDomainEvent(characterCreated);
             character._id = characterCreated._id;
             return character;
@@ -102,14 +103,14 @@ namespace Domain.Entities
         public void UpdateDirection(EnumDirection direction)
         {
             _direction = direction;
-            var characterDirectionUpdated = new CharacterDirUpdatedDomainEvent(this);
+            var characterDirectionUpdated = new CharacterDirUpdated(this);
             AddDomainEvent(characterDirectionUpdated);
         }
 
         public void UpdateState(EnumCharacterState state)
         {
             _state = state;
-            var characterStateUpdated = new CharacterStateUpdatedDomainEvent(this);
+            var characterStateUpdated = new CharacterStateUpdated(this);
             AddDomainEvent(characterStateUpdated);
         }
 
@@ -118,8 +119,14 @@ namespace Domain.Entities
             _state = EnumCharacterState.IDLE;
             _direction = direction;
             _position = position;
-            var characterRestarted = new CharacterRestartedDomainEvent(this);
+            var characterRestarted = new CharacterRestarted(this);
             AddDomainEvent(characterRestarted);
+        }
+
+        public void Delete()
+        {
+            var characterDeleted = new CharacterDeleted(this);
+            AddDomainEvent(characterDeleted);
         }
     }
 }

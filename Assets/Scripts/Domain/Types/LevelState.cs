@@ -4,7 +4,6 @@ namespace Domain.Types
     {
         ON,
         OFF,
-        WIN,
-        OVER
+        WIN
     }
 }

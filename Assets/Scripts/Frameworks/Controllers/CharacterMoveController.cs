@@ -87,7 +87,8 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         if (CollisionWithExit())
         {
             Debug.Log("NEXT LEVEL");
-            //todo: delete characters, tiles, arrows usecase FinishLevel, load new scene
+            _container.Resolve<FinishLevel>().Execute(new FinishLevelCommand(GetComponentInParent<LevelController>()._dto._id));
+            //todo: load new scene
         }
         else if (CollisionWithArrow())
         {

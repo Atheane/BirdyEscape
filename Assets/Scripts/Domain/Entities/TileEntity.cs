@@ -17,6 +17,7 @@ namespace Domain.Entities
         public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path);
         public void UpdateArrowDirection(EnumDirection direction);
         public void RemoveArrow();
+        public void Delete();
     }
 
     public class TileEntity : AggregateRoot, ITileEntity
@@ -68,6 +69,12 @@ namespace Domain.Entities
             _arrow = null;
             var tileArrowRemoved = new TileArrowRemoved(this);
             AddDomainEvent(tileArrowRemoved);
+        }
+
+        public void Delete()
+        {
+            var tileDelete = new TileDeleted(this);
+            AddDomainEvent(tileDelete);
         }
     }
 }

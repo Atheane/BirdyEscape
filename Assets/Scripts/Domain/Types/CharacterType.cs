@@ -3,6 +3,7 @@
     public enum EnumCharacterType
     {
         BLACK_BIRD,
+        EMPTY
     }
 }
 

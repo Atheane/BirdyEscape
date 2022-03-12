@@ -7,5 +7,6 @@ namespace Domain.Repositories
     {
         void Add(ITileEntity tile);
         void Update(ITileEntity tile);
+        void Remove(ITileEntity tile);
     }
 }
