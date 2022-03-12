@@ -2395,7 +2395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ef86c8a0b8a4a758ef0f1a7104e285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _charactersController: []
+  _charactersControllers: []
+  _tilesControllers: []
 --- !u!1001 &102182243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4414,8 +4415,9 @@ GameObject:
   - component: {fileID: 178914118}
   - component: {fileID: 178914117}
   - component: {fileID: 178914116}
-  m_Layer: 0
-  m_Name: New VFX
+  - component: {fileID: 178914119}
+  m_Layer: 9
+  m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4515,6 +4517,19 @@ Transform:
   m_Father: {fileID: 1261365998}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+--- !u!65 &178914119
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178914115}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.10096645, z: 1}
+  m_Center: {x: 0, y: -0.06503725, z: 0.5}
 --- !u!1 &181215429
 GameObject:
   m_ObjectHideFlags: 0

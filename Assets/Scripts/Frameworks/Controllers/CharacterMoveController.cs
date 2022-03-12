@@ -23,6 +23,8 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
 
     private LayerMask _layerObstacle;
     private LayerMask _layerArrow;
+    private LayerMask _layerExit;
+
     private DiContainer _container;
 
     private float timer = 0;
@@ -67,6 +69,7 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         // must be loaded AFTER PuzzleController Awake()
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
+        _layerExit = LayerMask.GetMask("Exit");
         _init_position = transform.position;
     }
 
@@ -81,8 +84,12 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
     }
 
     private void Moveloop() {
-
-        if (CollisionWithArrow())
+        if (CollisionWithExit())
+        {
+            Debug.Log("NEXT LEVEL");
+            //todo: delete characters, tiles, arrows usecase FinishLevel, load new scene
+        }
+        else if (CollisionWithArrow())
         {
             ICharacterEntity characterEntity = _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _dto._direction));
             var dto = CharacterDto.Create(
@@ -143,6 +150,18 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
                 _dto.UpdateDirection(controller._dto._arrow._direction);
                 return true;
             }
+        }
+        return false;
+    }
+
+    private bool CollisionWithExit()
+    {
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
+        RaycastHit hit;
+        Debug.DrawRay(ray.origin, ray.direction);
+        if (Physics.Raycast(ray, out hit, 0.25f, _layerExit))
+        {
+            return true;
         }
         return false;
     }
