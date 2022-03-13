@@ -88,13 +88,14 @@ public class LevelController : MonoBehaviour
                     controller._type,
                     controller._init_direction,
                     controller._init_position,
-                    controller._speed)
+                    (int)controller._speed)
                 );
             characters.Add(characterEntity);
             controller.SetDto(CharacterDto.Create(
                     characterEntity._id,
                     characterEntity._type,
                     characterEntity._direction,
+                    characterEntity._state,
                     characterEntity._position,
                     characterEntity._speed
             ));

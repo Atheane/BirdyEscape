@@ -3,7 +3,6 @@ using UnityEngine;
 using Zenject;
 using UniMediator;
 using Usecases;
-using Usecases.Queries;
 using Usecases.Commands;
 using Adapters.Unimediatr;
 using Domain.DomainEvents;
@@ -12,12 +11,12 @@ using Domain.Types;
 using Domain.Entities;
 using Frameworks.Dtos;
 
-public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<LevelRestarted>>
+public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<LevelRestarted>>, IMulticastMessageHandler<DomainEventNotification<CharacterStateUpdated>>
 {
     public EnumCharacterType _type;
     public Vector3 _init_position;
     public EnumDirection _init_direction;
-    public int _speed;
+    public float _speed;
 
     public CharacterDto _dto { get; private set; }
 
@@ -49,6 +48,7 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
                     characterEntity._id,
                     characterEntity._type,
                     characterEntity._direction,
+                    characterEntity._state,
                     characterEntity._position,
                     characterEntity._speed
                 );
@@ -57,6 +57,21 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
                 transform.rotation = Quaternion.Euler(_dto._orientation);
             }
         }
+    }
+
+    public void Handle(DomainEventNotification<CharacterStateUpdated> notification)
+    {
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        ICharacterEntity characterEntity = notification._domainEvent._props;
+        // characters
+        SetDto(CharacterDto.Create(
+            characterEntity._id,
+            characterEntity._type,
+            characterEntity._direction,
+            characterEntity._state,
+            characterEntity._position,
+            characterEntity._speed
+        ));
     }
 
     public void SetDto(CharacterDto dto)
@@ -71,16 +86,13 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         _layerArrow = LayerMask.GetMask("Arrow");
         _layerExit = LayerMask.GetMask("Exit");
         _init_position = transform.position;
+        var frequency = (1/_speed);
+        InvokeRepeating("Moveloop", 0, frequency);
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        timer += Time.deltaTime * 1000;
-        if (timer > _dto._speed)
-        {
-            Moveloop();
-            timer = 0;
-        }
+        CancelInvoke("Moveloop");
     }
 
     private void Moveloop() {
@@ -97,6 +109,7 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
                 characterEntity._id,
                 characterEntity._type,
                 characterEntity._direction,
+                characterEntity._state,
                 characterEntity._position,
                 characterEntity._speed);
             SetDto(dto);
@@ -109,6 +122,7 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
                characterEntity._id,
                characterEntity._type,
                characterEntity._direction,
+               characterEntity._state,
                characterEntity._position,
                characterEntity._speed);
             SetDto(dto);
@@ -116,8 +130,7 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         }
         else
         {
-            var state = _container.Resolve<GetCharacterState>().Execute(new GetCharacterStateQuery(_dto._id));
-            if (state == EnumCharacterState.MOVING)
+            if (_dto._state == EnumCharacterState.MOVING)
             {
                 VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
                 Vector3 newPosition = new Vector3(newPositionVO.Value.X, PuzzleController.MIN.y, newPositionVO.Value.Z);
@@ -131,7 +144,7 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
         RaycastHit hit;
         //Debug.DrawRay(ray.origin, ray.direction);
-        if (Physics.Raycast(ray, out hit, 0.5f, _layerObstacle))
+        if (Physics.Raycast(ray, out hit, 0.6f, _layerObstacle))
         {
             return true;
         }
@@ -166,7 +179,5 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         }
         return false;
     }
-
-
 
 }

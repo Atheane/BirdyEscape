@@ -11,6 +11,7 @@ namespace Frameworks.Dtos
         public Guid _id { get; }
         public EnumCharacterType _type { get; }
         public EnumDirection _direction { get; }
+        public EnumCharacterState _state { get; }
         public Vector3 _position { get; }
         public Vector3 _orientation { get; }
         public int _speed { get; }
@@ -22,22 +23,24 @@ namespace Frameworks.Dtos
         public Guid _id { get; private set; }
         public EnumCharacterType _type { get; private set; }
         public EnumDirection _direction { get; private set; }
+        public EnumCharacterState _state { get; }
         public Vector3 _position { get; private set; }
         public Vector3 _orientation { get; private set; }
         public int _speed { get; private set; }
         public string _image { get; private set; }
 
-        private CharacterDto(Guid id, EnumCharacterType type, EnumDirection direction, Vector3 position, int speed, string image)
+        private CharacterDto(Guid id, EnumCharacterType type, EnumDirection direction, EnumCharacterState state, Vector3 position, int speed, string image)
         {
             _id = id;
             _type = type;
             _direction = direction;
+            _state = state;
             _position = position;
             _speed = speed;
             _image = image;
         }
 
-        public static CharacterDto Create(Guid id, EnumCharacterType type, EnumDirection direction, VOPosition position, int speed)
+        public static CharacterDto Create(Guid id, EnumCharacterType type, EnumDirection direction, EnumCharacterState state, VOPosition position, int speed)
         {
             string image;
             switch (type)
@@ -50,7 +53,7 @@ namespace Frameworks.Dtos
                     break;
             }
             var pos = new Vector3(position.Value.X, PuzzleController.MIN.y, position.Value.Z);
-            var characterDto = new CharacterDto(id, type, direction, pos, speed, image);
+            var characterDto = new CharacterDto(id, type, direction, state, pos, speed, image);
             characterDto.Orientate();
             return characterDto;
         }
