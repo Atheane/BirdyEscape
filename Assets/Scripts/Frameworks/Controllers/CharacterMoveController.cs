@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 using UniMediator;
 using Usecases;
@@ -91,17 +92,8 @@ public class CharacterMoveController :
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
         _layerExit = LayerMask.GetMask("Exit");
-        var frequency = (1/_speed);
-        InvokeRepeating("Moveloop", 0.5f, frequency);
-        CharacterDto dto = CharacterDto.Create(
-            Guid.Empty,
-            EnumCharacterType.BLACK_BIRD,
-            EnumDirection.DOWN,
-            EnumCharacterState.IDLE,
-            VOPosition.Create((_init_position.x, _init_position.y, _init_position.z)),
-            (int)_speed
-        );
-        SetDto(dto);
+        var frequency = 1/_speed;
+        InvokeRepeating("Moveloop", 1, frequency);
     }
 
     private void OnDestroy()
@@ -115,6 +107,8 @@ public class CharacterMoveController :
             Debug.Log("NEXT LEVEL");
             _container.Resolve<FinishLevel>().Execute(new FinishLevelCommand(GetComponentInParent<LevelController>()._dto._id));
             //todo: load new scene
+            var level = transform.parent.name;
+            SceneManager.LoadScene(level, LoadSceneMode.Single);
         }
         else if (CollisionWithArrow())
         {
@@ -144,7 +138,7 @@ public class CharacterMoveController :
         }
         else
         {
-            if (_dto._state == EnumCharacterState.MOVING)
+            if (_dto != null && _dto._state == EnumCharacterState.MOVING)
             {
                 VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
                 Vector3 newPosition = new Vector3(newPositionVO.Value.X, PuzzleController.MIN.y, newPositionVO.Value.Z);

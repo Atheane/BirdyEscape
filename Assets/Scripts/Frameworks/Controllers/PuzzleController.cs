@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class PuzzleController : MonoBehaviour
 {
-    [SerializeField] Vector3 min;
-    [SerializeField] Vector3 max;
+    //[SerializeField] Vector3 min;
+    //[SerializeField] Vector3 max;
 
-    public static Vector3 MIN;
-    public static Vector3 MAX;
+    public static Vector3 MIN = new Vector3(-12.5f, -9.5f, -5f);
+    public static Vector3 MAX = new Vector3(-5.5f, 0f, 6f);
 
     public List<GameObject> tiles;
 
-    private void Awake()
-    {
-        // must be loaded before TileController Start()
-        MIN = min;
-        MAX = max;
-    }
-
     private void Start()
     {
+        //MIN = min;
+        //MAX = max;
         SetTiles(gameObject);
     }
 
