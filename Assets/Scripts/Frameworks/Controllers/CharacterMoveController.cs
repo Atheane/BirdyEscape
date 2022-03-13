@@ -11,7 +11,10 @@ using Domain.Types;
 using Domain.Entities;
 using Frameworks.Dtos;
 
-public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<LevelRestarted>>, IMulticastMessageHandler<DomainEventNotification<CharacterStateUpdated>>
+public class CharacterMoveController :
+    MonoBehaviour,
+    IMulticastMessageHandler<DomainEventNotification<LevelRestarted>>,
+    IMulticastMessageHandler<DomainEventNotification<CharacterStateUpdated>>
 {
     public EnumCharacterType _type;
     public Vector3 _init_position;
@@ -25,8 +28,6 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
     private LayerMask _layerExit;
 
     private DiContainer _container;
-
-    private float timer = 0;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -79,15 +80,28 @@ public class CharacterMoveController : MonoBehaviour, IMulticastMessageHandler<D
         _dto = dto;
     }
 
+    private void Awake()
+    {
+        _init_position = transform.position;
+    }
+
     private void Start()
     {
         // must be loaded AFTER PuzzleController Awake()
         _layerObstacle = LayerMask.GetMask("Obstacle");
         _layerArrow = LayerMask.GetMask("Arrow");
         _layerExit = LayerMask.GetMask("Exit");
-        _init_position = transform.position;
         var frequency = (1/_speed);
-        InvokeRepeating("Moveloop", 0, frequency);
+        InvokeRepeating("Moveloop", 0.5f, frequency);
+        CharacterDto dto = CharacterDto.Create(
+            Guid.Empty,
+            EnumCharacterType.BLACK_BIRD,
+            EnumDirection.DOWN,
+            EnumCharacterState.IDLE,
+            VOPosition.Create((_init_position.x, _init_position.y, _init_position.z)),
+            (int)_speed
+        );
+        SetDto(dto);
     }
 
     private void OnDestroy()

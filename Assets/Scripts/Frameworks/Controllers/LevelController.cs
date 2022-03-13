@@ -46,15 +46,16 @@ public class LevelController : MonoBehaviour
         return ids.ToArray();
     }
 
-    private void Start()
+    private void Awake()
     {
         SetCharactersController(gameObject);
         SetTilesController(gameObject);
         List<ICharacterEntity> characters = CreateCharacters();
         List<ITileEntity> tiles = CreateTiles();
+        var name = gameObject.name;
         ILevelEntity levelEntity = _container.Resolve<CreateLevel>().Execute(
             new CreateLevelCommand(
-                1,
+                name[name.Length - 1],
                 characters,
                 tiles,
                 EnumLevelState.OFF
