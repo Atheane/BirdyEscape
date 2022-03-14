@@ -57,16 +57,16 @@ namespace Domain.Entities
                 switch (_direction)
                 {
                     case EnumDirection.UP:
-                        position.X -= 0.1f;
+                        position.X -= 0.2f;
                         break;
                     case EnumDirection.DOWN:
-                        position.X += 0.1f;
+                        position.X += 0.2f;
                         break;
                     case EnumDirection.LEFT:
-                        position.Z -= 0.1f;
+                        position.Z -= 0.2f;
                         break;
                     case EnumDirection.RIGHT:
-                        position.Z += 0.1f;
+                        position.Z += 0.2f;
                         break;
                 }
                 _position = VOPosition.Create(position);

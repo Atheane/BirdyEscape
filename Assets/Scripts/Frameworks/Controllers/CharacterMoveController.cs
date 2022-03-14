@@ -105,10 +105,11 @@ public class CharacterMoveController :
         if (CollisionWithExit())
         {
             Debug.Log("NEXT LEVEL");
-            _container.Resolve<FinishLevel>().Execute(new FinishLevelCommand(GetComponentInParent<LevelController>()._dto._id));
-            //todo: load new scene
-            var level = transform.parent.name;
-            SceneManager.LoadScene(level, LoadSceneMode.Single);
+            var level = GetComponentInParent<LevelController>();
+            _container.Resolve<FinishLevel>().Execute(new FinishLevelCommand(level._dto._id));
+            Debug.Log(level._dto._number);
+            var nextLevelNumber = level._dto._number + 1;
+            SceneManager.LoadScene("Level"+ nextLevelNumber, LoadSceneMode.Single);
         }
         else if (CollisionWithArrow())
         {

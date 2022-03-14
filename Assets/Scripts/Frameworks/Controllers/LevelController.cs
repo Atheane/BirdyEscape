@@ -15,6 +15,7 @@ public class LevelController : MonoBehaviour
     private DiContainer _container;
     public List<CharacterMoveController> _charactersControllers;
     public List<TileController> _tilesControllers;
+    public int _levelNumber;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -55,7 +56,7 @@ public class LevelController : MonoBehaviour
         var name = gameObject.name;
         ILevelEntity levelEntity = _container.Resolve<CreateLevel>().Execute(
             new CreateLevelCommand(
-                name[name.Length - 1],
+                _levelNumber,
                 characters,
                 tiles,
                 EnumLevelState.OFF
