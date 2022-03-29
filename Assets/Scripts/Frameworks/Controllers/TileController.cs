@@ -44,7 +44,7 @@ public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEven
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ITileEntity tile = notification._domainEvent._props;
-        if (_dto._id == tile._id)
+        if (_dto._id == tile._id && _dto._arrow == null)
         {
             IArrowDto dto = ArrowDto.Create(
                 tile._arrow._id,
