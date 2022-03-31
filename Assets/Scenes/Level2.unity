@@ -19597,34 +19597,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2150605593437465987, guid: 584196b428be0db4d9d6105c2b1697ae, type: 3}
   m_PrefabInstance: {fileID: 1922360585}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1605751458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605751456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf7a7125166dd480f8e49027a7dfbb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1605751459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605751456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d83622986df2480490a1aea24fc8eb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: 0
-  _init_position: {x: 0, y: 0, z: 0}
-  _init_direction: 0
-  _speed: 20
 --- !u!65 &1605751460
 BoxCollider:
   m_ObjectHideFlags: 0
