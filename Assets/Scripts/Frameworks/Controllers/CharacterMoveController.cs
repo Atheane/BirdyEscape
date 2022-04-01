@@ -179,10 +179,10 @@ public class CharacterMoveController :
 
     private bool CollisionWithExit()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
+        Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction);
-        if (Physics.Raycast(ray, out hit, 0.25f, _layerExit))
+        if (Physics.Raycast(ray, out hit, 1f, _layerExit))
         {
             return true;
         }
