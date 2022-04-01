@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Resources/GUI/Button_Restart.prefab.meta
 guid: 59f1ce32ecdd8c649bf59285efe7e527
 PrefabImporter:
+=======
+guid: 5a555e6717272ac41903a0abbe103458
+folderAsset: yes
+DefaultImporter:
+>>>>>>> BrancheGilouQuiSeraSupp:Assets/Resources/Animations.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
