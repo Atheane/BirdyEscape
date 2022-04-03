@@ -51,8 +51,4 @@ public class GameInstaller : MonoInstaller
         Container.Bind<LevelController>().AsSingle();
     }
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
 }

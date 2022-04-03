@@ -107,7 +107,6 @@ public class CharacterMoveController :
             Debug.Log("NEXT LEVEL");
             var level = GetComponentInParent<LevelController>();
             _container.Resolve<FinishLevel>().Execute(new FinishLevelCommand(level._dto._id));
-            Debug.Log(level._dto._number);
             var nextLevelNumber = level._dto._number + 1;
             SceneManager.LoadScene("Level"+ nextLevelNumber, LoadSceneMode.Single);
         }
@@ -181,7 +180,7 @@ public class CharacterMoveController :
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction);
+        //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerExit))
         {
             return true;
