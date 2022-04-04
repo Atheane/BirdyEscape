@@ -149,9 +149,9 @@ public class CharacterMoveController :
 
     private bool CollisionWithObstacle()
     {
-        Ray ray = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
+        Ray ray = new Ray(transform.position + new Vector3(0, 0.05f, 0), transform.forward);
         RaycastHit hit;
-        //Debug.DrawRay(ray.origin, ray.direction);
+        Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 0.6f, _layerObstacle))
         {
             return true;
