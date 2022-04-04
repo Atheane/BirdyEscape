@@ -65,7 +65,7 @@ public class SwipeController :
                         _fingerBeginPosition = touch.position;
                         _fingerEndPosition = touch.position;
                     }
-                    if (touch.phase == TouchPhase.Ended)
+                    if (_target != null && touch.phase == TouchPhase.Ended)
                     {
                         _fingerEndPosition = touch.position;
                         if (!DetectTouch() && _target.CompareTag(Entities.Tile.ToString()))
