@@ -8,7 +8,9 @@ public class IOGameRepository : IGameRepository
 {
     public void Save(IGameEntity gameEntity)
     {
-        string destination = Application.persistentDataPath + "/Game.txt";
+        string destination = Application.dataPath + "/Game.txt";
+        Debug.Log("______________________ SAVE");
+        Debug.Log(Application.dataPath);
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenWrite(destination);
@@ -22,9 +24,10 @@ public class IOGameRepository : IGameRepository
 
     public IGameEntity Load()
     {
-        string destination = Application.persistentDataPath + "/Game.txt";
+        string destination = Application.dataPath + "/Game.txt";
         FileStream file;
-
+        Debug.Log("______________________ LOAD");
+        Debug.Log(Application.dataPath);
         if (File.Exists(destination)) file = File.OpenRead(destination);
         else
         {
