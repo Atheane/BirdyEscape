@@ -5,8 +5,8 @@ namespace Domain.Repositories
 {
     public interface IGameRepository : IRepository<IGameEntity>
     {
-        void Add(IGameEntity game);
-        void Update(IGameEntity game);
+        void Save(IGameEntity game);
+        IGameEntity Load();
     }
 }
 

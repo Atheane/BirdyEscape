@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using Libs.Usecases;
 using Libs.Domain.DomainEvents;
 using Domain.Entities;
@@ -6,12 +7,12 @@ using Domain.Repositories;
 
 namespace Usecases
 {
-    public class LoadGame : IUsecase<IntPtr, IGameEntity>
+    public class LoadOrCreateGame : IUsecase<IntPtr, IGameEntity>
     {
         public IGameRepository _gameRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
 
-        public LoadGame(
+        public LoadOrCreateGame(
             IGameRepository gameRepository,
             IDomainEventDispatcher domainEventDispatcher
         )
@@ -21,10 +22,17 @@ namespace Usecases
         }
         public IGameEntity Execute(IntPtr pointer)
         {
-            var gameEntity = GameEntity.Create(1, 500);
-            _gameRepository.Add(gameEntity);
-            _domainEventDispatcher.Dispatch(gameEntity);
-            return gameEntity;
+            try
+            {
+                return _gameRepository.Load();
+            } catch(Exception exception)
+            {
+                Debug.Log(exception);
+                var gameEntity = GameEntity.Create(1, 500);
+                _gameRepository.Save(gameEntity);
+                _domainEventDispatcher.Dispatch(gameEntity);
+                return gameEntity;
+            }
         }
     }
 }
