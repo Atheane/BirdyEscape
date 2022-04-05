@@ -11,6 +11,7 @@ namespace Domain.Entities
         public int _currentLevelNumber { get; }
         public VOEnergy _energy { get; }
         public DateTime _firstConnectionDate { get; }
+        public DateTime _lastConnectionDate { get; }
         public void UpdateLevel(int currentLevelNumber);
         public void ComputeEnergy(ILevelEntity currentLevel);
     }
@@ -21,6 +22,7 @@ namespace Domain.Entities
         public int _currentLevelNumber { get; private set; }
         public VOEnergy _energy { get; private set; }
         public DateTime _firstConnectionDate { get; private set; }
+        public DateTime _lastConnectionDate { get; private set; }
 
 
         private GameEntity(int currentLevelNumber, VOEnergy energy) : base()
@@ -36,6 +38,7 @@ namespace Domain.Entities
             game.AddDomainEvent(gameCreated);
             game._id = gameCreated._id;
             game._firstConnectionDate = gameCreated._createdAtUtc;
+            game._lastConnectionDate = gameCreated._createdAtUtc;
             return game;
         }
 
@@ -59,7 +62,10 @@ namespace Domain.Entities
 
         public void ComputeEnergy(ILevelEntity currentLevel)
         {
-            _energy = VOEnergy.Create(_energy.Value - currentLevel._totalDistance);
+            DateTime now = DateTime.UtcNow;
+            TimeSpan diff = now - _lastConnectionDate;
+            _energy = VOEnergy.Create(_energy.Value - currentLevel._totalDistance + 0.2f * diff.Minutes);
+            _lastConnectionDate = now;
             var energyUpdated = new GameEnergyComputed(this);
             AddDomainEvent(energyUpdated);
         }

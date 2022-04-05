@@ -4,7 +4,6 @@ using Libs.Domain.DomainEvents;
 using Domain.Entities;
 using Domain.Repositories;
 using Usecases.Commands;
-using UnityEngine;
 
 namespace Usecases
 {
@@ -31,8 +30,6 @@ namespace Usecases
             ILevelEntity level = _levelsRepository.Find(command._currentLevelId);
             game.ComputeEnergy(level);
             _gameRepository.Save(game);
-            Debug.Log("_________________2 Save Game");
-            Debug.Log(game._energy.Value);
             _domainEventDispatcher.Dispatch(game);
             return game;
         }
