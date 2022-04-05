@@ -79,18 +79,18 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMultica
             }
         } else
         {
-            (Guid id, Vector3 position, EnumDirection direction)[] charactersRestartProps = levelController.GetCharactersInit();
-            Guid[] tilesIds = levelController.GetTilesIdsWithArrows(); 
-            _container.Resolve<RestartLevel>().Execute(
+            (Guid id, Vector3 position, EnumDirection direction, float totalDistance)[] charactersRestartProps = levelController.GetCharactersInit();
+            Guid[] tilesIds = levelController.GetTilesIdsWithArrows();
+            ILevelEntity level = _container.Resolve<RestartLevel>().Execute(
                 new RestartLevelCommand(
                     levelController._dto._id,
                     charactersRestartProps,
                     tilesIds
-                ));
+            ));
             _container.Resolve<SaveGame>().Execute(
                 new UpdateGameCommand(
-                    levelController._dto._number,
-                    400 //VOEnergy(game, levelController._dto._distance)
+                    level._number,
+                    level._id
                 )
             );
             _state = LevelPlayButtonState.HIDDEN;

@@ -1,36 +1,37 @@
 using System;
 using Libs.Domain.Entities;
 using Domain.DomainEvents;
+using Domain.ValueObjects;
 
 namespace Domain.Entities
 {
     public interface IGameEntity : IAggregateRoot
     {
         public Guid _id { get; }
-        public int _currentLevel { get; }
-        public float _energy { get; }
+        public int _currentLevelNumber { get; }
+        public VOEnergy _energy { get; }
         public DateTime _firstConnectionDate { get; }
-        void UpdateLevel(int currentLevel);
-        public void UpdateEnergy(float energy);
+        public void UpdateLevel(int currentLevelNumber);
+        public void ComputeEnergy(ILevelEntity currentLevel);
     }
 
     public class GameEntity : AggregateRoot, IGameEntity
     {
         public Guid _id { get; private set; }
-        public int _currentLevel { get; private set; }
-        public float _energy { get; private set; }
+        public int _currentLevelNumber { get; private set; }
+        public VOEnergy _energy { get; private set; }
         public DateTime _firstConnectionDate { get; private set; }
 
 
-        private GameEntity(int currentLevel, float energy) : base()
+        private GameEntity(int currentLevelNumber, VOEnergy energy) : base()
         {
-            _currentLevel = currentLevel;
+            _currentLevelNumber = currentLevelNumber;
             _energy = energy;
         }
 
-        public static GameEntity Create(int currentLevel, float energy)
+        public static GameEntity Create(int currentLevelNumber)
         {
-            var game = new GameEntity(currentLevel, energy);
+            var game = new GameEntity(currentLevelNumber, VOEnergy.Create(50f));
             var gameCreated = new GameCreated(game);
             game.AddDomainEvent(gameCreated);
             game._id = gameCreated._id;
@@ -38,9 +39,9 @@ namespace Domain.Entities
             return game;
         }
 
-        public static GameEntity Load(Guid id, int currentLevel, float energy, DateTime firstConnectionDate)
+        public static GameEntity Load(Guid id, int currentLevelNumber, VOEnergy energy, DateTime firstConnectionDate)
         {
-            var game = new GameEntity(currentLevel, energy);
+            var game = new GameEntity(currentLevelNumber, energy);
             game._id = id;
             game._firstConnectionDate = firstConnectionDate;
 
@@ -49,21 +50,19 @@ namespace Domain.Entities
             return game;
         }
 
-        public void UpdateEnergy(float energy)
+        public void UpdateLevel(int currentLevelNumber)
         {
-            _energy = energy;
-            var energyUpdated = new GameEnergyUpdated(this);
-            this.AddDomainEvent(energyUpdated);
+            _currentLevelNumber = currentLevelNumber;
+            var levelUpdated = new GameLevelUpdated(this);
+            AddDomainEvent(levelUpdated);
         }
 
-        public void UpdateLevel(int currentLevel)
+        public void ComputeEnergy(ILevelEntity currentLevel)
         {
-            _currentLevel = currentLevel;
-            var levelUpdated = new GameLevelUpdated(this);
-            this.AddDomainEvent(levelUpdated);
+            _energy = VOEnergy.Create(_energy.Value - currentLevel._totalDistance);
+            var energyUpdated = new GameEnergyComputed(this);
+            AddDomainEvent(energyUpdated);
         }
 
     }
 }
-
-

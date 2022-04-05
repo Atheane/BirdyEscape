@@ -52,7 +52,8 @@ public class CharacterMoveController :
                     characterEntity._direction,
                     characterEntity._state,
                     characterEntity._position,
-                    characterEntity._speed
+                    characterEntity._speed,
+                    characterEntity._totalDistance
                 );
                 SetDto(dto);
                 transform.position = _dto._position;
@@ -72,7 +73,8 @@ public class CharacterMoveController :
             characterEntity._direction,
             characterEntity._state,
             characterEntity._position,
-            characterEntity._speed
+            characterEntity._speed,
+            characterEntity._totalDistance
         ));
     }
 
@@ -110,7 +112,7 @@ public class CharacterMoveController :
             _container.Resolve<SaveGame>().Execute(
                 new UpdateGameCommand(
                     nextLevelNumber,
-                    450 //VOEnergy(game, levelController._dto._distance)
+                    level._dto._id
                 )
             );
             SceneManager.LoadScene("Level"+ nextLevelNumber, LoadSceneMode.Single);
@@ -124,7 +126,9 @@ public class CharacterMoveController :
                 characterEntity._direction,
                 characterEntity._state,
                 characterEntity._position,
-                characterEntity._speed);
+                characterEntity._speed,
+                characterEntity._totalDistance
+            );
             SetDto(dto);
             transform.rotation = Quaternion.Euler(dto._orientation);
         }
@@ -137,7 +141,9 @@ public class CharacterMoveController :
                characterEntity._direction,
                characterEntity._state,
                characterEntity._position,
-               characterEntity._speed);
+               characterEntity._speed,
+               characterEntity._totalDistance
+            );
             SetDto(dto);
             transform.rotation = Quaternion.Euler(dto._orientation);
         }

@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using Domain.Repositories;
 using Domain.Entities;
+using Domain.ValueObjects;
 using Frameworks.Dtos;
 
 public class IOGameRepository : IGameRepository
@@ -17,7 +18,7 @@ public class IOGameRepository : IGameRepository
         else file = File.Create(destination);
 
         BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, new GameDto(gameEntity._id, gameEntity._currentLevel, gameEntity._energy, gameEntity._firstConnectionDate));
+        bf.Serialize(file, new GameDto(gameEntity._id, gameEntity._currentLevelNumber, gameEntity._energy.Value, gameEntity._firstConnectionDate));
         file.Close();
     }
 
@@ -33,6 +34,6 @@ public class IOGameRepository : IGameRepository
         BinaryFormatter bf = new BinaryFormatter();
         GameDto data = (GameDto)bf.Deserialize(file);
         file.Close();
-        return GameEntity.Load(data._id, data._currentLevel, data._energy, data._firstConnectionDate);
+        return GameEntity.Load(data._id, data._currentLevel, VOEnergy.Create(data._energy), data._firstConnectionDate);
     }
 }

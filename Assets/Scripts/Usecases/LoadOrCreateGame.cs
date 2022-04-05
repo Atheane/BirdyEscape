@@ -29,7 +29,7 @@ namespace Usecases
             } catch(Exception exception)
             {
                 Debug.Log(exception);
-                IGameEntity game = GameEntity.Create(1, 500);
+                IGameEntity game = GameEntity.Create(1);
                 _gameRepository.Save(game);
                 _domainEventDispatcher.Dispatch(game);
                 return game;

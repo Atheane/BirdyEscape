@@ -23,12 +23,12 @@ public class LevelController : MonoBehaviour
         _container = container;
     }
 
-    public (Guid id, Vector3 position, EnumDirection direction)[] GetCharactersInit()
+    public (Guid id, Vector3 position, EnumDirection direction, float totalDistance)[] GetCharactersInit()
     {
-        List<(Guid id, Vector3 position, EnumDirection direction)> charactersRestartProps = new List<(Guid id, Vector3 position, EnumDirection direction)>();
+        List<(Guid id, Vector3 position, EnumDirection direction, float totalDistance)> charactersRestartProps = new List<(Guid id, Vector3 position, EnumDirection direction, float totalDistance)>();
         foreach (CharacterMoveController controller in _charactersControllers)
         {
-            (Guid id, Vector3 position, EnumDirection direction) characterRestartProps = (controller._dto._id, controller._init_position, controller._init_direction);
+            (Guid id, Vector3 position, EnumDirection direction, float totalDistance) characterRestartProps = (controller._dto._id, controller._init_position, controller._init_direction, controller._dto._totalDistance);
             charactersRestartProps.Add(characterRestartProps);
         }
         return charactersRestartProps.ToArray();
@@ -99,7 +99,8 @@ public class LevelController : MonoBehaviour
                     characterEntity._direction,
                     characterEntity._state,
                     characterEntity._position,
-                    characterEntity._speed
+                    characterEntity._speed,
+                    characterEntity._totalDistance
             ));
         }
         return characters;

@@ -39,11 +39,11 @@ namespace Usecases
         public ILevelEntity Execute(IRestartLevelCommand command)
         {
             _levelEntity = _levelsRepository.Find(command._levelId);
-            List<(ICharacterEntity characterEntity, VOPosition position, EnumDirection direction)> charactersProps = new List<(ICharacterEntity characterEntity, VOPosition position, EnumDirection direction)>();
-            foreach ((Guid id, Vector3 position, EnumDirection direction) in command._charactersRestartProps)
+            List<(ICharacterEntity characterEntity, VOPosition position, EnumDirection direction, float totalDistance)> charactersProps = new List<(ICharacterEntity characterEntity, VOPosition position, EnumDirection direction, float totalDistance)>();
+            foreach ((Guid id, Vector3 position, EnumDirection direction, float totalDistance) in command._charactersRestartProps)
             {
                 var vOPosition = _mapper.ToDomain(position);
-                charactersProps.Add((_charactersRepository.Find(id), vOPosition, direction));
+                charactersProps.Add((_charactersRepository.Find(id), vOPosition, direction, totalDistance));
             }
             List<ITileEntity> tilesEntities = new List<ITileEntity>();
             foreach (Guid id in command._tilesIds)

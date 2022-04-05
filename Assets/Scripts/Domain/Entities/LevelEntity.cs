@@ -4,6 +4,7 @@ using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.Types;
 using Domain.ValueObjects;
+using UnityEngine;
 
 namespace Domain.Entities
 {
@@ -14,9 +15,10 @@ namespace Domain.Entities
         public ICharacterEntity[] _characters { get; }
         public ITileEntity[] _tiles { get; }
         public EnumLevelState _state { get; }
+        public float _totalDistance { get; }
         public void UpdateState(EnumLevelState state);
         public void Restart(
-            (ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps,
+            (ICharacterEntity character, VOPosition position, EnumDirection direction, float totalDistance)[] arrayProps,
             ITileEntity[] tiles
         );
         public void Finish();
@@ -29,6 +31,7 @@ namespace Domain.Entities
         public ICharacterEntity[] _characters { get; private set; }
         public ITileEntity[] _tiles { get; private set; }
         public EnumLevelState _state { get; private set; }
+        public float _totalDistance { get; private set; }
 
 
         private LevelEntity(int number, ICharacterEntity[] characters, ITileEntity[] tiles, EnumLevelState state) : base()
@@ -45,6 +48,7 @@ namespace Domain.Entities
             var levelCreated = new LevelCreated(level);
             level.AddDomainEvent(levelCreated);
             level._id = levelCreated._id;
+            level._totalDistance = 0;
             return level;
         }
 
@@ -56,17 +60,19 @@ namespace Domain.Entities
         }
 
         public void Restart(
-            (ICharacterEntity character, VOPosition position, EnumDirection direction)[] arrayProps,
+            (ICharacterEntity character, VOPosition position, EnumDirection direction, float totalDistance)[] arrayProps,
             ITileEntity[] tiles
         )
         {
             _state = EnumLevelState.OFF;
 
             List<ICharacterEntity> charactersEntities = new List<ICharacterEntity>();
-            foreach ((ICharacterEntity character, VOPosition position, EnumDirection direction) in arrayProps)
+            foreach ((ICharacterEntity character, VOPosition position, EnumDirection direction, float totalDistance) in arrayProps)
             {
+
                 character.Restart(position, direction);
                 charactersEntities.Add(character);
+                _totalDistance += totalDistance;
             }
 
             List<ITileEntity> tilesEntities = new List<ITileEntity>();
@@ -78,7 +84,7 @@ namespace Domain.Entities
             var levelRestarted = new LevelRestarted(this);
             AddDomainEvent(levelRestarted);
             _characters = charactersEntities.ToArray();
-            _tiles = tilesEntities.ToArray();
+            _tiles = tilesEntities.ToArray(); 
         }
 
         public void Finish()
@@ -86,6 +92,7 @@ namespace Domain.Entities
             _state = EnumLevelState.WIN;
             foreach (ICharacterEntity character in _characters)
             {
+                _totalDistance += character._totalDistance;
                 character.Delete();
             }
             foreach (ITileEntity tile in _tiles)

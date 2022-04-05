@@ -15,6 +15,7 @@ namespace Domain.Entities
         public VOPosition _position { get; }
         public int _speed { get; }
         public EnumCharacterState _state { get; }
+        public float _totalDistance { get; }
         public void MoveOnce();
         public void UpdateState(EnumCharacterState state);
         public void UpdateDirection(EnumDirection direction);
@@ -30,22 +31,26 @@ namespace Domain.Entities
         public VOPosition _position { get; private set; }
         public int _speed { get;  private set; }
         public EnumCharacterState _state { get; private set; }
+        public float _totalDistance { get; private set; }
 
-        private CharacterEntity(EnumCharacterType type, EnumDirection direction, VOPosition position, int speed) : base()
+
+        private CharacterEntity(EnumCharacterType type, EnumDirection direction, VOPosition position, int speed, float totalDistance) : base()
         {
             _type = type;
             _direction = direction;
             _position = position;
             _speed = speed;
             _state = EnumCharacterState.IDLE;
+            _totalDistance = totalDistance;
         }
 
         public static CharacterEntity Create(EnumCharacterType type, EnumDirection direction, VOPosition position, int speed)
         {
-            var character = new CharacterEntity(type, direction, position, speed);
+            var character = new CharacterEntity(type, direction, position, speed, 0);
             var characterCreated = new CharacterCreated(character);
             character.AddDomainEvent(characterCreated);
             character._id = characterCreated._id;
+            character._totalDistance = 0;
             return character;
         }
 
@@ -70,6 +75,7 @@ namespace Domain.Entities
                         break;
                 }
                 _position = VOPosition.Create(position);
+                _totalDistance += 0.2f;
                 // not necessary, and low perf
                 //var characterPositionUpdated = new CharacterPositionUpdatedDomainEvent(this);
                 //AddDomainEvent(characterPositionUpdated);
@@ -119,6 +125,7 @@ namespace Domain.Entities
             _state = EnumCharacterState.IDLE;
             _direction = direction;
             _position = position;
+            _totalDistance = 0;
             var characterRestarted = new CharacterRestarted(this);
             AddDomainEvent(characterRestarted);
         }

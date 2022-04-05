@@ -16,6 +16,7 @@ namespace Frameworks.Dtos
         public Vector3 _orientation { get; }
         public int _speed { get; }
         public string _image { get; }
+        public float _totalDistance { get; }
     }
 
     public class CharacterDto: ICharacterDto
@@ -28,8 +29,10 @@ namespace Frameworks.Dtos
         public Vector3 _orientation { get; private set; }
         public int _speed { get; private set; }
         public string _image { get; private set; }
+        public float _totalDistance { get; private set; }
 
-        private CharacterDto(Guid id, EnumCharacterType type, EnumDirection direction, EnumCharacterState state, Vector3 position, int speed, string image)
+
+        private CharacterDto(Guid id, EnumCharacterType type, EnumDirection direction, EnumCharacterState state, Vector3 position, int speed, string image, float totalDistance)
         {
             _id = id;
             _type = type;
@@ -38,9 +41,10 @@ namespace Frameworks.Dtos
             _position = position;
             _speed = speed;
             _image = image;
+            _totalDistance = totalDistance;
         }
 
-        public static CharacterDto Create(Guid id, EnumCharacterType type, EnumDirection direction, EnumCharacterState state, VOPosition position, int speed)
+        public static CharacterDto Create(Guid id, EnumCharacterType type, EnumDirection direction, EnumCharacterState state, VOPosition position, int speed, float totalDistance)
         {
             string image;
             switch (type)
@@ -53,7 +57,7 @@ namespace Frameworks.Dtos
                     break;
             }
             var pos = new Vector3(position.Value.X, PuzzleController.MIN.y, position.Value.Z);
-            var characterDto = new CharacterDto(id, type, direction, state, pos, speed, image);
+            var characterDto = new CharacterDto(id, type, direction, state, pos, speed, image, totalDistance);
             characterDto.Orientate();
             return characterDto;
         }

@@ -33,7 +33,7 @@ namespace Frameworks.Dtos
             List<ICharacterDto> characterDtos = new List<ICharacterDto>();
             foreach (ICharacterEntity character in characters)
             {
-                characterDtos.Add(CharacterDto.Create(character._id, character._type, character._direction, character._state, character._position, character._speed));
+                characterDtos.Add(CharacterDto.Create(character._id, character._type, character._direction, character._state, character._position, character._speed, character._totalDistance));
             }
             return new LevelDto(id, number, characterDtos.ToArray(), state);
         }

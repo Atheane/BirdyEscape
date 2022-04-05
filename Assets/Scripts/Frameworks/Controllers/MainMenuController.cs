@@ -31,7 +31,7 @@ public class MainMenuController : MonoBehaviour, IPointerDownHandler
         {
             _state = MainMenuButtonState.CLICKED;
             IGameEntity gameEntity = _container.Resolve<LoadOrCreateGame>().Execute(IntPtr.Zero);
-            SceneManager.LoadScene("Level" + gameEntity._currentLevel, LoadSceneMode.Single);
+            SceneManager.LoadScene("Level" + gameEntity._currentLevelNumber, LoadSceneMode.Single);
         }
     }
 }
