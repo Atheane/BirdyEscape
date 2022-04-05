@@ -22,8 +22,6 @@ namespace Usecases
         }
         public IGameEntity Execute(IntPtr pointer)
         {
-            Debug.Log("________________________");
-            Debug.Log("LoadOrCreate");
             try
             {
                 return _gameRepository.Load();

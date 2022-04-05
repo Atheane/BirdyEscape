@@ -8,5 +8,3 @@ namespace Domain.Repositories
         IGameEntity Load();
     }
 }
-
-

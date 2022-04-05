@@ -1,41 +1,38 @@
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using Domain.Repositories;
 using Domain.Entities;
+using Frameworks.Dtos;
 
 public class IOGameRepository : IGameRepository
 {
     public void Save(IGameEntity gameEntity)
     {
-        string destination = Application.dataPath + "/Game.txt";
-        Debug.Log("______________________ SAVE");
-        Debug.Log(Application.dataPath);
+        string destination = Application.dataPath + "/Persistence/Game.dat";
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenWrite(destination);
         else file = File.Create(destination);
 
-        IGameEntity data = GameEntity.Create(gameEntity._currentLevel, gameEntity._energy);
         BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, data);
+        bf.Serialize(file, new GameDto(gameEntity._id, gameEntity._currentLevel, gameEntity._energy, gameEntity._firstConnectionDate));
         file.Close();
     }
 
     public IGameEntity Load()
     {
-        string destination = Application.dataPath + "/Game.txt";
+        string destination = Application.dataPath + "/Persistence/Game.dat";
         FileStream file;
-        Debug.Log("______________________ LOAD");
-        Debug.Log(Application.dataPath);
         if (File.Exists(destination)) file = File.OpenRead(destination);
         else
         {
             throw new System.Exception("File not found");
         }
         BinaryFormatter bf = new BinaryFormatter();
-        IGameEntity data = (IGameEntity)bf.Deserialize(file);
+        GameDto data = (GameDto)bf.Deserialize(file);
         file.Close();
-        return data;
+        return GameEntity.Load(data._id, data._currentLevel, data._energy, data._firstConnectionDate);
     }
 }

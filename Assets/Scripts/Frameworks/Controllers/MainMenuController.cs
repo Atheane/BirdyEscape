@@ -1,6 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Zenject;
+using Usecases;
+using Domain.Entities;
 
 
 public enum MainMenuButtonState { CLICKED, IDLE };
@@ -8,8 +12,15 @@ public enum MainMenuButtonState { CLICKED, IDLE };
 public class MainMenuController : MonoBehaviour, IPointerDownHandler
 {
     public MainMenuButtonState _state;
+    private DiContainer _container;
 
-    void Start()
+    [Inject]
+    public void Construct(DiContainer container)
+    {
+        _container = container;
+    }
+
+    private void Start()
     {
         _state = MainMenuButtonState.IDLE;
     }
@@ -19,10 +30,8 @@ public class MainMenuController : MonoBehaviour, IPointerDownHandler
         if (_state == MainMenuButtonState.IDLE)
         {
             _state = MainMenuButtonState.CLICKED;
-            //to-do load last game statistics
-            //Game AggregateRoot. Has currentLevel, energy, firstConnection, player
-            var lastlevelNumber = 1;
-            SceneManager.LoadScene("Level" + lastlevelNumber, LoadSceneMode.Single);
+            IGameEntity gameEntity = _container.Resolve<LoadOrCreateGame>().Execute(IntPtr.Zero);
+            SceneManager.LoadScene("Level" + gameEntity._currentLevel, LoadSceneMode.Single);
         }
     }
 }

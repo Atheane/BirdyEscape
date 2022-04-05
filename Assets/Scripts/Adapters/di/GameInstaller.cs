@@ -23,30 +23,33 @@ public class GameInstaller : MonoInstaller
         Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>())).AsSingle();
         Container.Bind<ITilesRepository>().FromInstance(new InMemoryTileRepository(new Dictionary<Guid, ITileEntity>())).AsSingle();
         Container.Bind<ILevelsRepository>().FromInstance(new InMemoryLevelRepository(new Dictionary<Guid, ILevelEntity>())).AsSingle();
+        Container.Bind<IGameRepository>().To<IOGameRepository>().AsSingle();
 
         Container.Bind<IMapper<VOCoordinates, Vector3>>().To<Vector3ToVOCoordinatesMapper>().AsSingle();
         Container.Bind<IMapper<VOPosition, Vector3>>().To<Vector3ToVOPositionMapper>().AsSingle();
-        // level commands
+        // level usecase
         Container.Bind<CreateLevel>().AsSingle();
         Container.Bind<UpdateLevelState>().AsSingle();
         Container.Bind<RestartLevel>().AsSingle();
         Container.Bind<FinishLevel>().AsSingle();
-        // character commands
+        // character usecase
         Container.Bind<CreateCharacter>().AsSingle();
         Container.Bind<MoveOnceCharacter>().AsSingle();
         Container.Bind<UpdateCharacterState>().AsSingle();
         Container.Bind<TurnRight>().AsSingle();
         Container.Bind<UpdateCharacterDirection>().AsSingle();
-        // character queries
+        // character usecase
         Container.Bind<GetAllCharacters>().AsSingle();
         Container.Bind<GetCharacterState>().AsSingle();
         Container.Bind<GetCharacterPositionUsecase>().AsSingle();
-        // arrow commands
+        // arrow usecase
         Container.Bind<AddTileArrow>().AsSingle();
         Container.Bind<UpdateTileArrowDirection>().AsSingle();
         Container.Bind<RemoveTileArrow>().AsSingle();
-        // tile commands
+        // tile usecase
         Container.Bind<CreateTile>().AsSingle();
+        // game usecase
+        Container.Bind<LoadOrCreateGame>().AsSingle();
         // controllers
         Container.Bind<LevelController>().AsSingle();
     }

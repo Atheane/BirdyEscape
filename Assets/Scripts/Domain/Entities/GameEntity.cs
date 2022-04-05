@@ -36,6 +36,17 @@ namespace Domain.Entities
             return game;
         }
 
+        public static GameEntity Load(Guid id, int currentLevel, float energy, DateTime firstConnectionDate)
+        {
+            var game = new GameEntity(currentLevel, energy);
+            game._id = id;
+            game._firstConnectionDate = firstConnectionDate;
+
+            var gameLoaded = new GameLoaded(game);
+            game.AddDomainEvent(gameLoaded);
+            return game;
+        }
+
     }
 }
 
