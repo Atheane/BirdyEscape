@@ -104,10 +104,15 @@ public class CharacterMoveController :
     private void Moveloop() {
         if (CollisionWithExit())
         {
-            Debug.Log("NEXT LEVEL");
             var level = GetComponentInParent<LevelController>();
-            _container.Resolve<FinishLevel>().Execute(new FinishLevelCommand(level._dto._id));
             var nextLevelNumber = level._dto._number + 1;
+            _container.Resolve<FinishLevel>().Execute(new FinishLevelCommand(level._dto._id));
+            _container.Resolve<SaveGame>().Execute(
+                new UpdateGameCommand(
+                    nextLevelNumber,
+                    450 //VOEnergy(game, levelController._dto._distance)
+                )
+            );
             SceneManager.LoadScene("Level"+ nextLevelNumber, LoadSceneMode.Single);
         }
         else if (CollisionWithArrow())

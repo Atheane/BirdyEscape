@@ -87,6 +87,12 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMultica
                     charactersRestartProps,
                     tilesIds
                 ));
+            _container.Resolve<SaveGame>().Execute(
+                new UpdateGameCommand(
+                    levelController._dto._number,
+                    400 //VOEnergy(game, levelController._dto._distance)
+                )
+            );
             _state = LevelPlayButtonState.HIDDEN;
             _icon.sprite = _spriteButtonOn;
         }

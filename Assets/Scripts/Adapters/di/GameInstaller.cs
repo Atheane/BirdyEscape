@@ -50,6 +50,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<CreateTile>().AsSingle();
         // game usecase
         Container.Bind<LoadOrCreateGame>().AsSingle();
+        Container.Bind<SaveGame>().AsSingle();
         // controllers
         Container.Bind<LevelController>().AsSingle();
     }

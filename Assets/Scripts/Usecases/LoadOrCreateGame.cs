@@ -24,14 +24,15 @@ namespace Usecases
         {
             try
             {
-                return _gameRepository.Load();
+                IGameEntity game = _gameRepository.Load();
+                return game;
             } catch(Exception exception)
             {
                 Debug.Log(exception);
-                var gameEntity = GameEntity.Create(1, 500);
-                _gameRepository.Save(gameEntity);
-                _domainEventDispatcher.Dispatch(gameEntity);
-                return gameEntity;
+                IGameEntity game = GameEntity.Create(1, 500);
+                _gameRepository.Save(game);
+                _domainEventDispatcher.Dispatch(game);
+                return game;
             }
         }
     }

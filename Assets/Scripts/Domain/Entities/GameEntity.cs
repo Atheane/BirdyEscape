@@ -10,6 +10,8 @@ namespace Domain.Entities
         public int _currentLevel { get; }
         public float _energy { get; }
         public DateTime _firstConnectionDate { get; }
+        void UpdateLevel(int currentLevel);
+        public void UpdateEnergy(float energy);
     }
 
     public class GameEntity : AggregateRoot, IGameEntity
@@ -45,6 +47,20 @@ namespace Domain.Entities
             var gameLoaded = new GameLoaded(game);
             game.AddDomainEvent(gameLoaded);
             return game;
+        }
+
+        public void UpdateEnergy(float energy)
+        {
+            _energy = energy;
+            var energyUpdated = new GameEnergyUpdated(this);
+            this.AddDomainEvent(energyUpdated);
+        }
+
+        public void UpdateLevel(int currentLevel)
+        {
+            _currentLevel = currentLevel;
+            var levelUpdated = new GameLevelUpdated(this);
+            this.AddDomainEvent(levelUpdated);
         }
 
     }
