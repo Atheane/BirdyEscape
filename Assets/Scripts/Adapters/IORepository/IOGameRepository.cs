@@ -34,6 +34,6 @@ public class IOGameRepository : IGameRepository
         BinaryFormatter bf = new BinaryFormatter();
         GameDto data = (GameDto)bf.Deserialize(file);
         file.Close();
-        return GameEntity.Load(data._id, data._currentLevel, VOEnergy.Create(data._energy), data._firstConnectionDate);
+        return GameEntity.Load(data._id, data._currentLevel, VOEnergy.Load(data._energy), data._firstConnectionDate);
     }
 }

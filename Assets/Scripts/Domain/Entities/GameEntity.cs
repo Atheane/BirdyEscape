@@ -33,7 +33,7 @@ namespace Domain.Entities
 
         public static GameEntity Create(int currentLevelNumber)
         {
-            var game = new GameEntity(currentLevelNumber, VOEnergy.Create(50f));
+            var game = new GameEntity(currentLevelNumber, VOEnergy.Create());
             var gameCreated = new GameCreated(game);
             game.AddDomainEvent(gameCreated);
             game._id = gameCreated._id;
@@ -62,10 +62,8 @@ namespace Domain.Entities
 
         public void ComputeEnergy(ILevelEntity currentLevel)
         {
-            DateTime now = DateTime.UtcNow;
-            TimeSpan diff = now - _lastConnectionDate;
-            _energy = VOEnergy.Create(_energy.Value - currentLevel._totalDistance + 0.2f * diff.Minutes);
-            _lastConnectionDate = now;
+            _energy = VOEnergy.Compute(_energy.Value, currentLevel._totalDistance, _lastConnectionDate);
+            _lastConnectionDate = DateTime.UtcNow;
             var energyUpdated = new GameEnergyComputed(this);
             AddDomainEvent(energyUpdated);
         }
