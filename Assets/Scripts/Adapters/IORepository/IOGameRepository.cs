@@ -11,9 +11,8 @@ public class IOGameRepository : IGameRepository
 {
     public void Save(IGameEntity gameEntity)
     {
-        string destination = Application.dataPath + "/Persistence/Game.dat";
+        string destination = Application.persistentDataPath + "/Game.dat";
         FileStream file;
-
         if (File.Exists(destination)) file = File.OpenWrite(destination);
         else file = File.Create(destination);
 
@@ -24,12 +23,13 @@ public class IOGameRepository : IGameRepository
 
     public IGameEntity Load()
     {
-        string destination = Application.dataPath + "/Persistence/Game.dat";
+        string destination = Application.persistentDataPath + "/Game.dat";
+
         FileStream file;
         if (File.Exists(destination)) file = File.OpenRead(destination);
         else
         {
-            throw new System.Exception("File not found");
+            throw new Exception("File not found");
         }
         BinaryFormatter bf = new BinaryFormatter();
         GameDto data = (GameDto)bf.Deserialize(file);
