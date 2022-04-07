@@ -24,7 +24,7 @@ namespace Domain.ValueObjects
         public static VOEnergy Compute(float value, float distance, DateTime lastConnectionDate)
         {
             TimeSpan diff = DateTime.UtcNow - lastConnectionDate;
-            var newValue = value - distance + ENERGY_PER_MINUTE * diff.Minutes;
+            var newValue = Math.Min(value - distance + ENERGY_PER_MINUTE * diff.Minutes, 100);
             return new VOEnergy(newValue);
         }
 

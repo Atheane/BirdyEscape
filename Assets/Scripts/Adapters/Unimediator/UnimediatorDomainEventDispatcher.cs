@@ -35,7 +35,7 @@ namespace Adapters.Unimediatr
 
             foreach (IDomainEvent domainEvent in aggregateRoot.DomainEvents)
             {
-                //Debug.Log("______" + domainEvent._label + "_____published");
+                Debug.Log("______" + domainEvent._label + "_____published");
                 domainEventType = domainEvent.GetType();
                 genericDispatcherType = typeof(DomainEventNotification<>).MakeGenericType(domainEventType);
                 notification = Activator.CreateInstance(genericDispatcherType, domainEvent);

@@ -25,6 +25,7 @@ namespace Usecases
             try
             {
                 IGameEntity game = _gameRepository.Load();
+                _domainEventDispatcher.Dispatch(game);
                 return game;
             } catch(Exception exception)
             {
