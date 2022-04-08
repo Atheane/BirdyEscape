@@ -7,7 +7,7 @@ namespace Domain.ValueObjects
     public sealed class VOEnergy : ValueObject<float>
     {
         public static float INIT_ENERGY = 100f;
-        public static float ENERGY_PER_MINUTE = 0.2f;
+        public static float ENERGY_PER_MINUTE = 1.0f;
 
         private VOEnergy(float value) : base(value) { }
 
