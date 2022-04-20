@@ -6,7 +6,7 @@ namespace LayerLab
 {
     public class PanelMonoRound : MonoBehaviour
     {
-        [SerializeField] private GameObject[] otherPanels;
+        [SerializeField] private GameObject[] otherPanels = new GameObject[1];
 
         public void OnEnable()
         {
