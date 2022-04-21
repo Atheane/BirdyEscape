@@ -32,7 +32,7 @@ public class SwipeController :
     public void Awake()
     {
         _layer = LayerMask.GetMask(Entities.Puzzle.ToString());
-        _levelState = EnumLevelState.OFF;
+        _levelState = EnumLevelState.ON;
     }
 
     public void Handle(DomainEventNotification<LevelStateUpdated> notification)
@@ -55,7 +55,7 @@ public class SwipeController :
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _layer))
         {
-            if (_levelState == EnumLevelState.OFF)
+            if (_levelState == EnumLevelState.ON)
             {
                 foreach (Touch touch in Input.touches)
                 {

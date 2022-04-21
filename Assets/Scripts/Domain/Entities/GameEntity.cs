@@ -2,6 +2,8 @@ using System;
 using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.ValueObjects;
+using Domain.Exceptions;
+using UnityEngine;
 
 namespace Domain.Entities
 {
@@ -62,10 +64,22 @@ namespace Domain.Entities
 
         public void ComputeEnergy(ILevelEntity currentLevel)
         {
-            _energy = VOEnergy.Compute(_energy.Value, currentLevel._totalDistance, _lastConnectionDate);
-            _lastConnectionDate = DateTime.UtcNow;
-            var energyUpdated = new GameEnergyComputed(this);
-            AddDomainEvent(energyUpdated);
+            try
+            {
+                _energy = VOEnergy.Compute(_energy.Value, currentLevel._totalDistance, _lastConnectionDate);
+                _lastConnectionDate = DateTime.UtcNow;
+                var energyUpdated = new GameEnergyComputed(this);
+                AddDomainEvent(energyUpdated);
+            } catch(Exception e)
+            {
+                Debug.Log("COMPUTE ENERGY");
+                Debug.Log(e);
+                if (e.GetType() == typeof(EnergyException.ShouldNotBeNegative))
+                {
+                    var gameOver = new GameOver(this);
+                    AddDomainEvent(gameOver);
+                }
+            }
         }
 
     }

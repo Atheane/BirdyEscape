@@ -21,7 +21,8 @@ namespace Domain.Entities
             (ICharacterEntity character, VOPosition position, EnumDirection direction, float totalDistance)[] arrayProps,
             ITileEntity[] tiles
         );
-        public void Finish();
+        public void Complete();
+        public void Pause();
     }
 
     public class LevelEntity : AggregateRoot, ILevelEntity
@@ -64,7 +65,7 @@ namespace Domain.Entities
             ITileEntity[] tiles
         )
         {
-            _state = EnumLevelState.OFF;
+            _state = EnumLevelState.ON;
 
             List<ICharacterEntity> charactersEntities = new List<ICharacterEntity>();
             foreach ((ICharacterEntity character, VOPosition position, EnumDirection direction, float totalDistance) in arrayProps)
@@ -87,7 +88,7 @@ namespace Domain.Entities
             _tiles = tilesEntities.ToArray(); 
         }
 
-        public void Finish()
+        public void Complete()
         {
             _state = EnumLevelState.WIN;
             foreach (ICharacterEntity character in _characters)
@@ -99,6 +100,24 @@ namespace Domain.Entities
             {
                 tile.Delete();
             }
+            var levelCompleted = new LevelCompleted(this);
+            AddDomainEvent(levelCompleted);
+        }
+
+        public void Pause()
+        {
+            _state = EnumLevelState.PENDING;
+            foreach (ICharacterEntity character in _characters)
+            {
+                _totalDistance += character._totalDistance;
+                character.Delete();
+            }
+            foreach (ITileEntity tile in _tiles)
+            {
+                tile.Delete();
+            }
+            var levelPaused = new LevelPaused(this);
+            AddDomainEvent(levelPaused);
         }
     }
 }

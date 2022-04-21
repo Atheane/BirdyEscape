@@ -108,7 +108,7 @@ public class CharacterMoveController :
         {
             var level = GetComponentInParent<LevelController>();
             var nextLevelNumber = level._dto._number + 1;
-            _container.Resolve<FinishLevel>().Execute(new FinishLevelCommand(level._dto._id));
+            _container.Resolve<CompleteLevel>().Execute(new CompleteLevelCommand(level._dto._id));
             _container.Resolve<SaveGame>().Execute(
                 new UpdateGameCommand(
                     nextLevelNumber,

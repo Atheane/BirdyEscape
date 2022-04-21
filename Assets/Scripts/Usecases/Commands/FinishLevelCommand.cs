@@ -3,15 +3,15 @@ using UniMediator;
 
 namespace Usecases.Commands
 {
-    public interface IFinishLevelCommand
+    public interface ICompleteLevelCommand
     {
         public Guid _id { get; }
     }
-    public class FinishLevelCommand : IMulticastMessage, IFinishLevelCommand
+    public class CompleteLevelCommand : IMulticastMessage, ICompleteLevelCommand
     {
         public Guid _id { get; private set; }
 
-        public FinishLevelCommand(Guid id)
+        public CompleteLevelCommand(Guid id)
         {
             _id = id;
         }

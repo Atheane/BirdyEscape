@@ -7,14 +7,14 @@ using Domain.Repositories;
 
 namespace Usecases
 {
-    public class FinishLevel : IUsecase<IFinishLevelCommand, ILevelEntity>
+    public class CompleteLevel : IUsecase<ICompleteLevelCommand, ILevelEntity>
     {
         public ILevelsRepository _levelsRepository;
         public ITilesRepository _tilesRepository;
         public ICharactersRepository _charactersRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
 
-        public FinishLevel(
+        public CompleteLevel(
             ILevelsRepository levelsRepository,
             ITilesRepository tilesRepository,
             ICharactersRepository charactersRepository,
@@ -26,10 +26,10 @@ namespace Usecases
             _charactersRepository = charactersRepository;
             _domainEventDispatcher = domainEventDispatcher;
         }
-        public ILevelEntity Execute(IFinishLevelCommand command)
+        public ILevelEntity Execute(ICompleteLevelCommand command)
         {
             var levelEntity = _levelsRepository.Find(command._id);
-            levelEntity.Finish();
+            levelEntity.Complete();
             foreach (ICharacterEntity character in levelEntity._characters)
             {
                 _charactersRepository.Remove(character);

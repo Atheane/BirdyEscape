@@ -8,6 +8,7 @@ using Usecases.Commands;
 using Domain.Types;
 using Frameworks.Dtos;
 
+
 public class LevelController : MonoBehaviour
 {
 
@@ -59,7 +60,7 @@ public class LevelController : MonoBehaviour
                 _levelNumber,
                 characters,
                 tiles,
-                EnumLevelState.OFF
+                EnumLevelState.ON
             ));
         _dto = LevelDto.Create(levelEntity._id, levelEntity._number, levelEntity._characters, levelEntity._state);
     }

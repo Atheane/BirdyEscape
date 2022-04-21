@@ -68,8 +68,6 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMultica
             _icon.sprite = _spriteButtonOff;
             _state = LevelPlayButtonState.RESTART;
 
-            _container.Resolve<UpdateLevelState>().Execute(new UpdateLevelStateCommand(levelController._dto._id, EnumLevelState.ON));
-
             foreach (ICharacterEntity character in _characters)
             {
                 if (character._state == EnumCharacterState.IDLE)
