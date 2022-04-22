@@ -19,6 +19,7 @@ namespace Frameworks.Dtos
         public float _totalDistance { get; }
     }
 
+    [Serializable]
     public class CharacterDto: ICharacterDto
     {
         public Guid _id { get; private set; }

@@ -14,6 +14,7 @@ namespace Frameworks.Dtos
         public EnumLevelState _state { get; }
     }
 
+    [Serializable]
     public class LevelDto : ILevelDto
     {
         public Guid _id { get; private set; }

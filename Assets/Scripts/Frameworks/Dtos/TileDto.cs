@@ -13,6 +13,7 @@ namespace Frameworks.Dtos
         public void AddArrow(IArrowDto arrowDto);
     }
 
+    [Serializable]
     public class TileDto : ITileDto
     {
         public Guid _id { get; private set; }
