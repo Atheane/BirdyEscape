@@ -24,7 +24,7 @@ public class EnergyBarController : MonoBehaviour, IMulticastMessageHandler<Domai
     {
         _slider.maxValue = 1.0f;
         Debug.Log("EnergyBarController START");
-        IGameEntity gameEntity = _container.Resolve<LoadOrCreateGame>().Execute(IntPtr.Zero);
+        IGameEntity gameEntity = _container.Resolve<LoadGame>().Execute(IntPtr.Zero);
         _slider = gameObject.GetComponent<Slider>();
         _slider.value = gameEntity._energy.Value / 100;
         Debug.Log(_slider.value);

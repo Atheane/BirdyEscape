@@ -52,7 +52,15 @@ namespace Domain.Entities
             var levelCreated = new LevelCreated(level);
             level.AddDomainEvent(levelCreated);
             level._id = levelCreated._id;
-            level._totalDistance = 0;
+            return level;
+        }
+
+        public static LevelEntity Load(Guid id, int number, ICharacterEntity[] characters, ITileEntity[] tiles, EnumLevelState state)
+        {
+            var level = new LevelEntity(number, characters, tiles, state);
+            var levelLoaded = new LevelLoaded(level);
+            level.AddDomainEvent(levelLoaded);
+            level._id = id;
             return level;
         }
 

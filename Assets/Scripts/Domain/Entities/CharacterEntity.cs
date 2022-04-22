@@ -54,6 +54,16 @@ namespace Domain.Entities
             return character;
         }
 
+        public static CharacterEntity Load(Guid id, EnumCharacterType type, EnumDirection direction, VOPosition position, int speed)
+        {
+            var character = new CharacterEntity(type, direction, position, speed, 0);
+            var characterLoaded = new CharacterLoaded(character);
+            character.AddDomainEvent(characterLoaded);
+            character._id = id;
+            character._totalDistance = 0;
+            return character;
+        }
+
         public void MoveOnce()
         {
             try

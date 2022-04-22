@@ -38,7 +38,8 @@ public class LevelController : MonoBehaviour
                 tiles,
                 EnumLevelState.ON
             ));
-        _dto = LevelDto.Create(levelEntity._id, levelEntity._number, levelEntity._characters, levelEntity._state);
+        _dto = LevelDto.Create(levelEntity._id, levelEntity._number, levelEntity._characters, levelEntity._tiles, levelEntity._state);
+
     }
 
     private void SetCharactersController(GameObject obj)

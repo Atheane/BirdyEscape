@@ -26,9 +26,9 @@ namespace Usecases
         public IGameEntity Execute(IUpdateGameCommand command)
         {
             IGameEntity game = _gameRepository.Load();
-            game.UpdateCurrentLevel(command._currentLevelNumber);
             ILevelEntity level = _levelsRepository.Find(command._currentLevelId);
-            game.ComputeEnergy(level);
+            game.UpdateCurrentLevel(level);
+            game.ComputeEnergy();
             _gameRepository.Save(game);
             _domainEventDispatcher.Dispatch(game);
             return game;

@@ -43,6 +43,15 @@ namespace Domain.Entities
             return tile;
         }
 
+        public static TileEntity Load(Guid id, VOCoordinates coords, VOPath path)
+        {
+            var tile = new TileEntity(coords, path);
+            var tileLoaded = new TileLoaded(tile);
+            tile.AddDomainEvent(tileLoaded);
+            tile._id = id;
+            return tile;
+        }
+
         public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path)
         {
             var arrowEntity = ArrowEntity.Create(direction, coordinates, path);

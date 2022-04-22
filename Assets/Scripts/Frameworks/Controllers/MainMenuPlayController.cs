@@ -30,8 +30,15 @@ public class MainMenuPlayController : MonoBehaviour, IPointerDownHandler
         if (_state == MainMenuPlayButtonState.IDLE)
         {
             _state = MainMenuPlayButtonState.CLICKED;
-            IGameEntity gameEntity = _container.Resolve<LoadOrCreateGame>().Execute(IntPtr.Zero);
-            SceneManager.LoadScene("Level" + gameEntity._currentLevelNumber, LoadSceneMode.Single);
+            try
+            {
+                IGameEntity gameEntity = _container.Resolve<LoadGame>().Execute(IntPtr.Zero);
+                SceneManager.LoadScene("Level" + gameEntity._currentLevel._number, LoadSceneMode.Single);
+            } catch(Exception e)
+            {
+                Debug.Log(e);
+                SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+            }
         }
     }
 }

@@ -6,7 +6,6 @@ using Libs.Usecases;
 using Libs.Domain.DomainEvents;
 using Domain.Repositories;
 using Domain.Entities;
-using Domain.Types;
 using Usecases.Commands;
 using Domain.ValueObjects;
 

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.ValueObjects;
@@ -10,70 +12,68 @@ namespace Domain.Entities
     public interface IGameEntity : IAggregateRoot
     {
         public Guid _id { get; }
-        public int _currentLevelNumber { get; }
+        public ILevelEntity _currentLevel { get; }
         public VOEnergy _energy { get; }
-        public DateTime _firstConnectionDate { get; }
-        public DateTime _lastConnectionDate { get; }
-        public void UpdateCurrentLevel(int currentLevelNumber);
-        public void ComputeEnergy(ILevelEntity currentLevel);
+        public List<DateTime> _connectionsDate { get; }
+        public void UpdateCurrentLevel(ILevelEntity currentLevel);
+        public void ComputeEnergy();
     }
 
     public class GameEntity : AggregateRoot, IGameEntity
     {
         public Guid _id { get; private set; }
-        public int _currentLevelNumber { get; private set; }
+        public ILevelEntity _currentLevel { get; private set;  }
         public VOEnergy _energy { get; private set; }
-        public DateTime _firstConnectionDate { get; private set; }
-        public DateTime _lastConnectionDate { get; private set; }
+        public List<DateTime> _connectionsDate { get; private set; }
 
 
-        private GameEntity(int currentLevelNumber, VOEnergy energy) : base()
+        private GameEntity(ILevelEntity currentLevel, VOEnergy energy) : base()
         {
-            _currentLevelNumber = currentLevelNumber;
+            _currentLevel = currentLevel;
             _energy = energy;
+            _connectionsDate = new List<DateTime>();
         }
 
-        public static GameEntity Create(int currentLevelNumber)
+        public static GameEntity Create(ILevelEntity currentLevel)
         {
-            var game = new GameEntity(currentLevelNumber, VOEnergy.Create());
+            var game = new GameEntity(currentLevel, VOEnergy.Create());
             var gameCreated = new GameCreated(game);
             game.AddDomainEvent(gameCreated);
             game._id = gameCreated._id;
-            game._firstConnectionDate = gameCreated._createdAtUtc;
-            game._lastConnectionDate = gameCreated._createdAtUtc;
+            game._connectionsDate.Add(gameCreated._createdAtUtc);
             return game;
         }
 
-        public static GameEntity Load(Guid id, int currentLevelNumber, VOEnergy energy, DateTime firstConnectionDate)
+        public static GameEntity Load(Guid id, ILevelEntity currentLevel, VOEnergy energy, List<DateTime> connectionsDate)
         {
-            var game = new GameEntity(currentLevelNumber, energy);
+            var game = new GameEntity(currentLevel, energy);
             game._id = id;
-            game._firstConnectionDate = firstConnectionDate;
+            game._connectionsDate = connectionsDate;
 
             var gameLoaded = new GameLoaded(game);
             game.AddDomainEvent(gameLoaded);
             return game;
         }
 
-        public void UpdateCurrentLevel(int currentLevelNumber)
+        public void UpdateCurrentLevel(ILevelEntity currentLevel)
         {
-            _currentLevelNumber = currentLevelNumber;
+            _currentLevel = currentLevel;
             var levelUpdated = new GameLevelUpdated(this);
             AddDomainEvent(levelUpdated);
         }
 
-        public void ComputeEnergy(ILevelEntity currentLevel)
+        public void ComputeEnergy()
         {
             Debug.Log("COMPUTE ENERGY");
             try
             {
                 var totalDistance = 0f;
-                foreach (ICharacterEntity character in currentLevel._characters)
+                foreach (ICharacterEntity character in _currentLevel._characters)
                 {
                     totalDistance += character._totalDistance;
                 }
-                _energy = VOEnergy.Compute(_energy.Value, totalDistance, _lastConnectionDate);
-                _lastConnectionDate = DateTime.UtcNow;
+                _energy = VOEnergy.Compute(_energy.Value, totalDistance, _connectionsDate.Last());
+                _connectionsDate.Add(DateTime.UtcNow);
                 var energyUpdated = new GameEnergyComputed(this);
                 AddDomainEvent(energyUpdated);
             } catch(Exception e)
