@@ -7,11 +7,11 @@ using Usecases;
 using Domain.Entities;
 
 
-public enum MainMenuButtonState { CLICKED, IDLE };
+public enum MainMenuPlayButtonState { CLICKED, IDLE };
 
-public class MainMenuController : MonoBehaviour, IPointerDownHandler
+public class MainMenuPlayController : MonoBehaviour, IPointerDownHandler
 {
-    public MainMenuButtonState _state;
+    public MainMenuPlayButtonState _state;
     private DiContainer _container;
 
     [Inject]
@@ -22,14 +22,14 @@ public class MainMenuController : MonoBehaviour, IPointerDownHandler
 
     private void Start()
     {
-        _state = MainMenuButtonState.IDLE;
+        _state = MainMenuPlayButtonState.IDLE;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (_state == MainMenuButtonState.IDLE)
+        if (_state == MainMenuPlayButtonState.IDLE)
         {
-            _state = MainMenuButtonState.CLICKED;
+            _state = MainMenuPlayButtonState.CLICKED;
             IGameEntity gameEntity = _container.Resolve<LoadOrCreateGame>().Execute(IntPtr.Zero);
             SceneManager.LoadScene("Level" + gameEntity._currentLevelNumber, LoadSceneMode.Single);
         }

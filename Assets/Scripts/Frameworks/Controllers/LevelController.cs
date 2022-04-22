@@ -24,30 +24,6 @@ public class LevelController : MonoBehaviour
         _container = container;
     }
 
-    public (Guid id, Vector3 position, EnumDirection direction, float totalDistance)[] GetCharactersInit()
-    {
-        List<(Guid id, Vector3 position, EnumDirection direction, float totalDistance)> charactersRestartProps = new List<(Guid id, Vector3 position, EnumDirection direction, float totalDistance)>();
-        foreach (CharacterMoveController controller in _charactersControllers)
-        {
-            (Guid id, Vector3 position, EnumDirection direction, float totalDistance) characterRestartProps = (controller._dto._id, controller._init_position, controller._init_direction, controller._dto._totalDistance);
-            charactersRestartProps.Add(characterRestartProps);
-        }
-        return charactersRestartProps.ToArray();
-    }
-
-    public Guid[] GetTilesIdsWithArrows()
-    {
-        List<Guid> ids = new List<Guid>();
-        foreach (TileController controller in _tilesControllers)
-        {
-            if (controller._dto._arrow != null)
-            {
-                ids.Add(controller._dto._id);
-            }
-        }
-        return ids.ToArray();
-    }
-
     private void Awake()
     {
         SetCharactersController(gameObject);

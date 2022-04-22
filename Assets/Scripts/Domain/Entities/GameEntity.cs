@@ -14,7 +14,7 @@ namespace Domain.Entities
         public VOEnergy _energy { get; }
         public DateTime _firstConnectionDate { get; }
         public DateTime _lastConnectionDate { get; }
-        public void UpdateLevel(int currentLevelNumber);
+        public void UpdateCurrentLevel(int currentLevelNumber);
         public void ComputeEnergy(ILevelEntity currentLevel);
     }
 
@@ -55,7 +55,7 @@ namespace Domain.Entities
             return game;
         }
 
-        public void UpdateLevel(int currentLevelNumber)
+        public void UpdateCurrentLevel(int currentLevelNumber)
         {
             _currentLevelNumber = currentLevelNumber;
             var levelUpdated = new GameLevelUpdated(this);
@@ -64,15 +64,20 @@ namespace Domain.Entities
 
         public void ComputeEnergy(ILevelEntity currentLevel)
         {
+            Debug.Log("COMPUTE ENERGY");
             try
             {
-                _energy = VOEnergy.Compute(_energy.Value, currentLevel._totalDistance, _lastConnectionDate);
+                var totalDistance = 0f;
+                foreach (ICharacterEntity character in currentLevel._characters)
+                {
+                    totalDistance += character._totalDistance;
+                }
+                _energy = VOEnergy.Compute(_energy.Value, totalDistance, _lastConnectionDate);
                 _lastConnectionDate = DateTime.UtcNow;
                 var energyUpdated = new GameEnergyComputed(this);
                 AddDomainEvent(energyUpdated);
             } catch(Exception e)
             {
-                Debug.Log("COMPUTE ENERGY");
                 Debug.Log(e);
                 if (e.GetType() == typeof(EnergyException.ShouldNotBeNegative))
                 {

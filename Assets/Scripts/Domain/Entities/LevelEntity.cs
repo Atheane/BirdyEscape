@@ -12,15 +12,11 @@ namespace Domain.Entities
     {
         public Guid _id { get; }
         public int _number { get;  }
+        public (VOPosition, EnumDirection)[] _charactersInit { get; }
         public ICharacterEntity[] _characters { get; }
         public ITileEntity[] _tiles { get; }
         public EnumLevelState _state { get; }
-        public float _totalDistance { get; }
-        public void UpdateState(EnumLevelState state);
-        public void Restart(
-            (ICharacterEntity character, VOPosition position, EnumDirection direction, float totalDistance)[] arrayProps,
-            ITileEntity[] tiles
-        );
+        public List<ITileEntity> Restart();
         public void Complete();
         public void Pause();
     }
@@ -29,6 +25,7 @@ namespace Domain.Entities
     {
         public Guid _id { get; private set; }
         public int _number { get; private set; }
+        public (VOPosition, EnumDirection)[] _charactersInit { get; private set; }
         public ICharacterEntity[] _characters { get; private set; }
         public ITileEntity[] _tiles { get; private set; }
         public EnumLevelState _state { get; private set; }
@@ -38,6 +35,12 @@ namespace Domain.Entities
         private LevelEntity(int number, ICharacterEntity[] characters, ITileEntity[] tiles, EnumLevelState state) : base()
         {
             _number = number;
+            var charactersInit = new List<(VOPosition, EnumDirection)>(); 
+            foreach (ICharacterEntity character in characters)
+            {
+                charactersInit.Add((character._position, character._direction));
+            }
+            _charactersInit = charactersInit.ToArray();
             _characters = characters;
             _tiles = tiles;
             _state = state;
@@ -53,39 +56,26 @@ namespace Domain.Entities
             return level;
         }
 
-        public void UpdateState(EnumLevelState state)
-        {
-            _state = state;
-            var levelStateUpdated = new LevelStateUpdated(this);
-            AddDomainEvent(levelStateUpdated);
-        }
-
-        public void Restart(
-            (ICharacterEntity character, VOPosition position, EnumDirection direction, float totalDistance)[] arrayProps,
-            ITileEntity[] tiles
-        )
+        public List<ITileEntity> Restart()
         {
             _state = EnumLevelState.ON;
-
-            List<ICharacterEntity> charactersEntities = new List<ICharacterEntity>();
-            foreach ((ICharacterEntity character, VOPosition position, EnumDirection direction, float totalDistance) in arrayProps)
+            for (int c = 0; c < _characters.Length; c++)
             {
-
-                character.Restart(position, direction);
-                charactersEntities.Add(character);
-                _totalDistance += totalDistance;
+                _characters[c].Restart(_charactersInit[c].Item1, _charactersInit[c].Item2);
             }
 
-            List<ITileEntity> tilesEntities = new List<ITileEntity>();
-            foreach (ITileEntity tile in tiles)
+            var updatedTiles = new List<ITileEntity>();
+            foreach (ITileEntity tile in _tiles)
             {
-                tile.RemoveArrow();
-                tilesEntities.Add(tile);
+                if (tile._arrow != null)
+                {
+                    tile.RemoveArrow();
+                    updatedTiles.Add(tile);
+                }
             }
             var levelRestarted = new LevelRestarted(this);
             AddDomainEvent(levelRestarted);
-            _characters = charactersEntities.ToArray();
-            _tiles = tilesEntities.ToArray(); 
+            return updatedTiles;
         }
 
         public void Complete()
@@ -93,7 +83,6 @@ namespace Domain.Entities
             _state = EnumLevelState.WIN;
             foreach (ICharacterEntity character in _characters)
             {
-                _totalDistance += character._totalDistance;
                 character.Delete();
             }
             foreach (ITileEntity tile in _tiles)
@@ -109,7 +98,6 @@ namespace Domain.Entities
             _state = EnumLevelState.PENDING;
             foreach (ICharacterEntity character in _characters)
             {
-                _totalDistance += character._totalDistance;
                 character.Delete();
             }
             foreach (ITileEntity tile in _tiles)
