@@ -5,18 +5,26 @@ using Domain.Entities;
 
 namespace Frameworks.Dtos
 {
-    [Serializable]
-    public class LevelDto
+    public interface ILevelDto
     {
-        public string _id;
-        public int _number;
-        public CharacterDto[] _characters;
+        public Guid _id { get; }
+        public int _number { get; }
+        public CharacterDto[] _characters { get; }
+        public TileDto[] _tiles { get; }
+        public EnumLevelState _state { get; }
+    }
+
+    public class LevelDto: ILevelDto
+    {
+        public Guid _id { get; private set; }
+        public int _number { get; private set; }
+        public CharacterDto[] _characters { get; private set; }
         public TileDto[] _tiles { get; private set; }
-        public EnumLevelState _state;
+        public EnumLevelState _state { get; private set; }
 
         private LevelDto(Guid id, int number, CharacterDto[] characters, TileDto[] tiles, EnumLevelState state)
         {
-            _id = id.ToString();
+            _id = id;
             _number = number;
             _characters = characters;
             _tiles = tiles;

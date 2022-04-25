@@ -1,5 +1,4 @@
 
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UniMediator;
@@ -12,19 +11,17 @@ using Frameworks.Dtos;
 public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<TileArrowRemoved>>
 {
     public TileDto _dto { get; private set; }
-    public Guid _id;
 
     public void SetDto(TileDto dto)
     {
         _dto = dto;
-        _id = Guid.Parse(dto._id);
     }
 
     public void Handle(DomainEventNotification<TileArrowRemoved> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ITileEntity tile = notification._domainEvent._props;
-        if (tile._id == _id)
+        if (tile._id == _dto._id)
         {
             TileDto updatedDto = TileDto.Create(
                 tile._id,
@@ -45,7 +42,7 @@ public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEven
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ITileEntity tile = notification._domainEvent._props;
-        if (_id == tile._id && _dto._arrow == null)
+        if (_dto._id == tile._id && _dto._arrow == null)
         {
             IArrowDto dto = ArrowDto.Create(
                 tile._arrow._id,

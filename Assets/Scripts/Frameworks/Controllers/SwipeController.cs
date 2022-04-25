@@ -95,7 +95,7 @@ public class SwipeController :
         var path = "Arrow/" + Entities.Arrow.ToString();
         _container.Resolve<AddTileArrow>().Execute(
             new AddTileArrowCommand(
-                _target.GetComponent<TileController>()._id,
+                _target.GetComponent<TileController>()._dto._id,
                 direction,
                 path
             )
@@ -108,7 +108,7 @@ public class SwipeController :
         TileController tile = _target.parent.GetComponent<TileController>();
         ITileEntity tileEntity = _container.Resolve<UpdateTileArrowDirection>().Execute(
                 new UpdateTileArrowDirectionCommand(
-                    tile._id,
+                    tile._dto._id,
                     direction
                 )
             );
@@ -125,7 +125,7 @@ public class SwipeController :
     {
         TileController controller = _target.parent.GetComponent<TileController>();
         Destroy(_target.gameObject);
-        _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._id));
+        _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._dto._id));
     }
 
     private bool DetectTouch()

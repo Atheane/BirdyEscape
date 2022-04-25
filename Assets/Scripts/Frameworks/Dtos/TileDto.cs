@@ -4,15 +4,22 @@ using Domain.ValueObjects;
 
 namespace Frameworks.Dtos
 {
-    public class TileDto
+    public interface ITileDto
     {
-        public string _id;
-        public Vector3 _position;
-        public IArrowDto _arrow;
+        public Guid _id { get; }
+        public Vector3 _position { get; }
+        public IArrowDto _arrow { get; }
+    }
+
+    public class TileDto: ITileDto
+    {
+        public Guid _id { get; private set; }
+        public Vector3 _position { get; private set; }
+        public IArrowDto _arrow { get; private set; }
 
         private TileDto(Guid id, Vector3 position)
         {
-            _id = id.ToString();
+            _id = id;
             _position = position;
             _arrow = null;
         }
