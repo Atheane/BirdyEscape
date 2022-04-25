@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UniMediator;
 using Zenject;
 using Adapters.Unimediatr;
 using Domain.DomainEvents;
-using Domain.Entities;
-using Usecases;
+using Adapters.IORepository;
+using Frameworks.IO;
 
 
 public class EnergyBarController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<GameEnergyComputed>>
@@ -24,9 +23,9 @@ public class EnergyBarController : MonoBehaviour, IMulticastMessageHandler<Domai
     {
         _slider.maxValue = 1.0f;
         Debug.Log("EnergyBarController START");
-        IGameEntity gameEntity = _container.Resolve<LoadGame>().Execute(IntPtr.Zero);
+        GameIO gameIO = _container.Resolve<IOGameRepository>().PreLoad();
         _slider = gameObject.GetComponent<Slider>();
-        _slider.value = gameEntity._energy.Value / 100;
+        _slider.value = gameIO._energy / 100;
         Debug.Log(_slider.value);
     }
 

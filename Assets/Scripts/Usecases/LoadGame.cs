@@ -7,7 +7,7 @@ using Domain.Repositories;
 
 namespace Usecases
 {
-    public class LoadGame : IUsecase<IntPtr, IGameEntity>
+    public class LoadGame : IUsecase<ILevelEntity, IGameEntity>
     {
         public IGameRepository _gameRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
@@ -20,9 +20,9 @@ namespace Usecases
             _gameRepository = gameRepository;
             _domainEventDispatcher = domainEventDispatcher;
         }
-        public IGameEntity Execute(IntPtr pointer)
+        public IGameEntity Execute(ILevelEntity levelEntity)
         {
-            IGameEntity game = _gameRepository.Load();
+            IGameEntity game = _gameRepository.Load(levelEntity);
             _domainEventDispatcher.Dispatch(game);
             return game;
         }

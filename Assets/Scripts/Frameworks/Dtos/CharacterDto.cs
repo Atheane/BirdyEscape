@@ -6,7 +6,6 @@ using Domain.ValueObjects;
 
 namespace Frameworks.Dtos
 {
-    [Serializable]
     public class CharacterDto
     {
         public string _id;

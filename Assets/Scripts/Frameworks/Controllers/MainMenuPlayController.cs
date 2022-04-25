@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using Zenject;
-using Usecases;
-using Domain.Entities;
-
+using Adapters.IORepository;
+using Frameworks.IO;
 
 public enum MainMenuPlayButtonState { CLICKED, IDLE };
 
@@ -32,8 +31,8 @@ public class MainMenuPlayController : MonoBehaviour, IPointerDownHandler
             _state = MainMenuPlayButtonState.CLICKED;
             try
             {
-                IGameEntity gameEntity = _container.Resolve<LoadGame>().Execute(IntPtr.Zero);
-                SceneManager.LoadScene("Level" + gameEntity._currentLevel._number, LoadSceneMode.Single);
+                GameIO gameIO = _container.Resolve<IOGameRepository>().PreLoad();
+                SceneManager.LoadScene("Level" + gameIO._currentLevel._number, LoadSceneMode.Single);
             } catch(Exception e)
             {
                 Debug.Log(e);

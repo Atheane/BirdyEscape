@@ -12,6 +12,7 @@ using Usecases;
 using Adapters.InMemoryRepository;
 using Adapters.Unimediatr;
 using Adapters.Mappers;
+using Adapters.IORepository;
 
 
 public class GameInstaller : MonoInstaller
@@ -23,7 +24,8 @@ public class GameInstaller : MonoInstaller
         Container.Bind<ICharactersRepository>().FromInstance(new InMemoryCharacterRepository(new Dictionary<Guid, ICharacterEntity>())).AsSingle();
         Container.Bind<ITilesRepository>().FromInstance(new InMemoryTileRepository(new Dictionary<Guid, ITileEntity>())).AsSingle();
         Container.Bind<ILevelsRepository>().FromInstance(new InMemoryLevelRepository(new Dictionary<Guid, ILevelEntity>())).AsSingle();
-        Container.Bind<IGameRepository>().To<IOGameRepository>().AsSingle();
+        Container.Bind<IGameRepository>().To<IOGameRepository>().AsTransient();
+        Container.Bind<IOGameRepository>().To<IOGameRepository>().AsTransient();
 
         Container.Bind<IMapper<VOCoordinates, Vector3>>().To<Vector3ToVOCoordinatesMapper>().AsSingle();
         Container.Bind<IMapper<VOPosition, Vector3>>().To<Vector3ToVOPositionMapper>().AsSingle();

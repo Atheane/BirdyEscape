@@ -5,6 +5,6 @@ namespace Domain.Repositories
     public interface IGameRepository
     {
         void Save(IGameEntity game);
-        IGameEntity Load();
-    }
+        IGameEntity Load(ILevelEntity level);
+    } 
 }

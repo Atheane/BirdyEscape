@@ -38,8 +38,10 @@ namespace Usecases
             {
                 try
                 {
-                    _gameRepository.Load();
-                } catch(Exception e)
+                    var game = _gameRepository.Load(levelEntity);
+                    _domainEventDispatcher.Dispatch(game);
+                }
+                catch (Exception e)
                 {
                     var game = GameEntity.Create(levelEntity);
                     _domainEventDispatcher.Dispatch(game);
