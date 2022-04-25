@@ -6,14 +6,14 @@ namespace Frameworks.Dtos
 {
     public class TileDto
     {
-        public Guid _id;
+        public string _id;
         public Vector3 _position;
         public string _path;
         public IArrowDto _arrow;
 
         private TileDto(Guid id, Vector3 position, string path)
         {
-            _id = id;
+            _id = id.ToString();
             _position = position;
             _path = path;
             _arrow = null;

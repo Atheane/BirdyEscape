@@ -9,7 +9,7 @@ namespace Frameworks.Dtos
     [Serializable]
     public class CharacterDto
     {
-        public Guid _id;
+        public string _id;
         public EnumCharacterType _type;
         public EnumDirection _direction;
         public EnumCharacterState _state;
@@ -22,7 +22,7 @@ namespace Frameworks.Dtos
 
         private CharacterDto(Guid id, EnumCharacterType type, EnumDirection direction, EnumCharacterState state, Vector3 position, int speed, string image, float totalDistance)
         {
-            _id = id;
+            _id = id.ToString();
             _type = type;
             _direction = direction;
             _state = state;

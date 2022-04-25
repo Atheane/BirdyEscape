@@ -44,7 +44,7 @@ public class PuzzleController : MonoBehaviour
         GameObject result = tiles[0];
         foreach (GameObject tile in tiles)
         {
-            Guid id = tile.GetComponent<TileController>()._dto._id;
+            Guid id = tile.GetComponent<TileController>()._id;
             if (id == tileId)
             {
                 result = tile;

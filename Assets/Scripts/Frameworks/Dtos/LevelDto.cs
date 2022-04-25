@@ -8,7 +8,7 @@ namespace Frameworks.Dtos
     [Serializable]
     public class LevelDto
     {
-        public Guid _id;
+        public string _id;
         public int _number;
         public CharacterDto[] _characters;
         public TileDto[] _tiles { get; private set; }
@@ -16,7 +16,7 @@ namespace Frameworks.Dtos
 
         private LevelDto(Guid id, int number, CharacterDto[] characters, TileDto[] tiles, EnumLevelState state)
         {
-            _id = id;
+            _id = id.ToString();
             _number = number;
             _characters = characters;
             _tiles = tiles;

@@ -92,11 +92,10 @@ public class SwipeController :
     private void DrawArrow()
     {
         EnumDirection direction = GetSwipeDirection();
-        TileDto tileDto = _target.GetComponent<TileController>()._dto;
         var path = "Arrow/" + Entities.Arrow.ToString();
         _container.Resolve<AddTileArrow>().Execute(
             new AddTileArrowCommand(
-                tileDto._id,
+                _target.GetComponent<TileController>()._id,
                 direction,
                 path
             )
@@ -106,10 +105,10 @@ public class SwipeController :
     private void ChangeArrowDirection()
     {
         EnumDirection direction = GetSwipeDirection();
-        TileDto tileDto = _target.parent.GetComponent<TileController>()._dto;
+        TileController tile = _target.parent.GetComponent<TileController>();
         ITileEntity tileEntity = _container.Resolve<UpdateTileArrowDirection>().Execute(
                 new UpdateTileArrowDirectionCommand(
-                    tileDto._id,
+                    tile._id,
                     direction
                 )
             );
@@ -118,7 +117,7 @@ public class SwipeController :
             tileEntity._arrow._direction,
             tileEntity._arrow._coordinates,
             tileEntity._arrow._path);
-        tileDto.AddArrow(arrowDto);
+        tile._dto.AddArrow(arrowDto);
         _target.rotation = Quaternion.Euler(arrowDto._orientation);
     }
 
@@ -126,7 +125,7 @@ public class SwipeController :
     {
         TileController controller = _target.parent.GetComponent<TileController>();
         Destroy(_target.gameObject);
-        _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._dto._id));
+        _container.Resolve<RemoveTileArrow>().Execute(new RemoveTileArrowCommand(controller._id));
     }
 
     private bool DetectTouch()

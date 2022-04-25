@@ -40,7 +40,7 @@ public class IOGameRepository : IGameRepository
         foreach (CharacterDto characterDto in gameDto._currentLevel._characters)
         {
             charactersEntity.Add(CharacterEntity.Load(
-                characterDto._id,
+                Guid.Parse(characterDto._id),
                 characterDto._type,
                 characterDto._direction,
                 VOPosition.Create((characterDto._position.x, characterDto._position.y, characterDto._position.z)),
@@ -48,14 +48,14 @@ public class IOGameRepository : IGameRepository
             ));
         }
         var tilesEntity = new List<ITileEntity>();
-        foreach (TileDto tileDto in gameDto._currentLevel._tiles)
-        {
-            tilesEntity.Add(TileEntity.Load(
-                tileDto._id,
-                VOCoordinates.Create(((int)tileDto._position.x, (int)tileDto._position.y)),
-                VOPath.Create(tileDto._path)
-            ));
-        }
+        //foreach (TileDto tileDto in gameDto._currentLevel._tiles)
+        //{
+        //    tilesEntity.Add(TileEntity.Load(
+        //        tileDto._id,
+        //        VOCoordinates.Create(((int)tileDto._position.x, (int)tileDto._position.y)),
+        //        VOPath.Create(tileDto._path)
+        //    ));
+        //}
         var levelEntity = LevelEntity.Load(gameDto._currentLevel._id, gameDto._currentLevel._number, charactersEntity.ToArray(), tilesEntity.ToArray(), gameDto._currentLevel._state);
         return GameEntity.Load(
             gameDto._id,

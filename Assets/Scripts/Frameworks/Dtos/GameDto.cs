@@ -8,14 +8,14 @@ namespace Frameworks.Dtos
     [Serializable]
     public class GameDto
     {
-        public Guid _id;
+        public string _id;
         public LevelDto _currentLevel;
         public float _energy;
         public List<DateTime> _connectionsDate;
 
         public GameDto(Guid id, ILevelEntity currentLevel, float energy, List<DateTime> connectionsDate)
         {
-            _id = id;
+            _id = id.ToString();
             _currentLevel = LevelDto.Create(currentLevel._id, currentLevel._number, currentLevel._characters, currentLevel._tiles, currentLevel._state);
             _energy = energy;
             _connectionsDate = connectionsDate;

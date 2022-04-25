@@ -44,10 +44,10 @@ namespace Domain.Entities
             return game;
         }
 
-        public static GameEntity Load(Guid id, ILevelEntity currentLevel, VOEnergy energy, List<DateTime> connectionsDate)
+        public static GameEntity Load(string id, ILevelEntity currentLevel, VOEnergy energy, List<DateTime> connectionsDate)
         {
             var game = new GameEntity(currentLevel, energy);
-            game._id = id;
+            game._id = Guid.Parse(id);
             game._connectionsDate = connectionsDate;
 
             var gameLoaded = new GameLoaded(game);

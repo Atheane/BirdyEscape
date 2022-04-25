@@ -55,12 +55,12 @@ namespace Domain.Entities
             return level;
         }
 
-        public static LevelEntity Load(Guid id, int number, ICharacterEntity[] characters, ITileEntity[] tiles, EnumLevelState state)
+        public static LevelEntity Load(string id, int number, ICharacterEntity[] characters, ITileEntity[] tiles, EnumLevelState state)
         {
             var level = new LevelEntity(number, characters, tiles, state);
             var levelLoaded = new LevelLoaded(level);
             level.AddDomainEvent(levelLoaded);
-            level._id = id;
+            level._id = Guid.Parse(id);
             return level;
         }
 

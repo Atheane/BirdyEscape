@@ -13,6 +13,7 @@ public class LevelController : MonoBehaviour
 {
 
     public LevelDto _dto;
+    public Guid _id;
     private DiContainer _container;
     public List<CharacterMoveController> _charactersControllers;
     public List<TileController> _tilesControllers;
@@ -39,6 +40,7 @@ public class LevelController : MonoBehaviour
                 EnumLevelState.ON
             ));
         _dto = LevelDto.Create(levelEntity._id, levelEntity._number, levelEntity._characters, levelEntity._tiles, levelEntity._state);
+        _id = Guid.Parse(_dto._id);
 
     }
 

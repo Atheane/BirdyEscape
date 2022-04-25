@@ -79,7 +79,7 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMultica
         {
             ILevelEntity level = _container.Resolve<RestartLevel>().Execute(
                 new RestartLevelCommand(
-                    levelController._dto._id
+                    levelController._id
             ));
             _container.Resolve<SaveGame>().Execute(
                 new UpdateGameCommand(

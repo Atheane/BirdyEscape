@@ -23,6 +23,7 @@ public class CharacterMoveController :
     public float _speed;
 
     public CharacterDto _dto { get; private set; }
+    public Guid _id;
 
     private LayerMask _layerObstacle;
     private LayerMask _layerArrow;
@@ -44,7 +45,7 @@ public class CharacterMoveController :
         ICharacterEntity[] charactersEntity = levelEntity._characters;
         foreach (ICharacterEntity characterEntity in charactersEntity)
         {
-            if (characterEntity._id == _dto._id)
+            if (characterEntity._id == _id)
             {
                 CharacterDto dto = CharacterDto.Create(
                     characterEntity._id,
@@ -81,6 +82,7 @@ public class CharacterMoveController :
     public void SetDto(CharacterDto dto)
     {
         _dto = dto;
+        _id = Guid.Parse(dto._id);
     }
 
     private void Awake()
@@ -108,18 +110,18 @@ public class CharacterMoveController :
         {
             var level = GetComponentInParent<LevelController>();
             var nextLevelNumber = level._dto._number + 1;
-            _container.Resolve<CompleteLevel>().Execute(new CompleteLevelCommand(level._dto._id));
+            _container.Resolve<CompleteLevel>().Execute(new CompleteLevelCommand(level._id));
             _container.Resolve<SaveGame>().Execute(
                 new UpdateGameCommand(
                     nextLevelNumber,
-                    level._dto._id
+                    level._id
                 )
             );
             SceneManager.LoadScene("Level"+ nextLevelNumber, LoadSceneMode.Single);
         }
         else if (CollisionWithArrow())
         {
-            ICharacterEntity characterEntity = _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_dto._id, _dto._direction));
+            ICharacterEntity characterEntity = _container.Resolve<UpdateCharacterDirection>().Execute(new UpdateCharacterDirectionCommand(_id, _dto._direction));
             var dto = CharacterDto.Create(
                 characterEntity._id,
                 characterEntity._type,
@@ -134,7 +136,7 @@ public class CharacterMoveController :
         }
         else if (CollisionWithObstacle())
         {
-            ICharacterEntity characterEntity = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_dto._id));
+            ICharacterEntity characterEntity = _container.Resolve<TurnRight>().Execute(new TurnRightCommand(_id));
             var dto = CharacterDto.Create(
                characterEntity._id,
                characterEntity._type,
@@ -151,7 +153,7 @@ public class CharacterMoveController :
         {
             if (_dto != null && _dto._state == EnumCharacterState.MOVING)
             {
-                VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
+                VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_id));
                 Vector3 newPosition = new Vector3(newPositionVO.Value.X, PuzzleController.MIN.y, newPositionVO.Value.Z);
                 transform.position = newPosition;
             }
