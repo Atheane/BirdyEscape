@@ -92,7 +92,7 @@ public class SwipeController :
     private void DrawArrow()
     {
         EnumDirection direction = GetSwipeDirection();
-        ITileDto tileDto = _target.GetComponent<TileController>()._dto;
+        TileDto tileDto = _target.GetComponent<TileController>()._dto;
         var path = "Arrow/" + Entities.Arrow.ToString();
         _container.Resolve<AddTileArrow>().Execute(
             new AddTileArrowCommand(
@@ -106,7 +106,7 @@ public class SwipeController :
     private void ChangeArrowDirection()
     {
         EnumDirection direction = GetSwipeDirection();
-        ITileDto tileDto = _target.parent.GetComponent<TileController>()._dto;
+        TileDto tileDto = _target.parent.GetComponent<TileController>()._dto;
         ITileEntity tileEntity = _container.Resolve<UpdateTileArrowDirection>().Execute(
                 new UpdateTileArrowDirectionCommand(
                     tileDto._id,

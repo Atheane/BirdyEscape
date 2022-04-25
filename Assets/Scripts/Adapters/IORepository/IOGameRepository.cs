@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using Domain.Repositories;
 using Domain.Entities;
@@ -12,36 +11,33 @@ public class IOGameRepository : IGameRepository
 {
     public void Save(IGameEntity gameEntity)
     {
-        string destination = Application.persistentDataPath + "/Game.dat";
-        FileStream file;
-        if (File.Exists(destination)) file = File.OpenWrite(destination);
-        else file = File.Create(destination);
-
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, new GameDto(
+        string filePath = Application.persistentDataPath + "/Game.json";
+        var gameDto = new GameDto(
             gameEntity._id,
             gameEntity._currentLevel,
             gameEntity._energy.Value, gameEntity._connectionsDate
-           )
-         );
-        file.Close();
+           );
+        string data = JsonUtility.ToJson(gameDto, true); //pretty print!
+        File.WriteAllText(filePath, data);
     }
 
     public IGameEntity Load()
     {
-        string destination = Application.persistentDataPath + "/Game.dat";
+        string filePath = Application.persistentDataPath + "/Game.json";
+        GameDto gameDto;
 
-        FileStream file;
-        if (File.Exists(destination)) file = File.OpenRead(destination);
+        if (File.Exists(filePath))
+        {
+            string retrievedData = File.ReadAllText(filePath);
+            gameDto = JsonUtility.FromJson<GameDto>(retrievedData);
+        }
         else
         {
             throw new Exception("File not found");
         }
-        BinaryFormatter bf = new BinaryFormatter();
-        GameDto data = (GameDto)bf.Deserialize(file);
-        file.Close();
+       
         var charactersEntity = new List<ICharacterEntity>();
-        foreach (ICharacterDto characterDto in data._currentLevel._characters)
+        foreach (CharacterDto characterDto in gameDto._currentLevel._characters)
         {
             charactersEntity.Add(CharacterEntity.Load(
                 characterDto._id,
@@ -52,7 +48,7 @@ public class IOGameRepository : IGameRepository
             ));
         }
         var tilesEntity = new List<ITileEntity>();
-        foreach (ITileDto tileDto in data._currentLevel._tiles)
+        foreach (TileDto tileDto in gameDto._currentLevel._tiles)
         {
             tilesEntity.Add(TileEntity.Load(
                 tileDto._id,
@@ -60,10 +56,10 @@ public class IOGameRepository : IGameRepository
                 VOPath.Create(tileDto._path)
             ));
         }
-        var levelEntity = LevelEntity.Load(data._currentLevel._id, data._currentLevel._number, charactersEntity.ToArray(), tilesEntity.ToArray(), data._currentLevel._state);
+        var levelEntity = LevelEntity.Load(gameDto._currentLevel._id, gameDto._currentLevel._number, charactersEntity.ToArray(), tilesEntity.ToArray(), gameDto._currentLevel._state);
         return GameEntity.Load(
-            data._id,
+            gameDto._id,
             levelEntity,
-            VOEnergy.Load(data._energy), data._connectionsDate);
+            VOEnergy.Load(gameDto._energy), gameDto._connectionsDate);
     }
 }

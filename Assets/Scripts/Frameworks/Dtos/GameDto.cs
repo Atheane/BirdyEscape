@@ -5,21 +5,13 @@ using UnityEngine;
 
 namespace Frameworks.Dtos
 {
-    public interface IGameDto
-    {
-        public Guid _id { get; }
-        public LevelDto _currentLevel { get; }
-        public float _energy { get; }
-        public List<DateTime> _connectionsDate { get; }
-    }
-
     [Serializable]
-    public class GameDto : IGameDto
+    public class GameDto
     {
-        public Guid _id { get; private set; }
-        public LevelDto _currentLevel { get; private set; }
-        public float _energy { get; private set; }
-        public List<DateTime> _connectionsDate { get; private set; }
+        public Guid _id;
+        public LevelDto _currentLevel;
+        public float _energy;
+        public List<DateTime> _connectionsDate;
 
         public GameDto(Guid id, ILevelEntity currentLevel, float energy, List<DateTime> connectionsDate)
         {

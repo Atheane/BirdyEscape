@@ -6,31 +6,18 @@ using Domain.ValueObjects;
 
 namespace Frameworks.Dtos
 {
-    public interface ICharacterDto
-    {
-        public Guid _id { get; }
-        public EnumCharacterType _type { get; }
-        public EnumDirection _direction { get; }
-        public EnumCharacterState _state { get; }
-        public Vector3 _position { get; }
-        public Vector3 _orientation { get; }
-        public int _speed { get; }
-        public string _image { get; }
-        public float _totalDistance { get; }
-    }
-
     [Serializable]
-    public class CharacterDto: ICharacterDto
+    public class CharacterDto
     {
-        public Guid _id { get; private set; }
-        public EnumCharacterType _type { get; private set; }
-        public EnumDirection _direction { get; private set; }
-        public EnumCharacterState _state { get; }
-        public Vector3 _position { get; private set; }
-        public Vector3 _orientation { get; private set; }
-        public int _speed { get; private set; }
-        public string _image { get; private set; }
-        public float _totalDistance { get; private set; }
+        public Guid _id;
+        public EnumCharacterType _type;
+        public EnumDirection _direction;
+        public EnumCharacterState _state;
+        public Vector3 _position;
+        public Vector3 _orientation;
+        public int _speed;
+        public string _image;
+        public float _totalDistance;
 
 
         private CharacterDto(Guid id, EnumCharacterType type, EnumDirection direction, EnumCharacterState state, Vector3 position, int speed, string image, float totalDistance)

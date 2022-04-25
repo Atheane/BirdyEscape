@@ -12,7 +12,7 @@ using Frameworks.Dtos;
 public class LevelController : MonoBehaviour
 {
 
-    public ILevelDto _dto;
+    public LevelDto _dto;
     private DiContainer _container;
     public List<CharacterMoveController> _charactersControllers;
     public List<TileController> _tilesControllers;
