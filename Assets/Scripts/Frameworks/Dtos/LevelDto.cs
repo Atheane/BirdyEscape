@@ -11,7 +11,7 @@ namespace Frameworks.Dtos
         public Guid _id;
         public int _number;
         public CharacterDto[] _characters;
-        public TileDto[] _tiles;
+        public TileDto[] _tiles { get; private set; }
         public EnumLevelState _state;
 
         private LevelDto(Guid id, int number, CharacterDto[] characters, TileDto[] tiles, EnumLevelState state)

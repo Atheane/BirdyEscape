@@ -4,8 +4,6 @@ using Domain.ValueObjects;
 
 namespace Frameworks.Dtos
 {
-
-    [Serializable]
     public class TileDto
     {
         public Guid _id;
