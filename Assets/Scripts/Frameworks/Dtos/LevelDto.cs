@@ -34,7 +34,7 @@ namespace Frameworks.Dtos
             List<TileDto> tileDtos = new List<TileDto>();
             foreach (ITileEntity tile in tiles)
             {
-                tileDtos.Add(TileDto.Create(tile._id, tile._coordinates, tile._path));
+                tileDtos.Add(TileDto.Create(tile._id, tile._coordinates));
             }
             return new LevelDto(id, number, characterDtos.ToArray(), tileDtos.ToArray(), state);
         }

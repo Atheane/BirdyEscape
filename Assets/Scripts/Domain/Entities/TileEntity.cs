@@ -12,7 +12,6 @@ namespace Domain.Entities
     {
         public Guid _id { get; }
         public VOCoordinates _coordinates { get; }
-        public VOPath _path { get; }
         public IArrowEntity _arrow { get; }
         public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path);
         public void UpdateArrowDirection(EnumDirection direction);
@@ -24,28 +23,26 @@ namespace Domain.Entities
     {
         public Guid _id { get; private set; }
         public VOCoordinates _coordinates { get; private set; }
-        public VOPath _path { get; private set; }
         public IArrowEntity _arrow { get; private set; }
 
 
-        private TileEntity(VOCoordinates coords, VOPath path) : base()
+        private TileEntity(VOCoordinates coords) : base()
         {
             _coordinates = coords;
-            _path = path;
         }
 
-        public static TileEntity Create(VOCoordinates coords, VOPath path)
+        public static TileEntity Create(VOCoordinates coords)
         {
-            var tile = new TileEntity(coords, path);
+            var tile = new TileEntity(coords);
             var tileCreated = new TileCreated(tile);
             tile.AddDomainEvent(tileCreated);
             tile._id = tileCreated._id;
             return tile;
         }
 
-        public static TileEntity Load(Guid id, VOCoordinates coords, VOPath path)
+        public static TileEntity Load(Guid id, VOCoordinates coords)
         {
-            var tile = new TileEntity(coords, path);
+            var tile = new TileEntity(coords);
             var tileLoaded = new TileLoaded(tile);
             tile.AddDomainEvent(tileLoaded);
             tile._id = id;

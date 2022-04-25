@@ -28,8 +28,7 @@ public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEven
         {
             TileDto updatedDto = TileDto.Create(
                 tile._id,
-                tile._coordinates,
-                tile._path);
+                tile._coordinates);
             SetDto(updatedDto);
             List<GameObject> children = GetAllChildren(gameObject);
             foreach (GameObject child in children)

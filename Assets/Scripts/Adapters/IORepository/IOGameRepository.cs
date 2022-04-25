@@ -48,14 +48,6 @@ public class IOGameRepository : IGameRepository
             ));
         }
         var tilesEntity = new List<ITileEntity>();
-        //foreach (TileDto tileDto in gameDto._currentLevel._tiles)
-        //{
-        //    tilesEntity.Add(TileEntity.Load(
-        //        tileDto._id,
-        //        VOCoordinates.Create(((int)tileDto._position.x, (int)tileDto._position.y)),
-        //        VOPath.Create(tileDto._path)
-        //    ));
-        //}
         var levelEntity = LevelEntity.Load(gameDto._currentLevel._id, gameDto._currentLevel._number, charactersEntity.ToArray(), tilesEntity.ToArray(), gameDto._currentLevel._state);
         return GameEntity.Load(
             gameDto._id,

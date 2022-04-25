@@ -112,8 +112,7 @@ public class LevelController : MonoBehaviour
             tiles.Add(tileEntity);
             controller.SetDto(TileDto.Create(
                 tileEntity._id,
-                tileEntity._coordinates,
-                tileEntity._path
+                tileEntity._coordinates
             ));
         }
         return tiles;
