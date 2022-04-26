@@ -7,29 +7,33 @@ using Domain.Repositories;
 
 namespace Usecases
 {
-    public class CompleteLevel : IUsecase<ICompleteLevelCommand, ILevelEntity>
+    public class CompleteLevel : IUsecase<ICompleteLevelCommand, IGameEntity>
     {
         public ILevelsRepository _levelsRepository;
         public ITilesRepository _tilesRepository;
         public ICharactersRepository _charactersRepository;
+        public IGameRepository _gameRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
 
         public CompleteLevel(
             ILevelsRepository levelsRepository,
             ITilesRepository tilesRepository,
             ICharactersRepository charactersRepository,
+            IGameRepository gameRepository,
             IDomainEventDispatcher domainEventDispatcher
         )
         {
             _levelsRepository = levelsRepository;
             _tilesRepository = tilesRepository;
             _charactersRepository = charactersRepository;
+            _gameRepository = gameRepository;
             _domainEventDispatcher = domainEventDispatcher;
         }
-        public ILevelEntity Execute(ICompleteLevelCommand command)
+        public IGameEntity Execute(ICompleteLevelCommand command)
         {
             var levelEntity = _levelsRepository.Find(command._id);
             levelEntity.Complete();
+
             foreach (ICharacterEntity character in levelEntity._characters)
             {
                 _charactersRepository.Remove(character);
@@ -43,7 +47,13 @@ namespace Usecases
 
             _levelsRepository.Update(levelEntity);
             _domainEventDispatcher.Dispatch(levelEntity);
-            return levelEntity;
+
+            IGameEntity game = _gameRepository.Load(levelEntity);
+            game.ComputeEnergy();
+            _gameRepository.Save(game);
+            _domainEventDispatcher.Dispatch(game);
+
+            return game;
         }
     }
 }

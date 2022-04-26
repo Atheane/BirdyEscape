@@ -4,7 +4,6 @@ using System.Linq;
 using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.ValueObjects;
-using Domain.Exceptions;
 using UnityEngine;
 
 namespace Domain.Entities
@@ -34,12 +33,13 @@ namespace Domain.Entities
             _connectionsDate = new List<DateTime>();
         }
 
-        public static GameEntity Create(ILevelEntity currentLevel)
+        public static GameEntity Create(ILevelEntity currentLevel, VOEnergy energy, List<DateTime> connectionsDate)
         {
-            var game = new GameEntity(currentLevel, VOEnergy.Create());
+            var game = new GameEntity(currentLevel, energy);
             var gameCreated = new GameCreated(game);
             game.AddDomainEvent(gameCreated);
             game._id = gameCreated._id;
+            game._connectionsDate = connectionsDate;
             game._connectionsDate.Add(gameCreated._createdAtUtc);
             return game;
         }
@@ -64,27 +64,15 @@ namespace Domain.Entities
 
         public void ComputeEnergy()
         {
-            Debug.Log("COMPUTE ENERGY");
-            try
+            var totalDistance = 0f;
+            foreach (ICharacterEntity character in _currentLevel._characters)
             {
-                var totalDistance = 0f;
-                foreach (ICharacterEntity character in _currentLevel._characters)
-                {
-                    totalDistance += character._totalDistance;
-                }
-                _energy = VOEnergy.Compute(_energy.Value, totalDistance, _connectionsDate.Last());
-                _connectionsDate.Add(DateTime.UtcNow);
-                var energyUpdated = new GameEnergyComputed(this);
-                AddDomainEvent(energyUpdated);
-            } catch(Exception e)
-            {
-                Debug.Log(e);
-                if (e.GetType() == typeof(EnergyException.ShouldNotBeNegative))
-                {
-                    var gameOver = new GameOver(this);
-                    AddDomainEvent(gameOver);
-                }
+                totalDistance += character._totalDistance;
             }
+            _energy = VOEnergy.Compute(_energy.Value, totalDistance, _connectionsDate.Last());
+            _connectionsDate.Add(DateTime.UtcNow);
+            var energyUpdated = new GameEnergyComputed(this);
+            AddDomainEvent(energyUpdated);
         }
 
     }

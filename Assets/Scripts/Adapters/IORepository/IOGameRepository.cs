@@ -25,36 +25,28 @@ namespace Adapters.IORepository
         public GameIO PreLoad()
         {
             string filePath = Application.persistentDataPath + "/Game.json";
-            GameIO gameIO;
 
             if (File.Exists(filePath))
             {
                 string retrievedData = File.ReadAllText(filePath);
-                gameIO = JsonUtility.FromJson<GameIO>(retrievedData);
+                GameIO gameIO = JsonUtility.FromJson<GameIO>(retrievedData);
+                return gameIO;
             }
-            else
-            {
-                throw new Exception("File not found");
-            }
-            return gameIO;
+            throw new Exception("File not found");
         }
 
         public IGameEntity Load(ILevelEntity levelEntity)
         {
             string filePath = Application.persistentDataPath + "/Game.json";
-            GameIO gameIO;
 
             if (File.Exists(filePath))
             {
                 string retrievedData = File.ReadAllText(filePath);
-                gameIO = JsonUtility.FromJson<GameIO>(retrievedData);
+                GameIO gameIO = JsonUtility.FromJson<GameIO>(retrievedData);
+                IGameEntity gameEntity = GameEntity.Load(gameIO._id, levelEntity, VOEnergy.Load(gameIO._energy), gameIO._connectionsDate);
+                return gameEntity;
             }
-            else
-            {
-                throw new Exception("File not found");
-            }
-            IGameEntity gameEntity = GameEntity.Load(gameIO._id, levelEntity, VOEnergy.Load(gameIO._energy), gameIO._connectionsDate);
-            return gameEntity;
+            throw new Exception("File not found");
         }
     }
 }

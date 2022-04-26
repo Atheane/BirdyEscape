@@ -4,7 +4,7 @@ using Domain.Entities;
 
 namespace Domain.DomainEvents
 {
-    public class GameLoaded : IDomainEvent
+    public class GameLoaded: IDomainEvent
     {
         public string _label { get; }
         public Guid _id { get; }

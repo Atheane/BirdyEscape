@@ -77,16 +77,10 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMultica
             }
         } else
         {
-            ILevelEntity level = _container.Resolve<RestartLevel>().Execute(
+            _container.Resolve<RestartLevel>().Execute(
                 new RestartLevelCommand(
                     levelController._dto._id
             ));
-            _container.Resolve<SaveGame>().Execute(
-                new UpdateGameCommand(
-                    level._number,
-                    level._id
-                )
-            );
             _state = LevelPlayButtonState.HIDDEN;
             _icon.sprite = _spriteButtonOn;
         }

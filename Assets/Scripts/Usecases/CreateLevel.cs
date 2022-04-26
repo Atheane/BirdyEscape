@@ -1,10 +1,12 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using Libs.Usecases;
 using Libs.Domain.DomainEvents;
 using Usecases.Commands;
 using Domain.Entities;
 using Domain.Repositories;
+using Domain.ValueObjects;
 
 namespace Usecases
 {
@@ -34,19 +36,16 @@ namespace Usecases
             _levelsRepository.Add(levelEntity);
             _domainEventDispatcher.Dispatch(levelEntity);
 
-            if (command._number == 1)
+            try
             {
-                try
-                {
-                    var game = _gameRepository.Load(levelEntity);
-                    _domainEventDispatcher.Dispatch(game);
-                }
-                catch (Exception e)
-                {
-                    var game = GameEntity.Create(levelEntity);
-                    _domainEventDispatcher.Dispatch(game);
-                    _gameRepository.Save(game);
-                }
+                var game = _gameRepository.Load(levelEntity);
+                _domainEventDispatcher.Dispatch(game);
+            }
+            catch
+            {
+                var game = GameEntity.Create(levelEntity, VOEnergy.Create(), new List<DateTime>());
+                _domainEventDispatcher.Dispatch(game);
+                _gameRepository.Save(game);
             }
 
             return levelEntity;

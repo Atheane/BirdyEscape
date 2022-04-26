@@ -11,19 +11,20 @@ using Domain.ValueObjects;
 
 namespace Usecases
 {
-    public class RestartLevel : IUsecase<IRestartLevelCommand, ILevelEntity>
+    public class RestartLevel : IUsecase<IRestartLevelCommand, IGameEntity>
     {
         public ILevelsRepository _levelsRepository;
         public ICharactersRepository _charactersRepository;
         public ITilesRepository _tilesRepository;
+        public IGameRepository _gameRepository;
         public IDomainEventDispatcher _domainEventDispatcher;
-        public ILevelEntity _levelEntity;
         public IMapper<VOPosition, Vector3> _mapper;
 
         public RestartLevel(
             ILevelsRepository levelsRepository,
             ICharactersRepository charactersRepository,
             ITilesRepository tilesRepository,
+            IGameRepository gameRepository,
             IDomainEventDispatcher domainEventDispatcher,
             IMapper<VOPosition, Vector3> mapper
         )
@@ -31,17 +32,25 @@ namespace Usecases
             _levelsRepository = levelsRepository;
             _charactersRepository = charactersRepository;
             _tilesRepository = tilesRepository;
+            _gameRepository = gameRepository;
             _domainEventDispatcher = domainEventDispatcher;
             _mapper = mapper;
         }
 
-        public ILevelEntity Execute(IRestartLevelCommand command)
+        public IGameEntity Execute(IRestartLevelCommand command)
         {
-            _levelEntity = _levelsRepository.Find(command._levelId);
+            ILevelEntity levelEntity = _levelsRepository.Find(command._levelId);
 
-            var updatedTiles = _levelEntity.Restart();
+            IGameEntity game = _gameRepository.Load(levelEntity);
+            game.ComputeEnergy();
+            _gameRepository.Save(game);
+            Debug.Log("_____________________");
+            Debug.Log(game._energy.Value);
+            _domainEventDispatcher.Dispatch(game);
 
-            foreach (ICharacterEntity character in _levelEntity._characters)
+            var updatedTiles = levelEntity.Restart();
+
+            foreach (ICharacterEntity character in levelEntity._characters)
             {
                 _domainEventDispatcher.Dispatch(character);
                 _charactersRepository.Update(character);
@@ -52,9 +61,11 @@ namespace Usecases
                 _tilesRepository.Update(tile);
             }
 
-            _levelsRepository.Update(_levelEntity);
-            _domainEventDispatcher.Dispatch(_levelEntity);
-            return _levelEntity;
+            _levelsRepository.Update(levelEntity);
+            _domainEventDispatcher.Dispatch(levelEntity);
+
+
+            return game;
         }
 
     }

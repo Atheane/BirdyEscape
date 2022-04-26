@@ -3,12 +3,11 @@ using UnityEngine.UI;
 using UniMediator;
 using Zenject;
 using Adapters.Unimediatr;
-using Domain.DomainEvents;
 using Adapters.IORepository;
+using Domain.DomainEvents;
 using Frameworks.IO;
 
-
-public class EnergyBarController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<GameEnergyComputed>>
+public class EnergyBarController : MonoBehaviour,  IMulticastMessageHandler<DomainEventNotification<GameEnergyComputed>>
 {
     public Slider _slider;
     private DiContainer _container;
@@ -22,11 +21,9 @@ public class EnergyBarController : MonoBehaviour, IMulticastMessageHandler<Domai
     private void Start()
     {
         _slider.maxValue = 1.0f;
-        Debug.Log("EnergyBarController START");
-        GameIO gameIO = _container.Resolve<IOGameRepository>().PreLoad();
         _slider = gameObject.GetComponent<Slider>();
-        _slider.value = gameIO._energy / 100;
-        Debug.Log(_slider.value);
+        GameIO gameIO = _container.Resolve<IOGameRepository>().PreLoad();
+        _slider.value = gameIO._energy/100;
     }
 
     public void Handle(DomainEventNotification<GameEnergyComputed> notification)

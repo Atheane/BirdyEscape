@@ -49,9 +49,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<RemoveTileArrow>().AsSingle();
         // tile usecase
         Container.Bind<CreateTile>().AsSingle();
-        // game usecase
-        Container.Bind<LoadGame>().AsSingle();
-        Container.Bind<SaveGame>().AsSingle();
         // controllers
         Container.Bind<LevelController>().AsSingle();
     }
