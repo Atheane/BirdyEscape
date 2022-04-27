@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 4790059561780639895}
   - component: {fileID: 4790059561780639896}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Slider01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,8 +455,8 @@ GameObject:
   - component: {fileID: 7182125768591786530}
   - component: {fileID: 7182125768591786529}
   m_Layer: 5
-  m_Name: Text
-  m_TagString: EnergyStats
+  m_Name: Energie
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -508,7 +508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 70/100
+  m_text: 99/1500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5094b715585444e90b7306721788dae5, type: 2}
   m_sharedMaterial: {fileID: 2393364598115949451, guid: 5094b715585444e90b7306721788dae5, type: 2}
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 7182125768646408446}
   - component: {fileID: 7182125768646408447}
   m_Layer: 5
-  m_Name: EnergyBar
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -805,7 +805,7 @@ GameObject:
   - component: {fileID: 7182125769219573226}
   - component: {fileID: 7182125769219573227}
   m_Layer: 5
-  m_Name: IconText
+  m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1853,7 +1853,7 @@ GameObject:
   - component: {fileID: 7756391108334151370}
   - component: {fileID: 7756391108334151371}
   m_Layer: 5
-  m_Name: EnergyData
+  m_Name: Group_Complete_Status
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2835,7 +2835,7 @@ GameObject:
   - component: {fileID: 7756391109384993279}
   - component: {fileID: 7756391109384993276}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Text_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

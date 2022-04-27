@@ -16,7 +16,6 @@ namespace Domain.Entities
         public List<DateTime> _connectionsDate { get; }
         public void UpdateCurrentLevel(ILevelEntity currentLevel);
         public void ComputeEnergy();
-        public void CompleteLevel();
     }
 
     public class GameEntity : AggregateRoot, IGameEntity
@@ -82,13 +81,6 @@ namespace Domain.Entities
             _connectionsDate.Add(DateTime.UtcNow);
             var energyUpdated = new GameEnergyComputed(this);
             AddDomainEvent(energyUpdated);
-        }
-
-        public void CompleteLevel()
-        {
-            ComputeEnergy();
-            var gameLevelCompleted = new GameLevelCompleted(this);
-            AddDomainEvent(gameLevelCompleted);
         }
 
     }

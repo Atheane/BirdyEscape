@@ -22,5 +22,7 @@ public class PopupLoseController : MonoBehaviour, IMulticastMessageHandler<Domai
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         _state = PopupWinState.SHOWN;
         gameObject.SetActive(true);
+        Debug.Log("ENERGY LEVEL");
+        Debug.Log(notification._domainEvent._props._energy);
     }
 }

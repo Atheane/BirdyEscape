@@ -17,6 +17,7 @@ namespace Domain.Entities
         public ITileEntity[] _tiles { get; }
         public EnumLevelState _state { get; }
         public List<ITileEntity> Restart();
+        public void Complete();
         public void Pause();
     }
 
@@ -74,6 +75,21 @@ namespace Domain.Entities
             var levelRestarted = new LevelRestarted(this);
             AddDomainEvent(levelRestarted);
             return updatedTiles;
+        }
+
+        public void Complete()
+        {
+            _state = EnumLevelState.WIN;
+            foreach (ICharacterEntity character in _characters)
+            {
+                character.Delete();
+            }
+            foreach (ITileEntity tile in _tiles)
+            {
+                tile.Delete();
+            }
+            var levelCompleted = new LevelCompleted(this);
+            AddDomainEvent(levelCompleted);
         }
 
         public void Pause()
