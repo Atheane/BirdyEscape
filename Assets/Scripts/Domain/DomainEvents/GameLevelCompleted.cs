@@ -4,16 +4,16 @@ using Domain.Entities;
 
 namespace Domain.DomainEvents
 {
-    public class LevelPaused : IDomainEvent
+    public class GameLevelCompleted : IDomainEvent
     {
         public string _label { get; }
         public Guid _id { get; }
         public DateTime _createdAtUtc { get; }
-        public ILevelEntity _props { get; }
+        public IGameEntity _props { get; }
 
-        public LevelPaused(ILevelEntity props)
+        public GameLevelCompleted(IGameEntity props)
         {
-            _label = "LEVEL_PAUSED";
+            _label = "GAME_LEVEL_COMPLETED";
             _id = Guid.NewGuid();
             _createdAtUtc = DateTime.UtcNow;
             _props = props;

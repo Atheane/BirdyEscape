@@ -32,7 +32,7 @@ public class GameInstaller : MonoInstaller
         // level usecase
         Container.Bind<CreateLevel>().AsSingle();
         Container.Bind<RestartLevel>().AsSingle();
-        Container.Bind<CompleteLevel>().AsSingle();
+        Container.Bind<CompleteGameLevel>().AsSingle();
         // character usecase
         Container.Bind<CreateCharacter>().AsSingle();
         Container.Bind<MoveOnceCharacter>().AsSingle();

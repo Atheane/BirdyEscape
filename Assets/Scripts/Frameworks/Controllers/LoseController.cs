@@ -4,25 +4,24 @@ using Adapters.Unimediatr;
 using Domain.DomainEvents;
 
 
-public enum PopupLoseState { SHOWN, HIDDEN };
+public enum LoseState { SHOWN, HIDDEN };
 
-public class PopupLoseController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<GameOver>>
+public class LoseController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<GameOver>>
 {
-    public PopupWinState _state;
+    public LoseState _state;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        _state = PopupWinState.HIDDEN;
+        _state = LoseState.HIDDEN;
         gameObject.SetActive(false);
     }
 
     public void Handle(DomainEventNotification<GameOver> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
-        _state = PopupWinState.SHOWN;
+        _state = LoseState.SHOWN;
         gameObject.SetActive(true);
-        Debug.Log("ENERGY LEVEL");
         Debug.Log(notification._domainEvent._props._energy);
     }
 }
