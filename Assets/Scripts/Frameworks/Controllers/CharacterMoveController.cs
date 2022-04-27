@@ -109,7 +109,7 @@ public class CharacterMoveController :
             var level = GetComponentInParent<LevelController>();
             var nextLevelNumber = level._dto._number + 1;
             _container.Resolve<CompleteLevel>().Execute(new CompleteLevelCommand(level._dto._id));
-            SceneManager.LoadScene("Level"+ nextLevelNumber, LoadSceneMode.Single);
+            SceneManager.LoadScene("Win", LoadSceneMode.Single);
         }
         else if (CollisionWithArrow())
         {

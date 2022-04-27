@@ -32,28 +32,11 @@ namespace Usecases
         public IGameEntity Execute(ICompleteLevelCommand command)
         {
             var levelEntity = _levelsRepository.Find(command._id);
-            levelEntity.Complete();
-
-            foreach (ICharacterEntity character in levelEntity._characters)
-            {
-                _charactersRepository.Remove(character);
-                _domainEventDispatcher.Dispatch(character);
-            }
-            foreach (ITileEntity tile in levelEntity._tiles)
-            {
-                _tilesRepository.Remove(tile);
-                _domainEventDispatcher.Dispatch(tile);
-            }
-
-            _levelsRepository.Update(levelEntity);
-            _domainEventDispatcher.Dispatch(levelEntity);
-
-            IGameEntity game = _gameRepository.Load(levelEntity);
-            game.ComputeEnergy();
-            _gameRepository.Save(game);
-            _domainEventDispatcher.Dispatch(game);
-
-            return game;
+            IGameEntity gameEntity = _gameRepository.Load(levelEntity);
+            gameEntity.CompleteLevel();
+            _gameRepository.Save(gameEntity);
+            _domainEventDispatcher.Dispatch(gameEntity);
+            return gameEntity;
         }
     }
 }
