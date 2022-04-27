@@ -64,12 +64,20 @@ namespace Domain.Entities
 
         public void ComputeEnergy()
         {
-            var totalDistance = 0f;
+           var totalDistance = 0f;
             foreach (ICharacterEntity character in _currentLevel._characters)
             {
                 totalDistance += character._totalDistance;
             }
-            _energy = VOEnergy.Compute(_energy.Value, totalDistance, _connectionsDate.Last());
+            try
+            {
+                _energy = VOEnergy.Compute(_energy.Value, totalDistance, _connectionsDate.Last());
+            } catch
+            {
+                _energy = VOEnergy.Load(0f);
+                var gameOver = new GameOver(this);
+                AddDomainEvent(gameOver);
+            }
             _connectionsDate.Add(DateTime.UtcNow);
             var energyUpdated = new GameEnergyComputed(this);
             AddDomainEvent(energyUpdated);

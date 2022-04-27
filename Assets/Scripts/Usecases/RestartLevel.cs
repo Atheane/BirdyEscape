@@ -44,8 +44,6 @@ namespace Usecases
             IGameEntity game = _gameRepository.Load(levelEntity);
             game.ComputeEnergy();
             _gameRepository.Save(game);
-            Debug.Log("_____________________");
-            Debug.Log(game._energy.Value);
             _domainEventDispatcher.Dispatch(game);
 
             var updatedTiles = levelEntity.Restart();

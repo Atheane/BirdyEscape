@@ -31,6 +31,5 @@ public class EnergyBarController : MonoBehaviour,  IMulticastMessageHandler<Doma
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         var energy = notification._domainEvent._props._energy.Value;
         _slider.value = energy /100;
-        Debug.Log(_slider.value);
     }
 }
