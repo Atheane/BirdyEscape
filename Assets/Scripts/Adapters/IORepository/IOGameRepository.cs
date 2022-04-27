@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Domain.Repositories;
@@ -43,7 +44,12 @@ namespace Adapters.IORepository
             {
                 string retrievedData = File.ReadAllText(filePath);
                 GameIO gameIO = JsonUtility.FromJson<GameIO>(retrievedData);
-                IGameEntity gameEntity = GameEntity.Load(gameIO._id, levelEntity, VOEnergy.Load(gameIO._energy), gameIO._connectionsDate);
+                var connectionsDate = new List<DateTime>();
+                foreach (JsonDateTime date in gameIO._connectionsDate)
+                {
+                    connectionsDate.Add(date);
+                }
+                IGameEntity gameEntity = GameEntity.Load(gameIO._id, levelEntity, VOEnergy.Load(gameIO._energy), connectionsDate);
                 return gameEntity;
             }
             throw new Exception("File not found");
