@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 197429558298250700}
   - component: {fileID: 197429558298250701}
   m_Layer: 5
-  m_Name: EnergyConsumed
+  m_Name: EnergyStatus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1595,7 +1595,7 @@ RectTransform:
   m_GameObject: {fileID: 197429559346115601}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -51}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 6873773939546714366}
   - {fileID: 8763666144459503649}
@@ -2751,7 +2751,7 @@ GameObject:
   - component: {fileID: 771625065028593959}
   m_Layer: 5
   m_Name: Text
-  m_TagString: RemainingEnergy
+  m_TagString: EnergyStatus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

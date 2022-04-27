@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 using UniMediator;
 using Adapters.Unimediatr;
@@ -10,16 +13,13 @@ public enum WinState { SHOWN, HIDDEN };
 public class WinController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<GameLevelCompleted>>
 {
     public WinState _state;
-    private Slider _slider;
-    private string _text;
 
     // Start is called before the first frame update
     private void Start()
     {
         _state = WinState.HIDDEN;
         gameObject.SetActive(false);
-        _slider = gameObject.GetComponentInChildren<Slider>();
-        Debug.Log(GameObject.FindWithTag("RemainingEnergy"));
+
     }
 
     public void Handle(DomainEventNotification<GameLevelCompleted> notification)
@@ -28,8 +28,11 @@ public class WinController : MonoBehaviour, IMulticastMessageHandler<DomainEvent
         _state = WinState.SHOWN;
         gameObject.SetActive(true);
         var energy = notification._domainEvent._props._energy.Value;
-        _slider.value = energy / 100;
-        _text = Mathf.RoundToInt(energy).ToString() + "/ 100";
+        var slider = gameObject.GetComponentInChildren<Slider>();
+        slider.value = energy / 100;
+        var text = GameObject.FindWithTag("EnergyStatus").GetComponent<TextMeshProUGUI>();
+        text.text = Mathf.RoundToInt(energy).ToString() + "/100";
         //SceneManager.LoadScene("Level" + nextLevelNumber, LoadSceneMode.Single);
     }
+
 }

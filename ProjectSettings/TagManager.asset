@@ -9,8 +9,7 @@ TagManager:
   - Puzzle
   - Arrow
   - Cute_Bird_16
-  - EnergyUsed
-  - RemainingEnergy
+  - EnergyStatus
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 using UniMediator;
 using Usecases;
@@ -29,6 +28,8 @@ public class CharacterMoveController :
     private LayerMask _layerExit;
 
     private DiContainer _container;
+
+    private bool _levelCompleted = false;
 
     [Inject]
     public void Construct(DiContainer container)
@@ -108,7 +109,12 @@ public class CharacterMoveController :
         {
             var level = GetComponentInParent<LevelController>();
             var nextLevelNumber = level._dto._number + 1;
-            _container.Resolve<CompleteGameLevel>().Execute(new CompleteLevelCommand(level._dto._id));
+
+            if (_levelCompleted == false)
+            {
+                _container.Resolve<CompleteGameLevel>().Execute(new CompleteLevelCommand(level._dto._id));
+                _levelCompleted = true;
+            }
         }
         else if (CollisionWithArrow())
         {
