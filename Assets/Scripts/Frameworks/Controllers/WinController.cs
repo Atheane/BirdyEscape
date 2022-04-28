@@ -5,19 +5,21 @@ using UnityEngine.SceneManagement;
 using UniMediator;
 using Adapters.Unimediatr;
 using Domain.DomainEvents;
+using Domain.Entities;
 
 public enum WinState { SHOWN, HIDDEN };
 
 public class WinController : MonoBehaviour, IMulticastMessageHandler<DomainEventNotification<GameLevelCompleted>>
 {
-    public WinState _state;
+    public WinState _state = WinState.HIDDEN;
     public int _currentLevelNumber;
 
     private void Start()
     {
-        _state = WinState.HIDDEN;
-        gameObject.SetActive(false);
-
+        if (_state == WinState.HIDDEN)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void Handle(DomainEventNotification<GameLevelCompleted> notification)
@@ -26,11 +28,21 @@ public class WinController : MonoBehaviour, IMulticastMessageHandler<DomainEvent
         _state = WinState.SHOWN;
         gameObject.SetActive(true);
         _currentLevelNumber = notification._domainEvent._props._currentLevel._number;
-        var energy = notification._domainEvent._props._energy.Value;
+        var remainingEnergy = notification._domainEvent._props._energy.Value;
+        float energyUsed = 0f;
+        foreach (ICharacterEntity character in notification._domainEvent._props._currentLevel._characters)
+        {
+            energyUsed += character._totalDistance;
+        }
+        // update text with energy statistics
+        var remainingEnergyUI = GameObject.FindWithTag("RemainingEnergy").GetComponent<TextMeshProUGUI>();
+        remainingEnergyUI.text = Mathf.RoundToInt(remainingEnergy).ToString() + "/100";
+        // update slider value
         var slider = gameObject.GetComponentInChildren<Slider>();
-        slider.value = energy;
-        var text = GameObject.FindWithTag("EnergyStatus").GetComponent<TextMeshProUGUI>();
-        text.text = Mathf.RoundToInt(energy).ToString() + "/100";
+        slider.value = remainingEnergy;
+        // update energy used
+        var energyUsedUI = GameObject.FindWithTag("EnergyUsed").GetComponent<TextMeshProUGUI>();
+        energyUsedUI.text = Mathf.RoundToInt(energyUsed).ToString();
     }
 
     public void OnClickButtonHome()
