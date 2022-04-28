@@ -14,7 +14,7 @@ public class WinController : MonoBehaviour, IMulticastMessageHandler<DomainEvent
     public WinState _state = WinState.HIDDEN;
     public int _currentLevelNumber;
 
-    private void Start()
+    private void Awake()
     {
         if (_state == WinState.HIDDEN)
         {

@@ -15,7 +15,7 @@ public class LoseController : MonoBehaviour, IMulticastMessageHandler<DomainEven
     public LoseState _state = LoseState.HIDDEN;
     public int _currentLevelNumber;
 
-    private void Start()
+    private void Awake()
     {
         if (_state == LoseState.HIDDEN)
         {
@@ -30,8 +30,7 @@ public class LoseController : MonoBehaviour, IMulticastMessageHandler<DomainEven
         gameObject.SetActive(true);
         _currentLevelNumber = notification._domainEvent._props._currentLevel._number;
         var remainingEnergy = notification._domainEvent._props._energy.Value;
-        Debug.Log("__________");
-        Debug.Log(remainingEnergy);
+
         float energyUsed = 0f;
         foreach (ICharacterEntity character in notification._domainEvent._props._currentLevel._characters)
         {

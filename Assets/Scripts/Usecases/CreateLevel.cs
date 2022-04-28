@@ -12,7 +12,7 @@ using Usecases.Commands;
 
 namespace Usecases
 {
-    public class CreateLevel : IUsecase<ICreateLevelCommand, ILevelEntity>
+    public class CreateLevel : IUsecase<ICreateLevelCommand, IGameEntity>
     {
         public ILevelsRepository _levelsRepository;
         public IGameRepository _gameRepository;
@@ -28,7 +28,7 @@ namespace Usecases
             _gameRepository = gameRepository;
             _domainEventDispatcher = domainEventDispatcher;
         }
-        public ILevelEntity Execute(ICreateLevelCommand command)
+        public IGameEntity Execute(ICreateLevelCommand command)
         {
             var levelEntity = LevelEntity.Create(
                 command._number,
@@ -44,6 +44,7 @@ namespace Usecases
                 game.ComputeEnergy();
                 _domainEventDispatcher.Dispatch(game);
                 _gameRepository.Save(game);
+                return game;
             }
             catch(Exception e)
             {
@@ -51,8 +52,8 @@ namespace Usecases
                 var game = GameEntity.Create(levelEntity, VOEnergy.Create(), new List<DateTime>());
                 _domainEventDispatcher.Dispatch(game);
                 _gameRepository.Save(game);
+                return game;
             }
-            return levelEntity;
         }
     }
 }

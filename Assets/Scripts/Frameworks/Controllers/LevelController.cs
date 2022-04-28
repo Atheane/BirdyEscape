@@ -30,14 +30,23 @@ public class LevelController : MonoBehaviour
         List<ICharacterEntity> characters = CreateCharacters();
         List<ITileEntity> tiles = CreateTiles();
         var name = gameObject.name;
-        ILevelEntity levelEntity = _container.Resolve<CreateLevel>().Execute(
+
+        IGameEntity game = _container.Resolve<CreateLevel>().Execute(
             new CreateLevelCommand(
                 _levelNumber,
                 characters,
                 tiles,
                 EnumLevelState.ON
             ));
-        _dto = LevelDto.Create(levelEntity._id, levelEntity._number, levelEntity._characters, levelEntity._tiles, levelEntity._state);
+        _dto = LevelDto.Create(game._currentLevel._id, game._currentLevel._number, game._currentLevel._characters, game._currentLevel._tiles, game._currentLevel._state);
+
+        // patch to fix bug in build
+        // GAME_OVER event arrives before LoseController Awake...
+        if (game._energy.Equals(0f))
+        {
+            LoseController loseController = GameObject.FindWithTag("LoseUI").GetComponent<LoseController>();
+            loseController._state = LoseState.SHOWN;
+        }
     }
 
     private void SetCharactersController(GameObject obj)

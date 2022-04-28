@@ -11,6 +11,8 @@ TagManager:
   - Cute_Bird_16
   - EnergyUsed
   - RemainingEnergy
+  - LoseUI
+  - WinUI
   layers:
   - Default
   - TransparentFX
