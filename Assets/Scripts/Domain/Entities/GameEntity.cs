@@ -86,15 +86,9 @@ namespace Domain.Entities
                 }
             } catch(Exception e)
             {
-                if (e.InnerException is EnergyException.ShouldNotBeNegative)
-                {
-                    _connectionsDate.Add(DateTime.UtcNow);
-                    Over();
-                }
-                else
-                {
-                    throw e;
-                }
+                Debug.Log(e);
+                _connectionsDate.Add(DateTime.UtcNow);
+                Over();
             }
 
         }

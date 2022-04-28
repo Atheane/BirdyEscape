@@ -47,17 +47,11 @@ namespace Usecases
             }
             catch(Exception e)
             {
-                if (e.InnerException is AppException.FileNotFound)
-                {
-                    var game = GameEntity.Create(levelEntity, VOEnergy.Create(), new List<DateTime>());
-                    _domainEventDispatcher.Dispatch(game);
-                    _gameRepository.Save(game);
-                } else
-                {
-                    throw e;
-                }
+                Debug.Log(e);
+                var game = GameEntity.Create(levelEntity, VOEnergy.Create(), new List<DateTime>());
+                _domainEventDispatcher.Dispatch(game);
+                _gameRepository.Save(game);
             }
-
             return levelEntity;
         }
     }
