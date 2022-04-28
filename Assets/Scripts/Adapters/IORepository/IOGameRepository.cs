@@ -6,6 +6,8 @@ using Domain.Repositories;
 using Domain.Entities;
 using Domain.ValueObjects;
 using Frameworks.IO;
+using Adapters.Exceptions;
+
 
 namespace Adapters.IORepository
 {
@@ -33,7 +35,7 @@ namespace Adapters.IORepository
                 GameIO gameIO = JsonUtility.FromJson<GameIO>(retrievedData);
                 return gameIO;
             }
-            throw new Exception("File not found");
+            throw new AppException.FileNotFound("at path" + filePath);
         }
 
         public IGameEntity Load(ILevelEntity levelEntity)
@@ -52,7 +54,7 @@ namespace Adapters.IORepository
                 IGameEntity gameEntity = GameEntity.Load(gameIO._id, levelEntity, VOEnergy.Load(gameIO._energy), connectionsDate);
                 return gameEntity;
             }
-            throw new Exception("File not found");
+            throw new AppException.FileNotFound("at path" + filePath);
         }
     }
 }

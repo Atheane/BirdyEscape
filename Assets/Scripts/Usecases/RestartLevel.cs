@@ -62,7 +62,6 @@ namespace Usecases
             _levelsRepository.Update(levelEntity);
             _domainEventDispatcher.Dispatch(levelEntity);
 
-
             return game;
         }
 

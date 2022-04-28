@@ -6870,6 +6870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 529798456}
+  - component: {fileID: 529798457}
   m_Layer: 5
   m_Name: Lose
   m_TagString: Untagged
@@ -6898,6 +6899,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -15}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &529798457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529798455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88953f63310947d4abfa4137027be5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _state: 1
+  _currentLevelNumber: 0
 --- !u!1001 &529900118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12491,6 +12506,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8978135141559439318, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141559439318, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141559439318, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 529798457}
+    - target: {fileID: 8978135141559439318, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141559439318, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickButtonHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141559439318, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoseController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141559439318, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8978135141568479050, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -12506,6 +12549,34 @@ PrefabInstance:
     - target: {fileID: 8978135141568479050, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141568479051, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141568479051, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141568479051, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 529798457}
+    - target: {fileID: 8978135141568479051, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141568479051, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickButtonRestart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141568479051, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoseController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978135141568479051, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8978135141808940294, guid: b6233a360fddf4339b37c00220238c3f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -16721,7 +16792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771625065290790171, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 134
       objectReference: {fileID: 0}
     - target: {fileID: 771625065290790171, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchoredPosition.y

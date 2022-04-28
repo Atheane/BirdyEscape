@@ -4,6 +4,7 @@ using System.Linq;
 using Libs.Domain.Entities;
 using Domain.DomainEvents;
 using Domain.ValueObjects;
+using Domain.Exceptions;
 using UnityEngine;
 
 namespace Domain.Entities
@@ -17,6 +18,7 @@ namespace Domain.Entities
         public void UpdateCurrentLevel(ILevelEntity currentLevel);
         public void ComputeEnergy();
         public void CompleteCurrentLevel();
+        public void Over();
     }
 
     public class GameEntity : AggregateRoot, IGameEntity
@@ -65,7 +67,7 @@ namespace Domain.Entities
 
         public void ComputeEnergy()
         {
-           var totalDistance = 0f;
+            var totalDistance = 0f;
             foreach (ICharacterEntity character in _currentLevel._characters)
             {
                 totalDistance += character._totalDistance;
@@ -74,14 +76,25 @@ namespace Domain.Entities
             {
                 _energy = VOEnergy.Compute(_energy.Value, totalDistance, _connectionsDate.Last());
                 _connectionsDate.Add(DateTime.UtcNow);
-                var energyUpdated = new GameEnergyComputed(this);
-                AddDomainEvent(energyUpdated);
-            } catch
+                if (_energy.Value < 20f)
+                {
+                    Over();
+                } else
+                {
+                    var energyUpdated = new GameEnergyComputed(this);
+                    AddDomainEvent(energyUpdated);
+                }
+            } catch(Exception e)
             {
-                _energy = VOEnergy.Load(0f);
-                _connectionsDate.Add(DateTime.UtcNow);
-                var gameOver = new GameOver(this);
-                AddDomainEvent(gameOver);
+                if (e.InnerException is EnergyException.ShouldNotBeNegative)
+                {
+                    _connectionsDate.Add(DateTime.UtcNow);
+                    Over();
+                }
+                else
+                {
+                    throw e;
+                }
             }
 
         }
@@ -91,6 +104,13 @@ namespace Domain.Entities
             ComputeEnergy();
             var levelCompleted = new GameLevelCompleted(this);
             AddDomainEvent(levelCompleted);
+        }
+
+        public void Over()
+        {
+            _energy = VOEnergy.Load(0f);
+            var gameOver = new GameOver(this);
+            AddDomainEvent(gameOver);
         }
 
     }

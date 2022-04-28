@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using Libs.Usecases;
 using Libs.Domain.DomainEvents;
-using Usecases.Commands;
 using Domain.Entities;
 using Domain.Repositories;
 using Domain.ValueObjects;
+using Domain.Exceptions;
+using Adapters.Exceptions;
+using Usecases.Commands;
 
 namespace Usecases
 {
@@ -39,13 +41,21 @@ namespace Usecases
             try
             {
                 var game = _gameRepository.Load(levelEntity);
-                _domainEventDispatcher.Dispatch(game);
-            }
-            catch
-            {
-                var game = GameEntity.Create(levelEntity, VOEnergy.Create(), new List<DateTime>());
+                game.ComputeEnergy();
                 _domainEventDispatcher.Dispatch(game);
                 _gameRepository.Save(game);
+            }
+            catch(Exception e)
+            {
+                if (e.InnerException is AppException.FileNotFound)
+                {
+                    var game = GameEntity.Create(levelEntity, VOEnergy.Create(), new List<DateTime>());
+                    _domainEventDispatcher.Dispatch(game);
+                    _gameRepository.Save(game);
+                } else
+                {
+                    throw e;
+                }
             }
 
             return levelEntity;
