@@ -15706,6 +15706,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1817280530}
     m_Modifications:
+    - target: {fileID: 197429557788302230, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429557788302230, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429557788302230, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1817280531}
+    - target: {fileID: 197429557788302230, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429557788302230, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickButtonNext
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429557788302230, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WinController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429557788302230, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 197429557788302231, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15770,6 +15798,34 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 197429559008741829, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559008741829, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559008741829, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1817280531}
+    - target: {fileID: 197429559008741829, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559008741829, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickButtonHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559008741829, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WinController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559008741829, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 197429559008741830, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15824,7 +15880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 197429559296581868, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 549.02997
       objectReference: {fileID: 0}
     - target: {fileID: 197429559296581868, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -15978,6 +16034,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 197429559660705245, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559660705245, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559660705245, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1817280531}
+    - target: {fileID: 197429559660705245, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559660705245, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickButtonRestart
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559660705245, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WinController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 197429559660705245, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 197429559660705246, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16036,7 +16120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 197429559718740614, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 81.68
       objectReference: {fileID: 0}
     - target: {fileID: 197429559718740614, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -16214,7 +16298,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8197690369543125841, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f716639a5c7e4c8ba635ab95f39b86e, type: 3}
 --- !u!224 &1192706345 stripped
 RectTransform:
