@@ -1,6 +1,11 @@
-public enum Entities
+namespace Domain.Types
 {
-    Arrow,
-    Tile,
-    Puzzle
+    public enum Entities
+    {
+        Arrow,
+        Tile,
+        Puzzle
+    }
 }
+
+

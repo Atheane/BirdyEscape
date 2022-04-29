@@ -46,9 +46,9 @@ namespace Frameworks.Dtos
                     orientation = new Vector3(0, -90f, 0);
                     break;
             }
-            var posX = coordinates.Value.X + 0.5f;
+            var posX = coordinates.Value.X + PuzzleController.MIN.x;
             var posY = PuzzleController.MIN.y + 0.5f;
-            var posZ = coordinates.Value.Y;
+            var posZ = coordinates.Value.Y + PuzzleController.MIN.z;
             Vector3 position = new Vector3(posX, posY, posZ);
 
             return new ArrowDto(id, direction, orientation, position, path.Value);

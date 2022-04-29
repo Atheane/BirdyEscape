@@ -16,6 +16,10 @@ namespace Domain.Exceptions
         {
             public MissingDirection(string message = "") : base("Tile-MissingDirection" + message) { }
         }
+        public class MissingArrow : Exception
+        {
+            public MissingArrow(string message = "") : base("Tile-MissingArrow" + message) { }
+        }
     }
 }
 

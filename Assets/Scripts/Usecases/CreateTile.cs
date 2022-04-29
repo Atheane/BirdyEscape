@@ -28,7 +28,7 @@ namespace Usecases
         public ITileEntity Execute(ICreateTileCommand command)
         {
             var coordinates = _mapper.ToDomain(command._position);
-            var tileEntity = TileEntity.Create(coordinates, VOPath.Create(command._path));
+            var tileEntity = TileEntity.Create(coordinates);
             _tilesRepository.Add(tileEntity);
             _domainEventDispatcher.Dispatch(tileEntity);
             return tileEntity;

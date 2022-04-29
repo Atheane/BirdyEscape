@@ -4,32 +4,43 @@ using UnityEngine;
 
 public class PuzzleController : MonoBehaviour
 {
-    [SerializeField] Vector3 min;
-    [SerializeField] Vector3 max;
+    //[SerializeField] Vector3 min;
+    //[SerializeField] Vector3 max;
 
-    public static Vector3 MIN;
-    public static Vector3 MAX;
+    public static Vector3 MIN = new Vector3(-12.5f, -9.5f, -5f);
+    public static Vector3 MAX = new Vector3(-5.5f, 0f, 6f);
 
-    private void Awake()
+    public List<GameObject> tiles;
+
+    private void Start()
     {
-        // must be loaded before TileController Start()
-        MIN = min;
-        MAX = max;
+        //MIN = min;
+        //MAX = max;
+        SetTiles(gameObject);
     }
 
-    public List<GameObject> GetAllChilds()
+    private void SetTiles(GameObject obj)
     {
-        List<GameObject> list = new List<GameObject>();
-        for (int i = 0; i < transform.childCount; i++)
+        if (null == obj)
+            return;
+
+        foreach (Transform child in obj.transform)
         {
-            list.Add(transform.GetChild(i).gameObject);
+            if (null == child)
+                continue;
+
+            if (child.TryGetComponent(out TileController tileController))
+            {
+
+                tiles.Add(child.gameObject);
+            }
+            // reccursive search for child
+            SetTiles(child.gameObject);
         }
-        return list;
     }
 
     public GameObject FindTileById(Guid tileId)
     {
-        List<GameObject> tiles = GetAllChilds();
         GameObject result = tiles[0];
         foreach (GameObject tile in tiles)
         {
