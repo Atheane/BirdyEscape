@@ -3,18 +3,27 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MainCharacter
+  - Tile
+  - Puzzle
+  - Arrow
+  - Cute_Bird_16
+  - EnergyUsed
+  - RemainingEnergy
+  - LoseUI
+  - WinUI
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Puzzle
+  - Arrow
+  - Exit
   - 
   - 
   - 
