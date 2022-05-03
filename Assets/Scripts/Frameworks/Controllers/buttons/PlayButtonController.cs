@@ -11,10 +11,15 @@ using Usecases.Commands;
 using Domain.Entities;
 using Domain.Types;
 using Domain.DomainEvents;
+using System.Threading.Tasks;
 
 public enum LevelPlayButtonState { PLAY, RESTART, HIDDEN };
 
-public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMulticastMessageHandler<DomainEventNotification<TileArrowAdded>>
+public class PlayButtonController :
+    MonoBehaviour,
+    IPointerDownHandler,
+    IMulticastMessageHandler<DomainEventNotification<TileArrowAdded>>,
+    IMulticastMessageHandler<DomainEventNotification<LevelCreated>>
 {
     public Sprite _spriteButtonOff;
     public LevelPlayButtonState _state;
@@ -28,6 +33,12 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMultica
     public void Construct(DiContainer container)
     {
         _container = container;
+    }
+
+    public void Handle(DomainEventNotification<LevelCreated> notification)
+    {
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        _characters = _container.Resolve<GetAllCharacters>().Execute(IntPtr.Zero);
     }
 
     public void Handle(DomainEventNotification<TileArrowAdded> notification)
@@ -45,7 +56,6 @@ public class PlayButtonController : MonoBehaviour, IPointerDownHandler, IMultica
         _icon = transform.GetChild(0).GetComponent<Image>();
         _button = GetComponent<Image>();
         _spriteButtonOn = _icon.sprite;
-        _characters = _container.Resolve<GetAllCharacters>().Execute(IntPtr.Zero);
         _button.enabled = false;
         _icon.enabled = false;
     }

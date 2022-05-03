@@ -14588,6 +14588,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1480939712}
     m_Modifications:
+    - target: {fileID: 4950474988982307771, guid: 74bab7e87d1b54506bf00e4011518666, type: 3}
+      propertyPath: _state
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7675781554991858948, guid: 74bab7e87d1b54506bf00e4011518666, type: 3}
       propertyPath: m_Name
       value: Level_Button_Play
