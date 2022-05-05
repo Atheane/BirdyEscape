@@ -4,6 +4,6 @@ namespace Domain.Types
     {
         ON,
         WIN,
-        PENDING
+        EXECUTE_MOVE
     }
 }

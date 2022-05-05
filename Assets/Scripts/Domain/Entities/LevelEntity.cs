@@ -17,6 +17,7 @@ namespace Domain.Entities
         public ITileEntity[] _tiles { get; }
         public EnumLevelState _state { get; }
         public List<ITileEntity> Restart();
+        public void PlayMove();
     }
 
     public class LevelEntity : AggregateRoot, ILevelEntity
@@ -73,6 +74,23 @@ namespace Domain.Entities
             var levelRestarted = new LevelRestarted(this);
             AddDomainEvent(levelRestarted);
             return updatedTiles;
+        }
+
+        public void PlayMove()
+        {
+            var updatedCharacters = new List<ICharacterEntity>();
+
+            foreach (ICharacterEntity character in _characters)
+            {
+                if (character._state == EnumCharacterState.IDLE)
+                {
+                    character.UpdateState(EnumCharacterState.MOVING);
+                    updatedCharacters.Add(character);
+                }
+            }
+            _characters = updatedCharacters.ToArray();
+            var levelMovePlayed = new LevelMovePlayed(this);
+            AddDomainEvent(levelMovePlayed);
         }
     }
 }

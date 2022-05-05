@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,9 +7,8 @@ using Adapters.Unimediatr;
 using Usecases;
 using Usecases.Commands;
 using Domain.Entities;
-using Domain.Types;
 using Domain.DomainEvents;
-using System.Threading.Tasks;
+
 
 public enum LevelPlayButtonState { PLAY, RESTART, HIDDEN };
 
@@ -24,7 +21,7 @@ public class PlayButtonController :
     public Sprite _spriteButtonOff;
     public LevelPlayButtonState _state;
     private DiContainer _container;
-    private IReadOnlyList<ICharacterEntity> _characters;
+    private ILevelEntity _level;
     private Image _icon;
     private Sprite _spriteButtonOn;
     private Image _button;
@@ -38,7 +35,7 @@ public class PlayButtonController :
     public void Handle(DomainEventNotification<LevelCreated> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
-        _characters = _container.Resolve<GetAllCharacters>().Execute(IntPtr.Zero);
+        _level = notification._domainEvent._props;       
     }
 
     public void Handle(DomainEventNotification<TileArrowAdded> notification)
@@ -49,6 +46,7 @@ public class PlayButtonController :
         _state = LevelPlayButtonState.PLAY;
         _icon.sprite = _spriteButtonOn;
     }
+
 
     private void Start()
     {
@@ -77,15 +75,9 @@ public class PlayButtonController :
         {
             _icon.sprite = _spriteButtonOff;
             _state = LevelPlayButtonState.RESTART;
-
-            foreach (ICharacterEntity character in _characters)
-            {
-                if (character._state == EnumCharacterState.IDLE)
-                {
-                    _container.Resolve<UpdateCharacterState>().Execute(new UpdateCharacterStateCommand(character._id, EnumCharacterState.MOVING));
-                }
-            }
-        } else
+            _container.Resolve<LevelPlayMove>().Execute(new LevelPlayMoveCommand(_level._id));
+        }
+        else
         {
             _container.Resolve<RestartLevel>().Execute(
                 new RestartLevelCommand(

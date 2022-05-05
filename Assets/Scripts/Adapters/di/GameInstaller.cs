@@ -31,6 +31,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<IMapper<VOPosition, Vector3>>().To<Vector3ToVOPositionMapper>().AsSingle();
         // level usecase
         Container.Bind<CreateLevel>().AsSingle();
+        Container.Bind<LevelPlayMove>().AsSingle();
         Container.Bind<RestartLevel>().AsSingle();
         Container.Bind<CompleteGameLevel>().AsSingle();
         // character usecase
