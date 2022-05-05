@@ -88,6 +88,7 @@ namespace Domain.Entities
                     updatedCharacters.Add(character);
                 }
             }
+            _state = EnumLevelState.PLAY_MOVE;
             _characters = updatedCharacters.ToArray();
             var levelMovePlayed = new LevelMovePlayed(this);
             AddDomainEvent(levelMovePlayed);

@@ -4,6 +4,6 @@ namespace Domain.Types
     {
         ON,
         WIN,
-        EXECUTE_MOVE
+        PLAY_MOVE
     }
 }

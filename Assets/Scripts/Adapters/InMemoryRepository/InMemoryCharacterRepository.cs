@@ -23,9 +23,6 @@ namespace Adapters.InMemoryRepository
             if (!_store.ContainsKey(character._id))
             {
                 _store.Add(character._id, character);
-                Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                Debug.Log(character._id);
-                Debug.Log(_store.Values.First<ICharacterEntity>()._id);
             }
             else
             {
@@ -70,8 +67,6 @@ namespace Adapters.InMemoryRepository
         {
             Dictionary<Guid, ICharacterEntity>.ValueCollection charactersValueCollection = _store.Values;
             List<ICharacterEntity> charactersList = new List<ICharacterEntity>();
-            Debug.Log("<<<<<<<<<<<<<<<<<<<<<<<");
-            Debug.Log(_store.Values.First<ICharacterEntity>()._id);
 
             foreach (ICharacterEntity character in charactersValueCollection)
             {

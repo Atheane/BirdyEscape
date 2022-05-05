@@ -12,7 +12,7 @@ using Frameworks.Dtos;
 
 public class SwipeController :
     MonoBehaviour,
-    IMulticastMessageHandler<DomainEventNotification<LevelStateUpdated>>,
+    IMulticastMessageHandler<DomainEventNotification<LevelMovePlayed>>,
     IMulticastMessageHandler<DomainEventNotification<LevelRestarted>>
 {
     [SerializeField] private LayerMask _layer;
@@ -35,7 +35,7 @@ public class SwipeController :
         _levelState = EnumLevelState.ON;
     }
 
-    public void Handle(DomainEventNotification<LevelStateUpdated> notification)
+    public void Handle(DomainEventNotification<LevelMovePlayed> notification)
     {
         Debug.Log("______" + notification._domainEvent._label + "_____handled");
         ILevelEntity levelEntity = notification._domainEvent._props;
