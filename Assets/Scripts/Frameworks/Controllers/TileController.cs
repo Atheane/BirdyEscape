@@ -14,7 +14,8 @@ using Frameworks.Dtos;
 public class TileController : MonoBehaviour,
     IMulticastMessageHandler<DomainEventNotification<TileArrowAdded>>,
     IMulticastMessageHandler<DomainEventNotification<TileArrowRemoved>>,
-    IMulticastMessageHandler<DomainEventNotification<TileArrowEffectUpdated>>
+    IMulticastMessageHandler<DomainEventNotification<TileArrowEffectUpdated>>,
+    IMulticastMessageHandler<DomainEventNotification<TileArrowDirectionUpdated>>
 {
     public TileDto _dto { get; private set; }
 
@@ -95,6 +96,25 @@ public class TileController : MonoBehaviour,
                 tile._arrow._numberEffects
             );
             _dto.AddOrUpdateArrow(dto);
+        }
+    }
+
+    public void Handle(DomainEventNotification<TileArrowDirectionUpdated> notification)
+    {
+        Debug.Log("______" + notification._domainEvent._label + "_____handled");
+        ITileEntity tile = notification._domainEvent._props;
+        if (_dto._id == tile._id && _dto._arrow != null)
+        {
+            IArrowDto arrowDto = ArrowDto.Create(
+                tile._arrow._id,
+                tile._arrow._direction,
+                tile._arrow._coordinates,
+                tile._arrow._path,
+                tile._arrow._effectOnce,
+                tile._arrow._numberEffects
+            );
+            _dto.AddOrUpdateArrow(arrowDto);
+            transform.rotation = Quaternion.Euler(arrowDto._orientation);
         }
     }
 

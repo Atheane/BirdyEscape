@@ -107,22 +107,12 @@ public class SwipeController :
     {
         EnumDirection direction = GetSwipeDirection();
         TileController tile = _target.parent.GetComponent<TileController>();
-        ITileEntity tileEntity = _container.Resolve<UpdateTileArrowDirection>().Execute(
+        _container.Resolve<UpdateTileArrowDirection>().Execute(
                 new UpdateTileArrowDirectionCommand(
                     tile._dto._id,
                     direction
                 )
             );
-        IArrowDto arrowDto = ArrowDto.Create(
-            tileEntity._arrow._id,
-            tileEntity._arrow._direction,
-            tileEntity._arrow._coordinates,
-            tileEntity._arrow._path,
-            tileEntity._arrow._effectOnce,
-            tileEntity._arrow._numberEffects
-          );
-        tile._dto.AddOrUpdateArrow(arrowDto);
-        _target.rotation = Quaternion.Euler(arrowDto._orientation);
     }
 
     private void DeleteArrow()
