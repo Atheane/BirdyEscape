@@ -12,6 +12,7 @@ namespace Frameworks.Dtos
         public Vector3 _orientation { get; }
         public Vector3 _position { get; }
         public string _path { get; }
+        public bool _effectOnce { get; }
     }
 
     public class ArrowDto : IArrowDto
@@ -20,18 +21,21 @@ namespace Frameworks.Dtos
         public EnumDirection _direction { get; }
         public Vector3 _orientation { get; private set; }
         public Vector3 _position { get; private set; }
-        public string _path { get; }
+        public string _path { get; private set; }
+        public bool _effectOnce { get; private set; }
 
-        private ArrowDto(Guid id, EnumDirection direction, Vector3 orientation, Vector3 position, string path)
+
+        private ArrowDto(Guid id, EnumDirection direction, Vector3 orientation, Vector3 position, string path, bool effectOnce)
         {
             _id = id;
             _direction = direction;
             _orientation = orientation;
             _position = position;
             _path = path;
+            _effectOnce = effectOnce;
         }
 
-        public static ArrowDto Create(Guid id, EnumDirection direction, VOCoordinates coordinates, VOPath path)
+        public static ArrowDto Create(Guid id, EnumDirection direction, VOCoordinates coordinates, VOPath path, bool effectOnce)
         {
             Vector3 orientation = new Vector3(0, 90, 0);
             switch (direction)
@@ -51,7 +55,7 @@ namespace Frameworks.Dtos
             var posZ = coordinates.Value.Y + PuzzleController.MIN.z;
             Vector3 position = new Vector3(posX, posY, posZ);
 
-            return new ArrowDto(id, direction, orientation, position, path.Value);
+            return new ArrowDto(id, direction, orientation, position, path.Value, effectOnce);
         }
     }
 }

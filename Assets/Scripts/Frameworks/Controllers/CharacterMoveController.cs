@@ -161,7 +161,7 @@ public class CharacterMoveController :
     {
         Ray ray = new Ray(transform.position + new Vector3(0, 0.05f, 0), transform.forward);
         RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction);
+        //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 0.6f, _layerObstacle))
         {
             return true;
@@ -179,8 +179,11 @@ public class CharacterMoveController :
             TileController controller = hit.collider.GetComponentInParent<TileController>();
             if (controller._dto._arrow._direction != _dto._direction)
             {
-                _dto.UpdateDirection(controller._dto._arrow._direction);
-                return true;
+                if (!controller._dto._arrow._effectOnce)
+                {
+                    _dto.UpdateDirection(controller._dto._arrow._direction);
+                    return true;
+                }
             }
         }
         return false;

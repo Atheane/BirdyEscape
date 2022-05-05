@@ -97,7 +97,8 @@ public class SwipeController :
             new AddTileArrowCommand(
                 _target.GetComponent<TileController>()._dto._id,
                 direction,
-                path
+                path,
+                false
             )
         );
     }
@@ -116,7 +117,9 @@ public class SwipeController :
             tileEntity._arrow._id,
             tileEntity._arrow._direction,
             tileEntity._arrow._coordinates,
-            tileEntity._arrow._path);
+            tileEntity._arrow._path,
+            tileEntity._arrow._effectOnce
+          );
         tile._dto.AddArrow(arrowDto);
         _target.rotation = Quaternion.Euler(arrowDto._orientation);
     }

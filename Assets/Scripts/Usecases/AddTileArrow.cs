@@ -31,7 +31,7 @@ namespace Usecases
             var path = VOPath.Create(command._path);
 
 
-            tileEntity.AddArrow(command._direction, tileEntity._coordinates, path);
+            tileEntity.AddArrow(command._direction, tileEntity._coordinates, path, command._effectOnce);
             _tileRepository.Update(tileEntity);
             _domainEventDispatcher.Dispatch(tileEntity);
 

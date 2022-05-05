@@ -13,7 +13,7 @@ namespace Domain.Entities
         public Guid _id { get; }
         public VOCoordinates _coordinates { get; }
         public IArrowEntity _arrow { get; }
-        public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path);
+        public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path, bool effectOnce);
         public void UpdateArrowDirection(EnumDirection direction);
         public void RemoveArrow();
         public void Delete();
@@ -40,9 +40,9 @@ namespace Domain.Entities
             return tile;
         }
 
-        public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path)
+        public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path, bool effectOnce)
         {
-            var arrowEntity = ArrowEntity.Create(direction, coordinates, path);
+            var arrowEntity = ArrowEntity.Create(direction, coordinates, path, effectOnce);
             var arrowCreated = new TileArrowAdded(this);
             AddDomainEvent(arrowCreated);
             arrowEntity._id = arrowCreated._id;

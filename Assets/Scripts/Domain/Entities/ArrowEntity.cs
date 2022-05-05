@@ -12,6 +12,7 @@ namespace Domain.Entities
         public EnumDirection _direction { get; }
         public VOCoordinates _coordinates { get; }
         public VOPath _path { get; }
+        public bool _effectOnce { get; }
         public IArrowEntity UpdateDirection(EnumDirection direction);
     }
 
@@ -21,17 +22,19 @@ namespace Domain.Entities
         public EnumDirection _direction { get; set; }
         public VOCoordinates _coordinates { get; private set; }
         public VOPath _path { get; private set; }
+        public bool _effectOnce { get; }
 
-        private ArrowEntity(EnumDirection direction, VOCoordinates coords, VOPath path) : base()
+        private ArrowEntity(EnumDirection direction, VOCoordinates coords, VOPath path, bool effectOnce) : base()
         {
             _direction = direction;
             _coordinates = coords;
             _path = path;
+            _effectOnce = effectOnce;
         }
 
-        public static ArrowEntity Create(EnumDirection direction, VOCoordinates coords, VOPath path)
+        public static ArrowEntity Create(EnumDirection direction, VOCoordinates coords, VOPath path, bool effectOnce)
         {
-            var arrow = new ArrowEntity(direction, coords, path);
+            var arrow = new ArrowEntity(direction, coords, path, effectOnce);
             return arrow;
         }
 

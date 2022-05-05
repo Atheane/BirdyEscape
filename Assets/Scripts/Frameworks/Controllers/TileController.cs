@@ -48,11 +48,14 @@ public class TileController : MonoBehaviour, IMulticastMessageHandler<DomainEven
                 tile._arrow._id,
                 tile._arrow._direction,
                 tile._arrow._coordinates,
-                tile._arrow._path
+                tile._arrow._path,
+                tile._arrow._effectOnce
             );
             _dto.AddArrow(dto);
             GameObject go = Instantiate(Resources.Load(dto._path), dto._position, Quaternion.Euler(dto._orientation)) as GameObject;
-            // instantiate and attach the component in once function
+            // instantiate and attach the component in one function
+            // todo detect of arrow is near a wall with raycast
+            // if so: update its effectDuration
             go.tag = Entities.Arrow.ToString();
             go.transform.parent = transform;
         }
