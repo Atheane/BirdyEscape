@@ -15,6 +15,7 @@ namespace Domain.Entities
         public IArrowEntity _arrow { get; }
         public void AddArrow(EnumDirection direction, VOCoordinates coordinates, VOPath path, bool effectOnce);
         public void UpdateArrowDirection(EnumDirection direction);
+        public void UpdateArrowEffect(int numberEffects);
         public void RemoveArrow();
         public void Delete();
     }
@@ -47,6 +48,14 @@ namespace Domain.Entities
             AddDomainEvent(arrowCreated);
             arrowEntity._id = arrowCreated._id;
             _arrow = arrowEntity;
+        }
+
+        public void UpdateArrowEffect(int numberEffects)
+        {
+            IArrowEntity arrowUpdated = _arrow.UpdateEffect(numberEffects);
+            _arrow = arrowUpdated;
+            var arrowEffectUpdated = new TileArrowEffectUpdated(this);
+            AddDomainEvent(arrowEffectUpdated);
         }
 
         public void UpdateArrowDirection(EnumDirection direction)

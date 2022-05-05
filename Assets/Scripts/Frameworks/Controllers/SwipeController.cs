@@ -118,9 +118,10 @@ public class SwipeController :
             tileEntity._arrow._direction,
             tileEntity._arrow._coordinates,
             tileEntity._arrow._path,
-            tileEntity._arrow._effectOnce
+            tileEntity._arrow._effectOnce,
+            tileEntity._arrow._numberEffects
           );
-        tile._dto.AddArrow(arrowDto);
+        tile._dto.AddOrUpdateArrow(arrowDto);
         _target.rotation = Quaternion.Euler(arrowDto._orientation);
     }
 

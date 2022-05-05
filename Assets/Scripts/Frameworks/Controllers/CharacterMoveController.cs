@@ -173,15 +173,15 @@ public class CharacterMoveController :
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
-        //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerArrow))
         {
             TileController controller = hit.collider.GetComponentInParent<TileController>();
             if (controller._dto._arrow._direction != _dto._direction)
             {
-                if (!controller._dto._arrow._effectOnce)
+                if (!controller._dto._arrow._effectOnce || controller._dto._arrow._effectOnce && controller._dto._arrow._numberEffects == 0)
                 {
                     _dto.UpdateDirection(controller._dto._arrow._direction);
+                    _container.Resolve<UpdateTileArrowEffect>().Execute(new UpdateTileArrowEffectCommand(controller._dto._id, 1));
                     return true;
                 }
             }
@@ -193,7 +193,6 @@ public class CharacterMoveController :
     {
         Ray ray = new Ray(transform.position, transform.up);
         RaycastHit hit;
-        //Debug.DrawRay(ray.origin, ray.direction);
         if (Physics.Raycast(ray, out hit, 1f, _layerExit))
         {
             return true;

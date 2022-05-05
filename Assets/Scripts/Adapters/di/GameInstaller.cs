@@ -44,12 +44,12 @@ public class GameInstaller : MonoInstaller
         Container.Bind<GetAllCharacters>().AsSingle();
         Container.Bind<GetCharacterState>().AsSingle();
         Container.Bind<GetCharacterPositionUsecase>().AsSingle();
-        // arrow usecase
-        Container.Bind<AddTileArrow>().AsSingle();
-        Container.Bind<UpdateTileArrowDirection>().AsSingle();
-        Container.Bind<RemoveTileArrow>().AsSingle();
         // tile usecase
         Container.Bind<CreateTile>().AsSingle();
+        Container.Bind<AddTileArrow>().AsSingle();
+        Container.Bind<UpdateTileArrowDirection>().AsSingle();
+        Container.Bind<UpdateTileArrowEffect>().AsSingle();
+        Container.Bind<RemoveTileArrow>().AsSingle();
         // controllers
         Container.Bind<LevelController>().AsSingle();
     }

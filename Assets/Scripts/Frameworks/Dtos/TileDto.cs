@@ -34,7 +34,7 @@ namespace Frameworks.Dtos
             return new TileDto(id, position);
         }
 
-        public void AddArrow(IArrowDto arrowDto)
+        public void AddOrUpdateArrow(IArrowDto arrowDto)
         {
             _arrow = arrowDto;
         }
