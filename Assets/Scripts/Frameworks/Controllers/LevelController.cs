@@ -17,13 +17,15 @@ public class LevelController : MonoBehaviour
     public List<TileController> _tilesControllers;
     public int _levelNumber;
 
+
     [Inject]
     public void Construct(DiContainer container)
     {
         _container = container;
     }
 
-    private void Start()
+
+    private void Awake()
     {
         SetCharactersController(gameObject);
         SetTilesController(gameObject);
@@ -44,6 +46,7 @@ public class LevelController : MonoBehaviour
         // GAME_OVER event arrives before LoseController Awake...
         if (game._energy.Equals(0f))
         {
+            print(GameObject.FindWithTag("LoseUI"));
             LoseController loseController = GameObject.FindWithTag("LoseUI").GetComponent<LoseController>();
             loseController._state = LoseState.SHOWN;
         }
