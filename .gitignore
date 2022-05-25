@@ -12,6 +12,7 @@
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
+/[Bb]uild-iOS/
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
@@ -79,3 +80,15 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+._.git
+._Assets
+._Library
+._Logs
+._Packages
+._ProjectSettings
+._UserSettings
+Assets/._AssetStore
+Assets/._AssetStore.meta
+Assets/._Editor
+Assets/._Editor.meta
+Assets/._GUI Kit  - Mono Round
