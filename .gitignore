@@ -12,6 +12,7 @@
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
+/[Bb]uild-iOS/
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
@@ -82,3 +83,13 @@ crashlytics-build.properties
 
 /Build-IOS/*
 /Build-Android/*
+._.git
+._Assets
+._Library
+._Logs
+._Packages
+._ProjectSettings
+._UserSettings
+Assets/._AssetStore
+Assets/._Editor
+Assets/._GUI Kit  - Mono Round
