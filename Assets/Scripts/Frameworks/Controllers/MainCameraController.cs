@@ -4,6 +4,6 @@ public class MainCameraController : MonoBehaviour
 {
     void Awake()
     {
-        Screen.orientation = ScreenOrientation.Landscape;
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
 }
