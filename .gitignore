@@ -13,6 +13,7 @@
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uild-iOS/
+/[Bb]uild-iOS*
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
