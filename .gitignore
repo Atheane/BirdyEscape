@@ -14,6 +14,7 @@
 /[Bb]uild/
 /[Bb]uild-iOS/
 /[Bb]uild-iOS*
+/[Bb]uild-Android/
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
