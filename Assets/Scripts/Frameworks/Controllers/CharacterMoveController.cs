@@ -31,6 +31,8 @@ public class CharacterMoveController :
 
     private bool _levelCompleted = false;
 
+    private Animator _animator;
+
     [Inject]
     public void Construct(DiContainer container)
     {
@@ -97,6 +99,7 @@ public class CharacterMoveController :
         _layerExit = LayerMask.GetMask("Exit");
         var frequency = 1/_speed;
         InvokeRepeating("Moveloop", 1, frequency);
+        _animator = GetComponent<Animator>();
     }
 
     private void OnDestroy()
@@ -109,6 +112,7 @@ public class CharacterMoveController :
         {
             var level = GetComponentInParent<LevelController>();
             var nextLevelNumber = level._dto._number + 1;
+            _animator.SetBool("isMoving", false);
 
             if (_levelCompleted == false)
             {
@@ -150,6 +154,7 @@ public class CharacterMoveController :
         {
             if (_dto != null && _dto._state == EnumCharacterState.MOVING)
             {
+                _animator.SetBool("isMoving", true);
                 VOPosition newPositionVO = _container.Resolve<MoveOnceCharacter>().Execute(new MoveOnceCharacterCommand(_dto._id));
                 Vector3 newPosition = new Vector3(newPositionVO.Value.X, PuzzleController.MIN.y, newPositionVO.Value.Z);
                 transform.position = newPosition;
