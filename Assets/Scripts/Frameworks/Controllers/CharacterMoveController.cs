@@ -61,6 +61,10 @@ public class CharacterMoveController :
                 SetDto(dto);
                 transform.position = _dto._position;
                 transform.rotation = Quaternion.Euler(_dto._orientation);
+                if (_animator == null) {
+                    _animator = GetComponent<Animator>();
+                }
+                _animator.SetBool("isMoving", false);
             }
         }
     }
