@@ -38740,6 +38740,10 @@ PrefabInstance:
       propertyPath: _state
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4950474988982307771, guid: 74bab7e87d1b54506bf00e4011518666, type: 3}
+      propertyPath: _spriteButtonOff
+      value: 
+      objectReference: {fileID: 21300000, guid: 6dad636e34ac94d55931f495260ff125, type: 3}
     - target: {fileID: 7675781554991858948, guid: 74bab7e87d1b54506bf00e4011518666, type: 3}
       propertyPath: m_Name
       value: Level_Button_Play
