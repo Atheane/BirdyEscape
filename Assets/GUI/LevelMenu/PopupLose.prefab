@@ -1199,7 +1199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 134, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8978135141808940288
@@ -1842,32 +1842,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3060999089250231901, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.10869138
+      value: 0.3572954
       objectReference: {fileID: 0}
     - target: {fileID: 3060999089250231901, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.019956077
+      value: -0.0069327205
       objectReference: {fileID: 0}
     - target: {fileID: 3060999089250231901, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9936881
+      value: 0.9338636
       objectReference: {fileID: 0}
     - target: {fileID: 3060999089250231901, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.019285649
+      value: -0.01381559
       objectReference: {fileID: 0}
     - target: {fileID: 3060999089250231901, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -2.445
+      value: 1.195
       objectReference: {fileID: 0}
     - target: {fileID: 3060999089250231901, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 167.559
+      value: 138.113
       objectReference: {fileID: 0}
     - target: {fileID: 3060999089250231901, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -2.034
+      value: -1.308
       objectReference: {fileID: 0}
+    - target: {fileID: 5531545619567537598, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 0af7fc4b96047564dafddc5c649e1b5b, type: 3}
+    - target: {fileID: 5531545619567537598, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fe25bb453b1c0bc43899377fffb2dedc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7e70d97c4d3440d0979d05dc9bffafa, type: 3}
 --- !u!4 &5580732932456055478 stripped
