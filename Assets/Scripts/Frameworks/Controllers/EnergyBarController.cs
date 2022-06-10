@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UniMediator;
@@ -22,8 +23,16 @@ public class EnergyBarController : MonoBehaviour,  IMulticastMessageHandler<Doma
     {
         _slider.maxValue = 1.0f;
         _slider = gameObject.GetComponent<Slider>();
-        GameIO gameIO = _container.Resolve<IOGameRepository>().PreLoad();
-        _slider.value = gameIO._energy/100;
+        try
+        {
+            GameIO gameIO = _container.Resolve<IOGameRepository>().PreLoad();
+            _slider.value = gameIO._energy / 100;
+        } catch(Exception e)
+        {
+            Debug.Log("EnergyBar Start is called before Level is created");
+            Debug.Log(e);
+        }
+
     }
 
     public void Handle(DomainEventNotification<GameEnergyComputed> notification)

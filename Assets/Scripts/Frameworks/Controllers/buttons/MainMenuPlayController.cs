@@ -36,6 +36,7 @@ public class MainMenuPlayController : MonoBehaviour, IPointerDownHandler
             } catch(Exception e)
             {
                 Debug.Log(e);
+                Debug.Log("_________________________11111111111 should be HERRREE");
                 SceneManager.LoadScene("Level1", LoadSceneMode.Single);
             }
         }

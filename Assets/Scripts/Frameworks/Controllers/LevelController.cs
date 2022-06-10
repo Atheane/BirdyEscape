@@ -31,7 +31,6 @@ public class LevelController : MonoBehaviour
         SetTilesController(gameObject);
         List<ICharacterEntity> characters = CreateCharacters();
         List<ITileEntity> tiles = CreateTiles();
-        var name = gameObject.name;
 
         IGameEntity game = _container.Resolve<CreateLevel>().Execute(
             new CreateLevelCommand(
@@ -46,7 +45,6 @@ public class LevelController : MonoBehaviour
         // GAME_OVER event arrives before LoseController Awake...
         if (game._energy.Equals(0f))
         {
-            print(GameObject.FindWithTag("LoseUI"));
             LoseController loseController = GameObject.FindWithTag("LoseUI").GetComponent<LoseController>();
             loseController._state = LoseState.SHOWN;
         }
