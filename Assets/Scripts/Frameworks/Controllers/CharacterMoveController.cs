@@ -47,7 +47,7 @@ public class CharacterMoveController :
         ICharacterEntity[] charactersEntity = levelEntity._characters;
         foreach (ICharacterEntity characterEntity in charactersEntity)
         {
-            if (characterEntity._id == _dto._id)
+            if (this != null && characterEntity._id == _dto._id)
             {
                 CharacterDto dto = CharacterDto.Create(
                     characterEntity._id,

@@ -38,7 +38,7 @@ public class LoseController : MonoBehaviour, IMulticastMessageHandler<DomainEven
         }
         // update text with energy statistics
         var remainingEnergyUI = GameObject.FindWithTag("RemainingEnergy").GetComponent<TextMeshProUGUI>();
-        remainingEnergyUI.text = Mathf.RoundToInt(remainingEnergy).ToString() + "/100";
+        remainingEnergyUI.text = "          " + Mathf.RoundToInt(remainingEnergy).ToString() + " / 100";
         // update slider value
         var slider = gameObject.GetComponentInChildren<Slider>();
         slider.value = remainingEnergy;
